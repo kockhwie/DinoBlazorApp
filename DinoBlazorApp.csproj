@@ -7,4 +7,8 @@
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Services\GeminiService.cs" />
+  </ItemGroup>
+
 </Project>

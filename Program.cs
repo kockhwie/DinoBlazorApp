@@ -10,6 +10,11 @@ builder.Services.AddRazorComponents()
 // IMPORTANT FOR RENDER
 builder.WebHost.UseUrls("http://0.0.0.0:10000");
 
+//https://127.0.0.1:7249/
+//var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
+//builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
+builder.Services.AddHttpClient<GeminiService>();
 
 var app = builder.Build();
 

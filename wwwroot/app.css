@@ -36,3 +36,40 @@ h1:focus {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+
+
+
+.chat-container {
+    max-width: 600px;
+    margin: auto;
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: #f9f9f9;
+}
+
+.chat-bubble {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 80%;
+}
+
+    .chat-bubble.user {
+        background: #007bff;
+        color: white;
+        margin-left: auto;
+    }
+
+    .chat-bubble.ai {
+        background: #e5e5ea;
+        color: black;
+        margin-right: auto;
+    }
+
+.input-area {
+    max-width: 600px;
+    margin: auto;
+}
