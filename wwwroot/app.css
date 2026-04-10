@@ -20,9 +20,9 @@ h1:focus {
     color: white;
 }
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
-    }
+.blazor-error-boundary::after {
+    content: "An error has occurred."
+}
 
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
@@ -57,17 +57,17 @@ h1:focus {
     max-width: 80%;
 }
 
-    .chat-bubble.user {
-        background: #007bff;
-        color: white;
-        margin-left: auto;
-    }
+.chat-bubble.user {
+    background: #007bff;
+    color: white;
+    margin-left: auto;
+}
 
-    .chat-bubble.ai {
-        background: #e5e5ea;
-        color: black;
-        margin-right: auto;
-    }
+.chat-bubble.ai {
+    background: #e5e5ea;
+    color: black;
+    margin-right: auto;
+}
 
 .input-area {
     max-width: 600px;

@@ -10,8 +10,11 @@
 *.userosscache
 *.sln.docstates
 
+# Jason added specific secrets
+.env
+secrets.json
 
-#Jason added
+# Jason added Environment-specific overrides
 appsettings.*.json 
 
 # User-specific files (MonoDevelop/Xamarin Studio)

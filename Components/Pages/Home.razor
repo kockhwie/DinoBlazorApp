@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject GeminiService Gemini
+@using Microsoft.AspNetCore.Components.Web
 
 <h3 class="mb-3">AI Assistant 🤖</h3>
 
@@ -16,15 +17,16 @@
 </div>
 
 <div class="input-area mt-3">
+    <form @onsubmit="OnSubmit" @onsubmit:preventDefault>
     <input class="form-control"
            @bind="userInput"
            placeholder="Ask anything..." />
 
-    <button class="btn btn-primary mt-2"
-            @onclick="AskAI"
+        <button id="sendButton" type="submit" class="btn btn-primary mt-2"
             disabled="@isLoading">
         @(isLoading ? "Thinking..." : "Send")
     </button>
+    </form>
 </div>
 
 @code {
@@ -51,22 +53,40 @@
 
         StateHasChanged();
 
-        // Call AI
-        var aiResponse = await Gemini.AskAsync(prompt);
 
-        // Add AI response
-        messages.Add(new Message
+        // Call AI
+        try
         {
-            Text = aiResponse,
-            IsUser = false
-        });
+            var aiResponse = await Gemini.AskAsync(prompt);
+            // Add AI response
+            messages.Add(new Message
+            {
+                Text = aiResponse,
+                IsUser = false
+            });
+        }
+        catch (Exception ex)
+        {
+            messages.Add(new Message
+            {
+                Text = $"❌ Error: {ex.Message}",
+                IsUser = false
+            });
+        }
 
         isLoading = false;
     }
+
+    private async Task OnSubmit()
+    {
+            await AskAI();
+        }
 
     class Message
     {
         public string? Text { get; set; }
         public bool IsUser { get; set; }
+        public DateTime Time { get; set; } = DateTime.Now;
     }
+
 }
