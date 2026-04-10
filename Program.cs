@@ -1,4 +1,5 @@
-using DinoBlazorApp.Components;
+﻿using DinoBlazorApp.Components;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,15 +20,14 @@ builder.Services.AddRazorComponents()
 //  2. HttpClient Header ?? Add??? bug?: request.Headers.Add("x-goog-api-key", _apiKey);
 //builder.Services.AddHttpClient<GeminiService>();
 // 2.1 Add this line in service class too: var url = $"v1beta/models/{model}:generateContent";
+
 builder.Services.AddHttpClient<GeminiService>(client =>
 {
     client.BaseAddress = new Uri("https://generativelanguage.googleapis.com/");
     client.DefaultRequestHeaders.Add("x-goog-api-key", builder.Configuration["Gemini:ApiKey"]);
-    client.Timeout = TimeSpan.FromSeconds(30); // Set a reasonable timeout for API calls
-})
-.AddStandardResilienceHandler(); // add resilience handler with Polly policies for retries and circuit breaker
-
-
+    client.Timeout = TimeSpan.FromMinutes(3); // Set a reasonable timeout for API calls
+    //client.Timeout = Timeout.InfiniteTimeSpan; // 🔥 建議直接關掉
+});
 
 var app = builder.Build();
 

@@ -1,40 +1,71 @@
 ﻿@page "/"
 @inject GeminiService Gemini
+@using Markdig
 @using Microsoft.AspNetCore.Components.Web
+@inject IJSRuntime JS
 
 <h3 class="mb-3">AI Assistant 🤖</h3>
+<div class="container">
+    <div class="chat-containerc" @ref="chatContainer">
 
-<div class="chat-container">
+        @foreach (var msg in messages)
+        {
+            <div class="chat-bubble @(msg.IsUser ? "chat-user" : "chat-ai")">
+                <b>@(msg.IsUser ? "You" : "AI"):</b>
+                <div>@( (MarkupString)(msg.Text ?? string.Empty) )</div>
+            </div>
+        }
 
-    @foreach (var msg in messages)
-    {
-        <div class="chat-bubble @(msg.IsUser ? "user" : "ai")">
-            <b>@(msg.IsUser ? "You" : "AI"):</b>
-            <div>@msg.Text</div>
+        @if (isLoading && !string.IsNullOrEmpty(streamingHtml))
+        {
+            <div class="chat-bubble  chat-ai">
+                <b>AI:</b>
+                <div>@( (MarkupString)(streamingHtml ?? string.Empty) )</div>
+            </div>
+        }
+    </div>
+
+    <div class="card">
+        <div class="card-footer text-body-dark">
+
+            <form id="chatform" @onsubmit="OnSubmit" @onsubmit:preventDefault class="row g-2">
+                <div class="input-group">
+                    <input id="ask" class="form-control" type="text" @bind="userInput" placeholder="Ask anything..." />
+                    <button id="sendButton" class="btn btn-sm btn-primary" type="submit" disabled="@isLoading">
+                        @(isLoading ? "Thinking..." : "Send")
+                    </button>
+                </div>
+            </form>
+
         </div>
-    }
-
+    </div>
 </div>
+<p>
+    &nbsp;
+</p>
+<script type="text/javascript">
+    window.scrollToBottom = (el) => {
+        el.scrollTop = el.scrollHeight;
+    };
+</script>
 
-<div class="input-area mt-3">
-    <form @onsubmit="OnSubmit" @onsubmit:preventDefault>
-    <input class="form-control"
-           @bind="userInput"
-           placeholder="Ask anything..." />
-
-        <button id="sendButton" type="submit" class="btn btn-primary mt-2"
-            disabled="@isLoading">
-        @(isLoading ? "Thinking..." : "Send")
-    </button>
-    </form>
-</div>
 
 @code {
+ 
+
+    private string streamingText = "";
+    private string streamingHtml = "";
+
     private string? userInput;
     private bool isLoading = false;
 
     private List<Message> messages = new();
 
+    private ElementReference chatContainer;
+
+    private readonly MarkdownPipeline _mdPipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+
+ 
     private async Task AskAI()
     {
         if (string.IsNullOrWhiteSpace(userInput))
@@ -50,20 +81,48 @@
         var prompt = userInput;
         userInput = "";
         isLoading = true;
-
-        StateHasChanged();
-
+        streamingText = "";
 
         // Call AI
         try
         {
-            var aiResponse = await Gemini.AskAsync(prompt);
-            // Add AI response
+            /*var aiResponse = await Gemini.AskAsync(prompt);
             messages.Add(new Message
             {
                 Text = aiResponse,
                 IsUser = false
+            });*/
+
+            var progress = new Progress<string>(s => _ = InvokeAsync(() =>
+            {
+                messages.Add(new Message { Text = s, IsUser = false });
+                StateHasChanged();
+            }));
+
+            var fullResponse = await Gemini.AskAsync(prompt, progress);
+
+            // 🔥 Fake streaming（逐字顯示） — build markdown progressively and render to HTML
+            foreach (var ch in fullResponse)
+            {
+                streamingText += ch;
+                streamingHtml = Markdown.ToHtml(streamingText, _mdPipeline);
+                await Task.Delay(10); // 調整速度（10~30）
+                StateHasChanged();
+            }
+
+            // Final formatted HTML
+            var finalHtml = Markdown.ToHtml(fullResponse, _mdPipeline);
+
+            messages.Add(new Message
+            {
+                Text = finalHtml,
+                IsUser = false
             });
+
+            streamingText = "";
+            streamingHtml = "";
+            isLoading = false;
+
         }
         catch (Exception ex)
         {
@@ -87,6 +146,13 @@
         public string? Text { get; set; }
         public bool IsUser { get; set; }
         public DateTime Time { get; set; } = DateTime.Now;
+    }
+
+    // This single OnAfterRenderAsync handles scrolling and syntax highlighting
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("scrollToBottom", chatContainer);
+        //await JS.InvokeVoidAsync("hljs.highlightAll");
     }
 
 }

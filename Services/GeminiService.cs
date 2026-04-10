@@ -14,11 +14,12 @@ public class GeminiService
                   ?? throw new Exception("Gemini API Key is missing");
     }
 
-    public async Task<string> AskAsync(string prompt)
+    public async Task<string> AskAsync(string prompt, IProgress<string>? progress = null)
     {
         // List of models to try in order of preference
         string[] models = { 
-            /*"gemini-2.5-flash", 
+            
+            /* "gemini-2.5-flash",
             "gemini-2.5-pro", 
             "gemini-2.0-flash-001", 
             "gemini-2.0-flash-lite-001", 
@@ -32,24 +33,34 @@ public class GeminiService
             "gemini-3.1-pro-preview", 
             "gemini-3.1-flash-lite-preview", 
             "gemini-3.1-flash-live-preview", */
-            "gemma-3-1b-it", 
-            "gemma-3-4b-it", 
+            "gemma-4-31b-it",  
+            "gemma-4-26b-a4b-it",
+            "gemma-3-27b-it",
             "gemma-3-12b-it", 
-            "gemma-3-27b-it", 
-            "lyria-3-clip-preview", 
-            "lyria-3-pro-preview"
+            "lyria-3-clip-preview" 
         };
 
         foreach (var model in models)
         {
             try
             {
-                return await ExecuteRequestAsync(model, prompt);
+                progress?.Report($"Connecting to {model} ...");
+                var result = await ExecuteRequestAsync(model, prompt);
+                progress?.Report($"Connecting to {model} ... Succeed");
+                return result;
             }
             catch (HttpRequestException ex) when (ex.Message.Contains("high demand") || (int?)ex.StatusCode == 503)
             {
                 // Log that the current model is busy, then loop to the next one
                 Console.WriteLine($"Model {model} is busy. Trying fallback...");
+                progress?.Report($"Connecting to {model} ... failed ({ex.Message})");
+                continue;
+            }
+            catch (HttpRequestException ex)
+            {
+                // Other request-level failures (e.g. network, retries exhausted)
+                Console.WriteLine($"Model {model} failed: {ex.Message}");
+                progress?.Report($"Connecting to {model} ... failed ({ex.Message})");
                 continue;
             }
         }
