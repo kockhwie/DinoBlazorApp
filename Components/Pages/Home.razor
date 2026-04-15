@@ -1,158 +1,371 @@
-﻿@page "/"
+@page "/"
 @inject GeminiService Gemini
 @using Markdig
+@using Markdig.Parsers
 @using Microsoft.AspNetCore.Components.Web
 @inject IJSRuntime JS
 
-<h3 class="mb-3">AI Assistant 🤖</h3>
-<div class="container">
-    <div class="chat-containerc" @ref="chatContainer">
+<div class="portal-container">
+    
+    <!-- LEFT SIDE: Prompt Constructor & Fossil Dig -->
+    <div class="portal-left">
+        <div class="portal-brand">
+            <img src="hacker_dino.png" alt="Hacker Dino Avatar" class="cyber-dino-logo" />
+            <h1>Prompt Academy</h1>
+        </div>
 
-        @foreach (var msg in messages)
-        {
-            <div class="chat-bubble @(msg.IsUser ? "chat-user" : "chat-ai")">
-                <b>@(msg.IsUser ? "You" : "AI"):</b>
-                <div>@( (MarkupString)(msg.Text ?? string.Empty) )</div>
+        <div class="academy-section">
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-badge lvl-1">L1</span>
+                    <span class="level-title">Beginner</span>
+                </div>
+                <div class="framework-buttons">
+                    <button class="framework-btn btn-lvl-1" @onclick='() => InsertTemplate("Role: Act as a ___. Purpose: ___. Output: A bulleted list.")'>PRO</button>
+                    <button class="framework-btn btn-lvl-1" @onclick='() => InsertTemplate("Expectation: ___. Role: Act as a ___. Action: Draft a ___.")'>ERA</button>
+                </div>
             </div>
-        }
 
-        @if (isLoading && !string.IsNullOrEmpty(streamingHtml))
-        {
-            <div class="chat-bubble  chat-ai">
-                <b>AI:</b>
-                <div>@( (MarkupString)(streamingHtml ?? string.Empty) )</div>
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-badge lvl-2">L2</span>
+                    <span class="level-title">Intermediate</span>
+                </div>
+                <div class="framework-buttons">
+                    <button class="framework-btn btn-lvl-2" @onclick='() => InsertTemplate("Role: Senior ___. Action: Draft a ___. Context: Our audience is ___. Expectation: Format with clear subheadings.")'>RACE</button>
+                    <button class="framework-btn btn-lvl-2" @onclick='() => InsertTemplate("Context: ___. Action: ___. Result: ___. Example: ___.")'>CARE</button>
+                </div>
             </div>
-        }
+
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-badge lvl-3">L3</span>
+                    <span class="level-title">Advanced</span>
+                </div>
+                <div class="framework-buttons">
+                    <button class="framework-btn btn-lvl-3" @onclick='() => InsertTemplate("Context: Launching ___. Objective: ___. Style: ___. Tone: ___. Audience: ___. Response: Markdown format.")'>CO-STAR</button>
+                    <button class="framework-btn btn-lvl-3" @onclick='() => InsertTemplate("Role: ___. Instructions: ___. Steps: ___. End Goal: ___. Narrowing: ___.")'>RISEN</button>
+                </div>
+            </div>
+
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-badge lvl-4">L4</span>
+                    <span class="level-title">Expert</span>
+                </div>
+                <div class="framework-buttons">
+                    <button class="framework-btn btn-lvl-4" @onclick='() => InsertTemplate("Before solving this, first list 3 key principles of ___. Once done, use those principles to step-by-step analyze ___.")'>CoT + Knowledge</button>
+                </div>
+            </div>
+
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-badge lvl-5">L5</span>
+                    <span class="level-title">Master</span>
+                </div>
+                <div class="framework-buttons">
+                    <button class="framework-btn btn-lvl-5" @onclick='() => InsertTemplate("Step 1: Identify ___. Step 2: For each, explain ___. Step 3: Write a summary. Step 4: Format as PDF brief.")'>Agent Workflow</button>
+                </div>
+            </div>
+        </div>
+
+        <form @onsubmit="OnSubmit" @onsubmit:preventDefault class="constructor-box">
+            @if (isRefining)
+            {
+                <div class="refining-overlay">
+                    <i class="fa-solid fa-bolt fa-fade fa-2x mb-2"></i>
+                    <span>Refining Prompt...</span>
+                </div>
+            }
+
+            <textarea class="constructor-textarea" 
+                      @bind="userInput" 
+                      @bind:event="oninput"
+                      placeholder="Type your prompt here, or tap a framework pill above to insert a structured template..." 
+                      disabled="@(isLoading || isRefining)"></textarea>
+            
+            <div class="constructor-footer">
+                <button class="refine-btn" type="button" @onclick="RefinePrompt" disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Refine
+                </button>
+
+                <button class="launch-btn" type="submit" disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
+                    <i class="fa-solid fa-rocket"></i> Execute
+                </button>
+            </div>
+        </form>
     </div>
 
-    <div class="card">
-        <div class="card-footer text-body-dark">
-
-            <form id="chatform" @onsubmit="OnSubmit" @onsubmit:preventDefault class="row g-2">
-                <div class="input-group">
-                    <input id="ask" class="form-control" type="text" @bind="userInput" placeholder="Ask anything..." />
-                    <button id="sendButton" class="btn btn-sm btn-primary" type="submit" disabled="@isLoading">
-                        @(isLoading ? "Thinking..." : "Send")
-                    </button>
+    <!-- RIGHT SIDE: The Document Canvas -->
+    <div class="portal-right" @ref="documentContainer">
+        <div class="document-canvas">
+            
+            @if (messages.Count == 0 && !isLoading)
+            {
+                <div class="standby-state">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <p>Select a framework template to begin...</p>
                 </div>
-            </form>
+            }
+
+            @foreach (var msg in messages)
+            {
+                @if (msg.IsUser)
+                {
+                    <div class="doc-query-wrapper">
+                        <i class="fa-solid fa-code doc-query-icon"></i>
+                        <div class="doc-query">@msg.Text</div>
+                    </div>
+                }
+                else
+                {
+                    <div class="doc-section chat-content">
+                        <div class="doc-action-bar">
+                            @if(msg.IsTranslating)
+                            {
+                                <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-solid fa-circle-notch fa-spin"></i> Translating...</span>
+                            }
+                            else
+                            {
+                                <div class="action-select-wrapper">
+                                    <i class="fa-solid fa-earth-asia"></i>
+                                    <select class="action-select" value="@msg.TargetLanguage" @onchange="@(e => ChangeLanguage(msg, e.Value?.ToString() ?? ""))">
+                                        <option value="">Translate To...</option>
+                                        <option value="Spanish">Spanish</option>
+                                        <option value="French">French</option>
+                                        <option value="Mandarin">Mandarin</option>
+                                        <option value="Japanese">Japanese</option>
+                                        <option value="German">German</option>
+                                    </select>
+                                </div>
+                                <button class="action-btn" @onclick="() => CopyToClipboard(msg)">
+                                    <div class="action-icon-circle">
+                                        <i class="fa-solid @(msg.DidCopy ? "fa-check" : "fa-copy")"></i>
+                                    </div> 
+                                    <span>@(msg.DidCopy ? "Copied" : "Copy")</span>
+                                </button>
+                                <button class="action-btn" @onclick="() => ShareContent(msg)">
+                                    <div class="action-icon-circle">
+                                        <i class="fa-solid fa-share-nodes"></i>
+                                    </div>
+                                    <span>Share</span>
+                                </button>
+                            }
+                        </div>
+                        @( (MarkupString)(msg.Html ?? string.Empty) )
+                    </div>
+                }
+            }
+
+            @if (isLoading)
+            {
+                <div class="doc-query-wrapper">
+                    <i class="fa-solid fa-code doc-query-icon"></i>
+                    <div class="doc-query">@currentPrompt</div>
+                </div>
+                <div class="doc-section chat-content">
+                    @if (string.IsNullOrEmpty(streamingText))
+                    {
+                        <span class="thinking-dots">Scanning Network</span>
+                    }
+                    else
+                    {
+                        @( (MarkupString)(streamingHtml ?? string.Empty) )
+                        <span class="stream-cursor"></span>
+                    }
+                </div>
+            }
 
         </div>
     </div>
 </div>
-<p>
-    &nbsp;
-</p>
+
 <script type="text/javascript">
     window.scrollToBottom = (el) => {
-        el.scrollTop = el.scrollHeight;
+        if(el) {
+            el.scrollTop = el.scrollHeight;
+        }
+    };
+    window.highlightCode = () => {
+        if (window.hljs) {
+            window.hljs.highlightAll();
+        }
+    };
+    window.copyTextToClipboard = (text) => {
+        navigator.clipboard.writeText(text);
+    };
+    window.shareContentNative = async (text) => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'From AI Prompt Academy',
+                    text: text
+                });
+            } catch (err) { }
+        } else {
+            alert('Sharing is not supported on this device/browser automatically. Used "Copy" instead!');
+        }
     };
 </script>
 
-
 @code {
- 
-
     private string streamingText = "";
     private string streamingHtml = "";
-
-    private string? userInput;
+    private string userInput = "";
+    private string currentPrompt = "";
     private bool isLoading = false;
-
+    private bool isRefining = false;
     private List<Message> messages = new();
+    private ElementReference documentContainer;
 
-    private ElementReference chatContainer;
+    private MarkdownPipeline _mdPipeline = default!;
 
-    private readonly MarkdownPipeline _mdPipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
-
- 
-    private async Task AskAI()
+    protected override void OnInitialized()
     {
-        if (string.IsNullOrWhiteSpace(userInput))
-            return;
+        var builder = new MarkdownPipelineBuilder().UseAdvancedExtensions();
+        builder.BlockParsers.RemoveAll(x => x is IndentedCodeBlockParser);
+        _mdPipeline = builder.Build();
+    }
 
-        // Add user message
-        messages.Add(new Message
-        {
-            Text = userInput,
-            IsUser = true
-        });
+    private void InsertTemplate(string template)
+    {
+        userInput = template;
+    }
 
-        var prompt = userInput;
-        userInput = "";
-        isLoading = true;
-        streamingText = "";
+    private async Task CopyToClipboard(Message msg)
+    {
+        if (string.IsNullOrEmpty(msg.Text)) return;
+        
+        await JS.InvokeVoidAsync("copyTextToClipboard", msg.Text);
+        msg.DidCopy = true;
+        StateHasChanged();
+        
+        // Reset copy icon after 2 seconds
+        await Task.Delay(2000);
+        msg.DidCopy = false;
+        StateHasChanged();
+    }
 
-        // Call AI
+    private async Task ShareContent(Message msg)
+    {
+        if (string.IsNullOrEmpty(msg.Text)) return;
+        await JS.InvokeVoidAsync("shareContentNative", msg.Text);
+    }
+
+    private async Task ChangeLanguage(Message msg, string newLanguage)
+    {
+        if (string.IsNullOrEmpty(newLanguage) || string.IsNullOrEmpty(msg.Text)) return;
+
+        msg.TargetLanguage = newLanguage;
+        msg.IsTranslating = true;
+        StateHasChanged();
+
         try
         {
-            /*var aiResponse = await Gemini.AskAsync(prompt);
-            messages.Add(new Message
-            {
-                Text = aiResponse,
-                IsUser = false
-            });*/
-
-            var progress = new Progress<string>(s => _ = InvokeAsync(() =>
-            {
-                messages.Add(new Message { Text = s, IsUser = false });
-                StateHasChanged();
-            }));
-
-            var fullResponse = await Gemini.AskAsync(prompt, progress);
-
-            // 🔥 Fake streaming（逐字顯示） — build markdown progressively and render to HTML
-            foreach (var ch in fullResponse)
-            {
-                streamingText += ch;
-                streamingHtml = Markdown.ToHtml(streamingText, _mdPipeline);
-                await Task.Delay(10); // 調整速度（10~30）
-                StateHasChanged();
-            }
-
-            // Final formatted HTML
-            var finalHtml = Markdown.ToHtml(fullResponse, _mdPipeline);
-
-            messages.Add(new Message
-            {
-                Text = finalHtml,
-                IsUser = false
-            });
-
-            streamingText = "";
-            streamingHtml = "";
-            isLoading = false;
-
+            // Call the Gemini service translating over the RAW markdown
+            var translatedRaw = await Gemini.TranslatePromptAsync(msg.Text, newLanguage);
+            
+            // Overwrite the original text and HTML so its permanently translated in memory
+            msg.Text = translatedRaw;
+            msg.Html = Markdown.ToHtml(translatedRaw, _mdPipeline);
         }
         catch (Exception ex)
         {
-            messages.Add(new Message
-            {
-                Text = $"❌ Error: {ex.Message}",
-                IsUser = false
-            });
+            Console.WriteLine("Translate error: " + ex.Message);
         }
+        finally
+        {
+            msg.IsTranslating = false;
+            msg.TargetLanguage = ""; // Reset dropdown
+            StateHasChanged();
+            
+            // Re-fire syntax highlighter over the translated block
+            await JS.InvokeVoidAsync("highlightCode");
+        }
+    }
 
-        isLoading = false;
+    private async Task RefinePrompt()
+    {
+        if (string.IsNullOrWhiteSpace(userInput)) return;
+        isRefining = true;
+        StateHasChanged();
+
+        try
+        {
+            var refined = await Gemini.RefinePromptAsync(userInput);
+            userInput = refined;
+        }
+        catch (Exception)
+        {
+            // Ignore failure, let user keep their text
+        }
+        finally
+        {
+            isRefining = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task AskAI()
+    {
+        if (string.IsNullOrWhiteSpace(userInput)) return;
+
+        messages.Add(new Message { Text = userInput, IsUser = true });
+        currentPrompt = userInput;
+        userInput = "";
+        isLoading = true;
+        streamingText = "";
+        streamingHtml = "";
+        StateHasChanged(); 
+
+        try
+        {
+            await foreach (var chunk in Gemini.AskStreamAsync(currentPrompt))
+            {
+                streamingText += chunk;
+                streamingHtml = Markdown.ToHtml(streamingText, _mdPipeline);
+                StateHasChanged();
+                await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
+            }
+
+            var finalHtml = Markdown.ToHtml(streamingText, _mdPipeline);
+            messages.Add(new Message { Text = streamingText, Html = finalHtml, IsUser = false });
+        }
+        catch (Exception ex)
+        {
+            messages.Add(new Message { Text = $"❌ Error: {ex.Message}", Html = $"❌ Error: {ex.Message}", IsUser = false });
+        }
+        finally
+        {
+            streamingText = "";
+            streamingHtml = "";
+            currentPrompt = "";
+            isLoading = false;
+            StateHasChanged();
+        }
     }
 
     private async Task OnSubmit()
     {
-            await AskAI();
-        }
+        await AskAI();
+    }
 
     class Message
     {
         public string? Text { get; set; }
+        public string? Html { get; set; }
         public bool IsUser { get; set; }
         public DateTime Time { get; set; } = DateTime.Now;
+        
+        // UI States
+        public bool IsTranslating { get; set; }
+        public string TargetLanguage { get; set; } = "";
+        public bool DidCopy { get; set; }
     }
 
-    // This single OnAfterRenderAsync handles scrolling and syntax highlighting
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JS.InvokeVoidAsync("scrollToBottom", chatContainer);
-        //await JS.InvokeVoidAsync("hljs.highlightAll");
+        await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
+        await JS.InvokeVoidAsync("highlightCode");
     }
-
 }
