@@ -31,11 +31,33 @@ body {
     overflow: hidden; 
 }
 
+
+/* font-face type */
+.text-xs {
+    font-size: 0.625rem;
+}
+
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #3f3f46; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+.mobile-version-text {
+    margin: 10px 0 0;
+    font-size: 0.625rem;
+    color: #71717a;
+    text-align: center;
+}
+.mobile-version-text a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+.mobile-version-text a:hover {
+    text-decoration: underline;
+}
 
 /* ======== Split Portal Layout ======== */
 .portal-container {
@@ -277,7 +299,7 @@ body {
     text-align: center;
 }
 .standby-state i { font-size: 4rem; opacity: 0.2; margin-bottom: 20px; }
-.standby-state p { opacity: 0.5; font-size: 1.1rem; }
+.standby-state p { opacity: 0.7; font-size: 1.1rem; }
 
 /* Document Flow styles */
 .doc-section {
@@ -438,6 +460,12 @@ body {
 }
 
 /* Responsive Mobile Optimization */
+
+/* Mobile floating prompt bar — hidden by default on desktop */
+.mobile-prompt-bar {
+    display: none;
+}
+
 @media (max-width: 900px) {
     body { overflow-y: auto; } /* Let native body scroll on mobile */
     .portal-container { flex-direction: column; height: auto; display: block; overflow: visible; }
@@ -461,9 +489,90 @@ body {
     }
     
     .document-canvas {
-        padding: 2rem 1.5rem 100px 1.5rem;
+        padding: 2rem 1.5rem 140px 1.5rem; /* Extra bottom padding for floating bar */
     }
     
     .doc-query-wrapper { flex-direction: column; gap: 10px; padding: 1rem; border-radius: 8px; }
     .doc-action-bar { flex-wrap: wrap; justify-content: flex-start; }
+
+    /* Hide the original big textarea on mobile — replaced by floating bar */
+    .constructor-box {
+        display: none;
+    }
+
+
+
+    /* Show the floating bar on mobile */
+    .mobile-prompt-bar {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: var(--panel-bg);
+        border-top: 1px solid var(--border-color);
+        padding: 12px 16px;
+        padding-bottom: calc(12px + env(safe-area-inset-bottom));
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-prompt-form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .mobile-prompt-input {
+        flex: 1;
+        background: var(--app-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px 16px;
+        color: var(--text-main);
+        font-family: var(--font-ui);
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+
+    .mobile-prompt-input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .mobile-prompt-input::placeholder {
+        color: #52525b;
+    }
+
+    .mobile-send-btn {
+        width: auto;
+        height: 44px;
+        padding: 0 18px;
+        border-radius: 12px;
+        border: none;
+        background: var(--text-main);
+        color: #000;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.2s;
+        flex-shrink: 0;
+    }
+
+    .mobile-send-btn:hover:not(:disabled) {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 0 15px var(--accent-glow);
+        transform: translateY(-2px);
+    }
+
+    .mobile-send-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
 }

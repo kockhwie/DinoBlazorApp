@@ -11,7 +11,7 @@
     <div class="portal-left">
         <div class="portal-brand">
             <img src="hacker_dino.png" alt="Hacker Dino Avatar" class="cyber-dino-logo" />
-            <h1>Prompt Academy</h1>
+            <h1>Dino Prompt Academy</h1> 
         </div>
 
         <div class="academy-section">
@@ -74,27 +74,31 @@
             {
                 <div class="refining-overlay">
                     <i class="fa-solid fa-bolt fa-fade fa-2x mb-2"></i>
-                    <span>Refining Prompt...</span>
+                    <span>Sharpening T-Rex claws...</span>
                 </div>
             }
 
             <textarea class="constructor-textarea" 
                       @bind="userInput" 
                       @bind:event="oninput"
-                      placeholder="Type your prompt here, or tap a framework pill above to insert a structured template..." 
+                      placeholder="Feed your prompt to the dino here, or tap a glowing framework above..." 
                       disabled="@(isLoading || isRefining)"></textarea>
             
             <div class="constructor-footer">
                 <button class="refine-btn" type="button" @onclick="RefinePrompt" disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Refine
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Sharpen Claws
                 </button>
 
                 <button class="launch-btn" type="submit" disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
-                    <i class="fa-solid fa-rocket"></i> Execute
+                    <i class="fa-solid fa-rocket"></i> Release the Dino!
                 </button>
             </div>
-        </form>
+        </form>    
+        
+        <p class="mobile-version-text">Version 1.1.0 <a href="/release-notes" target="_blank">Release note</a></p>
+
     </div>
+
 
     <!-- RIGHT SIDE: The Document Canvas -->
     <div class="portal-right" @ref="documentContainer">
@@ -102,8 +106,7 @@
             
             @if (messages.Count == 0 && !isLoading)
             {
-                <div class="standby-state">
-                    <i class="fa-solid fa-map-location-dot"></i>
+                <div class="standby-state">                     
                     <p>Select a framework template to begin...</p>
                 </div>
             }
@@ -113,13 +116,14 @@
                 @if (msg.IsUser)
                 {
                     <div class="doc-query-wrapper">
-                        <i class="fa-solid fa-code doc-query-icon"></i>
+                        <i class="fa-solid fa-drumstick-bite doc-query-icon"></i>
                         <div class="doc-query">@msg.Text</div>
                     </div>
                 }
                 else
                 {
                     <div class="doc-section chat-content">
+                        @( (MarkupString)(msg.Html ?? string.Empty) )
                         <div class="doc-action-bar">
                             @if(msg.IsTranslating)
                             {
@@ -131,11 +135,11 @@
                                     <i class="fa-solid fa-earth-asia"></i>
                                     <select class="action-select" value="@msg.TargetLanguage" @onchange="@(e => ChangeLanguage(msg, e.Value?.ToString() ?? ""))">
                                         <option value="">Translate To...</option>
-                                        <option value="Spanish">Spanish</option>
-                                        <option value="French">French</option>
                                         <option value="Mandarin">Mandarin</option>
+                                        <option value="French">Malay</option>
+                                        <option value="Mandarin">English</option>
                                         <option value="Japanese">Japanese</option>
-                                        <option value="German">German</option>
+                                        <option value="Spanish">Spanish</option>                                       
                                     </select>
                                 </div>
                                 <button class="action-btn" @onclick="() => CopyToClipboard(msg)">
@@ -152,7 +156,6 @@
                                 </button>
                             }
                         </div>
-                        @( (MarkupString)(msg.Html ?? string.Empty) )
                     </div>
                 }
             }
@@ -160,13 +163,13 @@
             @if (isLoading)
             {
                 <div class="doc-query-wrapper">
-                    <i class="fa-solid fa-code doc-query-icon"></i>
+                    <i class="fa-solid fa-drumstick-bite doc-query-icon"></i>
                     <div class="doc-query">@currentPrompt</div>
                 </div>
                 <div class="doc-section chat-content">
                     @if (string.IsNullOrEmpty(streamingText))
                     {
-                        <span class="thinking-dots">Scanning Network</span>
+                        <span class="thinking-dots">Connecting to T-Rex brain...</span>
                     }
                     else
                     {
@@ -180,10 +183,32 @@
     </div>
 </div>
 
+<!-- MOBILE FLOATING PROMPT BAR -->
+<div class="mobile-prompt-bar">
+    <form @onsubmit="OnSubmit" @onsubmit:preventDefault class="mobile-prompt-form">
+        <input type="text" class="mobile-prompt-input" 
+               @bind="userInput" 
+               @bind:event="oninput"
+               placeholder="Feed the dino..." 
+               disabled="@(isLoading || isRefining)" />
+        <button class="mobile-send-btn" type="submit" disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
+            <i class="fa-solid fa-rocket"></i> Release
+        </button>
+    </form>
+    <p class="mobile-version-text">Version 1.1.0 <a href="/release-notes" target="_blank">Release note</a></p>
+</div>
+
+
 <script type="text/javascript">
     window.scrollToBottom = (el) => {
-        if(el) {
-            el.scrollTop = el.scrollHeight;
+        if (el) {
+            // Smooth scroll that follows the stream like reading along
+            el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+        }
+        // On mobile the portal-right is not a scroll container,
+        // so also scroll the window itself
+        if (window.innerWidth <= 900) {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
     };
     window.highlightCode = () => {
@@ -365,7 +390,10 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
+        if (messages.Count > 0 || isLoading)
+        {
+            await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
+        }
         await JS.InvokeVoidAsync("highlightCode");
     }
 }

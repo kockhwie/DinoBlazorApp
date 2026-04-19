@@ -1,0 +1,453 @@
+@page "/release-notes"
+@using Markdig
+@inject IJSRuntime JS
+
+<div class="changelog-container">
+    <!-- SIDEBAR FOR NAVIGATION -->
+    <aside class="changelog-sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-dna"></i>
+            <span>Fossil Record</span>
+        </div>
+        <nav class="version-nav">
+            @foreach (var version in versions)
+            {
+                <a @onclick="() => ScrollToVersion(version.Id)" @onclick:preventDefault class="nav-item">
+                    <span class="v-label">@version.Id</span>
+                    <span class="v-date">@version.Date</span>
+                </a>
+            }
+        </nav>
+
+        <footer class="changelog-footer">
+            <a href="/" class="back-link button"><i class="fa-solid fa-arrow-left"></i> 🦕 Return to the academy</a>
+        </footer>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="changelog-main">
+        <!-- MOBILE BACK LINK -->
+        <a href="/" class="mobile-back-link"><i class="fa-solid fa-arrow-left"></i> 🦕 Return to the academy</a>
+        <!-- MOBILE VERSION STRIP -->
+        <div class="mobile-version-strip">
+            @foreach (var version in versions)
+            {
+                <a @onclick="() => ScrollToVersion(version.Id)" @onclick:preventDefault class="mobile-nav-pill">
+                    v@version.Id
+                </a>
+            }
+        </div>
+
+        <header class="main-header">
+            <h1>🦖 Dino Evolution Log</h1>
+            <p>All notable mutations to <strong>Dino Prompt Academy</strong> are documented in this fossil record.</p>
+        </header>
+
+        <section class="log-content">
+            @foreach (var v in versions)
+            {
+                <article id="v@(v.Id.Replace(".", ""))" class="version-block">
+                    <div class="version-header">
+                        <h2 class="version-number">[@v.Id] — @v.Date</h2>
+                    </div>
+
+                    @if (v.Added.Any())
+                    {
+                        <div class="change-group">
+                            <h3>🧬 Added</h3>
+                            <ul>
+                                @foreach (var item in v.Added) { <li>@item</li> }
+                            </ul>
+                        </div>
+                    }
+
+                    @if (v.Changed.Any())
+                    {
+                        <div class="change-group">
+                            <h3>🔄 Changed</h3>
+                            <ul>
+                                @foreach (var item in v.Changed) { <li>@item</li> }
+                            </ul>
+                        </div>
+                    }
+
+                    @if (v.Deprecated.Any())
+                    {
+                        <div class="change-group">
+                            <h3>🪨 Deprecated</h3>
+                            <ul>
+                                @foreach (var item in v.Deprecated) { <li>@item</li> }
+                            </ul>
+                        </div>
+                    }
+
+                    @if (v.Removed.Any())
+                    {
+                        <div class="change-group">
+                            <h3>☄️ Removed</h3>
+                            <ul>
+                                @foreach (var item in v.Removed) { <li>@item</li> }
+                            </ul>
+                        </div>
+                    }
+
+                    @if (v.Fixed.Any())
+                    {
+                        <div class="change-group">
+                            <h3>🩹 Fixed</h3>
+                            <ul>
+                                @foreach (var item in v.Fixed) { <li>@item</li> }
+                            </ul>
+                        </div>
+                    }
+
+                    @if (v.Security.Any())
+                    {
+                        <div class="change-group">
+                            <h3>🛡️ Security</h3>
+                            <ul>
+                                @foreach (var item in v.Security) { <li>@item</li> }
+                            </ul>
+                        </div>
+                    }
+                </article>
+            }
+        </section>
+
+
+    </main>
+</div>
+
+<style>
+    .changelog-container {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        height: 100vh;
+        background: #0d0f17;
+        color: #eee;
+        font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    /* SIDEBAR */
+    .changelog-sidebar {
+        background: #080a0f;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 40px 20px;
+        overflow-y: auto;
+    }
+
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #10b981;
+        margin-bottom: 40px;
+        padding-left: 10px;
+    }
+
+    .version-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        padding: 12px 15px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #888;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+    }
+
+    .nav-item:hover {
+        background: rgba(255, 255, 255, 0.03);
+        color: #fff;
+    }
+
+    .nav-item .v-label {
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    .nav-item .v-date {
+        font-size: 0.75rem;
+        opacity: 0.6;
+    }
+
+    /* MAIN */
+    .changelog-main {
+        overflow-y: auto;
+        padding: 60px 80px;
+        scroll-behavior: smooth;
+    }
+
+    .main-header {
+        max-width: 800px;
+        margin-bottom: 60px;
+    }
+
+    .main-header h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        margin: 0 0 15px;
+        color: #fff;
+    }
+
+    .main-header p {
+        font-size: 1.2rem;
+        color: #aaa;
+        line-height: 1.6;
+    }
+
+    .principle-note {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .principle-note a {
+        color: #10b981;
+        text-decoration: none;
+    }
+
+    /* LOG CONTENT */
+    .log-content {
+        max-width: 800px;
+    }
+
+    .version-block {
+        margin-bottom: 80px;
+        scroll-margin-top: 60px;
+    }
+
+    .version-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 30px;
+        padding-bottom: 10px;
+    }
+
+    .version-number {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .change-group {
+        margin-bottom: 30px;
+    }
+
+    .change-group h3 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #fff;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .change-group ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .change-group li {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 10px;
+        color: #ccc;
+        line-height: 1.6;
+    }
+
+    .change-group li::before {
+        content: "-";
+        position: absolute;
+        left: 0;
+        color: #10b981;
+        font-weight: 900;
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 40px;
+        color: #10b981;
+        text-decoration: none;
+        transition: all 0.2s;
+        font-weight: 600;
+    }
+
+    .back-link:hover {
+        opacity: 0.8;
+        transform: translateX(-4px);
+    }
+
+    .mobile-back-link {
+        display: none;
+    }
+
+    @@media (max-width: 1024px) {
+        .mobile-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #10b981;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .changelog-container {
+            grid-template-columns: 1fr;
+        }
+        .changelog-sidebar {
+            display: none;
+        }
+        .changelog-main {
+            padding: 40px 20px;
+        }
+        .mobile-version-strip {
+            display: flex;
+        }
+    }
+
+    .mobile-version-strip {
+        display: none;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 15px 0;
+        margin-bottom: 30px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mobile-nav-pill {
+        flex-shrink: 0;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #aaa;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .mobile-nav-pill:hover {
+        background: rgba(16, 185, 129, 0.15);
+        color: #10b981;
+        border-color: #10b981;
+    }
+</style>
+
+<script>
+    window.scrollToVersionElement = (elementId) => {
+        const el = document.getElementById(elementId);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+</script>
+
+@code {
+    private List<LogVersion> versions = new()
+    {
+        new LogVersion 
+        { 
+            Id = "1.1.0", 
+            Date = "2026-04-20",
+            Added = new() { 
+                "New 'Fossil Record' sidebar navigation for professional changelog browsing.",
+                "Dino-themed UI 'Chrome' enhancements (Fossil Record, Dino Evolution Log).",
+                "Dedicated mobile version pill strip for fast navigation.",
+                "Floating mobile prompt bar with 'Release' rocket button for better UX.",
+                "Meat icon (🍗) for user feeding actions."
+            },
+            Changed = new() { 
+                "Relocated AI action bars below response content for better readability.",
+                "Replaced generic buttons with 'Release the Dino!' and 'Sharpen Claws' branding.",
+                "Unified version footer styling across all screen sizes."
+            },
+            Fixed = new() { 
+                "Implemented smooth auto-follow scrolling for streaming AI responses.",
+                "Resolved Blazor anchor navigation issues with JS scrollIntoView integration.",
+                "Fixed mobile layout double-prompt box visibility issue.",
+                "Cleaned up CSS validation warnings (-webkit-background-clip)."
+            }
+        },
+        new LogVersion 
+        { 
+            Id = "1.0.0", 
+            Date = "2026-04-20",
+            Added = new() { 
+                "Dino-themed vocabulary across all system labels ('Release the Dino', 'Sharpen Claws').", 
+                "Live translation engine with support for 5 major global languages.",
+                "Custom 'Keep a Changelog' compliant documentation page with sidebar navigation."
+            },
+            Changed = new() {
+                "Refined the prompt optimization logic into a decoupled 'Agent Workflow' background service.",
+                "Updated SSE text streaming buffer size for smoother output on mobile devices."
+            },
+            Fixed = new() {
+                "Horizontal scrollbars appearing on code blocks in the Document Canvas.",
+                "Late-session token exhaustion errors for complex multi-level prompt structures."
+            },
+            Security = new() {
+                "Implemented strict input sanitization on the Raw Prompt Constructor to prevent malicious injections."
+            }
+        },
+        new LogVersion 
+        { 
+            Id = "0.9.0", 
+            Date = "2026-04-18",
+            Added = new() { 
+                "Step-by-step 5-Level Academy progression system.",
+                "Split-screen UI architecture for parallel command construction and document viewing.",
+                "Native share API integration for mobile and desktop browsers."
+            },
+            Changed = new() {
+                "Migrated styling system to custom HSL-based Glassmorphism tokens."
+            }
+        },
+        new LogVersion 
+        { 
+            Id = "0.5.1", 
+            Date = "2026-04-15",
+            Added = new() { 
+                "First functioning Gemini Pro API integration via C# backend service.",
+                "Markdown rendering support for primary AI responses.",
+                "Dockerfile for automated multi-environment deployments."
+            }
+        }
+    };
+
+    private async Task ScrollToVersion(string versionId)
+    {
+        var elementId = "v" + versionId.Replace(".", "");
+        await JS.InvokeVoidAsync("scrollToVersionElement", elementId);
+    }
+
+    private class LogVersion
+    {
+        public string Id { get; set; } = "";
+        public string Date { get; set; } = "";
+        public List<string> Added { get; set; } = new();
+        public List<string> Changed { get; set; } = new();
+        public List<string> Deprecated { get; set; } = new();
+        public List<string> Removed { get; set; } = new();
+        public List<string> Fixed { get; set; } = new();
+        public List<string> Security { get; set; } = new();
+    }
+}
