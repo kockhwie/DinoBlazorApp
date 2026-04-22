@@ -6,3 +6,4 @@
 - Keep secrets out of source control; use user secrets or environment variables.
 - Treat `.appdata/` and `.dotnetcli/` as local-only runtime folders.
 - If `.appdata/` or `.dotnetcli/` are already tracked, remember `.gitignore` only affects future commits; ask before untracking or rewriting history.
+- On non-Windows hosts, prefer `DataProtection:CertificateBase64` or `DataProtection:CertificatePath`; otherwise use ephemeral keys instead of plaintext storage.
