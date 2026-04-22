@@ -10,33 +10,6 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
-var dataProtection = builder.Services
-    .AddDataProtection()
-    .SetApplicationName("DinoBlazorApp");
-
-if (OperatingSystem.IsWindows())
-{
-    dataProtection
-        .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(builder.Environment.ContentRootPath, ".appdata", "dpkeys")))
-        .ProtectKeysWithDpapi();
-}
-else
-{
-    var certificate = LoadDataProtectionCertificate(builder.Configuration);
-
-    if (certificate is not null)
-    {
-        dataProtection
-            .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(builder.Environment.ContentRootPath, ".appdata", "dpkeys")))
-            .ProtectKeysWithCertificate(certificate);
-    }
-    else
-    {
-        dataProtection.UseEphemeralDataProtectionProvider();
-        Console.WriteLine("Warning: No DataProtection certificate configured. Using ephemeral in-memory keys.");
-    }
-}
-
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
@@ -48,6 +21,37 @@ builder.Services.AddHttpClient<GeminiService>(client =>
     client.Timeout = TimeSpan.FromMinutes(3);
 });
 
+var dataProtection = builder.Services
+    .AddDataProtection()
+    .SetApplicationName("DinoBlazorApp");
+
+var keyDirectory = builder.Configuration["DataProtection:KeyDirectory"];
+var keyDirectoryInfo = string.IsNullOrWhiteSpace(keyDirectory)
+    ? new DirectoryInfo(Path.Combine(builder.Environment.ContentRootPath, ".appdata", "dpkeys"))
+    : new DirectoryInfo(keyDirectory);
+
+if (OperatingSystem.IsWindows())
+{
+    dataProtection
+        .PersistKeysToFileSystem(keyDirectoryInfo)
+        .ProtectKeysWithDpapi();
+}
+else
+{
+    var certificate = LoadDataProtectionCertificate(builder.Configuration);
+
+    if (certificate is not null)
+    {
+        dataProtection
+            .PersistKeysToFileSystem(keyDirectoryInfo)
+            .ProtectKeysWithCertificate(certificate);
+    }
+    else
+    {
+        dataProtection.UseEphemeralDataProtectionProvider();
+    }
+}
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -57,7 +61,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
-app.UseHttpsRedirection();
+
+if (!string.IsNullOrWhiteSpace(builder.Configuration["ASPNETCORE_HTTPS_PORT"]) ||
+    !string.IsNullOrWhiteSpace(builder.Configuration["HTTPS_PORT"]))
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAntiforgery();
 
