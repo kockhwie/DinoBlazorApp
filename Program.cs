@@ -1,8 +1,20 @@
 ﻿using DinoBlazorApp.Components;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.DataProtection;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+// In some locked-down Windows environments, the default EventLog logger and the default
+// DataProtection key location (AppData) can fail with access-denied and break the app.
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
+builder.Services
+    .AddDataProtection()
+    .PersistKeysToFileSystem(new System.IO.DirectoryInfo(System.IO.Path.Combine(builder.Environment.ContentRootPath, ".appdata", "dpkeys")))
+    .SetApplicationName("DinoBlazorApp");
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

@@ -1,250 +1,495 @@
 @page "/"
 @inject GeminiService Gemini
+@inject IJSRuntime JS
 @using Markdig
 @using Markdig.Parsers
-@using Microsoft.AspNetCore.Components.Web
-@inject IJSRuntime JS
+@implements IDisposable
 
-<div class="portal-container">
-    
-    <!-- LEFT SIDE: Prompt Constructor & Fossil Dig -->
-    <div class="portal-left">
-        <div class="portal-brand">
-            <img src="hacker_dino.png" alt="Hacker Dino Avatar" class="cyber-dino-logo" />
-            <h1>Dino Prompt Academy</h1> 
+@* ══ MOBILE TOP NAV — must sit before .app in DOM so it is never clipped ══ *@
+<nav class="mob-topnav">
+    <div class="mob-brand">
+        <span class="mob-brand-dino">🦕</span>
+        <div>
+            <div class="mob-brand-name">Dino Prompt Academy</div>
+            <div class="mob-brand-sub">Learn prompting · Master AI</div>
         </div>
-
-        <div class="academy-section">
-            <div class="level-item">
-                <div class="level-header">
-                    <span class="level-badge lvl-1">L1</span>
-                    <span class="level-title">Beginner</span>
-                </div>
-                <div class="framework-buttons">
-                    <button class="framework-btn btn-lvl-1" @onclick='() => InsertTemplate("Role: Act as a ___. Purpose: ___. Output: A bulleted list.")'>PRO</button>
-                    <button class="framework-btn btn-lvl-1" @onclick='() => InsertTemplate("Expectation: ___. Role: Act as a ___. Action: Draft a ___.")'>ERA</button>
-                </div>
-            </div>
-
-            <div class="level-item">
-                <div class="level-header">
-                    <span class="level-badge lvl-2">L2</span>
-                    <span class="level-title">Intermediate</span>
-                </div>
-                <div class="framework-buttons">
-                    <button class="framework-btn btn-lvl-2" @onclick='() => InsertTemplate("Role: Senior ___. Action: Draft a ___. Context: Our audience is ___. Expectation: Format with clear subheadings.")'>RACE</button>
-                    <button class="framework-btn btn-lvl-2" @onclick='() => InsertTemplate("Context: ___. Action: ___. Result: ___. Example: ___.")'>CARE</button>
-                </div>
-            </div>
-
-            <div class="level-item">
-                <div class="level-header">
-                    <span class="level-badge lvl-3">L3</span>
-                    <span class="level-title">Advanced</span>
-                </div>
-                <div class="framework-buttons">
-                    <button class="framework-btn btn-lvl-3" @onclick='() => InsertTemplate("Context: Launching ___. Objective: ___. Style: ___. Tone: ___. Audience: ___. Response: Markdown format.")'>CO-STAR</button>
-                    <button class="framework-btn btn-lvl-3" @onclick='() => InsertTemplate("Role: ___. Instructions: ___. Steps: ___. End Goal: ___. Narrowing: ___.")'>RISEN</button>
-                </div>
-            </div>
-
-            <div class="level-item">
-                <div class="level-header">
-                    <span class="level-badge lvl-4">L4</span>
-                    <span class="level-title">Expert</span>
-                </div>
-                <div class="framework-buttons">
-                    <button class="framework-btn btn-lvl-4" @onclick='() => InsertTemplate("Before solving this, first list 3 key principles of ___. Once done, use those principles to step-by-step analyze ___.")'>CoT + Knowledge</button>
-                </div>
-            </div>
-
-            <div class="level-item">
-                <div class="level-header">
-                    <span class="level-badge lvl-5">L5</span>
-                    <span class="level-title">Master</span>
-                </div>
-                <div class="framework-buttons">
-                    <button class="framework-btn btn-lvl-5" @onclick='() => InsertTemplate("Step 1: Identify ___. Step 2: For each, explain ___. Step 3: Write a summary. Step 4: Format as PDF brief.")'>Agent Workflow</button>
-                </div>
-            </div>
-        </div>
-
-        <form @onsubmit="OnSubmit" @onsubmit:preventDefault class="constructor-box">
-            @if (isRefining)
-            {
-                <div class="refining-overlay">
-                    <i class="fa-solid fa-bolt fa-fade fa-2x mb-2"></i>
-                    <span>Sharpening T-Rex claws...</span>
-                </div>
-            }
-
-            <textarea class="constructor-textarea" 
-                      @bind="userInput" 
-                      @bind:event="oninput"
-                      placeholder="Feed your prompt to the dino here, or tap a glowing framework above..." 
-                      disabled="@(isLoading || isRefining)"></textarea>
-            
-            <div class="constructor-footer">
-                <button class="refine-btn" type="button" @onclick="RefinePrompt" disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Sharpen Claws
-                </button>
-
-                <button class="launch-btn" type="submit" disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
-                    <i class="fa-solid fa-rocket"></i> Release the Dino!
-                </button>
-            </div>
-        </form>    
-        
-        <p class="mobile-version-text">Version 1.1.0 <a href="/release-notes" target="_blank">Release note</a></p>
-
     </div>
+    <button class="mob-ham" @onclick="OpenNav" aria-label="Open menu">☰</button>
+</nav>
 
+@* ══ APP SHELL ══ *@
+<div class="app">
 
-    <!-- RIGHT SIDE: The Document Canvas -->
-    <div class="portal-right" @ref="documentContainer">
-        <div class="document-canvas">
-            
-            @if (messages.Count == 0 && !isLoading)
-            {
-                <div class="standby-state">                     
-                    <p>Select a framework template to begin...</p>
+    @* ── SIDEBAR ── *@
+    <aside class="sidebar">
+        <div class="sb-scroll">
+
+            @* Brand *@
+            <div class="brand">
+                <span class="brand-dino">🦕</span>
+                <div>
+                    <h1>Dino Prompt Academy</h1>
+                    <p>Learn prompting. Master AI. Own your future.</p>
                 </div>
-            }
+            </div>
 
-            @foreach (var msg in messages)
-            {
-                @if (msg.IsUser)
+            @* Level pills *@
+            <div class="lv-strip">
+                @foreach (var lv in Levels)
                 {
-                    <div class="doc-query-wrapper">
-                        <i class="fa-solid fa-drumstick-bite doc-query-icon"></i>
-                        <div class="doc-query">@msg.Text</div>
+                    <button class="lv-pill @(level == lv.Key ? "on" : "")"
+                            @onclick="() => SetLevel(lv.Key)">
+                        @lv.Value
+                    </button>
+                }
+            </div>
+
+            @* Framework cards *@
+            <div class="fw-list">
+                @foreach (var (fw, idx) in GetCurrentFrameworks())
+                {
+                    <div class="fw-card @(selFw?.Name == fw.Name ? "sel" : "")"
+                         @onclick="() => PickFw(idx)">
+                        <div class="fw-r1">
+                            <span class="fw-icon">@fw.Icon</span>
+                            <span class="fw-name">@fw.Name</span>
+                            <span class="fw-badge @fw.Bc">@fw.Badge</span>
+                        </div>
+                        <div class="fw-desc">@fw.Desc</div>
+                        <span class="fw-tag">@fw.Tag</span>
                     </div>
                 }
-                else
+            </div>
+
+            @* Prompt box *@
+            <div class="pb">
+                <div class="pb-lbl">Your Prompt</div>
+                <textarea class="pb-ta" id="deskTa"
+                          @bind="userInput"
+                          @bind:event="oninput"
+                          placeholder="Choose a template above, or write your own..."
+                          disabled="@(isLoading || isRefining)"
+                          rows="5"></textarea>
+                <div class="pb-foot">
+                    <span class="char-c @(userInput.Length > 3600 ? "over" : "")">
+                        @userInput.Length / 4000
+                    </span>
+                    <div class="pb-btns">
+                        <button class="btn-sh"
+                                @onclick="RefinePrompt"
+                                disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
+                            ✨ Sharpen
+                        </button>
+                        <button class="btn-go"
+                                @onclick="OnSubmit"
+                                disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
+                            🚀 Release!
+                        </button>
+                    </div>
+                </div>
+                @if (isRefining)
                 {
-                    <div class="doc-section chat-content">
-                        @( (MarkupString)(msg.Html ?? string.Empty) )
-                        <div class="doc-action-bar">
-                            @if(msg.IsTranslating)
-                            {
-                                <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-solid fa-circle-notch fa-spin"></i> Translating...</span>
-                            }
-                            else
-                            {
-                                <div class="action-select-wrapper">
-                                    <i class="fa-solid fa-earth-asia"></i>
-                                    <select class="action-select" value="@msg.TargetLanguage" @onchange="@(e => ChangeLanguage(msg, e.Value?.ToString() ?? ""))">
-                                        <option value="">Translate To...</option>
-                                        <option value="Mandarin">Mandarin</option>
-                                        <option value="French">Malay</option>
-                                        <option value="Mandarin">English</option>
-                                        <option value="Japanese">Japanese</option>
-                                        <option value="Spanish">Spanish</option>                                       
-                                    </select>
-                                </div>
-                                <button class="action-btn" @onclick="() => CopyToClipboard(msg)">
-                                    <div class="action-icon-circle">
-                                        <i class="fa-solid @(msg.DidCopy ? "fa-check" : "fa-copy")"></i>
-                                    </div> 
-                                    <span>@(msg.DidCopy ? "Copied" : "Copy")</span>
-                                </button>
-                                <button class="action-btn" @onclick="() => ShareContent(msg)">
-                                    <div class="action-icon-circle">
-                                        <i class="fa-solid fa-share-nodes"></i>
-                                    </div>
-                                    <span>Share</span>
-                                </button>
-                            }
+                    <div class="ro"><span>⚡</span><p>Sharpening your prompt...</p></div>
+                }
+            </div>
+
+        </div>
+        <div class="sb-foot">
+            v1.3.0 · <a href="/release-notes">Release Notes</a> · <a href="#">💬 Feedback</a>
+        </div>
+    </aside>
+
+    @* ── CANVAS ── *@
+    <main class="canvas">
+        <div class="canvas-glow"></div>
+
+        @if (messages.Count > 0 || isLoading)
+        {
+            <div class="canvas-bar">
+                <button class="btn-new" @onclick="NewSession">↺ New Session</button>
+            </div>
+        }
+
+        <div class="canvas-scroll" @ref="documentContainer">
+            <div class="canvas-body">
+
+                @* Welcome screen *@
+                @if (messages.Count == 0 && !isLoading)
+                {
+                    <div class="welcome">
+                        <div class="welcome-dino">🦕</div>
+                        <h2>What will you prompt today?</h2>
+                        <p>Three steps is all it takes. The dino handles the rest.</p>
+                        <div class="welcome-steps">
+                            <div class="w-step">
+                                <div class="w-step-num">Step 1</div>
+                                <div class="w-step-ico">🎯</div>
+                                <div class="w-step-txt">Pick your level</div>
+                            </div>
+                            <div class="w-step">
+                                <div class="w-step-num">Step 2</div>
+                                <div class="w-step-ico">✍️</div>
+                                <div class="w-step-txt">Choose a style</div>
+                            </div>
+                            <div class="w-step">
+                                <div class="w-step-num">Step 3</div>
+                                <div class="w-step-ico">🚀</div>
+                                <div class="w-step-txt">Release the dino!</div>
+                            </div>
                         </div>
                     </div>
                 }
-            }
 
-            @if (isLoading)
+                @* Message history *@
+                @foreach (var msg in messages)
+                {
+                    <div class="msg-group">
+                        @if (msg.IsUser)
+                        {
+                            <div class="msg-user">
+                                <div class="msg-av">👤</div>
+                                <div class="msg-bub">@msg.Text</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="msg-ai">
+                                <div class="msg-ai-head">
+                                    <span class="msg-av">🦕</span>
+                                    <span class="msg-ai-name">Dino AI</span>
+                                </div>
+                                <div class="ai-body">
+                                    @((MarkupString)(msg.Html ?? string.Empty))
+                                </div>
+                                <div class="msg-actions">
+                                    @if (msg.IsTranslating)
+                                    {
+                                        <span style="font-size:.78rem;color:var(--muted);font-style:italic">⏳ Translating...</span>
+                                    }
+                                    else
+                                    {
+                                        <div class="action-select-wrapper">
+                                            <select class="action-select"
+                                                    value="@msg.TargetLanguage"
+                                                    @onchange="@(e => ChangeLanguage(msg, e.Value?.ToString() ?? ""))">
+                                                <option value="">🌍 Translate...</option>
+                                                <option value="Malay">Malay</option>
+                                                <option value="English">English</option>
+                                                <option value="Mandarin">Mandarin</option>
+                                                <option value="Japanese">Japanese</option>
+                                                <option value="Spanish">Spanish</option>
+                                            </select>
+                                        </div>
+                                        <button class="act-btn @(msg.DidCopy ? "ok" : "")"
+                                                @onclick="() => CopyToClipboard(msg)">
+                                            @(msg.DidCopy ? "✅ Copied" : "📋 Copy")
+                                        </button>
+                                        <button class="act-btn" @onclick="() => ShareContent(msg)">
+                                            🔗 Share
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+
+                @* Live streaming *@
+                @if (isLoading)
+                {
+                    <div class="msg-group">
+                        <div class="msg-user">
+                            <div class="msg-av">👤</div>
+                            <div class="msg-bub">@currentPrompt</div>
+                        </div>
+
+                        @if (string.IsNullOrEmpty(streamingText))
+                        {
+                            <div class="thinking">
+                                <div class="dots">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <span class="thinking-txt">T-Rex brain is thinking...</span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="msg-ai">
+                                <div class="msg-ai-head">
+                                    <span class="msg-av">🦕</span>
+                                    <span class="msg-ai-name">Dino AI</span>
+                                </div>
+                                <div class="ai-body">
+                                    @((MarkupString)(streamingHtml ?? string.Empty))
+                                    <span class="cursor"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+        </div>
+    </main>
+
+</div>@* end .app *@
+
+
+@* ══ MOBILE NAV DRAWER ══ *@
+@if (navOpen)
+{
+    <div class="nav-bg on" @onclick="CloseNav"></div>
+}
+<div class="nav-drawer @(navOpen ? "on" : "")">
+    <div class="nav-head">
+        <div class="nav-head-b">
+            <span class="nd-ico">🦕</span>
+            <span class="nd-lbl">Menu</span>
+        </div>
+        <button class="nav-close" @onclick="CloseNav">✕</button>
+    </div>
+
+    <div class="nav-sec">Learn</div>
+    <button class="nav-lnk"><span class="ni">🏠</span><span class="nl">Home</span></button>
+    <button class="nav-lnk"><span class="ni">📚</span><span class="nl">Prompt Library</span><span class="nav-soon">Soon</span></button>
+    <button class="nav-lnk"><span class="ni">💡</span><span class="nl">Learning Snippets</span><span class="nav-soon">Soon</span></button>
+    <button class="nav-lnk"><span class="ni">📜</span><span class="nl">My History</span><span class="nav-soon">Soon</span></button>
+
+    <div class="nav-div"></div>
+    <div class="nav-sec">Account</div>
+    <button class="nav-lnk"><span class="ni">👤</span><span class="nl">Profile</span><span class="nav-soon">Soon</span></button>
+    <button class="nav-lnk"><span class="ni">⚙️</span><span class="nl">Settings</span><span class="nav-soon">Soon</span></button>
+
+    <div class="nav-div"></div>
+    <div class="nav-sec">Community</div>
+    <button class="nav-lnk"><span class="ni">💬</span><span class="nl">Feedback &amp; Wishlist</span><span class="nav-new">New</span></button>
+    <a class="nav-lnk" href="/release-notes"><span class="ni">📋</span><span class="nl">Release Notes</span></a>
+
+    <div class="nav-div"></div>
+    <button class="nav-lnk" style="color:var(--amber)">
+        <span class="ni">🔑</span><span class="nl">Sign In / Register</span><span class="nav-soon">Soon</span>
+    </button>
+
+    <div class="nav-foot">v1.3.0 · Dino Prompt Academy</div>
+</div>
+
+
+@* ══ GUIDE STRIP ══
+   BUG FIX: GuideStripHidden is a pure computed C# property evaluated on every Blazor render.
+   No timers, no classes, no race conditions.
+   — Hidden only when: no style selected AND user has typed something (strip would block input view)
+   — Always visible when: style is selected (user needs to see "Tap to change ↺" and ✕)
+   — Always visible when: input is empty and no style (shows the invitation to pick a style)
+*@
+<div class="guide-strip @(GuideStripHidden ? "hidden" : "")" @onclick="OpenFwSheet">
+    <span class="gs-ico">🦴</span>
+    <span class="gs-lbl">@(selFw != null ? "Tap to change ↺" : "Tap to pick a prompt style")</span>
+    <span class="gs-chip @(selFw != null ? "set" : "empty")">
+        @(selFw != null ? selFw.Name : "No style yet")
+    </span>
+    @if (selFw != null)
+    {
+        @* stopPropagation prevents the guide strip onclick from also firing *@
+        <button class="gs-clear" @onclick="ClearStyle" @onclick:stopPropagation="true">✕</button>
+    }
+    else
+    {
+        <span class="gs-arr">›</span>
+    }
+</div>
+
+
+@* ══ MOBILE INPUT BAR ══ *@
+<div class="mob-inputbar">
+    <div class="mob-ta-wrap">
+        <textarea class="mob-ta" id="mobTa"
+                  @bind="userInput"
+                  @bind:event="oninput"
+                  placeholder="Feed the dino a prompt..."
+                  disabled="@(isLoading || isRefining)"
+                  rows="1"></textarea>
+    </div>
+    <button class="mob-send"
+            @onclick="OnSubmit"
+            disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
+        🚀
+    </button>
+</div>
+
+
+@* ══ FRAMEWORK SHEET ══ *@
+@if (fwSheetOpen)
+{
+    <div class="fw-sheet-bg on" @onclick="CloseFwSheet"></div>
+}
+<div class="fw-sheet @(fwSheetOpen ? "on" : "")">
+    <div class="fsh-handle"></div>
+    <div class="fsh-head">
+        <div class="fsh-title">Choose your prompt style 🦕</div>
+        <div class="fsh-sub">Pick what fits — we handle the framework magic behind the scenes.</div>
+    </div>
+
+    @* Level pills inside sheet *@
+    <div class="fsh-levels">
+        @foreach (var lv in Levels)
+        {
+            <button class="fsh-lv @(level == lv.Key ? "on" : "")"
+                    @onclick="() => SetLevel(lv.Key)">
+                @lv.Value
+            </button>
+        }
+    </div>
+
+    @{
+        var fwCount = GetCurrentFrameworks().Count();
+    }
+    <div class="fsh-hint">
+        @fwCount style@(fwCount > 1 ? "s" : "") at this level — swipe to explore
+    </div>
+
+    @* Swipeable cards *@
+    <div class="fsh-cards-wrap">
+        <div class="fsh-cards">
+            @foreach (var (fw, idx) in GetCurrentFrameworks())
             {
-                <div class="doc-query-wrapper">
-                    <i class="fa-solid fa-drumstick-bite doc-query-icon"></i>
-                    <div class="doc-query">@currentPrompt</div>
-                </div>
-                <div class="doc-section chat-content">
-                    @if (string.IsNullOrEmpty(streamingText))
-                    {
-                        <span class="thinking-dots">Connecting to T-Rex brain...</span>
-                    }
-                    else
-                    {
-                        @( (MarkupString)(streamingHtml ?? string.Empty) )
-                        <span class="stream-cursor"></span>
-                    }
+                <div class="fsh-card @(selFw?.Name == fw.Name ? "sel" : "")">
+                    <div class="fsh-card-top">
+                        <span class="fsh-card-ico">@fw.Icon</span>
+                        <span class="fsh-card-name">@fw.Name</span>
+                        <span class="fw-badge @fw.Bc" style="font-size:.56rem">@fw.Badge</span>
+                    </div>
+                    <div class="fsh-card-desc">@fw.Desc</div>
+                    <span class="fsh-card-tag">@fw.Tag</span>
+                    <button class="fsh-use" @onclick="() => PickFwMob(idx)">Use this style →</button>
                 </div>
             }
-
         </div>
     </div>
 </div>
 
-<!-- MOBILE FLOATING PROMPT BAR -->
-<div class="mobile-prompt-bar">
-    <form @onsubmit="OnSubmit" @onsubmit:preventDefault class="mobile-prompt-form">
-        <input type="text" class="mobile-prompt-input" 
-               @bind="userInput" 
-               @bind:event="oninput"
-               placeholder="Feed the dino..." 
-               disabled="@(isLoading || isRefining)" />
-        <button class="mobile-send-btn" type="submit" disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
-            <i class="fa-solid fa-rocket"></i> Release
-        </button>
-    </form>
-    <p class="mobile-version-text">Version 1.1.0 <a href="/release-notes" target="_blank">Release note</a></p>
-</div>
 
-
+@* ══ JS HELPERS ══ *@
 <script type="text/javascript">
     window.scrollToBottom = (el) => {
-        if (el) {
-            // Smooth scroll that follows the stream like reading along
-            el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
-        }
-        // On mobile the portal-right is not a scroll container,
-        // so also scroll the window itself
-        if (window.innerWidth <= 900) {
+        if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+        if (window.innerWidth <= 860)
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
     };
     window.highlightCode = () => {
-        if (window.hljs) {
-            window.hljs.highlightAll();
-        }
+        if (window.hljs) hljs.highlightAll();
     };
     window.copyTextToClipboard = (text) => {
         navigator.clipboard.writeText(text);
     };
     window.shareContentNative = async (text) => {
         if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: 'From AI Prompt Academy',
-                    text: text
-                });
-            } catch (err) { }
+            try { await navigator.share({ title: 'From Dino Prompt Academy', text }); } catch {}
         } else {
-            alert('Sharing is not supported on this device/browser automatically. Used "Copy" instead!');
+            navigator.clipboard.writeText(text);
         }
     };
 </script>
 
+
 @code {
-    private string streamingText = "";
-    private string streamingHtml = "";
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // FRAMEWORK DATA
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private record FrameworkItem(
+        string Icon, string Name, string Desc,
+        string Tag, string Badge, string Bc, string Tpl);
+
+    private static readonly Dictionary<int, string> Levels = new()
+    {
+        { 1, "🐣 Baby"  },
+        { 2, "🦎 Explorer" },
+        { 3, "🦖 Pro"      },
+        { 4, "🔬 Expert"   },
+        { 5, "🚀 Master"   }
+    };
+
+    private static readonly Dictionary<int, List<FrameworkItem>> FW = new()
+    {
+        { 1, new() {
+            new("✍️", "Get a quick answer",
+                "Simple questions, definitions, short explanations. No fuss — just ask.",
+                "PRO Framework", "L1", "b1",
+                "Role: Act as a knowledgeable and friendly expert.\nPurpose: Help me understand [topic or question].\nOutput: Give me a clear, simple explanation using bullet points where helpful."),
+            new("📝", "Write something for me",
+                "Emails, captions, short messages. Tell AI what to write, who it's for, and the tone.",
+                "ERA Framework", "L1", "b1",
+                "Expectation: I need a short and friendly [email / message / post].\nRole: Act as a professional writer.\nAction: Draft a [type of content] for [recipient or audience] about [topic].")
+        }},
+        { 2, new() {
+            new("📋", "Break into clear steps",
+                "Turn any task or goal into an ordered, easy-to-follow action plan.",
+                "RACE Framework", "L2", "b2",
+                "Role: Senior project planner and strategist.\nAction: Create a clear step-by-step plan for [task or goal].\nContext: My situation is [describe briefly]. My audience or team is [who is involved].\nExpectation: Format with numbered steps, short headings, and key notes under each step."),
+            new("💡", "Explain this to someone",
+                "Turn a complex idea into a clear explanation tailored to any audience.",
+                "CARE Framework", "L2", "b2",
+                "Context: I need to explain [topic] to [audience — e.g. my manager, a student, a client].\nAction: Write a clear and engaging explanation.\nResult: The reader should understand [specific outcome] by the end.\nExample: Use a relatable real-world analogy to make the concept stick.")
+        }},
+        { 3, new() {
+            new("🎯", "Create something professional",
+                "Full-context prompting for reports, proposals, presentations, and polished documents.",
+                "CO-STAR Framework", "L3", "b3",
+                "Context: I am working on [describe the situation or project].\nObjective: Create a professional [type of content] that [goal].\nStyle: Clear, structured, and confident.\nTone: [e.g. formal, friendly, authoritative].\nAudience: [who will read or use this].\nResponse: Format using Markdown with clear headings and bullet points where appropriate."),
+            new("🗺️", "Build a complete strategy",
+                "End-to-end strategy with defined role, phased steps, a clear goal, and sharp focus.",
+                "RISEN Framework", "L3", "b3",
+                "Role: Expert consultant specialising in [your field or industry].\nInstructions: Help me build a complete strategy for [goal or challenge].\nSteps: Divide this into phases with realistic timelines and milestones.\nEnd Goal: By the end, I want to achieve [specific, measurable outcome].\nNarrowing: Focus specifically on [what to include]. Ignore [what to exclude].")
+        }},
+        { 4, new() {
+            new("🔬", "Think through a complex problem",
+                "Chain-of-thought reasoning for tough, multi-layered challenges. AI thinks before answering.",
+                "CoT + Knowledge", "L4", "b4",
+                "Before answering, first list the 3 most important principles behind [topic or domain].\nOnce you have those principles, carefully step-by-step analyse [the specific problem].\nFor each step, explain your reasoning clearly before giving a conclusion.\nFinally, write a crisp summary of your recommendation, suitable to share with a decision-maker.")
+        }},
+        { 5, new() {
+            new("🤖", "Run a multi-step workflow",
+                "Chain multiple AI tasks like an agent. Build rich, structured outputs in one prompt.",
+                "Agent Workflow", "L5", "b5",
+                "Step 1: Identify and list the key components of [topic or subject].\nStep 2: For each component, provide a detailed explanation covering [what to explain].\nStep 3: Write a professional executive summary that ties all components together.\nStep 4: Format the entire output as a structured brief with labelled sections, ready to share or present.")
+        }}
+    };
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // STATE
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private int level = 1;
+    private FrameworkItem? selFw = null;
     private string userInput = "";
     private string currentPrompt = "";
+    private string streamingText = "";
+    private string streamingHtml = "";
     private bool isLoading = false;
     private bool isRefining = false;
+    private bool navOpen = false;
+    private bool fwSheetOpen = false;
     private List<Message> messages = new();
     private ElementReference documentContainer;
-
     private MarkdownPipeline _mdPipeline = default!;
+    private CancellationTokenSource _cts = new();
 
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // GUIDE STRIP — computed property
+    // This is the core fix for the auto-hide bug.
+    // Blazor evaluates this on every render so it is
+    // always accurate with zero timers or async races.
+    //
+    //  selFw != null  → ALWAYS show (locked visible so user can change/clear)
+    //  selFw == null  → hide only when user has typed something into the box
+    //                   (strip would cover the input area on small screens)
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private bool GuideStripHidden => selFw == null && userInput.Trim().Length > 0;
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // INIT
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     protected override void OnInitialized()
     {
         var builder = new MarkdownPipelineBuilder().UseAdvancedExtensions();
@@ -252,20 +497,168 @@
         _mdPipeline = builder.Build();
     }
 
-    private void InsertTemplate(string template)
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // HELPERS
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private IEnumerable<(FrameworkItem fw, int idx)> GetCurrentFrameworks()
+        => (FW.TryGetValue(level, out var list) ? list : new List<FrameworkItem>())
+           .Select((fw, i) => (fw, i));
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // LEVEL & FRAMEWORK SELECTION
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private void SetLevel(int lv) => level = lv;
+
+    private void PickFw(int i)
     {
-        userInput = template;
+        if (!FW.TryGetValue(level, out var list) || i >= list.Count) return;
+        selFw = list[i];
+        userInput = selFw.Tpl;
+        // GuideStripHidden will re-evaluate automatically on next render
+        // and will return FALSE because selFw != null — no manual call needed
     }
 
+    private void PickFwMob(int i)
+    {
+        PickFw(i);
+        fwSheetOpen = false;
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // GUIDE STRIP ACTIONS
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private void OpenFwSheet() => fwSheetOpen = true;
+    private void CloseFwSheet() => fwSheetOpen = false;
+
+    // ✕ button: clear the selected style, keep the prompt text
+    private void ClearStyle() => selFw = null;
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // NAV DRAWER
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private void OpenNav() => navOpen = true;
+    private void CloseNav() => navOpen = false;
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // SUBMIT
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private async Task OnSubmit() => await AskAI();
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // AI — STREAMING
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private async Task AskAI()
+    {
+        if (string.IsNullOrWhiteSpace(userInput) || isLoading || isRefining) return;
+
+        messages.Add(new Message { Text = userInput, IsUser = true });
+        currentPrompt = userInput;
+        userInput = "";
+        selFw = null;
+        isLoading = true;
+        streamingText = "";
+        streamingHtml = "";
+        StateHasChanged();
+
+        try
+        {
+            _cts.Cancel();
+            _cts = new CancellationTokenSource();
+
+            await foreach (var chunk in Gemini.AskStreamAsync(currentPrompt))
+            {
+                if (_cts.Token.IsCancellationRequested) break;
+                streamingText += chunk;
+                streamingHtml = Markdown.ToHtml(streamingText, _mdPipeline);
+                StateHasChanged();
+                await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
+            }
+
+            var finalHtml = Markdown.ToHtml(streamingText, _mdPipeline);
+            messages.Add(new Message
+            {
+                Text = streamingText,
+                Html = finalHtml,
+                IsUser = false
+            });
+        }
+        catch (OperationCanceledException) { /* user navigated away */ }
+        catch (Exception ex)
+        {
+            messages.Add(new Message
+            {
+                Text = $"❌ Error: {ex.Message}",
+                Html = $"<p style='color:var(--rose)'>❌ {ex.Message}</p>",
+                IsUser = false
+            });
+        }
+        finally
+        {
+            streamingText = "";
+            streamingHtml = "";
+            currentPrompt = "";
+            isLoading = false;
+            StateHasChanged();
+            await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
+            await JS.InvokeVoidAsync("highlightCode");
+        }
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // REFINE PROMPT
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private async Task RefinePrompt()
+    {
+        if (string.IsNullOrWhiteSpace(userInput) || isRefining || isLoading) return;
+        isRefining = true;
+        StateHasChanged();
+        try
+        {
+            var refined = await Gemini.RefinePromptAsync(userInput);
+            userInput = refined;
+        }
+        catch { /* silent — user keeps their original text */ }
+        finally
+        {
+            isRefining = false;
+            StateHasChanged();
+        }
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // TRANSLATE
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private async Task ChangeLanguage(Message msg, string newLanguage)
+    {
+        if (string.IsNullOrEmpty(newLanguage) || string.IsNullOrEmpty(msg.Text)) return;
+        msg.TargetLanguage = newLanguage;
+        msg.IsTranslating = true;
+        StateHasChanged();
+        try
+        {
+            var translated = await Gemini.TranslatePromptAsync(msg.Text, newLanguage);
+            msg.Text = translated;
+            msg.Html = Markdown.ToHtml(translated, _mdPipeline);
+        }
+        catch { }
+        finally
+        {
+            msg.IsTranslating = false;
+            msg.TargetLanguage = "";
+            StateHasChanged();
+            await JS.InvokeVoidAsync("highlightCode");
+        }
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // COPY / SHARE
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     private async Task CopyToClipboard(Message msg)
     {
         if (string.IsNullOrEmpty(msg.Text)) return;
-        
         await JS.InvokeVoidAsync("copyTextToClipboard", msg.Text);
         msg.DidCopy = true;
         StateHasChanged();
-        
-        // Reset copy icon after 2 seconds
         await Task.Delay(2000);
         msg.DidCopy = false;
         StateHasChanged();
@@ -277,123 +670,46 @@
         await JS.InvokeVoidAsync("shareContentNative", msg.Text);
     }
 
-    private async Task ChangeLanguage(Message msg, string newLanguage)
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // NEW SESSION
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private void NewSession()
     {
-        if (string.IsNullOrEmpty(newLanguage) || string.IsNullOrEmpty(msg.Text)) return;
-
-        msg.TargetLanguage = newLanguage;
-        msg.IsTranslating = true;
-        StateHasChanged();
-
-        try
-        {
-            // Call the Gemini service translating over the RAW markdown
-            var translatedRaw = await Gemini.TranslatePromptAsync(msg.Text, newLanguage);
-            
-            // Overwrite the original text and HTML so its permanently translated in memory
-            msg.Text = translatedRaw;
-            msg.Html = Markdown.ToHtml(translatedRaw, _mdPipeline);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Translate error: " + ex.Message);
-        }
-        finally
-        {
-            msg.IsTranslating = false;
-            msg.TargetLanguage = ""; // Reset dropdown
-            StateHasChanged();
-            
-            // Re-fire syntax highlighter over the translated block
-            await JS.InvokeVoidAsync("highlightCode");
-        }
-    }
-
-    private async Task RefinePrompt()
-    {
-        if (string.IsNullOrWhiteSpace(userInput)) return;
-        isRefining = true;
-        StateHasChanged();
-
-        try
-        {
-            var refined = await Gemini.RefinePromptAsync(userInput);
-            userInput = refined;
-        }
-        catch (Exception)
-        {
-            // Ignore failure, let user keep their text
-        }
-        finally
-        {
-            isRefining = false;
-            StateHasChanged();
-        }
-    }
-
-    private async Task AskAI()
-    {
-        if (string.IsNullOrWhiteSpace(userInput)) return;
-
-        messages.Add(new Message { Text = userInput, IsUser = true });
-        currentPrompt = userInput;
+        messages.Clear();
         userInput = "";
-        isLoading = true;
+        selFw = null;
         streamingText = "";
         streamingHtml = "";
-        StateHasChanged(); 
-
-        try
-        {
-            await foreach (var chunk in Gemini.AskStreamAsync(currentPrompt))
-            {
-                streamingText += chunk;
-                streamingHtml = Markdown.ToHtml(streamingText, _mdPipeline);
-                StateHasChanged();
-                await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
-            }
-
-            var finalHtml = Markdown.ToHtml(streamingText, _mdPipeline);
-            messages.Add(new Message { Text = streamingText, Html = finalHtml, IsUser = false });
-        }
-        catch (Exception ex)
-        {
-            messages.Add(new Message { Text = $"❌ Error: {ex.Message}", Html = $"❌ Error: {ex.Message}", IsUser = false });
-        }
-        finally
-        {
-            streamingText = "";
-            streamingHtml = "";
-            currentPrompt = "";
-            isLoading = false;
-            StateHasChanged();
-        }
     }
 
-    private async Task OnSubmit()
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // LIFECYCLE
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await AskAI();
+        if (messages.Count > 0 || isLoading)
+            await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
+
+        if (!isLoading && messages.Count > 0)
+            await JS.InvokeVoidAsync("highlightCode");
     }
 
-    class Message
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // MESSAGE MODEL
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    private class Message
     {
         public string? Text { get; set; }
         public string? Html { get; set; }
         public bool IsUser { get; set; }
-        public DateTime Time { get; set; } = DateTime.Now;
-        
-        // UI States
         public bool IsTranslating { get; set; }
         public string TargetLanguage { get; set; } = "";
         public bool DidCopy { get; set; }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (messages.Count > 0 || isLoading)
-        {
-            await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
-        }
-        await JS.InvokeVoidAsync("highlightCode");
     }
 }
