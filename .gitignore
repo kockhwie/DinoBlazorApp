@@ -10,6 +10,10 @@
 *.userosscache
 *.sln.docstates
 
+# Local tooling and runtime state
+.appdata/
+.dotnetcli/
+
 # Jason added specific secrets
 .env
 secrets.json

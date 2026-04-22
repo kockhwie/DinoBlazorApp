@@ -11,10 +11,18 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
-builder.Services
-    .AddDataProtection()
-    .PersistKeysToFileSystem(new System.IO.DirectoryInfo(System.IO.Path.Combine(builder.Environment.ContentRootPath, ".appdata", "dpkeys")))
-    .SetApplicationName("DinoBlazorApp");
+if (OperatingSystem.IsWindows())
+{
+    builder.Services
+        .AddDataProtection()
+        .PersistKeysToFileSystem(new System.IO.DirectoryInfo(System.IO.Path.Combine(builder.Environment.ContentRootPath, ".appdata", "dpkeys")))
+        .ProtectKeysWithDpapi()
+        .SetApplicationName("DinoBlazorApp");
+}
+else
+{
+    throw new PlatformNotSupportedException("DinoBlazorApp requires Windows Data Protection or a custom encrypted key provider.");
+}
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

@@ -159,7 +159,7 @@ body {
 }
 
 .lv-pill {
-    flex: 1;
+    /*flex: 1;*/
     min-width: 0;
     padding: 6px 4px;
     border: 1px solid var(--bdr);
