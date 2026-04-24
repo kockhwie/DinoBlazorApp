@@ -1,0 +1,27 @@
+@inherits LayoutComponentBase
+
+<div class="app sub-page-layout">
+    <NavMenu @bind-IsMobileDrawerOpen="navOpen" />
+
+    <main class="subpage-canvas">
+        @* MOBILE TOP NAV *@
+        <nav class="mob-topnav">
+            <div class="mob-brand">
+                <span class="mob-brand-dino">🦕</span>
+                <div>
+                    <div class="mob-brand-name">Dino Prompt Academy</div>
+                </div>
+            </div>
+            <button class="mob-ham" @onclick="OpenNav" aria-label="Open menu">☰</button>
+        </nav>
+
+        <div class="subpage-content">
+            @Body
+        </div>
+    </main>
+</div>
+
+@code {
+    private bool navOpen = false;
+    private void OpenNav() => navOpen = true;
+}

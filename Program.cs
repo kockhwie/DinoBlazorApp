@@ -1,4 +1,5 @@
 using DinoBlazorApp.Components;
+using DinoBlazorApp.Services;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography.X509Certificates;
@@ -13,6 +14,8 @@ builder.Logging.AddDebug();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddSingleton<IFeedbackService, FeedbackService>();
 
 builder.Services.AddHttpClient<GeminiService>(client =>
 {
@@ -99,3 +102,5 @@ static X509Certificate2? LoadDataProtectionCertificate(IConfiguration configurat
 
     return null;
 }
+
+public partial class Program { }

@@ -1,5 +1,12 @@
 # Repo Guidance
 
+## 🚀 Critical Tech Stack
+- **Target Framework:** .NET 10 (Strictly use C# 14/latest features).
+- **Core Pattern:** Clean Architecture + Blazor Interactive Server.
+- **Standards:** Refer to `docs/modern_csharp.md` for coding style.
+
+## 🛠️ Environment Rules
+
 - Keep Blazor interactive server rendering enabled for the main app shell.
 - Persist DataProtection keys locally only when needed, and always encrypt them at rest.
 - Do not reintroduce Windows Event Log logging in this workspace.

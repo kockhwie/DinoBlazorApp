@@ -1,0 +1,393 @@
+@page "/feedback"
+@layout SubPageLayout
+@using DinoBlazorApp.Models
+@inject DinoBlazorApp.Services.IFeedbackService FeedbackService
+@inject IJSRuntime JS
+
+<div class="fb-page">
+
+    @* ── PAGE HEADER ── *@
+    <header class="fb-header">
+        <a href="/" class="fb-back"><span>←</span> Back to Academy</a>
+        <div class="fb-hero">
+            <div class="fb-hero-dino">💬</div>
+            <h1>Feedback &amp; Wishlist</h1>
+            <p>Help us evolve. Every roar counts 🦕</p>
+        </div>
+
+        @* Tab strip *@
+        <div class="fb-tabs">
+            <button class="fb-tab @(activeTab == "feedback" ? "on" : "")"
+                    @onclick='() => activeTab = "feedback"'>
+                <span class="ft-ico">📝</span>
+                <span class="ft-lbl">Leave Feedback</span>
+            </button>
+            <button class="fb-tab @(activeTab == "wishlist" ? "on" : "")"
+                    @onclick='() => activeTab = "wishlist"'>
+                <span class="ft-ico">✨</span>
+                <span class="ft-lbl">Feature Wishlist</span>
+                <span class="ft-count">@wishlistItems.Count</span>
+            </button>
+        </div>
+    </header>
+
+    @* ── FEEDBACK TAB ── *@
+    @if (activeTab == "feedback")
+    {
+        <div class="fb-body">
+
+            @* Submitted state *@
+            @if (feedbackSubmitted)
+            {
+                <div class="fb-success">
+                    <div class="fs-dino">🦕</div>
+                    <h2>Thank you, @(string.IsNullOrWhiteSpace(form.Nickname) ? "friend" : form.Nickname)!</h2>
+                    <p>Your feedback has been received. We read every single one.</p>
+                    <button class="fs-again" @onclick="ResetForm">Submit another →</button>
+                </div>
+            }
+            else
+            {
+                <div class="fb-two-col">
+
+                    @* ── FORM ── *@
+                    <div class="fb-form-wrap">
+                        <div class="fb-section-title">Tell us what you think</div>
+
+                        @* Type selector *@
+                        <div class="fb-field">
+                            <label class="fb-lbl">What kind of feedback is this?</label>
+                            <div class="fb-type-pills">
+                                @foreach (var t in FeedbackTypes)
+                                {
+                                    <button class="fb-type-pill @(form.Type == t.Key ? "on" : "")"
+                                            @onclick="() => form.Type = t.Key">
+                                        @t.Value
+                                    </button>
+                                }
+                            </div>
+                        </div>
+
+                        @* Dino rating *@
+                        <div class="fb-field">
+                            <label class="fb-lbl">How do you feel about the app?</label>
+                            <div class="fb-rating">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    var score = i;
+                                    <button class="fb-dino-btn @(form.Rating >= score ? "lit" : "")"
+                                            @onclick="() => form.Rating = score"
+                                            title="@RatingLabel(score)">
+                                        🦕
+                                    </button>
+                                }
+                                @if (form.Rating > 0)
+                                {
+                                    <span class="fb-rating-lbl">@RatingLabel(form.Rating)</span>
+                                }
+                            </div>
+                        </div>
+
+                        @* Nickname *@
+                        <div class="fb-field">
+                            <label class="fb-lbl">Your name <span class="fb-optional">(optional)</span></label>
+                            <input class="fb-input" type="text"
+                                   placeholder="e.g. Dino Tamer 🦖"
+                                   @bind="form.Nickname"
+                                   maxlength="40" />
+                        </div>
+
+                        @* Message *@
+                        <div class="fb-field">
+                            <label class="fb-lbl">Your message <span class="fb-required">*</span></label>
+                            <textarea class="fb-ta"
+                                      placeholder="@GetPlaceholder()"
+                                      @bind="form.Message"
+                                      maxlength="1000"
+                                      rows="5"></textarea>
+                            <div class="fb-char">@form.Message.Length / 1000</div>
+                        </div>
+
+                        @* Validation *@
+                        @if (showValidation && string.IsNullOrWhiteSpace(form.Message))
+                        {
+                            <div class="fb-error">⚠️ Please write a message before submitting.</div>
+                        }
+
+                        <button class="fb-submit" @onclick="SubmitFeedback"
+                                disabled="@isSubmitting">
+                            @if (isSubmitting)
+                            { <span class="fb-spin">⚡</span> <span>Sending...</span> }
+                            else
+                            { <span>🚀 Send Feedback</span> }
+                        </button>
+                    </div>
+
+                    @* ── RECENT FEEDBACK WALL ── *@
+                    <div class="fb-wall">
+                        <div class="fb-section-title">Recent feedback</div>
+                        @if (!recentFeedback.Any())
+                        {
+                            <div class="fb-wall-empty">
+                                <div>🦴</div>
+                                <p>Be the first to leave feedback!</p>
+                            </div>
+                        }
+                        else
+                        {
+                            @foreach (var fb in recentFeedback.OrderByDescending(f => f.At).Take(8))
+                            {
+                                <div class="fb-wall-card">
+                                    <div class="fwc-top">
+                                        <span class="fwc-type">@FeedbackTypes.GetValueOrDefault(fb.Type, "💬")</span>  
+                                        <span class="ft-count"><span class="fwc-who">@(string.IsNullOrEmpty(fb.Nickname) ? "Anonymous Dino" : fb.Nickname)</span></span>
+                                        <span class="fwc-time">@TimeAgo(fb.At)</span>
+                                    </div>
+                                    @if (fb.Rating > 0)
+                                    {
+                                        <div class="fwc-rating">
+                                            @for (int i = 0; i < fb.Rating; i++) { <span>🦕</span> }
+                                        </div>
+                                    }
+                                    <div class="fwc-msg">@fb.Message</div>
+                                </div>
+                            }
+                        }
+                    </div>
+
+                </div>
+            }
+        </div>
+    }
+
+    @* ── WISHLIST TAB ── *@
+    @if (activeTab == "wishlist")
+    {
+        <div class="fb-body">
+            <div class="fb-two-col">
+
+                @* ── ADD IDEA FORM ── *@
+                <div class="fb-form-wrap">
+                    <div class="fb-section-title">Suggest a feature</div>
+
+                    <div class="fb-field">
+                        <label class="fb-lbl">Feature title <span class="fb-required">*</span></label>
+                        <input class="fb-input" type="text"
+                               placeholder="e.g. Save favourite prompts"
+                               @bind="newIdea.Title"
+                               maxlength="80" />
+                    </div>
+
+                    <div class="fb-field">
+                        <label class="fb-lbl">Category</label>
+                        <div class="fb-type-pills">
+                            @foreach (var c in IdeaCategories)
+                            {
+                                <button class="fb-type-pill @(newIdea.Category == c.Key ? "on" : "")"
+                                        @onclick="() => newIdea.Category = c.Key">
+                                    @c.Value
+                                </button>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="fb-field">
+                        <label class="fb-lbl">Why would this help you? <span class="fb-optional">(optional)</span></label>
+                        <textarea class="fb-ta"
+                                  placeholder="Describe the problem it solves or the value it adds..."
+                                  @bind="newIdea.Desc"
+                                  maxlength="500"
+                                  rows="4"></textarea>
+                    </div>
+
+                    @if (showIdeaValidation && string.IsNullOrWhiteSpace(newIdea.Title))
+                    {
+                        <div class="fb-error">⚠️ Please give your idea a title.</div>
+                    }
+
+                    <button class="fb-submit" @onclick="SubmitIdea">
+                        ✨ Add to Wishlist
+                    </button>
+
+                    <p class="fb-note">
+                        💾 Submissions are stored in-memory for this session.
+                        Persistent voting &amp; history coming in a future release.
+                    </p>
+                </div>
+
+                @* ── WISHLIST WALL ── *@
+                <div class="fb-wall">
+                    <div class="fb-section-title-row">
+                        <span class="fb-section-title">Community wishlist</span>
+                        <div class="fb-sort">
+                            <button class="fb-sort-btn @(sortBy == "votes" ? "on" : "")"
+                                    @onclick='() => sortBy = "votes"'>🔥 Top</button>
+                            <button class="fb-sort-btn @(sortBy == "new" ? "on" : "")"
+                                    @onclick='() => sortBy = "new"'>✨ New</button>
+                        </div>
+                    </div>
+
+                    @foreach (var idea in SortedIdeas())
+                    {
+                        <div class="wl-card @(idea.Voted ? "voted" : "")">
+                            <button class="wl-vote" @onclick="() => ToggleVote(idea)"
+                                    title="@(idea.Voted ? "Remove vote" : "Upvote this idea")">
+                                <span class="wl-vote-ico">@(idea.Voted ? "🦖" : "🦴")</span>
+                                <span class="wl-vote-count">@idea.Votes</span>
+                            </button>
+                            <div class="wl-body">
+                                <div class="wl-top">
+                                    <span class="wl-cat">@IdeaCategories.GetValueOrDefault(idea.Category, "💡")</span>
+                                    @if (idea.IsNew)
+                                    {
+                                        <span class="wl-new-badge">New</span>
+                                    }
+                                </div>
+                                <div class="wl-title">@idea.Title</div>
+                                @if (!string.IsNullOrEmpty(idea.Desc))
+                                {
+                                    <div class="wl-desc">@idea.Desc</div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>
+
+@code {
+    // ── TABS ──
+    private string activeTab  = "feedback";
+    private string sortBy     = "votes";
+
+    // ── FEEDBACK FORM STATE ──
+    private FeedbackForm form = new();
+    private bool feedbackSubmitted = false;
+    private bool isSubmitting      = false;
+    private bool showValidation    = false;
+
+    // ── WISHLIST FORM STATE ──
+    private IdeaForm newIdea         = new();
+    private bool showIdeaValidation  = false;
+
+    // ── DATA ──
+    private List<FeedbackEntry> recentFeedback => FeedbackService.GetFeedback();
+    private List<WishlistItem> wishlistItems => FeedbackService.GetWishlist();
+
+    // ── LOOKUP TABLES ──
+    private static readonly Dictionary<string, string> FeedbackTypes = new()
+    {
+        { "general",  "💬 General"      },
+        { "bug",      "🐛 Bug Report"   },
+        { "idea",     "💡 Idea"         },
+        { "praise",   "🌟 Compliment"   }
+    };
+
+    private static readonly Dictionary<string, string> IdeaCategories = new()
+    {
+        { "feature", "⚡ Feature"  },
+        { "ux",      "🎨 Design"   },
+        { "learn",   "📚 Learning" },
+        { "mobile",  "📱 Mobile"   },
+        { "perf",    "🚀 Speed"    }
+    };
+
+    // ── RATING LABELS ──
+    private static string RatingLabel(int r) => r switch
+    {
+        1 => "Needs a lot of work",
+        2 => "Could be better",
+        3 => "It's decent",
+        4 => "Really good!",
+        5 => "Absolutely love it 🦕",
+        _ => ""
+    };
+
+    // ── PLACEHOLDER BY TYPE ──
+    private string GetPlaceholder() => form.Type switch
+    {
+        "bug"    => "Describe what happened, what you expected, and how to reproduce it...",
+        "idea"   => "What would you like to see? How would it help you?",
+        "praise" => "We'd love to hear what you enjoy about the app 🦕",
+        _        => "Share your thoughts — every roar counts..."
+    };
+
+    // ── SUBMIT FEEDBACK ──
+    private async Task SubmitFeedback()
+    {
+        showValidation = true;
+        if (string.IsNullOrWhiteSpace(form.Message)) return;
+
+        isSubmitting = true;
+        StateHasChanged();
+        await Task.Delay(900); // simulate brief send
+
+        FeedbackService.AddFeedback(new FeedbackEntry
+        {
+            Nickname = form.Nickname,
+            Type     = form.Type,
+            Rating   = form.Rating,
+            Message  = form.Message,
+            At       = DateTime.Now
+        });
+
+        isSubmitting      = false;
+        feedbackSubmitted = true;
+        showValidation    = false;
+    }
+
+    private void ResetForm()
+    {
+        form              = new FeedbackForm();
+        feedbackSubmitted = false;
+        showValidation    = false;
+    }
+
+    // ── SUBMIT IDEA ──
+    private void SubmitIdea()
+    {
+        showIdeaValidation = true;
+        if (string.IsNullOrWhiteSpace(newIdea.Title)) return;
+
+        FeedbackService.AddWishlistItem(new WishlistItem
+        {
+            Title    = newIdea.Title,
+            Category = string.IsNullOrEmpty(newIdea.Category) ? "feature" : newIdea.Category,
+            Desc     = newIdea.Desc,
+            Votes    = 1,
+            Voted    = true,
+            IsNew    = true
+        });
+
+        newIdea            = new IdeaForm();
+        showIdeaValidation = false;
+    }
+
+    // ── VOTE ──
+    private void ToggleVote(WishlistItem item)
+    {
+        FeedbackService.ToggleVote(item.Id);
+    }
+
+    // ── SORT ──
+    private IEnumerable<WishlistItem> SortedIdeas() => sortBy == "votes"
+        ? wishlistItems.OrderByDescending(i => i.Votes)
+        : wishlistItems.OrderByDescending(i => i.IsNew).ThenByDescending(i => i.Id);
+
+    // ── TIME AGO ──
+    private static string TimeAgo(DateTime dt)
+    {
+        var diff = DateTime.Now - dt;
+        if (diff.TotalSeconds < 60)  return "just now";
+        if (diff.TotalMinutes < 60)  return $"{(int)diff.TotalMinutes}m ago";
+        if (diff.TotalHours   < 24)  return $"{(int)diff.TotalHours}h ago";
+        return $"{(int)diff.TotalDays}d ago";
+    }
+
+
+}
+

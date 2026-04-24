@@ -17,8 +17,14 @@
     <button class="mob-ham" @onclick="OpenNav" aria-label="Open menu">☰</button>
 </nav>
 
-@* ══ APP SHELL ══ *@
+@* ══ APP SHELL ══
+<i class="uil uil-microscope"></i>
+<i class="uil uil-dna"></i>
+<i class="uil uil-bug"></i>
+*@
+
 <div class="app">
+    <NavMenu @bind-IsMobileDrawerOpen="navOpen" />
 
     @* ── SIDEBAR ── *@
     <aside class="sidebar">
@@ -26,29 +32,33 @@
 
             @* Brand *@
             <div class="brand">
-                <span class="brand-dino">🦕</span>
+                <span class="brand-dino"></span>
                 <div>
                     <h1>Dino Prompt Academy</h1>
-                    <p>Learn prompting. Master AI. Own your future.</p>
+                    <p>Learn prompting · Master AI · Own your future · </p>
                 </div>
             </div>
 
             @* Level pills *@
-            <div class="lv-strip">
-                @foreach (var lv in Levels)
-                {
-                    <button class="lv-pill @(level == lv.Key ? "on" : "")"
-                            @onclick="() => SetLevel(lv.Key)">
-                        @lv.Value
-                    </button>
-                }
+            <div class="fw-level @(desktopLevelsGlow ? "guide-glow" : "")"> 
+                <span class="fw-icon">🎯</span>
+                <span class="fw-name">Levels</span>
+                <div class="lv-strip">
+                    @foreach (var lv in Levels)
+                    {
+                        <button class="lv-pill t-@lv.Key @(level == lv.Key ? "on" : "")"
+                                @onclick="() => SetLevel(lv.Key)">
+                            @lv.Value
+                        </button>
+                    }
+                </div>
             </div>
 
             @* Framework cards *@
             <div class="fw-list">
                 @foreach (var (fw, idx) in GetCurrentFrameworks())
                 {
-                    <div class="fw-card @(selFw?.Name == fw.Name ? "sel" : "")"
+                    <div class="fw-card t-@level @(selFw?.Name == fw.Name ? "sel" : "")"
                          @onclick="() => PickFw(idx)">
                         <div class="fw-r1">
                             <span class="fw-icon">@fw.Icon</span>
@@ -65,11 +75,14 @@
             <div class="pb">
                 <div class="pb-lbl">Your Prompt</div>
                 <textarea class="pb-ta" id="deskTa"
+                          data-prompt-editor="true"
+                          data-max-height="240"
                           @bind="userInput"
                           @bind:event="oninput"
+                          @bind:after="OnPromptChangedAsync"
                           placeholder="Choose a template above, or write your own..."
                           disabled="@(isLoading || isRefining)"
-                          rows="5"></textarea>
+                          rows="3"></textarea>
                 <div class="pb-foot">
                     <span class="char-c @(userInput.Length > 3600 ? "over" : "")">
                         @userInput.Length / 4000
@@ -95,7 +108,7 @@
 
         </div>
         <div class="sb-foot">
-            v1.3.0 · <a href="/release-notes">Release Notes</a> · <a href="#">💬 Feedback</a>
+            v1.3.0 · Dino Prompt Academy<!--a href="/release-notes">Release Notes</a--><!--a href="/feedback">💬 Feedback</a-->
         </div>
     </aside>
 
@@ -120,12 +133,15 @@
                         <div class="welcome-dino">🦕</div>
                         <h2>What will you prompt today?</h2>
                         <p>Three steps is all it takes. The dino handles the rest.</p>
+                        <div class="welcome-help"></div>
                         <div class="welcome-steps">
-                            <div class="w-step">
+                            <button type="button"
+                                    class="w-step w-step-cta @(step2Nudge ? "done" : "")"
+                                    @onclick="StartStep1Guide">
                                 <div class="w-step-num">Step 1</div>
                                 <div class="w-step-ico">🎯</div>
-                                <div class="w-step-txt">Pick your level</div>
-                            </div>
+                                <div class="w-step-txt">Choose your level</div>
+                            </button>
                             <div class="w-step">
                                 <div class="w-step-num">Step 2</div>
                                 <div class="w-step-ico">✍️</div>
@@ -237,45 +253,7 @@
 </div>@* end .app *@
 
 
-@* ══ MOBILE NAV DRAWER ══ *@
-@if (navOpen)
-{
-    <div class="nav-bg on" @onclick="CloseNav"></div>
-}
-<div class="nav-drawer @(navOpen ? "on" : "")">
-    <div class="nav-head">
-        <div class="nav-head-b">
-            <span class="nd-ico">🦕</span>
-            <span class="nd-lbl">Menu</span>
-        </div>
-        <button class="nav-close" @onclick="CloseNav">✕</button>
-    </div>
-
-    <div class="nav-sec">Learn</div>
-    <button class="nav-lnk"><span class="ni">🏠</span><span class="nl">Home</span></button>
-    <button class="nav-lnk"><span class="ni">📚</span><span class="nl">Prompt Library</span><span class="nav-soon">Soon</span></button>
-    <button class="nav-lnk"><span class="ni">💡</span><span class="nl">Learning Snippets</span><span class="nav-soon">Soon</span></button>
-    <button class="nav-lnk"><span class="ni">📜</span><span class="nl">My History</span><span class="nav-soon">Soon</span></button>
-
-    <div class="nav-div"></div>
-    <div class="nav-sec">Account</div>
-    <button class="nav-lnk"><span class="ni">👤</span><span class="nl">Profile</span><span class="nav-soon">Soon</span></button>
-    <button class="nav-lnk"><span class="ni">⚙️</span><span class="nl">Settings</span><span class="nav-soon">Soon</span></button>
-
-    <div class="nav-div"></div>
-    <div class="nav-sec">Community</div>
-    <button class="nav-lnk"><span class="ni">💬</span><span class="nl">Feedback &amp; Wishlist</span><span class="nav-new">New</span></button>
-    <a class="nav-lnk" href="/release-notes"><span class="ni">📋</span><span class="nl">Release Notes</span></a>
-
-    <div class="nav-div"></div>
-    <button class="nav-lnk" style="color:var(--amber)">
-        <span class="ni">🔑</span><span class="nl">Sign In / Register</span><span class="nav-soon">Soon</span>
-    </button>
-
-    <div class="nav-foot">v1.3.0 · Dino Prompt Academy</div>
-</div>
-
-
+@* ══ MOBILE NAV DRAWER (Now handled by NavMenu) ══ *@
 @* ══ GUIDE STRIP ══
    BUG FIX: GuideStripHidden is a pure computed C# property evaluated on every Blazor render.
    No timers, no classes, no race conditions.
@@ -305,11 +283,14 @@
 <div class="mob-inputbar">
     <div class="mob-ta-wrap">
         <textarea class="mob-ta" id="mobTa"
+                  data-prompt-editor="true"
+                  data-max-height="150"
                   @bind="userInput"
                   @bind:event="oninput"
+                  @bind:after="OnPromptChangedAsync"
                   placeholder="Feed the dino a prompt..."
                   disabled="@(isLoading || isRefining)"
-                  rows="1"></textarea>
+                  rows="2"></textarea>
     </div>
     <button class="mob-send"
             @onclick="OnSubmit"
@@ -332,10 +313,10 @@
     </div>
 
     @* Level pills inside sheet *@
-    <div class="fsh-levels">
+    <div class="fsh-levels @(mobileLevelsGlow ? "guide-glow" : "")">
         @foreach (var lv in Levels)
         {
-            <button class="fsh-lv @(level == lv.Key ? "on" : "")"
+            <button class="fsh-lv t-@lv.Key @(level == lv.Key ? "on" : "")"
                     @onclick="() => SetLevel(lv.Key)">
                 @lv.Value
             </button>
@@ -354,7 +335,7 @@
         <div class="fsh-cards">
             @foreach (var (fw, idx) in GetCurrentFrameworks())
             {
-                <div class="fsh-card @(selFw?.Name == fw.Name ? "sel" : "")">
+                <div class="fsh-card t-@level @(selFw?.Name == fw.Name ? "sel" : "")">
                     <div class="fsh-card-top">
                         <span class="fsh-card-ico">@fw.Icon</span>
                         <span class="fsh-card-name">@fw.Name</span>
@@ -390,6 +371,15 @@
             navigator.clipboard.writeText(text);
         }
     };
+    window.syncPromptEditors = () => {
+        document.querySelectorAll('[data-prompt-editor="true"]').forEach((el) => {
+            const maxHeight = parseInt(el.dataset.maxHeight || '200', 10);
+            el.style.height = 'auto';
+            const nextHeight = Math.min(el.scrollHeight, maxHeight);
+            el.style.height = `${nextHeight}px`;
+        });
+    };
+    window.isMobileView = () => window.innerWidth <= 860;
 </script>
 
 
@@ -404,11 +394,11 @@
 
     private static readonly Dictionary<int, string> Levels = new()
     {
-        { 1, "🐣 Baby"  },
-        { 2, "🦎 Explorer" },
-        { 3, "🦖 Pro"      },
-        { 4, "🔬 Expert"   },
-        { 5, "🚀 Master"   }
+        { 1, "🐣\nBaby" },
+        { 2, "🦎\nExplorer" },
+        { 3, "🦖\nPro" },
+        { 4, "🔬\nExpert" },
+        { 5, "🚀\nMaster" }
     };
 
     private static readonly Dictionary<int, List<FrameworkItem>> FW = new()
@@ -470,6 +460,10 @@
     private bool isRefining = false;
     private bool navOpen = false;
     private bool fwSheetOpen = false;
+    private bool promptResizeNeeded = false;
+    private bool desktopLevelsGlow = false;
+    private bool mobileLevelsGlow = false;
+    private bool step2Nudge = false;
     private List<Message> messages = new();
     private ElementReference documentContainer;
     private MarkdownPipeline _mdPipeline = default!;
@@ -507,13 +501,24 @@
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // LEVEL & FRAMEWORK SELECTION
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    private void SetLevel(int lv) => level = lv;
+    private void SetLevel(int lv)
+    {
+        level = lv;
+
+        if (desktopLevelsGlow || mobileLevelsGlow)
+        {
+            desktopLevelsGlow = false;
+            mobileLevelsGlow = false;
+            step2Nudge = true;
+        }
+    }
 
     private void PickFw(int i)
     {
         if (!FW.TryGetValue(level, out var list) || i >= list.Count) return;
         selFw = list[i];
         userInput = selFw.Tpl;
+        QueuePromptResize();
         // GuideStripHidden will re-evaluate automatically on next render
         // and will return FALSE because selFw != null — no manual call needed
     }
@@ -530,6 +535,24 @@
     private void OpenFwSheet() => fwSheetOpen = true;
     private void CloseFwSheet() => fwSheetOpen = false;
 
+    private async Task StartStep1Guide()
+    {
+        step2Nudge = false;
+
+        var isMobile = await JS.InvokeAsync<bool>("isMobileView");
+        if (isMobile)
+        {
+            fwSheetOpen = true;
+            mobileLevelsGlow = true;
+            desktopLevelsGlow = false;
+        }
+        else
+        {
+            desktopLevelsGlow = true;
+            mobileLevelsGlow = false;
+        }
+    }
+
     // ✕ button: clear the selected style, keep the prompt text
     private void ClearStyle() => selFw = null;
 
@@ -543,6 +566,14 @@
     // SUBMIT
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     private async Task OnSubmit() => await AskAI();
+
+    private Task OnPromptChangedAsync()
+    {
+        QueuePromptResize();
+        return Task.CompletedTask;
+    }
+
+    private void QueuePromptResize() => promptResizeNeeded = true;
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // AI — STREAMING
@@ -616,6 +647,7 @@
         {
             var refined = await Gemini.RefinePromptAsync(userInput);
             userInput = refined;
+            QueuePromptResize();
         }
         catch { /* silent — user keeps their original text */ }
         finally
@@ -680,6 +712,7 @@
         selFw = null;
         streamingText = "";
         streamingHtml = "";
+        QueuePromptResize();
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -692,6 +725,12 @@
 
         if (!isLoading && messages.Count > 0)
             await JS.InvokeVoidAsync("highlightCode");
+
+        if (promptResizeNeeded)
+        {
+            promptResizeNeeded = false;
+            await JS.InvokeVoidAsync("syncPromptEditors");
+        }
     }
 
     public void Dispose()

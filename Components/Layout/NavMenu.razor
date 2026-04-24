@@ -1,0 +1,99 @@
+<div class="global-nav-rail">
+    <div class="gn-brand">
+        <span class="gn-dino">🦕</span>
+    </div>
+    
+    <div class="gn-links">
+        <a href="/" class="gn-link @(CurrentPath == "" ? "on" : "")" title="Academy Home">
+            <span class="ni">🏠</span>
+            <span class="gn-lbl">Home</span>
+        </a>
+        <a href="/release-notes" class="gn-link @(CurrentPath == "release-notes" ? "on" : "")" title="Release Notes">
+            <span class="ni">📋</span>
+            <span class="gn-lbl">Release Notes</span>
+        </a>
+        <a href="/feedback" class="gn-link @(CurrentPath == "feedback" ? "on" : "")" title="Feedback & Wishlist">
+            <span class="ni" style="position:relative;">💬</span>
+            <span class="gn-lbl">Feedback & Wishlist</span>
+        </a>
+    </div>
+
+    <div class="gn-bottom">
+        <button class="gn-link soon" title="Profile (Soon)">
+            <span class="ni">👤</span>
+        </button>
+        <button class="gn-link soon" title="Settings (Soon)">
+            <span class="ni">⚙️</span>
+        </button>
+    </div>
+</div>
+
+@* MOBILE DRAWER *@
+@if (IsMobileDrawerOpen)
+{
+    <div class="nav-bg on" @onclick="CloseDrawer"></div>
+}
+<div class="nav-drawer @(IsMobileDrawerOpen ? "on" : "")">
+    <div class="nav-head">
+        <div class="nav-head-b">
+            <span class="nd-ico">🦕</span>
+            <span class="nd-lbl">Menu</span>
+        </div>
+        <button class="nav-close" @onclick="CloseDrawer">✕</button>
+    </div>
+
+    <div class="nav-sec"></div>
+    <a href="/" class="nav-lnk @(CurrentPath == "" ? "on" : "")"><span class="ni">🏠</span><span class="nl">Home</span></a>
+    <button class="nav-lnk"><span class="ni">📚</span><span class="nl">Prompt Library</span><span class="nav-soon">Soon</span></button>
+    <button class="nav-lnk"><span class="ni">💡</span><span class="nl">Learning Snippets</span><span class="nav-soon">Soon</span></button>
+    <button class="nav-lnk"><span class="ni">📜</span><span class="nl">My History</span><span class="nav-soon">Soon</span></button>
+
+    <div class="nav-div"></div>
+    <div class="nav-sec">Account</div>
+    <button class="nav-lnk"><span class="ni">👤</span><span class="nl">Profile</span><span class="nav-soon">Soon</span></button>
+    <button class="nav-lnk"><span class="ni">⚙️</span><span class="nl">Settings</span><span class="nav-soon">Soon</span></button>
+
+    <div class="nav-div"></div>
+    <div class="nav-sec">Community</div>
+    <a href="/feedback" class="nav-lnk @(CurrentPath == "feedback" ? "on" : "")"><span class="ni">💬</span><span class="nl">Feedback &amp; Wishlist</span><span class="nav-new">New</span></a>
+    <a href="/release-notes" class="nav-lnk @(CurrentPath == "release-notes" ? "on" : "")"><span class="ni">📋</span><span class="nl">Release Notes</span></a>
+
+    <div class="nav-div"></div>
+    <button class="nav-lnk" style="color:var(--amber)">
+        <span class="ni">🔑</span><span class="nl">Sign In / Register</span><span class="nav-soon">Soon</span>
+    </button>
+
+    <div class="nav-foot">v1.3.1 · Dino Prompt Academy</div>
+</div>
+
+@implements IDisposable
+
+@code {
+    [Parameter] public bool IsMobileDrawerOpen { get; set; }
+    [Parameter] public EventCallback<bool> IsMobileDrawerOpenChanged { get; set; }
+
+    [Inject] private NavigationManager NavManager { get; set; } = default!;
+
+    public string CurrentPath => NavManager.ToBaseRelativePath(NavManager.Uri);
+
+    protected override void OnInitialized()
+    {
+        NavManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        NavManager.LocationChanged -= OnLocationChanged;
+    }
+
+    private async Task CloseDrawer()
+    {
+        IsMobileDrawerOpen = false;
+        await IsMobileDrawerOpenChanged.InvokeAsync(false);
+    }
+}
