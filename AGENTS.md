@@ -14,3 +14,8 @@
 - Treat `.appdata/` and `.dotnetcli/` as local-only runtime folders.
 - If `.appdata/` or `.dotnetcli/` are already tracked, remember `.gitignore` only affects future commits; ask before untracking or rewriting history.
 - On non-Windows hosts, prefer `DataProtection:CertificateBase64` or `DataProtection:CertificatePath`; otherwise use ephemeral keys instead of plaintext storage.
+
+## 🛑 Safety & Workspace Boundaries
+
+- **NEVER use destructive commands** (`Remove-Item`, `rm -rf`, etc.) on entire directories without explicitly listing the contents first to verify nothing valuable is inside. Do not trust user assumptions that a folder is a "safe duplicate."
+- **Test Project Location:** The XUnit test project (`DinoBlazorApp.Tests`) must permanently remain OUTSIDE the `DinoBlazorApp` application folder (e.g., side-by-side at the `repos/` level). Do not continuously attempt to generate a test folder inside the main web project, as it causes namespace and visual studio display conflicts.
