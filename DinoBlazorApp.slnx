@@ -1,4 +1,3 @@
 <Solution>
   <Project Path="DinoBlazorApp.csproj" />
-  <Project Path="DinoBlazorApp.Tests/DinoBlazorApp.Tests.csproj" />
 </Solution>
