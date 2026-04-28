@@ -86,6 +86,7 @@ body {
 .app {
     display: flex;
     height: 100vh;
+    outline: none; /* Fix for ghost border on focus */
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1724,14 +1725,73 @@ body {
    SUB-PAGE LAYOUT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .sub-page-layout {
-    display: flex; height: 100vh; overflow: hidden; background: #0d0f17; flex-direction: row; align-items: stretch;
+    display: flex; height: 100vh; overflow: hidden; background: var(--bg); flex-direction: row; align-items: stretch;
 }
 .subpage-canvas {
     flex: 1; overflow-y: auto; display: flex; flex-direction: column; position: relative;
 }
-.subpage-content { flex: 1; }
+.subpage-content { flex: 1; display: flex; flex-direction: column; }
 
 @media (max-width: 860px) {
     .global-nav-rail { display: none; }
     .sub-page-layout { flex-direction: column; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHARED SUB-PAGE HEADER  (.sp-*)
+   Used by Feedback + ReleaseNotes
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.sp-header {
+    background: var(--surf);
+    border-bottom: 1px solid var(--bdr);
+    padding: 28px 48px 0;
+    flex-shrink: 0;
+}
+
+/* Back link ─ top-left above the hero */
+.sp-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    font-family: var(--fb);
+    font-size: .78rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s, transform .2s;
+    margin-bottom: 18px;
+}
+.sp-back:hover { color: var(--amber); transform: translateX(-3px); }
+
+/* Hero band ─ centred title + subtitle */
+.sp-hero {
+    text-align: center;
+    padding-bottom: 24px;
+}
+.sp-hero-ico {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+    animation: dinoFloat 3.5s ease-in-out infinite;
+    display: inline-block;
+}
+.sp-hero h1 {
+    font-family: var(--fh);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--cream);
+    margin-bottom: 6px;
+    line-height: 1.2;
+    outline: none; /* Prevent white focus border on refresh */
+}
+.sp-hero p {
+    font-size: .92rem;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+@media (max-width: 860px) {
+    .sp-header { padding: 16px 18px 0; }
+    .sp-back   { margin-bottom: 12px; }
+    .sp-hero h1 { font-size: 1.55rem; }
+    .sp-hero-ico { font-size: 2rem; }
 }

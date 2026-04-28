@@ -5,6 +5,19 @@
 
 <div class="changelog-container">
 
+    <!-- SHARED PAGE HEADER -->
+    <header class="sp-header">
+        <a href="/" class="sp-back"><span>←</span> Back to Academy</a>
+        <div class="sp-hero">
+            <div class="sp-hero-ico">🦴</div>
+            <h1>Dino Evolution Log</h1>
+            <p>All notable mutations to <strong>Dino Prompt Academy</strong> are documented here.</p>
+        </div>
+    </header>
+
+    <!-- SIDEBAR + MAIN BODY -->
+    <div class="changelog-body">
+
     <!-- SUB-SIDEBAR -->
     <aside class="changelog-sidebar">
         <div class="sidebar-header">
@@ -34,11 +47,6 @@
                 </a>
             }
         </div>
-
-        <header class="main-header">
-            <h1>🦖 Dino Evolution Log</h1>
-            <p>All notable mutations to <strong>Dino Prompt Academy</strong> are documented in this fossil record.</p>
-        </header>
 
         <section class="log-content">
             @foreach (var v in versions)
@@ -99,6 +107,7 @@
         </section>
 
     </main>
+    </div>
 </div>
 
 <script>
