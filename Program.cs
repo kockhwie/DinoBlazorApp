@@ -55,6 +55,20 @@ else
     }
 }
 
+// render hosting return error:
+//
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+}
+else
+{
+    builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
+}
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
