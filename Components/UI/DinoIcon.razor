@@ -1,0 +1,11 @@
+@* Components/UI/DinoIcon.razor *@
+
+<svg width="@Size" height="@Size" class="icon-svg @Class" style="display: inline-block; vertical-align: middle;">
+    <use href="assets/icons/icons.svg#@Name"></use>
+</svg>
+
+@code {
+    [Parameter] public string Name { get; set; } = "home"; // The ID in your icons.svg
+    [Parameter] public string Size { get; set; } = "1em";  // "1em" makes it scale with font size
+    [Parameter] public string Class { get; set; } = "";    // For extra CSS classes
+}

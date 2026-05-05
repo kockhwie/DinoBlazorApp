@@ -9,7 +9,7 @@
     <header class="sp-header">
         <a href="/" class="sp-back"><span>←</span> Back to Academy</a>
         <div class="sp-hero">
-            <div class="sp-hero-ico">🦴</div>
+            <div class="sp-hero-ico"><i class="ti ti-dna"></i></div>
             <h1>Dino Evolution Log</h1>
             <p>All notable mutations to <strong>Dino Prompt Academy</strong> are documented here.</p>
         </div>
@@ -21,7 +21,7 @@
     <!-- SUB-SIDEBAR -->
     <aside class="changelog-sidebar">
         <div class="sidebar-header">
-            <i class="fa-solid fa-dna"></i>
+            <i class="ti ti-fossil"></i>
             <span>Fossil Record</span>
         </div>
         <nav class="version-nav">
@@ -63,43 +63,43 @@
                     @if (v.Added.Any())
                     {
                         <div class="change-group">
-                            <h3>🧬 Added</h3>
-                            <ul>@foreach (var item in v.Added) { <li>@item</li> }</ul>
+                            <h3><i class="ti ti-circle-plus"></i> Added</h3>
+                            <ul>@foreach (var item in v.Added) { <li>@((MarkupString)item)</li> }</ul>
                         </div>
                     }
                     @if (v.Changed.Any())
                     {
                         <div class="change-group">
-                            <h3>🔄 Changed</h3>
-                            <ul>@foreach (var item in v.Changed) { <li>@item</li> }</ul>
+                            <h3><i class="ti ti-refresh"></i> Changed</h3>
+                            <ul>@foreach (var item in v.Changed) { <li>@((MarkupString)item)</li> }</ul>
                         </div>
                     }
                     @if (v.Deprecated.Any())
                     {
                         <div class="change-group">
-                            <h3>🪨 Deprecated</h3>
-                            <ul>@foreach (var item in v.Deprecated) { <li>@item</li> }</ul>
+                            <h3><i class="ti ti-hourglass"></i> Deprecated</h3>
+                            <ul>@foreach (var item in v.Deprecated) { <li>@((MarkupString)item)</li> }</ul>
                         </div>
                     }
                     @if (v.Removed.Any())
                     {
                         <div class="change-group">
-                            <h3>☄️ Removed</h3>
-                            <ul>@foreach (var item in v.Removed) { <li>@item</li> }</ul>
+                            <h3><i class="ti ti-circle-minus"></i> Removed</h3>
+                            <ul>@foreach (var item in v.Removed) { <li>@((MarkupString)item)</li> }</ul>
                         </div>
                     }
                     @if (v.Fixed.Any())
                     {
                         <div class="change-group">
-                            <h3>🩹 Fixed</h3>
-                            <ul>@foreach (var item in v.Fixed) { <li>@item</li> }</ul>
+                            <h3><i class="ti ti-tool"></i> Fixed</h3>
+                            <ul>@foreach (var item in v.Fixed) { <li>@((MarkupString)item)</li> }</ul>
                         </div>
                     }
                     @if (v.Security.Any())
                     {
                         <div class="change-group">
-                            <h3>🛡️ Security</h3>
-                            <ul>@foreach (var item in v.Security) { <li>@item</li> }</ul>
+                            <h3><i class="ti ti-shield-check"></i> Security</h3>
+                            <ul>@foreach (var item in v.Security) { <li>@((MarkupString)item)</li> }</ul>
                         </div>
                     }
                 </article>
@@ -121,6 +121,42 @@
 
     private List<LogVersion> versions = new()
     {
+        // ── v1.3.3 ────────────────────────────────────────────────────────────
+        new LogVersion
+        {
+            Id       = "1.3.3",
+            Date     = "2026-05-05",
+            Subtitle = "The Performance & Iconography Update",
+            Added    = new()
+            {
+                "Integrated premium Tabler Icons across the entire interface (Home, Nav, Feedback, Release Notes).",
+                "Created a dynamic `<DinoIcon>` component to standardize icon rendering throughout the app.",
+                "Added explicit `<span class=\"gn-lbl\">` text labels to 'Profile' and 'Settings' buttons in the desktop sidebar for visual parity.",
+                "Implemented custom, sleek scrollbars specifically tailored for Markdown `<pre>` and `<code>` blocks.",
+                "Introduced dark-themed gradient backgrounds for code blocks to enhance contrast and readability."
+            },
+            Changed  = new()
+            {
+                "Re-architected the Gemini system instruction injection by safely prepending rules directly to the user prompt, ensuring 100% compatibility across all API model versions.",
+                "Upgraded level selection pills (`.b1` through `.b5`) to use modern, semi-transparent HSL color tokens.",
+                "Optimized AI message bubble layouts with `max-width: 100%` and `overflow-wrap: break-word` to guarantee zero horizontal overflow on mobile.",
+                "Refined the translation pipeline to proactively strip out streaming metadata (`*Attempting...*`, `*(Connected...)*`) prior to translation processing.",
+                "Updated the 'Translate...' dropdown icon to inherit the brand's primary action color (`#e89000`)."
+            },
+            Removed  = new()
+            {
+                "Purged all legacy, OS-dependent emojis to establish a professional, unified aesthetic across all platforms.",
+                "Stripped out heavy `DotLottie` animation dependencies to dramatically reduce page weight and load times.",
+                "Eliminated residual `DinoBlazorApp.Tests` project references and obsolete `NuGet.Config` to ensure clean, error-free Docker deployments on Render."
+            },
+            Fixed    = new()
+            {
+                "Resolved a critical API serialization crash where the `systemInstruction` JSON field caused hard `400/404` errors across primary Gemini models.",
+                "Fixed a destructive markdown parsing regression in `Home.razor` where aggressive inline backtick-closing corrupted multi-line syntax highlighting.",
+                "Silenced visual layout stuttering by automatically intercepting and trimming trailing hallucination artifacts (`*.. ..*`) from the AI's data stream."
+            }
+        },
+
         // ── v1.3.2 ────────────────────────────────────────────────────────────
         new LogVersion
         {
@@ -185,9 +221,9 @@
             {
                 "Completely new warm amber/earth dark theme, replacing the previous cold cyber-green palette. Feels premium and inviting rather than like a developer tool.",
                 "Fraunces display serif paired with DM Sans body font — a distinctive combination that makes the UI feel crafted rather than default.",
-                "Mobile top navigation bar: fixed 52px header with animated 🦕 logo, site name, tagline, and ☰ hamburger button. Always visible on mobile — positioned correctly before the app shell to avoid the overflow-hidden clipping bug.",
+                "Mobile top navigation bar: fixed 52px header with animated <span class='logo-anim' style='width: 24px; height: 24px; vertical-align: middle;'></span> logo, site name, tagline, and <i class='ti ti-menu-2'></i> hamburger button. Always visible on mobile — positioned correctly before the app shell to avoid the overflow-hidden clipping bug.",
                 "Right-side navigation drawer — slides in from the right with full link structure: Learn (Home, Prompt Library, Learning Snippets, My History), Account (Profile, Settings), Community (Feedback & Wishlist, Release Notes), and Sign In / Register. All future pages stubbed with 'Soon' badges.",
-                "Guide strip — a smart sticky bar above the mobile input that shows the currently selected framework style. Displays 'Tap to pick a prompt style' when empty, and 'Tap to change ↺' with a ✕ clear button once a style is selected.",
+                "Guide strip — a smart sticky bar above the mobile input that shows the currently selected framework style. Displays 'Tap to pick a prompt style' when empty, and 'Tap to change <i class='ti ti-refresh'></i>' with a <i class='ti ti-x'></i> clear button once a style is selected.",
                 "Framework bottom sheet — tapping the guide strip opens a smooth bottom sheet with horizontal-scroll level pills and swipeable snap-scroll framework cards. Each card shows icon, name, description, framework tag, and a 'Use this style →' button.",
                 "3-step onboarding on the welcome screen (Step 1: Pick your level, Step 2: Choose a style, Step 3: Release the dino!) replacing the vague hint chips.",
                 "Amber selected-state highlight on desktop framework cards so users always know which template is currently active.",
@@ -198,7 +234,7 @@
             {
                 "Framework labels rewritten from technical acronyms (CO-STAR, RACE, RISEN) to plain-English intent: 'Create something professional', 'Break into clear steps', 'Build a complete strategy'. Framework names now appear only as small tags — context without pressure.",
                 "Level navigation redesigned as compact pill buttons on desktop and a horizontal-scroll row inside the framework sheet on mobile.",
-                "Welcome screen hints ('🎯 Pick your level', '✍️ Choose a template', '🚀 Release the dino') promoted to a structured 3-step card layout with numbered steps for clarity.",
+                "Welcome screen hints ('<i class='ti ti-target'></i> Pick your level', '<i class='ti ti-edit'></i> Choose a template', '<i class='ti ti-rocket'></i> Release the dino') promoted to a structured 3-step card layout with numbered steps for clarity.",
                 "Mobile layout is now a fundamentally separate flow from desktop — not a scaled-down version. One action at a time, no visible walls of options.",
                 "Sidebar footer updated to include both Release Notes and Feedback links.",
                 "Removed Bootstrap dependency entirely — the new design system is self-contained in app.css.",
@@ -233,9 +269,9 @@
             },
             Changed  = new()
             {
-                "Mobile floating bar redesigned — replaced the 🦴 icon-only trigger with a full guide strip that shows the currently selected style at a glance.",
+                "Mobile floating bar redesigned — replaced the <i class='ti ti-bone'></i> icon-only trigger with a full guide strip that shows the currently selected style at a glance.",
                 "Streaming render throttled — StateHasChanged now fires at most every 80ms during streaming rather than on every token chunk, significantly reducing CPU usage on long responses.",
-                "Sharpen Claws renamed to ✨ Sharpen for clarity — the previous name was opaque to non-technical users.",
+                "Sharpen Claws renamed to <i class='ti ti-sparkles'></i> Sharpen for clarity — the previous name was opaque to non-technical users.",
             },
             Fixed    = new()
             {
@@ -257,7 +293,7 @@
                 "Dino-themed UI 'Chrome' enhancements (Fossil Record, Dino Evolution Log).",
                 "Dedicated mobile version pill strip for fast navigation.",
                 "Floating mobile prompt bar with 'Release' rocket button for better UX.",
-                "Meat icon (🍗) for user feeding actions."
+                "Meat icon (<i class='ti ti-meat'></i>) for user feeding actions."
             },
             Changed  = new()
             {

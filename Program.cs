@@ -4,6 +4,17 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography.X509Certificates;
 
+// IMPORTANT: This must stay before CreateBuilder.
+// Render's Linux containers can hit low inotify limits if ASP.NET Core watches
+// config files. Do not fix this by re-adding appsettings.json later; ASP.NET
+// Core already loads appsettings, User Secrets, and environment variables in
+// the correct order, and a late reload can override User Secrets with dummy
+// placeholder values such as REPLACE_THIS_IN_USER_SECRETS.
+if (!OperatingSystem.IsWindows())
+{
+    Environment.SetEnvironmentVariable("DOTNET_hostBuilder__reloadConfigOnChange", "false");
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Keep runtime logs simple and avoid Windows Event Log dependencies.
@@ -16,11 +27,11 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddSingleton<IFeedbackService, FeedbackService>();
+builder.Services.AddSingleton<IAiUsageLimiter, AiUsageLimiter>();
 
 builder.Services.AddHttpClient<GeminiService>(client =>
 {
     client.BaseAddress = new Uri("https://generativelanguage.googleapis.com/");
-    client.DefaultRequestHeaders.Add("x-goog-api-key", builder.Configuration["Gemini:ApiKey"]);
     client.Timeout = TimeSpan.FromMinutes(3);
 });
 
@@ -55,20 +66,6 @@ else
     }
 }
 
-// render hosting return error:
-//
-
-if (builder.Environment.IsDevelopment())
-{
-    builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-}
-else
-{
-    builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
-}
-
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -78,6 +75,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.TryAdd("X-Content-Type-Options", "nosniff");
+    context.Response.Headers.TryAdd("Referrer-Policy", "strict-origin-when-cross-origin");
+    context.Response.Headers.TryAdd("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+    await next();
+});
 
 if (!string.IsNullOrWhiteSpace(builder.Configuration["ASPNETCORE_HTTPS_PORT"]) ||
     !string.IsNullOrWhiteSpace(builder.Configuration["HTTPS_PORT"]))

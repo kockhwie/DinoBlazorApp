@@ -1,0 +1,353 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<!-- Jurassic Icon Set: Line-Art and Colored Versions -->
+
+  <symbol id="sauropod-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">sauropod</text>
+  </symbol>
+
+  <symbol id="sauropod-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="green" stroke="darkgreen" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">sauropod</text>
+  </symbol>
+
+  <symbol id="theropod-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">theropod</text>
+  </symbol>
+
+  <symbol id="theropod-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="red" stroke="darkred" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">theropod</text>
+  </symbol>
+
+  <symbol id="ceratops-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">ceratops</text>
+  </symbol>
+
+  <symbol id="ceratops-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="purple" stroke="indigo" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">ceratops</text>
+  </symbol>
+
+  <symbol id="stegosaurus-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">stegosaurus</text>
+  </symbol>
+
+  <symbol id="stegosaurus-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="green" stroke="orange" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">stegosaurus</text>
+  </symbol>
+
+  <symbol id="ankylosaurus-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">ankylosaurus</text>
+  </symbol>
+
+  <symbol id="ankylosaurus-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="blue" stroke="navy" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">ankylosaurus</text>
+  </symbol>
+
+  <symbol id="pterosaur-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">pterosaur</text>
+  </symbol>
+
+  <symbol id="pterosaur-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="orange" stroke="darkorange" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">pterosaur</text>
+  </symbol>
+
+  <symbol id="plesiosaur-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">plesiosaur</text>
+  </symbol>
+
+  <symbol id="plesiosaur-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="lightblue" stroke="blue" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">plesiosaur</text>
+  </symbol>
+
+  <symbol id="mosasaur-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">mosasaur</text>
+  </symbol>
+
+  <symbol id="mosasaur-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="purple" stroke="indigo" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">mosasaur</text>
+  </symbol>
+
+  <symbol id="ammonite-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">ammonite</text>
+  </symbol>
+
+  <symbol id="ammonite-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="orange" stroke="darkorange" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">ammonite</text>
+  </symbol>
+
+  <symbol id="ichthyosaur-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">ichthyosaur</text>
+  </symbol>
+
+  <symbol id="ichthyosaur-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="blue" stroke="darkblue" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">ichthyosaur</text>
+  </symbol>
+
+  <symbol id="trilobite-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">trilobite</text>
+  </symbol>
+
+  <symbol id="trilobite-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="red" stroke="darkred" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">trilobite</text>
+  </symbol>
+
+  <symbol id="eurypterid-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">eurypterid</text>
+  </symbol>
+
+  <symbol id="eurypterid-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="green" stroke="darkgreen" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">eurypterid</text>
+  </symbol>
+
+  <symbol id="coelacanth-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">coelacanth</text>
+  </symbol>
+
+  <symbol id="coelacanth-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="purple" stroke="indigo" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">coelacanth</text>
+  </symbol>
+
+  <symbol id="nautiloid-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">nautiloid</text>
+  </symbol>
+
+  <symbol id="nautiloid-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="pink" stroke="deeppink" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">nautiloid</text>
+  </symbol>
+
+  <symbol id="cycad-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">cycad</text>
+  </symbol>
+
+  <symbol id="cycad-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="green" stroke="darkgreen" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">cycad</text>
+  </symbol>
+
+  <symbol id="ginkgo-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">ginkgo</text>
+  </symbol>
+
+  <symbol id="ginkgo-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="limegreen" stroke="green" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">ginkgo</text>
+  </symbol>
+
+  <symbol id="cordaites-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">cordaites</text>
+  </symbol>
+
+  <symbol id="cordaites-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="brown" stroke="saddlebrown" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">cordaites</text>
+  </symbol>
+
+  <symbol id="horsetail-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">horsetail</text>
+  </symbol>
+
+  <symbol id="horsetail-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="seagreen" stroke="darkgreen" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">horsetail</text>
+  </symbol>
+
+  <symbol id="treefern-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">treefern</text>
+  </symbol>
+
+  <symbol id="treefern-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="forestgreen" stroke="darkgreen" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">treefern</text>
+  </symbol>
+
+  <symbol id="lepidodendron-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">lepidodendron</text>
+  </symbol>
+
+  <symbol id="lepidodendron-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="olive" stroke="darkolivegreen" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">lepidodendron</text>
+  </symbol>
+
+  <symbol id="calamites-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">calamites</text>
+  </symbol>
+
+  <symbol id="calamites-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="darkseagreen" stroke="seagreen" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">calamites</text>
+  </symbol>
+
+  <symbol id="footprints-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">footprints</text>
+  </symbol>
+
+  <symbol id="footprints-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="green" stroke="darkgreen" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">footprints</text>
+  </symbol>
+
+  <symbol id="dinosaur-egg-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">dinosaur-egg</text>
+  </symbol>
+
+  <symbol id="dinosaur-egg-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="beige" stroke="saddlebrown" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">dinosaur-egg</text>
+  </symbol>
+
+  <symbol id="dinosaur-nest-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">dinosaur-nest</text>
+  </symbol>
+
+  <symbol id="dinosaur-nest-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="sienna" stroke="brown" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">dinosaur-nest</text>
+  </symbol>
+
+  <symbol id="skull-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">skull</text>
+  </symbol>
+
+  <symbol id="skull-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="white" stroke="gray" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">skull</text>
+  </symbol>
+
+  <symbol id="fossil-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">fossil</text>
+  </symbol>
+
+  <symbol id="fossil-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="saddlebrown" stroke="black" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">fossil</text>
+  </symbol>
+
+  <symbol id="amber-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">amber</text>
+  </symbol>
+
+  <symbol id="amber-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="gold" stroke="orange" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">amber</text>
+  </symbol>
+
+  <symbol id="fossil-shell-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">fossil-shell</text>
+  </symbol>
+
+  <symbol id="fossil-shell-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="burlywood" stroke="peru" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">fossil-shell</text>
+  </symbol>
+
+  <symbol id="volcano-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">volcano</text>
+  </symbol>
+
+  <symbol id="volcano-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="gray" stroke="black" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">volcano</text>
+  </symbol>
+
+  <symbol id="comet-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">comet</text>
+  </symbol>
+
+  <symbol id="comet-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="orangered" stroke="darkred" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">comet</text>
+  </symbol>
+
+  <symbol id="sediment-layers-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">sediment-layers</text>
+  </symbol>
+
+  <symbol id="sediment-layers-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="tan" stroke="sienna" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">sediment-layers</text>
+  </symbol>
+
+  <symbol id="mineral-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">mineral</text>
+  </symbol>
+
+  <symbol id="mineral-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="deepskyblue" stroke="blue" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">mineral</text>
+  </symbol>
+
+  <symbol id="cave-painting-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">cave-painting</text>
+  </symbol>
+
+  <symbol id="cave-painting-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="brown" stroke="black" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">cave-painting</text>
+  </symbol>
+
+  <symbol id="mud-volcano-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">mud-volcano</text>
+  </symbol>
+
+  <symbol id="mud-volcano-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="peru" stroke="saddlebrown" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">mud-volcano</text>
+  </symbol>
+
+  <symbol id="ancient-landscape-line" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" stroke="black" fill="none" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="black">ancient-landscape</text>
+  </symbol>
+
+  <symbol id="ancient-landscape-color" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="20" fill="lightgreen" stroke="green" stroke-width="2"/>
+    <text x="32" y="37" font-size="6" text-anchor="middle" fill="white">ancient-landscape</text>
+  </symbol>
+</svg>

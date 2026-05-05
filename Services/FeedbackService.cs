@@ -5,8 +5,8 @@ namespace DinoBlazorApp.Services;
 
 public interface IFeedbackService
 {
-    List<FeedbackEntry> GetFeedback();
-    List<WishlistItem> GetWishlist();
+    IReadOnlyList<FeedbackEntry> GetFeedback();
+    IReadOnlyList<WishlistItem> GetWishlist();
     void AddFeedback(FeedbackEntry entry);
     void AddWishlistItem(WishlistItem item);
     void ToggleVote(int itemId);
@@ -14,6 +14,7 @@ public interface IFeedbackService
 
 public class FeedbackService : IFeedbackService
 {
+    private readonly object _gate = new();
     private readonly string _storePath;
     private FeedbackDataStore _store = new();
 
@@ -66,31 +67,90 @@ public class FeedbackService : IFeedbackService
         File.WriteAllText(_storePath, json);
     }
 
-    public List<FeedbackEntry> GetFeedback() => _store.RecentFeedback;
+    public IReadOnlyList<FeedbackEntry> GetFeedback()
+    {
+        lock (_gate)
+        {
+            return [.. _store.RecentFeedback];
+        }
+    }
     
-    public List<WishlistItem> GetWishlist() => _store.WishlistItems;
+    public IReadOnlyList<WishlistItem> GetWishlist()
+    {
+        lock (_gate)
+        {
+            return [.. _store.WishlistItems];
+        }
+    }
 
     public void AddFeedback(FeedbackEntry entry)
     {
-        _store.RecentFeedback.Add(entry);
-        SaveStore();
+        lock (_gate)
+        {
+            entry.Nickname = CleanText(entry.Nickname, 40);
+            entry.Type = NormalizeFeedbackType(entry.Type);
+            entry.Rating = Math.Clamp(entry.Rating, 0, 5);
+            entry.Message = CleanText(entry.Message, 1000);
+
+            if (string.IsNullOrWhiteSpace(entry.Message))
+            {
+                return;
+            }
+
+            _store.RecentFeedback.Add(entry);
+            SaveStore();
+        }
     }
 
     public void AddWishlistItem(WishlistItem item)
     {
-        item.Id = _store.WishlistItems.Count > 0 ? _store.WishlistItems.Max(i => i.Id) + 1 : 1;
-        _store.WishlistItems.Insert(0, item);
-        SaveStore();
+        lock (_gate)
+        {
+            item.Title = CleanText(item.Title, 80);
+            item.Category = NormalizeIdeaCategory(item.Category);
+            item.Desc = CleanText(item.Desc, 500);
+
+            if (string.IsNullOrWhiteSpace(item.Title))
+            {
+                return;
+            }
+
+            item.Id = _store.WishlistItems.Count > 0 ? _store.WishlistItems.Max(i => i.Id) + 1 : 1;
+            item.Votes = Math.Max(0, item.Votes);
+            _store.WishlistItems.Insert(0, item);
+            SaveStore();
+        }
     }
 
     public void ToggleVote(int itemId)
     {
-        var item = _store.WishlistItems.FirstOrDefault(i => i.Id == itemId);
-        if (item != null)
+        lock (_gate)
         {
-            if (item.Voted) { item.Votes--; item.Voted = false; }
-            else { item.Votes++; item.Voted = true; }
-            SaveStore();
+            var item = _store.WishlistItems.FirstOrDefault(i => i.Id == itemId);
+            if (item != null)
+            {
+                if (item.Voted) { item.Votes = Math.Max(0, item.Votes - 1); item.Voted = false; }
+                else { item.Votes++; item.Voted = true; }
+                SaveStore();
+            }
         }
     }
+
+    private static string CleanText(string value, int maxLength)
+    {
+        var cleaned = (value ?? string.Empty).Trim();
+        return cleaned.Length <= maxLength ? cleaned : cleaned[..maxLength];
+    }
+
+    private static string NormalizeFeedbackType(string value) => value switch
+    {
+        "bug" or "idea" or "praise" => value,
+        _ => "general"
+    };
+
+    private static string NormalizeIdeaCategory(string value) => value switch
+    {
+        "ux" or "learn" or "mobile" or "perf" => value,
+        _ => "feature"
+    };
 }

@@ -1,21 +1,24 @@
 # Repo Guidance
 
-## 🚀 Critical Tech Stack
-- **Target Framework:** .NET 10 (Strictly use C# 14/latest features).
-- **Core Pattern:** Clean Architecture + Blazor Interactive Server.
-- **Standards:** Refer to `docs/modern_csharp.md` for coding style.
+Keep the detailed working rules in [docs/codex-rules.md](docs/codex-rules.md). Use this file as the short repo contract.
 
-## 🛠️ Environment Rules
+## Stack
 
-- Keep Blazor interactive server rendering enabled for the main app shell.
-- Persist DataProtection keys locally only when needed, and always encrypt them at rest.
-- Do not reintroduce Windows Event Log logging in this workspace.
-- Keep secrets out of source control; use user secrets or environment variables.
+- Target `.NET 10` and modern C#.
+- Keep the app on Blazor Interactive Server.
+- Follow the repo’s existing clean-architecture shape.
+
+## Security And Config
+
+- Keep secrets out of source control.
+- Use user secrets or environment variables for real API keys.
+- Do not re-add `appsettings.json` manually after `WebApplication.CreateBuilder(args)`.
+- Keep the Render/inotify mitigation before `CreateBuilder`.
+- Persist DataProtection keys only when needed, and encrypt them at rest on non-Windows hosts.
+- Do not reintroduce Windows Event Log logging.
+
+## Workspace Boundaries
+
 - Treat `.appdata/` and `.dotnetcli/` as local-only runtime folders.
-- If `.appdata/` or `.dotnetcli/` are already tracked, remember `.gitignore` only affects future commits; ask before untracking or rewriting history.
-- On non-Windows hosts, prefer `DataProtection:CertificateBase64` or `DataProtection:CertificatePath`; otherwise use ephemeral keys instead of plaintext storage.
-
-## 🛑 Safety & Workspace Boundaries
-
-- **NEVER use destructive commands** (`Remove-Item`, `rm -rf`, etc.) on entire directories without explicitly listing the contents first to verify nothing valuable is inside. Do not trust user assumptions that a folder is a "safe duplicate."
-- **Test Project Location:** The XUnit test project (`DinoBlazorApp.Tests`) must permanently remain OUTSIDE the `DinoBlazorApp` application folder (e.g., side-by-side at the `repos/` level). Do not continuously attempt to generate a test folder inside the main web project, as it causes namespace and visual studio display conflicts.
+- Do not use destructive directory commands unless contents were checked first.
+- Keep `DinoBlazorApp.Tests` outside the app folder.

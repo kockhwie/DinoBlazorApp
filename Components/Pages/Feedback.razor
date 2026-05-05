@@ -10,21 +10,21 @@
     <header class="sp-header">
         <a href="/" class="sp-back"><span>←</span> Back to Academy</a>
         <div class="sp-hero">
-            <div class="sp-hero-ico">💬</div>
+            <div class="sp-hero-ico"><i class="ti ti-message-circle"></i></div>
             <h1>Feedback &amp; Wishlist</h1>
-            <p>Help us evolve. Every roar counts 🦕</p>
+            <p>Help us evolve. Every roar counts <span class="dino-icon"></span></p>
         </div>
 
         @* Tab strip *@
         <div class="fb-tabs">
             <button class="fb-tab @(activeTab == "feedback" ? "on" : "")"
                     @onclick='() => activeTab = "feedback"'>
-                <span class="ft-ico">📝</span>
+                <span class="ft-ico"><i class="ti ti-edit"></i></span>
                 <span class="ft-lbl">Leave Feedback</span>
             </button>
             <button class="fb-tab @(activeTab == "wishlist" ? "on" : "")"
                     @onclick='() => activeTab = "wishlist"'>
-                <span class="ft-ico">✨</span>
+                <span class="ft-ico"><i class="ti ti-sparkles"></i></span>
                 <span class="ft-lbl">Feature Wishlist</span>
                 <span class="ft-count">@wishlistItems.Count</span>
             </button>
@@ -40,10 +40,12 @@
             @if (feedbackSubmitted)
             {
                 <div class="fb-success">
-                    <div class="fs-dino">🦕</div>
+                    <div class="fs-dino" style="height: 100px; display: flex; align-items: center; justify-content: center;">
+                        <span class="logo-anim" style="width: 80px; height: 80px;"></span>
+                    </div>
                     <h2>Thank you, @(string.IsNullOrWhiteSpace(form.Nickname) ? "friend" : form.Nickname)!</h2>
                     <p>Your feedback has been received. We read every single one.</p>
-                    <button class="fs-again" @onclick="ResetForm">Submit another →</button>
+                    <button class="fs-again" @onclick="ResetForm">Submit another <i class="ti ti-arrow-right"></i></button>
                 </div>
             }
             else
@@ -62,7 +64,7 @@
                                 {
                                     <button class="fb-type-pill @(form.Type == t.Key ? "on" : "")"
                                             @onclick="() => form.Type = t.Key">
-                                        @t.Value
+                                        @((MarkupString)t.Value)
                                     </button>
                                 }
                             </div>
@@ -78,7 +80,7 @@
                                     <button class="fb-dino-btn @(form.Rating >= score ? "lit" : "")"
                                             @onclick="() => form.Rating = score"
                                             title="@RatingLabel(score)">
-                                        🦕
+                                        <span class="logo-anim" style="width: 20px; height: 20px;"></span>
                                     </button>
                                 }
                                 @if (form.Rating > 0)
@@ -92,7 +94,7 @@
                         <div class="fb-field">
                             <label class="fb-lbl">Your name <span class="fb-optional">(optional)</span></label>
                             <input class="fb-input" type="text"
-                                   placeholder="e.g. Dino Tamer 🦖"
+                                   placeholder="e.g. Dino Tamer"
                                    @bind="form.Nickname"
                                    maxlength="40" />
                         </div>
@@ -111,15 +113,15 @@
                         @* Validation *@
                         @if (showValidation && string.IsNullOrWhiteSpace(form.Message))
                         {
-                            <div class="fb-error">⚠️ Please write a message before submitting.</div>
+                            <div class="fb-error"><i class="ti ti-alert-triangle"></i> Please write a message before submitting.</div>
                         }
 
                         <button class="fb-submit" @onclick="SubmitFeedback"
                                 disabled="@isSubmitting">
                             @if (isSubmitting)
-                            { <span class="fb-spin">⚡</span> <span>Sending...</span> }
+                            { <span class="fb-spin"><i class="ti ti-loader-2"></i></span> <span>Sending...</span> }
                             else
-                            { <span>🚀 Send Feedback</span> }
+                            { <span><i class="ti ti-rocket"></i> Send Feedback</span> }
                         </button>
                     </div>
 
@@ -129,7 +131,7 @@
                         @if (!recentFeedback.Any())
                         {
                             <div class="fb-wall-empty">
-                                <div>🦴</div>
+                                <div><i class="ti ti-mood-empty"></i></div>
                                 <p>Be the first to leave feedback!</p>
                             </div>
                         }
@@ -139,14 +141,14 @@
                             {
                                 <div class="fb-wall-card">
                                     <div class="fwc-top">
-                                        <span class="fwc-type">@FeedbackTypes.GetValueOrDefault(fb.Type, "💬")</span>  
+                                        <span class="fwc-type">@((MarkupString)FeedbackTypes.GetValueOrDefault(fb.Type, "<i class='ti ti-message'></i>"))</span>  
                                         <span class="ft-count"><span class="fwc-who">@(string.IsNullOrEmpty(fb.Nickname) ? "Anonymous Dino" : fb.Nickname)</span></span>
                                         <span class="fwc-time">@TimeAgo(fb.At)</span>
                                     </div>
                                     @if (fb.Rating > 0)
                                     {
                                         <div class="fwc-rating">
-                                            @for (int i = 0; i < fb.Rating; i++) { <span>🦕</span> }
+                                            @for (int i = 0; i < fb.Rating; i++) { <span class="logo-anim" style="width: 14px; height: 14px; margin-right: 2px;"></span> }
                                         </div>
                                     }
                                     <div class="fwc-msg">@fb.Message</div>
@@ -185,7 +187,7 @@
                             {
                                 <button class="fb-type-pill @(newIdea.Category == c.Key ? "on" : "")"
                                         @onclick="() => newIdea.Category = c.Key">
-                                    @c.Value
+                                    @((MarkupString)c.Value)
                                 </button>
                             }
                         </div>
@@ -202,11 +204,11 @@
 
                     @if (showIdeaValidation && string.IsNullOrWhiteSpace(newIdea.Title))
                     {
-                        <div class="fb-error">⚠️ Please give your idea a title.</div>
+                        <div class="fb-error"><i class="ti ti-alert-triangle"></i> Please give your idea a title.</div>
                     }
 
                     <button class="fb-submit" @onclick="SubmitIdea">
-                        ✨ Add to Wishlist
+                        <i class="ti ti-sparkles"></i> Add to Wishlist
                     </button>
 
                     <p class="fb-note">
@@ -221,9 +223,9 @@
                         <span class="fb-section-title">Community wishlist</span>
                         <div class="fb-sort">
                             <button class="fb-sort-btn @(sortBy == "votes" ? "on" : "")"
-                                    @onclick='() => sortBy = "votes"'>🔥 Top</button>
+                                    @onclick='() => sortBy = "votes"'><i class="ti ti-flame"></i> Top</button>
                             <button class="fb-sort-btn @(sortBy == "new" ? "on" : "")"
-                                    @onclick='() => sortBy = "new"'>✨ New</button>
+                                    @onclick='() => sortBy = "new"'><i class="ti ti-sparkles"></i> New</button>
                         </div>
                     </div>
 
@@ -232,12 +234,12 @@
                         <div class="wl-card @(idea.Voted ? "voted" : "")">
                             <button class="wl-vote" @onclick="() => ToggleVote(idea)"
                                     title="@(idea.Voted ? "Remove vote" : "Upvote this idea")">
-                                <span class="wl-vote-ico">@(idea.Voted ? "🦖" : "🦴")</span>
+                                <span class="wl-vote-ico">@(idea.Voted ? (MarkupString)"<span class='logo-anim' style='width:12px; height:12px'></span>" : (MarkupString)"<i class='ti ti-bone'></i>")</span>
                                 <span class="wl-vote-count">@idea.Votes</span>
                             </button>
                             <div class="wl-body">
                                 <div class="wl-top">
-                                    <span class="wl-cat">@IdeaCategories.GetValueOrDefault(idea.Category, "💡")</span>
+                                    <span class="wl-cat">@((MarkupString)IdeaCategories.GetValueOrDefault(idea.Category, "<i class='ti ti-bulb'></i>"))</span>
                                     @if (idea.IsNew)
                                     {
                                         <span class="wl-new-badge">New</span>
@@ -275,25 +277,25 @@
     private bool showIdeaValidation  = false;
 
     // ── DATA ──
-    private List<FeedbackEntry> recentFeedback => FeedbackService.GetFeedback();
-    private List<WishlistItem> wishlistItems => FeedbackService.GetWishlist();
+    private IReadOnlyList<FeedbackEntry> recentFeedback => FeedbackService.GetFeedback();
+    private IReadOnlyList<WishlistItem> wishlistItems => FeedbackService.GetWishlist();
 
     // ── LOOKUP TABLES ──
     private static readonly Dictionary<string, string> FeedbackTypes = new()
     {
-        { "general",  "💬 General"      },
-        { "bug",      "🐛 Bug Report"   },
-        { "idea",     "💡 Idea"         },
-        { "praise",   "🌟 Compliment"   }
+        { "general",  "<i class='ti ti-message'></i> General"      },
+        { "bug",      "<i class='ti ti-bug'></i> Bug Report"   },
+        { "idea",     "<i class='ti ti-bulb'></i> Idea"         },
+        { "praise",   "<i class='ti ti-star'></i> Compliment"   }
     };
 
     private static readonly Dictionary<string, string> IdeaCategories = new()
     {
-        { "feature", "⚡ Feature"  },
-        { "ux",      "🎨 Design"   },
-        { "learn",   "📚 Learning" },
-        { "mobile",  "📱 Mobile"   },
-        { "perf",    "🚀 Speed"    }
+        { "feature", "<i class='ti ti-bolt'></i> Feature"  },
+        { "ux",      "<i class='ti ti-palette'></i> Design"   },
+        { "learn",   "<i class='ti ti-library'></i> Learning" },
+        { "mobile",  "<i class='ti ti-device-mobile'></i> Mobile"   },
+        { "perf",    "<i class='ti ti-rocket'></i> Speed"    }
     };
 
     // ── RATING LABELS ──
@@ -303,7 +305,7 @@
         2 => "Could be better",
         3 => "It's decent",
         4 => "Really good!",
-        5 => "Absolutely love it 🦕",
+        5 => "Absolutely love it",
         _ => ""
     };
 
@@ -312,7 +314,7 @@
     {
         "bug"    => "Describe what happened, what you expected, and how to reproduce it...",
         "idea"   => "What would you like to see? How would it help you?",
-        "praise" => "We'd love to hear what you enjoy about the app 🦕",
+        "praise" => "We'd love to hear what you enjoy about the app",
         _        => "Share your thoughts — every roar counts..."
     };
 

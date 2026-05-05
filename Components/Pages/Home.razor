@@ -1,20 +1,22 @@
 @page "/"
 @inject GeminiService Gemini
 @inject IJSRuntime JS
+@using DinoBlazorApp.Components.UI
 @using Markdig
 @using Markdig.Parsers
+@using System.Net
 @implements IDisposable
 
 @* ══ MOBILE TOP NAV — must sit before .app in DOM so it is never clipped ══ *@
 <nav class="mob-topnav">
     <div class="mob-brand">
-        <span class="mob-brand-dino">🦕</span>
+        <span class="logo-anim" style="width: 38px; height: 38px;"></span>
         <div>
             <div class="mob-brand-name">Dino Prompt Academy</div>
             <div class="mob-brand-sub">Learn prompting · Master AI</div>
         </div>
     </div>
-    <button class="mob-ham" @onclick="OpenNav" aria-label="Open menu">☰</button>
+    <button class="mob-ham" @onclick="OpenNav" aria-label="Open menu"><i class="ti ti-menu-2"></i></button>
 </nav>
 
 @* ══ APP SHELL ══
@@ -33,6 +35,30 @@
             @* Brand *@
             <div class="brand">
                 <span class="brand-dino"></span>
+
+                <!--div class="sb-item">
+                    <button class="sb-btn">
+                        <DinoIcon Name="home" Size="24" />
+                        <span>Home</span>
+                    </button>
+                </div>
+
+
+                <div class="sb-item">
+                    <button class="sb-btn">
+                        <DinoIcon Name="user" Size="24" />
+                        <span>User</span>
+                    </button>
+                </div>
+        
+
+                <div class="sb-item">
+                    <button class="sb-btn">
+                        <DinoIcon Name="settings" Size="24" /> 
+                        <span>Settings</span>
+                    </button>
+                </div-->
+
                 <div>
                     <h1>Dino Prompt Academy</h1>
                     <p>Learn prompting · Master AI · Own your future · </p>
@@ -41,14 +67,14 @@
 
             @* Level pills *@
             <div class="fw-level @(desktopLevelsGlow ? "guide-glow" : "")"> 
-                <span class="fw-icon">🎯</span>
-                <span class="fw-name">Levels</span>
+                <div class="pb-lbl">Levels</div>
+                
                 <div class="lv-strip">
                     @foreach (var lv in Levels)
                     {
                         <button class="lv-pill t-@lv.Key @(level == lv.Key ? "on" : "")"
                                 @onclick="() => SetLevel(lv.Key)">
-                            @lv.Value
+                            @((MarkupString)lv.Value)
                         </button>
                     }
                 </div>
@@ -61,7 +87,7 @@
                     <div class="fw-card t-@level @(selFw?.Name == fw.Name ? "sel" : "")"
                          @onclick="() => PickFw(idx)">
                         <div class="fw-r1">
-                            <span class="fw-icon">@fw.Icon</span>
+                            <span class="fw-icon">@((MarkupString)fw.Icon)</span>
                             <span class="fw-name">@fw.Name</span>
                             <span class="fw-badge @fw.Bc">@fw.Badge</span>
                         </div>
@@ -85,30 +111,30 @@
                           rows="3"></textarea>
                 <div class="pb-foot">
                     <span class="char-c @(userInput.Length > 3600 ? "over" : "")">
-                        @userInput.Length / 4000
+                        @userInput.Length / @MaxPromptLength
                     </span>
                     <div class="pb-btns">
                         <button class="btn-sh"
                                 @onclick="RefinePrompt"
-                                disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
-                            ✨ Sharpen
+                                disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput) || userInput.Length > MaxPromptLength)">
+                            <i class="ti ti-sparkles"></i> Sharpen
                         </button>
                         <button class="btn-go"
                                 @onclick="OnSubmit"
-                                disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
-                            🚀 Release!
+                                disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput) || userInput.Length > MaxPromptLength)">
+                            <i class="ti ti-rocket"></i> Release!
                         </button>
                     </div>
                 </div>
                 @if (isRefining)
                 {
-                    <div class="ro"><span>⚡</span><p>Sharpening your prompt...</p></div>
+                    <div class="ro"><span><i class="ti ti-bolt"></i></span><p>Sharpening your prompt...</p></div>
                 }
             </div>
 
         </div>
         <div class="sb-foot">
-            v1.3.0 · Dino Prompt Academy<!--a href="/release-notes">Release Notes</a--><!--a href="/feedback">💬 Feedback</a-->
+            v1.3.2 · Dino Prompt Academy<!--a href="/release-notes">Release Notes</a--><!--a href="/feedback">💬 Feedback</a-->
         </div>
     </aside>
 
@@ -119,7 +145,7 @@
         @if (messages.Count > 0 || isLoading)
         {
             <div class="canvas-bar">
-                <button class="btn-new" @onclick="NewSession">↺ New Session</button>
+                <button class="btn-new" @onclick="NewSession"><i class="ti ti-refresh"></i> New Session</button>
             </div>
         }
 
@@ -130,7 +156,9 @@
                 @if (messages.Count == 0 && !isLoading)
                 {
                     <div class="welcome">
-                        <div class="welcome-dino">🦕</div>
+                        <div class="welcome-dino" style="height: 120px; display: flex; align-items: center; justify-content: center;">
+                            <span class="logo-anim" style="width: 100px; height: 100px;"></span>
+                        </div>
                         <h2>What will you prompt today?</h2>
                         <p>Three steps is all it takes. The dino handles the rest.</p>
                         <div class="welcome-help"></div>
@@ -139,17 +167,17 @@
                                     class="w-step w-step-cta @(step2Nudge ? "done" : "")"
                                     @onclick="StartStep1Guide">
                                 <div class="w-step-num">Step 1</div>
-                                <div class="w-step-ico">🎯</div>
+                                <div class="w-step-ico"><i class="ti ti-target"></i></div>
                                 <div class="w-step-txt">Choose your level</div>
                             </button>
                             <div class="w-step">
                                 <div class="w-step-num">Step 2</div>
-                                <div class="w-step-ico">✍️</div>
+                                <div class="w-step-ico"><i class="ti ti-edit"></i></div>
                                 <div class="w-step-txt">Choose a style</div>
                             </div>
                             <div class="w-step">
                                 <div class="w-step-num">Step 3</div>
-                                <div class="w-step-ico">🚀</div>
+                                <div class="w-step-ico"><i class="ti ti-rocket"></i></div>
                                 <div class="w-step-txt">Release the dino!</div>
                             </div>
                         </div>
@@ -163,7 +191,7 @@
                         @if (msg.IsUser)
                         {
                             <div class="msg-user">
-                                <div class="msg-av">👤</div>
+                                <div class="msg-av"><i class="ti ti-user-circle"></i></div>
                                 <div class="msg-bub">@msg.Text</div>
                             </div>
                         }
@@ -171,8 +199,8 @@
                         {
                             <div class="msg-ai">
                                 <div class="msg-ai-head">
-                                    <span class="msg-av">🦕</span>
-                                    <span class="msg-ai-name">Dino AI</span>
+                                    <span class="msg-av"><span class="logo-anim" style="width: 24px; height: 24px;"></span></span>
+                                    <span class="msg-ai-name"></span>
                                 </div>
                                 <div class="ai-body">
                                     @((MarkupString)(msg.Html ?? string.Empty))
@@ -180,28 +208,28 @@
                                 <div class="msg-actions">
                                     @if (msg.IsTranslating)
                                     {
-                                        <span style="font-size:.78rem;color:var(--muted);font-style:italic">⏳ Translating...</span>
+                                        <span style="font-size:.78rem;color:var(--muted);font-style:italic">Translating...</span>
                                     }
                                     else
                                     {
                                         <div class="action-select-wrapper">
+                                            <i class="ti ti-world"></i>
                                             <select class="action-select"
                                                     value="@msg.TargetLanguage"
                                                     @onchange="@(e => ChangeLanguage(msg, e.Value?.ToString() ?? ""))">
-                                                <option value="">🌍 Translate...</option>
-                                                <option value="Malay">Malay</option>
+                                                <option value=""><i class="ti ti-world"></i> Translate...</option>
                                                 <option value="English">English</option>
                                                 <option value="Mandarin">Mandarin</option>
-                                                <option value="Japanese">Japanese</option>
-                                                <option value="Spanish">Spanish</option>
+                                                <option value="Malay">Malay</option>
+                                                <option value="Japanese">Japanese</option>                                               
                                             </select>
                                         </div>
                                         <button class="act-btn @(msg.DidCopy ? "ok" : "")"
                                                 @onclick="() => CopyToClipboard(msg)">
-                                            @(msg.DidCopy ? "✅ Copied" : "📋 Copy")
+                                            @(msg.DidCopy ? (MarkupString)"<i class='ti ti-circle-check'></i> Copied" : (MarkupString)"<i class='ti ti-copy'></i> Copy")
                                         </button>
                                         <button class="act-btn" @onclick="() => ShareContent(msg)">
-                                            🔗 Share
+                                            <i class="ti ti-share"></i> Share
                                         </button>
                                     }
                                 </div>
@@ -215,7 +243,7 @@
                 {
                     <div class="msg-group">
                         <div class="msg-user">
-                            <div class="msg-av">👤</div>
+                            <div class="msg-av"><i class="ti ti-user-circle"></i></div>
                             <div class="msg-bub">@currentPrompt</div>
                         </div>
 
@@ -234,8 +262,8 @@
                         {
                             <div class="msg-ai">
                                 <div class="msg-ai-head">
-                                    <span class="msg-av">🦕</span>
-                                    <span class="msg-ai-name">Dino AI</span>
+                                    <span class="msg-av logo-anim" style="width: 24px; height: 24px;"></span>
+                                    <span class="msg-ai-name"></span>
                                 </div>
                                 <div class="ai-body">
                                     @((MarkupString)(streamingHtml ?? string.Empty))
@@ -262,15 +290,15 @@
    — Always visible when: input is empty and no style (shows the invitation to pick a style)
 *@
 <div class="guide-strip @(GuideStripHidden ? "hidden" : "")" @onclick="OpenFwSheet">
-    <span class="gs-ico">🦴</span>
-    <span class="gs-lbl">@(selFw != null ? "Tap to change ↺" : "Tap to pick a prompt style")</span>
+    <span class="gs-ico"><i class="ti ti-fossil"></i></span>
+    <span class="gs-lbl">@(selFw != null ? (MarkupString)"Tap to change <i class='ti ti-refresh'></i>" : "Tap to pick a prompt style")</span>
     <span class="gs-chip @(selFw != null ? "set" : "empty")">
         @(selFw != null ? selFw.Name : "No style yet")
     </span>
     @if (selFw != null)
     {
         @* stopPropagation prevents the guide strip onclick from also firing *@
-        <button class="gs-clear" @onclick="ClearStyle" @onclick:stopPropagation="true">✕</button>
+        <button class="gs-clear" @onclick="ClearStyle" @onclick:stopPropagation="true"><i class="ti ti-x"></i></button>
     }
     else
     {
@@ -294,8 +322,8 @@
     </div>
     <button class="mob-send"
             @onclick="OnSubmit"
-            disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput))">
-        🚀
+            disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput) || userInput.Length > MaxPromptLength)">
+        <i class="ti ti-rocket"></i>
     </button>
 </div>
 
@@ -308,7 +336,10 @@
 <div class="fw-sheet @(fwSheetOpen ? "on" : "")">
     <div class="fsh-handle"></div>
     <div class="fsh-head">
-        <div class="fsh-title">Choose your prompt style 🦕</div>
+        <div class="fsh-title" style="display: flex; align-items: center; gap: 8px;">
+            Choose your prompt style 
+            <span class="logo-anim" style="width: 24px; height: 24px;"></span>
+        </div>
         <div class="fsh-sub">Pick what fits — we handle the framework magic behind the scenes.</div>
     </div>
 
@@ -318,7 +349,7 @@
         {
             <button class="fsh-lv t-@lv.Key @(level == lv.Key ? "on" : "")"
                     @onclick="() => SetLevel(lv.Key)">
-                @lv.Value
+                @((MarkupString)lv.Value)
             </button>
         }
     </div>
@@ -337,7 +368,7 @@
             {
                 <div class="fsh-card t-@level @(selFw?.Name == fw.Name ? "sel" : "")">
                     <div class="fsh-card-top">
-                        <span class="fsh-card-ico">@fw.Icon</span>
+                        <span class="fsh-card-ico">@((MarkupString)fw.Icon)</span>
                         <span class="fsh-card-name">@fw.Name</span>
                         <span class="fw-badge @fw.Bc" style="font-size:.56rem">@fw.Badge</span>
                     </div>
@@ -384,6 +415,7 @@
 
 
 @code {
+    private const int MaxPromptLength = 4000;
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // FRAMEWORK DATA
@@ -394,53 +426,53 @@
 
     private static readonly Dictionary<int, string> Levels = new()
     {
-        { 1, "🐣\nBaby" },
-        { 2, "🦎\nExplorer" },
-        { 3, "🦖\nPro" },
-        { 4, "🔬\nExpert" },
-        { 5, "🚀\nMaster" }
+        { 1, "Baby" },
+        { 2, "Explorer" },
+        { 3, "Pro" },
+        { 4, "Expert" },
+        { 5, "Master" }
     };
 
     private static readonly Dictionary<int, List<FrameworkItem>> FW = new()
     {
         { 1, new() {
-            new("✍️", "Get a quick answer",
+            new("<i class='ti ti-edit'></i>", "Get a quick answer",
                 "Simple questions, definitions, short explanations. No fuss — just ask.",
                 "PRO Framework", "L1", "b1",
                 "Role: Act as a knowledgeable and friendly expert.\nPurpose: Help me understand [topic or question].\nOutput: Give me a clear, simple explanation using bullet points where helpful."),
-            new("📝", "Write something for me",
+            new("<i class='ti ti-edit'></i>", "Write something for me",
                 "Emails, captions, short messages. Tell AI what to write, who it's for, and the tone.",
                 "ERA Framework", "L1", "b1",
                 "Expectation: I need a short and friendly [email / message / post].\nRole: Act as a professional writer.\nAction: Draft a [type of content] for [recipient or audience] about [topic].")
         }},
         { 2, new() {
-            new("📋", "Break into clear steps",
+            new("<i class='ti ti-file-description'></i>", "Break into clear steps",
                 "Turn any task or goal into an ordered, easy-to-follow action plan.",
                 "RACE Framework", "L2", "b2",
                 "Role: Senior project planner and strategist.\nAction: Create a clear step-by-step plan for [task or goal].\nContext: My situation is [describe briefly]. My audience or team is [who is involved].\nExpectation: Format with numbered steps, short headings, and key notes under each step."),
-            new("💡", "Explain this to someone",
+            new("<i class='ti ti-bulb'></i>", "Explain this to someone",
                 "Turn a complex idea into a clear explanation tailored to any audience.",
                 "CARE Framework", "L2", "b2",
                 "Context: I need to explain [topic] to [audience — e.g. my manager, a student, a client].\nAction: Write a clear and engaging explanation.\nResult: The reader should understand [specific outcome] by the end.\nExample: Use a relatable real-world analogy to make the concept stick.")
         }},
         { 3, new() {
-            new("🎯", "Create something professional",
+            new("<i class='ti ti-target'></i>", "Create something professional",
                 "Full-context prompting for reports, proposals, presentations, and polished documents.",
                 "CO-STAR Framework", "L3", "b3",
                 "Context: I am working on [describe the situation or project].\nObjective: Create a professional [type of content] that [goal].\nStyle: Clear, structured, and confident.\nTone: [e.g. formal, friendly, authoritative].\nAudience: [who will read or use this].\nResponse: Format using Markdown with clear headings and bullet points where appropriate."),
-            new("🗺️", "Build a complete strategy",
+            new("<i class='ti ti-map-2'></i>", "Build a complete strategy",
                 "End-to-end strategy with defined role, phased steps, a clear goal, and sharp focus.",
                 "RISEN Framework", "L3", "b3",
                 "Role: Expert consultant specialising in [your field or industry].\nInstructions: Help me build a complete strategy for [goal or challenge].\nSteps: Divide this into phases with realistic timelines and milestones.\nEnd Goal: By the end, I want to achieve [specific, measurable outcome].\nNarrowing: Focus specifically on [what to include]. Ignore [what to exclude].")
         }},
         { 4, new() {
-            new("🔬", "Think through a complex problem",
+            new("<i class='ti ti-microscope'></i>", "Think through a complex problem",
                 "Chain-of-thought reasoning for tough, multi-layered challenges. AI thinks before answering.",
                 "CoT + Knowledge", "L4", "b4",
                 "Before answering, first list the 3 most important principles behind [topic or domain].\nOnce you have those principles, carefully step-by-step analyse [the specific problem].\nFor each step, explain your reasoning clearly before giving a conclusion.\nFinally, write a crisp summary of your recommendation, suitable to share with a decision-maker.")
         }},
         { 5, new() {
-            new("🤖", "Run a multi-step workflow",
+            new("<i class='ti ti-robot'></i>", "Run a multi-step workflow",
                 "Chain multiple AI tasks like an agent. Build rich, structured outputs in one prompt.",
                 "Agent Workflow", "L5", "b5",
                 "Step 1: Identify and list the key components of [topic or subject].\nStep 2: For each component, provide a detailed explanation covering [what to explain].\nStep 3: Write a professional executive summary that ties all components together.\nStep 4: Format the entire output as a structured brief with labelled sections, ready to share or present.")
@@ -464,6 +496,7 @@
     private bool desktopLevelsGlow = false;
     private bool mobileLevelsGlow = false;
     private bool step2Nudge = false;
+    private readonly string usageKey = Guid.NewGuid().ToString("N");
     private List<Message> messages = new();
     private ElementReference documentContainer;
     private MarkdownPipeline _mdPipeline = default!;
@@ -486,7 +519,10 @@
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     protected override void OnInitialized()
     {
-        var builder = new MarkdownPipelineBuilder().UseAdvancedExtensions();
+        var builder = new MarkdownPipelineBuilder()
+            .UseAdvancedExtensions()
+            .DisableHtml();
+
         builder.BlockParsers.RemoveAll(x => x is IndentedCodeBlockParser);
         _mdPipeline = builder.Build();
     }
@@ -497,6 +533,208 @@
     private IEnumerable<(FrameworkItem fw, int idx)> GetCurrentFrameworks()
         => (FW.TryGetValue(level, out var list) ? list : new List<FrameworkItem>())
            .Select((fw, i) => (fw, i));
+
+    private string RenderMarkdown(string markdown)
+    {
+        if (string.IsNullOrWhiteSpace(markdown)) return string.Empty;
+        
+        // Clean up common "LLM stutter" patterns at the end of the text
+        var cleaned = markdown.TrimEnd();
+        if (cleaned.EndsWith("*.. ..") || cleaned.EndsWith("*..") || cleaned.EndsWith(".. .."))
+        {
+            cleaned = cleaned.Substring(0, cleaned.LastIndexOf('*')).TrimEnd();
+        }
+
+        var normalized = NormalizeCodeBlocks(cleaned);
+        var prepared = ExtractCodeBlocks(normalized, out var codeBlocks);
+
+        var html = Markdown.ToHtml(prepared, _mdPipeline);
+        return InjectCodeBlocks(html, codeBlocks);
+    }
+
+    private static string InjectCodeBlocks(string html, IReadOnlyList<CodeBlock> codeBlocks)
+    {
+        if (codeBlocks.Count == 0)
+        {
+            return html;
+        }
+
+        var output = html;
+        for (var i = 0; i < codeBlocks.Count; i++)
+        {
+            var token = $"[[[CODE_BLOCK_{i}]]]";
+            output = output.Replace(token, BuildCodeBlockHtml(codeBlocks[i]));
+        }
+
+        return output;
+    }
+
+    private static string BuildCodeBlockHtml(CodeBlock block)
+    {
+        var languageClass = string.IsNullOrWhiteSpace(block.Language)
+            ? string.Empty
+            : $" language-{WebUtility.HtmlEncode(block.Language)}";
+
+        return $"""
+                <pre class="ai-code{languageClass}"><code>{WebUtility.HtmlEncode(block.Content)}</code></pre>
+                """;
+    }
+
+    private static string ExtractCodeBlocks(string markdown, out List<CodeBlock> codeBlocks)
+    {
+        codeBlocks = new List<CodeBlock>();
+
+        if (string.IsNullOrWhiteSpace(markdown))
+        {
+            return markdown;
+        }
+
+        var lines = markdown.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
+        var output = new List<string>(lines.Length);
+        var inFence = false;
+        var fenceLanguage = string.Empty;
+        var codeLines = new List<string>();
+
+        foreach (var rawLine in lines)
+        {
+            var line = rawLine.TrimEnd();
+            var trimmed = line.TrimStart();
+
+            if (!inFence && trimmed.StartsWith("```", StringComparison.Ordinal))
+            {
+                inFence = true;
+                fenceLanguage = trimmed[3..].Trim();
+                codeLines.Clear();
+                continue;
+            }
+
+            if (inFence && trimmed.StartsWith("```", StringComparison.Ordinal))
+            {
+                output.Add($"[[[CODE_BLOCK_{codeBlocks.Count}]]]");
+                codeBlocks.Add(new CodeBlock(fenceLanguage, string.Join('\n', codeLines)));
+                inFence = false;
+                fenceLanguage = string.Empty;
+                codeLines.Clear();
+                continue;
+            }
+
+            if (inFence)
+            {
+                codeLines.Add(line);
+                continue;
+            }
+
+            output.Add(line);
+        }
+
+        if (inFence)
+        {
+            output.Add($"[[[CODE_BLOCK_{codeBlocks.Count}]]]");
+            codeBlocks.Add(new CodeBlock(fenceLanguage, string.Join('\n', codeLines)));
+        }
+
+        return string.Join('\n', output);
+    }
+
+    private static string NormalizeCodeBlocks(string markdown)
+    {
+        if (string.IsNullOrWhiteSpace(markdown))
+        {
+            return markdown;
+        }
+
+        var lines = markdown.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
+        var normalized = new List<string>(lines.Length + 8);
+        var inFence = false;
+        var inInferredCode = false;
+
+        foreach (var rawLine in lines)
+        {
+            var line = rawLine.TrimEnd();
+            var trimmed = line.TrimStart();
+
+            if (trimmed.StartsWith("```", StringComparison.Ordinal))
+            {
+                if (inInferredCode)
+                {
+                    normalized.Add("```");
+                    inInferredCode = false;
+                }
+
+                inFence = !inFence;
+                normalized.Add(line);
+                continue;
+            }
+
+            if (inFence)
+            {
+                normalized.Add(line);
+                continue;
+            }
+
+            if (inInferredCode)
+            {
+                if (ShouldEndInferredCode(trimmed))
+                {
+                    normalized.Add("```");
+                    normalized.Add(string.Empty);
+                    inInferredCode = false;
+                }
+                else
+                {
+                    normalized.Add(line);
+                    continue;
+                }
+            }
+
+            if (StartsUnfencedCode(trimmed))
+            {
+                normalized.Add("```razor");
+                normalized.Add(line);
+                inInferredCode = true;
+                continue;
+            }
+
+            normalized.Add(line);
+        }
+
+        if (inInferredCode)
+        {
+            normalized.Add("```");
+        }
+
+        return string.Join('\n', normalized);
+    }
+
+    private static bool StartsUnfencedCode(string line)
+        => !string.IsNullOrWhiteSpace(line) &&
+           (line.StartsWith('@') ||
+            line.StartsWith('<') ||
+            line.StartsWith('{') ||
+            line.StartsWith('}') ||
+            line.StartsWith("using ", StringComparison.Ordinal) ||
+            line.StartsWith("namespace ", StringComparison.Ordinal) ||
+            line.StartsWith("public ", StringComparison.Ordinal) ||
+            line.StartsWith("private ", StringComparison.Ordinal) ||
+            line.StartsWith("protected ", StringComparison.Ordinal) ||
+            line.StartsWith("internal ", StringComparison.Ordinal) ||
+            line.StartsWith("var ", StringComparison.Ordinal) ||
+            line.StartsWith("const ", StringComparison.Ordinal) ||
+            line.StartsWith("await ", StringComparison.Ordinal) ||
+            line.StartsWith("if ", StringComparison.Ordinal) ||
+            line.StartsWith("if(", StringComparison.Ordinal) ||
+            line.Contains("=>", StringComparison.Ordinal) ||
+            line.Contains(" = new", StringComparison.Ordinal) ||
+            line.Contains(");", StringComparison.Ordinal));
+
+    private static bool ShouldEndInferredCode(string line)
+        => string.IsNullOrWhiteSpace(line) ||
+           line.StartsWith("Explanation", StringComparison.OrdinalIgnoreCase) ||
+           line.StartsWith("Important Note", StringComparison.OrdinalIgnoreCase) ||
+           line.StartsWith("Note:", StringComparison.OrdinalIgnoreCase) ||
+           (line.Length > 3 && char.IsDigit(line[0]) && line[1] == '.' && line[2] == ' ');
+
+    private sealed record CodeBlock(string Language, string Content);
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // LEVEL & FRAMEWORK SELECTION
@@ -581,6 +819,16 @@
     private async Task AskAI()
     {
         if (string.IsNullOrWhiteSpace(userInput) || isLoading || isRefining) return;
+        if (userInput.Length > MaxPromptLength)
+        {
+            messages.Add(new Message
+            {
+                Text = $"Prompt is too long. Please keep it under {MaxPromptLength} characters.",
+                Html = $"<p style='color:var(--rose)'>Prompt is too long. Please keep it under {MaxPromptLength} characters.</p>",
+                IsUser = false
+            });
+            return;
+        }
 
         messages.Add(new Message { Text = userInput, IsUser = true });
         currentPrompt = userInput;
@@ -596,16 +844,16 @@
             _cts.Cancel();
             _cts = new CancellationTokenSource();
 
-            await foreach (var chunk in Gemini.AskStreamAsync(currentPrompt))
+            await foreach (var chunk in Gemini.AskStreamAsync(currentPrompt, usageKey, _cts.Token))
             {
                 if (_cts.Token.IsCancellationRequested) break;
                 streamingText += chunk;
-                streamingHtml = Markdown.ToHtml(streamingText, _mdPipeline);
+                streamingHtml = RenderMarkdown(streamingText);
                 StateHasChanged();
                 await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
             }
 
-            var finalHtml = Markdown.ToHtml(streamingText, _mdPipeline);
+            var finalHtml = RenderMarkdown(streamingText);
             messages.Add(new Message
             {
                 Text = streamingText,
@@ -631,7 +879,6 @@
             isLoading = false;
             StateHasChanged();
             await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
-            await JS.InvokeVoidAsync("highlightCode");
         }
     }
 
@@ -641,11 +888,12 @@
     private async Task RefinePrompt()
     {
         if (string.IsNullOrWhiteSpace(userInput) || isRefining || isLoading) return;
+        if (userInput.Length > MaxPromptLength) return;
         isRefining = true;
         StateHasChanged();
         try
         {
-            var refined = await Gemini.RefinePromptAsync(userInput);
+            var refined = await Gemini.RefinePromptAsync(userInput, usageKey, _cts.Token);
             userInput = refined;
             QueuePromptResize();
         }
@@ -668,9 +916,13 @@
         StateHasChanged();
         try
         {
-            var translated = await Gemini.TranslatePromptAsync(msg.Text, newLanguage);
+            var lines = msg.Text.Split('\n').ToList();
+            lines.RemoveAll(l => l.Trim().StartsWith("*Attempting ") || l.Trim().StartsWith("*(Connected to "));
+            var textToTranslate = string.Join("\n", lines).Trim();
+
+            var translated = await Gemini.TranslatePromptAsync(textToTranslate, newLanguage, usageKey, _cts.Token);
             msg.Text = translated;
-            msg.Html = Markdown.ToHtml(translated, _mdPipeline);
+            msg.Html = RenderMarkdown(translated);
         }
         catch { }
         finally
@@ -678,7 +930,6 @@
             msg.IsTranslating = false;
             msg.TargetLanguage = "";
             StateHasChanged();
-            await JS.InvokeVoidAsync("highlightCode");
         }
     }
 
