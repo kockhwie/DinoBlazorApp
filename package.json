@@ -7,8 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "build:css": "npx tailwindcss -i ./Styles/tailwind.css -o ./wwwroot/tailwind.css",
-    "watch:css": "npx tailwindcss -i ./Styles/tailwind.css -o ./wwwroot/tailwind.css --watch",
+    "build:css": "echo \"wwwroot/tailwind.css is maintained directly; no separate Tailwind source file is used.\"",
+    "watch:css": "echo \"No CSS watch task: edit wwwroot/tailwind.css directly.\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

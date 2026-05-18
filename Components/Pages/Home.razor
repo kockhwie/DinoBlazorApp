@@ -2,7 +2,6 @@
 @inject GeminiService Gemini
 @inject IJSRuntime JS
 @using DinoBlazorApp.Components.UI
-@using Markdig
 @using Markdig.Parsers
 @using System.Net
 @implements IDisposable
@@ -161,7 +160,8 @@
                 }
 
                 @* Scroll Container *@
-                <div class="dino-message-container" @ref="documentContainer">
+                <div class="dino-message-container flex-1 min-h-0 overflow-y-auto px-6 py-4 flex flex-col gap-6 pb-[132px] md:pb-4"
+                     @ref="documentContainer">
                     <div class="dino-welcome-screen">
 
                         @* Welcome screen *@
@@ -206,16 +206,16 @@
                         @* Message history *@
                         @foreach (var msg in messages)
                         {
-                            <div class="flex flex-col gap-6 animate-slide-up">
+                            <div class="chat-message">
                                 @if (msg.IsUser)
                                 {
-                                    <div class="flex gap-4 justify-end">
-                                        <div class="flex flex-col items-end gap-2 max-w-[85%]">
-                                            <div class="bg-dino-amber text-dino-bg px-5 py-3 rounded-2xl rounded-tr-sm text-sm font-semibold shadow-lg shadow-dino-amber/10">
+                                    <div class="user-message-row">
+                                        <div class="user-message-stack">
+                                            <div class="user-prompt-bubble">
                                                 @msg.Text
                                             </div>
-                                            <div class="flex items-center gap-1.5 px-1">
-                                                <span class="text-[10px] font-bold text-dino-muted uppercase tracking-widest">You</span>
+                                            <div class="message-meta">
+                                                <span>You</span>
                                                 <i class="ti ti-user-circle text-dino-muted text-sm"></i>
                                             </div>
                                         </div>
@@ -229,7 +229,7 @@
                                                 <span class="logo-anim" style="width: 22px; height: 22px;"></span>
                                                 <span class="text-[10px] font-extrabold text-dino-amber uppercase tracking-[2px]">Master Dino</span>
                                             </div>
-                                            <div class="bg-dino-surf border border-dino-bdr p-5 md:p-7 rounded-2xl rounded-tl-sm shadow-xl prose prose-invert prose-sm max-w-none">
+                                            <div class="assistant-response-bubble prose prose-invert max-w-none chat-response">
                                                 @((MarkupString)(msg.Html ?? string.Empty))
                                             </div>
                                             
@@ -275,10 +275,10 @@
                         @* Live streaming *@
                         @if (isLoading)
                         {
-                            <div class="flex flex-col gap-6 animate-pulse">
-                                <div class="flex gap-4 justify-end">
-                                    <div class="flex flex-col items-end gap-2 max-w-[85%]">
-                                        <div class="bg-dino-amber/40 text-dino-bg/60 px-5 py-3 rounded-2xl rounded-tr-sm text-sm font-semibold italic">
+                            <div class="chat-message chat-message--loading">
+                                <div class="user-message-row">
+                                    <div class="user-message-stack">
+                                        <div class="user-prompt-bubble user-prompt-bubble--pending">
                                             @currentPrompt
                                         </div>
                                     </div>
@@ -287,6 +287,18 @@
                                 @if (string.IsNullOrEmpty(streamingText))
                                 {
                                     <div class="flex flex-col items-center gap-4 py-8">
+                                        @if (streamStatuses.Count > 0)
+                                        {
+                                            <div class="flex flex-wrap justify-center gap-2 max-w-2xl">
+                                                @foreach (var status in streamStatuses)
+                                                {
+                                                    <span class="inline-flex items-center gap-2 rounded-full border border-dino-amber/25 bg-dino-amber/10 px-3 py-1.5 text-[11px] font-semibold text-dino-amber">
+                                                        <i class="ti ti-activity-heartbeat text-sm"></i>
+                                                        @status
+                                                    </span>
+                                                }
+                                            </div>
+                                        }
                                         <div class="flex gap-1.5">
                                             <div class="w-2.5 h-2.5 rounded-full bg-dino-amber animate-bounce [animation-delay:-0.3s]"></div>
                                             <div class="w-2.5 h-2.5 rounded-full bg-dino-amber animate-bounce [animation-delay:-0.15s]"></div>
@@ -301,11 +313,25 @@
                                         <div class="flex flex-col gap-3 w-full">
                                             <div class="flex items-center gap-2 px-1">
                                                 <span class="logo-anim" style="width: 22px; height: 22px;"></span>
-                                                <span class="text-[10px] font-extrabold text-dino-amber uppercase tracking-[2px]">Streaming Extraction</span>
+                                                <span class="text-[10px] font-extrabold text-dino-amber uppercase tracking-[2px]">Generating response</span>
                                             </div>
-                                            <div class="bg-dino-surf border border-dino-amber/30 p-5 md:p-7 rounded-2xl rounded-tl-sm shadow-xl prose prose-invert prose-sm max-w-none">
-                                                @((MarkupString)(streamingHtml ?? string.Empty))
-                                                <span class="inline-block w-1.5 h-4 bg-dino-amber ml-1 animate-blink"></span>
+                                            @if (streamStatuses.Count > 0)
+                                            {
+                                                <div class="flex flex-wrap gap-2">
+                                                    @foreach (var status in streamStatuses)
+                                                    {
+                                                        <span class="inline-flex items-center gap-2 rounded-full border border-dino-amber/25 bg-dino-amber/10 px-3 py-1.5 text-[11px] font-semibold text-dino-amber">
+                                                            <i class="ti ti-activity-heartbeat text-sm"></i>
+                                                            @status
+                                                        </span>
+                                                    }
+                                                </div>
+                                            }
+                                            <div class="assistant-response-bubble assistant-response-bubble--stream">
+                                                <div class="prose prose-invert max-w-none chat-response">
+                                                    @((MarkupString)(streamingHtml ?? string.Empty))
+                                                    <span class="inline-block w-1.5 h-4 bg-dino-amber ml-1 animate-blink align-middle"></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -543,6 +569,7 @@
     private string currentPrompt = "";
     private string streamingText = "";
     private string streamingHtml = "";
+    private List<string> streamStatuses = new();
     private bool isLoading = false;
     private bool isRefining = false;
     private bool navOpen = false;
@@ -600,6 +627,7 @@
             cleaned = cleaned.Substring(0, cleaned.LastIndexOf('*')).TrimEnd();
         }
 
+        cleaned = PromoteSoftParagraphBreaks(cleaned);
         var normalized = NormalizeCodeBlocks(cleaned);
         var prepared = ExtractCodeBlocks(normalized, out var codeBlocks);
 
@@ -789,6 +817,38 @@
            line.StartsWith("Note:", StringComparison.OrdinalIgnoreCase) ||
            (line.Length > 3 && char.IsDigit(line[0]) && line[1] == '.' && line[2] == ' ');
 
+    private static string PromoteSoftParagraphBreaks(string markdown)
+    {
+        if (string.IsNullOrWhiteSpace(markdown) || markdown.Contains("\n\n", StringComparison.Ordinal))
+        {
+            return markdown;
+        }
+
+        var lines = markdown.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
+        if (lines.Length < 2)
+        {
+            return markdown;
+        }
+
+        var hasMarkdownStructure = lines.Any(line =>
+        {
+            var trimmed = line.TrimStart();
+            return trimmed.StartsWith("#", StringComparison.Ordinal) ||
+                   trimmed.StartsWith("-", StringComparison.Ordinal) ||
+                   trimmed.StartsWith("*", StringComparison.Ordinal) ||
+                   trimmed.StartsWith("```", StringComparison.Ordinal) ||
+                   trimmed.StartsWith(">", StringComparison.Ordinal) ||
+                   (trimmed.Length > 1 && char.IsDigit(trimmed[0]) && trimmed[1] == '.');
+        });
+
+        if (hasMarkdownStructure)
+        {
+            return markdown;
+        }
+
+        return string.Join("\n\n", lines.Select(line => line.TrimEnd()));
+    }
+
     private sealed record CodeBlock(string Language, string Content);
 
     // ------------------------------------------------------------------------------------------------------
@@ -892,6 +952,7 @@
         isLoading = true;
         streamingText = "";
         streamingHtml = "";
+        streamStatuses.Clear();
         StateHasChanged();
 
         try
@@ -902,6 +963,14 @@
             await foreach (var chunk in Gemini.AskStreamAsync(currentPrompt, usageKey, _cts.Token))
             {
                 if (_cts.Token.IsCancellationRequested) break;
+                if (TryReadStreamStatus(chunk, out var status))
+                {
+                    streamStatuses.Add(status);
+                    StateHasChanged();
+                    await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
+                    continue;
+                }
+
                 streamingText += chunk;
                 streamingHtml = RenderMarkdown(streamingText);
                 StateHasChanged();
@@ -930,6 +999,7 @@
         {
             streamingText = "";
             streamingHtml = "";
+            streamStatuses.Clear();
             currentPrompt = "";
             isLoading = false;
             StateHasChanged();
@@ -1018,7 +1088,21 @@
         selFw = null;
         streamingText = "";
         streamingHtml = "";
+        streamStatuses.Clear();
         QueuePromptResize();
+    }
+
+    private static bool TryReadStreamStatus(string chunk, out string status)
+    {
+        const string prefix = "__DINO_STATUS__:";
+        if (chunk.StartsWith(prefix, StringComparison.Ordinal))
+        {
+            status = chunk[prefix.Length..].Trim();
+            return true;
+        }
+
+        status = string.Empty;
+        return false;
     }
 
     // ------------------------------------------------------------------------------------------------------
@@ -1026,9 +1110,6 @@
     // ------------------------------------------------------------------------------------------------------
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (messages.Count > 0 || isLoading)
-            await JS.InvokeVoidAsync("scrollToBottom", documentContainer);
-
         if (!isLoading && messages.Count > 0)
             await JS.InvokeVoidAsync("highlightCode");
 

@@ -36,11 +36,15 @@ public class GeminiService
         // DO NOT CHANGE THESE MODELS without my approval.
         // Models prioritized by modern performance (2026 stack)
         var modelQueue = new Queue<string>(new[] {            
+            
             "gemini-2.5-flash", // User's preferred primary
-            "gemini-2.0-flash", // Primary 2026 Stable
-            "gemma-3-4b-it",
-            "gemini-1.5-flash", // Reliable Fallback
-            "gemini-1.5-pro"    // Heavy Logic Fallback
+            "gemini-3.1-flash-lite", // 2026 Flash with better grounding, but watch for trailing artifacts
+            "gemma-3-4b-it", // 2026 Stable with best grounding, but watch for trailing artifacts
+            "gemini-2.0-flash", // Primary 2026 Stable           
+            "gemma-4-31b-it" // 2026 Heavy with best grounding, but watch for trailing artifacts
+            
+            //"gemini-1.5-flash", // Reliable Fallback
+            //"gemini-1.5-pro"    // Heavy Logic Fallback
         });
 
         if (string.IsNullOrWhiteSpace(_apiKey) ||
@@ -63,7 +67,7 @@ public class GeminiService
             var maskedKey = _apiKey.Length > 8 ? $"{_apiKey[..4]}...{_apiKey[^4..]}" : "****";
             var displayUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent?alt=sse&key={maskedKey}";
             
-            yield return $"*Attempting {model}... *\n";
+            yield return $"__DINO_STATUS__:Trying {model}...";
 
             // Guard against trailing artifacts and grounding citations by prepending to the prompt
             var systemInstruction = "System Note: Do not include trailing grounding metadata, source citations, or thinking markers like '*.. ..' at the end of your response. End your response cleanly.\n\n";
@@ -103,7 +107,7 @@ public class GeminiService
             }
 
             lastError = null; 
-            yield return $"*(Connected to {model}, streaming...)*\n\n";
+            yield return $"__DINO_STATUS__:Connected to {model} - streaming...";
 
             // Real Server-Sent Events reading
             using var responseLease = response;

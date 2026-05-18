@@ -1,6 +1,5 @@
 @page "/release-notes"
 @layout SubPageLayout
-@using Markdig
 @inject IJSRuntime JS
 
 <!-- LAYOUT: Full height flex column -->
@@ -204,7 +203,7 @@
             Changed  = new()
             {
                 "Migrated the main academy, navigation, feedback, and release-note screens from large handcrafted CSS blocks to utility-first Tailwind markup.",
-                "Consolidated shared UI styling into `Styles/tailwind.css` and reduced `wwwroot/app.css` to a legacy handoff note.",
+                "Consolidated shared UI styling directly into the shipped `wwwroot/tailwind.css` stylesheet.",
                 "Reworked the subpage shell and mobile drawer to use responsive Tailwind layouts across desktop and mobile."
             },
             Removed  = new()
