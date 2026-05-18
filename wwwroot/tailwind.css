@@ -4720,3 +4720,30 @@ body {
         padding: 1.75rem
     }
 }
+
+/* --- PREMIUM UI OVERRIDES --- */
+.dino-prompt-wrapper .dino-input-group {
+    border-radius: 1.5rem;
+    background-color: #111110;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border-color: rgba(56, 50, 31, 0.8);
+    padding: 0.75rem;
+}
+
+.dino-btn-ghost:disabled, .dino-btn-ghost[disabled] {
+    background-color: transparent !important;
+    color: rgba(242, 232, 213, 0.4) !important;
+    border-color: transparent !important;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+}
+
+.dino-btn-primary:disabled, .dino-btn-primary[disabled] {
+    background-color: rgba(240, 160, 48, 0.2) !important;
+    color: rgba(240, 160, 48, 0.5) !important;
+    border-color: rgba(240, 160, 48, 0.1) !important;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+    box-shadow: none !important;
+}
+

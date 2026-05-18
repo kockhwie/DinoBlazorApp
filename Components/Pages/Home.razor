@@ -90,50 +90,9 @@
                                 </div>
                             }
                         </div>
-
-                        @* Sidebar Prompt Box (Moved here to follow Frameworks) *@
-                        <div class="flex flex-col gap-2 mt-2 pt-3 border-t border-dino-bdr/50">
-                            <div class="flex items-center justify-between px-1">
-                                <label class="dino-label-primary">Your Prompt</label>
-                                <span class="text-[10px] font-bold @(userInput.Length > 3600 ? "text-error" : "text-dino-muted2")">
-                                    @userInput.Length / @MaxPromptLength
-                                </span>
-                            </div>
-                            <div class="dino-input-group">
-                                <textarea class="dino-textarea min-h-[140px] max-h-[400px] !resize-y"
-                                          id="deskTa" data-prompt-editor="true" data-max-height="400"
-                                          @bind="userInput" @bind:event="oninput" @bind:after="OnPromptChangedAsync"
-                                          placeholder="Choose a template above, or write your own..."
-                                          disabled="@(isLoading || isRefining)" rows="4"></textarea>
-                                
-                                <div class="flex items-center justify-end gap-2 mt-2 pt-2 border-t border-white/5">
-                                    <button class="dino-btn-ghost @(isRefining ? "animate-pulse" : "")"
-                                            @onclick="RefinePrompt"
-                                            disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput) || userInput.Length > MaxPromptLength)">
-                                        <i class="ti ti-sparkles @(isRefining ? "animate-spin" : "")"></i> Sharpen
-                                    </button>
-                                    <button class="dino-btn-primary"
-                                            @onclick="OnSubmit"
-                                            disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput) || userInput.Length > MaxPromptLength)">
-                                        <i class="ti ti-rocket"></i> Release!
-                                    </button>
-                                </div>
-                            </div>
-                            @if (isRefining)
-                            {
-                                <div class="flex items-center gap-2 px-3 py-2 bg-dino-amber/5 border border-dino-amber/20 rounded-xl animate-pulse">
-                                    <i class="ti ti-bolt text-dino-amber"></i>
-                                    <p class="text-[10px] font-bold text-dino-amber/80 uppercase">Sharpening your directive...</p>
-                                </div>
-                            }
-                        </div>
-                        
-                        <div class="mt-4 text-[10px] text-dino-muted2 text-center uppercase tracking-tighter">
-                            v1.3.3 . Dino Prompt Academy
-                        </div>
                     </div>
-                </div>
 
+                </div>
 
             </aside>
 
@@ -171,33 +130,33 @@
                                 <div class="h-32 flex items-center justify-center mb-6">
                                     <span class="logo-anim" style="width: 110px; height: 110px;"></span>
                                 </div>
-                                <h2 class="dino-h2 mb-4">What will you prompt today?</h2>
+                                <h2 class="dino-h2 !text-3xl md:!text-4xl mb-4">What will you prompt today?</h2>
                                 <p class="dino-p-muted max-w-lg mb-12">Three steps is all it takes. The dino handles the rest, turning your thoughts into master-class directives.</p>
                                 
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4  max-w-2xl">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl px-2">
                                     <button type="button" @onclick="StartStep1Guide"
-                                            class="group dino-card-step active">
+                                            class="group dino-card-step active !py-4 !px-2">
                                         <div class="dino-step-label">Step 1</div>
-                                        <div class="text-primary group-hover:scale-110 transition-transform">
-                                            <iconify-icon icon="glyphs-poly:crosshairs" width="44" height="44"></iconify-icon>
+                                        <div class="text-primary group-hover:scale-110 transition-transform my-1">
+                                            <iconify-icon icon="glyphs-poly:crosshairs" width="36" height="36"></iconify-icon>
                                         </div>
-                                        <div class="text-sm font-bold text-dino-cream">Choose level</div>
+                                        <div class="text-sm font-bold text-dino-cream text-center leading-tight">Choose<br/>Level</div>
                                     </button>
  
-                                    <div class="group dino-card-step @(step2Nudge ? "active" : "opacity-50 cursor-not-allowed")">
+                                    <div class="group dino-card-step @(step2Nudge ? "active" : "opacity-50 cursor-not-allowed") !py-4 !px-2">
                                         <div class="dino-step-label">Step 2</div>
-                                        <div class="text-primary transition-transform group-hover:scale-110">
-                                            <iconify-icon icon="glyphs-poly:note-pad" width="44" height="44"></iconify-icon>
+                                        <div class="text-primary transition-transform group-hover:scale-110 my-1">
+                                            <iconify-icon icon="glyphs-poly:note-pad" width="36" height="36"></iconify-icon>
                                         </div>
-                                        <div class="text-sm font-bold text-dino-cream">Choose a Prompt Framework</div>
+                                        <div class="text-sm font-bold text-dino-cream text-center leading-tight">Choose<br/>Framework</div>
                                     </div>
  
-                                    <div class="group dino-card-step opacity-40 cursor-not-allowed">
+                                    <div class="group dino-card-step opacity-40 cursor-not-allowed !py-4 !px-2">
                                         <div class="dino-step-label">Step 3</div>
-                                        <div class="text-dino-muted2 transition-transform group-hover:scale-110">
-                                            <iconify-icon icon="glyphs-poly:rocket" width="44" height="44"></iconify-icon>
+                                        <div class="text-dino-muted2 transition-transform group-hover:scale-110 my-1">
+                                            <iconify-icon icon="glyphs-poly:rocket" width="36" height="36"></iconify-icon>
                                         </div>
-                                        <div class="text-sm font-bold text-dino-cream">Release dino!</div>
+                                        <div class="text-sm font-bold text-dino-cream text-center leading-tight">Release<br/>Dino!</div>
                                     </div>
                                 </div>
                             </div>
@@ -336,6 +295,44 @@
                                         </div>
                                     </div>
                                 }
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @* Main Canvas Prompt Box (Desktop) *@
+                <div class="dino-prompt-wrapper hidden md:flex shrink-0 flex-col pb-8 pt-4 px-8 z-30 w-full relative">
+                    <div class="w-full max-w-4xl mx-auto flex flex-col gap-2">
+                        <div class="dino-input-group relative">
+                            <textarea class="dino-textarea min-h-[80px] max-h-[300px] !resize-y bg-transparent px-4 py-2 text-sm leading-relaxed text-dino-cream placeholder:text-dino-muted/50"
+                                      id="deskTa" data-prompt-editor="true" data-max-height="400"
+                                      @bind="userInput" @bind:event="oninput" @bind:after="OnPromptChangedAsync"
+                                      placeholder="Choose a template from the sidebar, or write your own directive here..."
+                                      disabled="@(isLoading || isRefining)" rows="3"></textarea>
+                            
+                            <div class="dino-prompt-actions flex items-center justify-between mt-1 pt-2 px-3">
+                                <span class="text-[10px] font-bold @(userInput.Length > 3600 ? "text-error" : "text-dino-muted2")">
+                                    @userInput.Length / @MaxPromptLength
+                                </span>
+                                <div class="flex items-center gap-3">
+                                    <button class="dino-btn-ghost @(isRefining ? "animate-pulse" : "")"
+                                            @onclick="RefinePrompt"
+                                            disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput) || userInput.Length > MaxPromptLength)">
+                                        <i class="ti ti-sparkles @(isRefining ? "animate-spin" : "")"></i> Sharpen
+                                    </button>
+                                    <button class="dino-btn-primary px-8 shadow-lg font-extrabold tracking-wide"
+                                            @onclick="OnSubmit"
+                                            disabled="@(isLoading || isRefining || string.IsNullOrWhiteSpace(userInput) || userInput.Length > MaxPromptLength)">
+                                        <i class="ti ti-rocket"></i> Release!
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        @if (isRefining)
+                        {
+                            <div class="flex items-center justify-center gap-2 px-3 py-2 animate-pulse mx-auto mt-2">
+                                <i class="ti ti-bolt text-dino-amber"></i>
+                                <p class="text-[10px] font-bold text-dino-amber/80 uppercase">Sharpening your directive...</p>
                             </div>
                         }
                     </div>
@@ -904,6 +901,8 @@
             desktopLevelsGlow = true;
             mobileLevelsGlow = false;
         }
+        
+        StateHasChanged();
     }
 
     // --- button: clear the selected style, keep the prompt text
