@@ -3,110 +3,178 @@
 @using Markdig
 @inject IJSRuntime JS
 
-<div class="changelog-container">
+<!-- LAYOUT: Full height flex column -->
+<div class="flex flex-col h-full bg-dino-bg text-dino-cream font-body overflow-hidden">
 
-    <!-- SHARED PAGE HEADER -->
-    <header class="sp-header">
-        <a href="/" class="sp-back"><span>←</span> Back to Academy</a>
-        <div class="sp-hero">
-            <div class="sp-hero-ico"><i class="ti ti-dna"></i></div>
-            <h1>Dino Evolution Log</h1>
-            <p>All notable mutations to <strong>Dino Prompt Academy</strong> are documented here.</p>
+    <!-- PAGE HEADER -->
+    <header class="bg-dino-surf border-b border-dino-bdr px-6 md:px-12 pt-7 shrink-0">
+        <div class="flex items-center gap-5 pb-6">
+            <div class="text-4xl shrink-0 animate-dino-float">
+                <iconify-icon icon="glyphs-poly:note-pad" width="44" height="44" class="text-dino-amber"></iconify-icon>
+            </div>
+            <div>
+                <h1 class="font-display text-2xl md:text-[2.2rem] font-extrabold text-dino-cream leading-tight">Dino Evolution Log</h1>
+                <p class="text-sm text-dino-muted mt-1">All notable mutations to <strong class="text-dino-creamd">Dino Prompt Academy</strong> are documented here.</p>
+            </div>
         </div>
     </header>
 
-    <!-- SIDEBAR + MAIN BODY -->
-    <div class="changelog-body">
+    <!-- BODY: sidebar + main -->
+    <div class="flex flex-1 min-h-0 overflow-hidden">
 
-    <!-- SUB-SIDEBAR -->
-    <aside class="changelog-sidebar">
-        <div class="sidebar-header">
-            <i class="ti ti-fossil"></i>
-            <span>Fossil Record</span>
-        </div>
-        <nav class="version-nav">
-            @foreach (var version in versions)
-            {
-                <a @onclick="() => ScrollToVersion(version.Id)" @onclick:preventDefault class="nav-item">
-                    <span class="v-label">@version.Id</span>
-                    <span class="v-date">@version.Date</span>
-                </a>
-            }
-        </nav>
-    </aside>
+        <!-- SIDEBAR (desktop only) -->
+        <aside class="hidden md:flex flex-col w-[280px] bg-dino-surf border-r border-dino-bdr overflow-y-auto shrink-0 p-6">
+            <div class="flex items-center gap-3 font-bold text-xs uppercase tracking-[2px] text-dino-amber mb-8 pl-2">
+                <i class="ti ti-fossil text-base"></i>
+                <span>Fossil Record</span>
+            </div>
+            <nav class="flex flex-col gap-2">
+                @foreach (var version in versions)
+                {
+                    <a @onclick="() => ScrollToVersion(version.Id)" @onclick:preventDefault
+                       class="flex flex-col px-3 py-2.5 rounded-xl text-dino-muted border border-transparent
+                              hover:bg-dino-surf2 hover:text-dino-cream hover:border-dino-bdr cursor-pointer transition-all duration-200">
+                        <span class="font-bold text-[0.95rem]">@version.Id</span>
+                        <span class="text-xs opacity-60">@version.Date</span>
+                    </a>
+                }
+            </nav>
+        </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="changelog-main">
+        <!-- MAIN CONTENT -->
+        <main class="flex-1 overflow-y-auto px-5 py-8 md:px-14 scroll-smooth">
 
-        <!-- MOBILE VERSION STRIP -->
-        <div class="mobile-version-strip">
-            @foreach (var version in versions)
-            {
-                <a @onclick="() => ScrollToVersion(version.Id)" @onclick:preventDefault class="mobile-nav-pill">
-                    v@version.Id
-                </a>
-            }
-        </div>
+            <!-- MOBILE VERSION STRIP -->
+            <div class="flex md:hidden gap-2.5 overflow-x-auto pb-4 mb-7 border-b border-dino-bdr scrollbar-none">
+                @foreach (var version in versions)
+                {
+                    <a @onclick="() => ScrollToVersion(version.Id)" @onclick:preventDefault
+                       class="shrink-0 px-4 py-2 rounded-full bg-dino-surf2 border border-dino-bdr text-dino-muted2
+                              text-xs font-semibold cursor-pointer hover:bg-dino-amber/10 hover:text-dino-amber
+                              hover:border-dino-ambers transition-all">
+                        v@version.Id
+                    </a>
+                }
+            </div>
 
-        <section class="log-content">
-            @foreach (var v in versions)
-            {
-                <article id="v@(v.Id.Replace(".", ""))" class="version-block">
-                    <div class="version-header">
-                        <h2 class="version-number">[@v.Id] — @v.Date</h2>
-                        @if (!string.IsNullOrEmpty(v.Subtitle))
+            <!-- VERSION BLOCKS -->
+            <div class="max-w-[900px]">
+                @foreach (var v in versions)
+                {
+                    <article id="v@(v.Id.Replace(".", ""))" class="mb-20 scroll-mt-14">
+
+                        <!-- Version heading -->
+                        <div class="border-b border-dino-bdr pb-3 mb-7">
+                            <h2 class="text-[1.75rem] font-bold text-dino-amber">[@v.Id] — @v.Date</h2>
+                            @if (!string.IsNullOrEmpty(v.Subtitle))
+                            {
+                                <p class="text-sm text-dino-muted mt-1.5 italic">@v.Subtitle</p>
+                            }
+                        </div>
+
+                        <!-- Change groups -->
+                        @if (v.Added.Any())
                         {
-                            <p class="version-subtitle">@v.Subtitle</p>
+                            <div class="mb-7">
+                                <h3 class="flex items-center gap-2.5 text-sm font-extrabold uppercase tracking-wide text-white mb-3">
+                                    <i class="ti ti-circle-plus text-dino-green"></i> Added
+                                </h3>
+                                <ul class="space-y-2.5 list-none p-0 m-0">
+                                    @foreach (var item in v.Added)
+                                    {
+                                        <li class="relative pl-5 text-dino-creamd text-[0.88rem] leading-relaxed before:content-['-'] before:absolute before:left-0 before:text-dino-amber before:font-black">
+                                            @((MarkupString)item)
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
                         }
-                    </div>
+                        @if (v.Changed.Any())
+                        {
+                            <div class="mb-7">
+                                <h3 class="flex items-center gap-2.5 text-sm font-extrabold uppercase tracking-wide text-white mb-3">
+                                    <i class="ti ti-refresh text-dino-amber"></i> Changed
+                                </h3>
+                                <ul class="space-y-2.5 list-none p-0 m-0">
+                                    @foreach (var item in v.Changed)
+                                    {
+                                        <li class="relative pl-5 text-dino-creamd text-[0.88rem] leading-relaxed before:content-['-'] before:absolute before:left-0 before:text-dino-amber before:font-black">
+                                            @((MarkupString)item)
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        @if (v.Deprecated.Any())
+                        {
+                            <div class="mb-7">
+                                <h3 class="flex items-center gap-2.5 text-sm font-extrabold uppercase tracking-wide text-white mb-3">
+                                    <i class="ti ti-hourglass text-yellow-400"></i> Deprecated
+                                </h3>
+                                <ul class="space-y-2.5 list-none p-0 m-0">
+                                    @foreach (var item in v.Deprecated)
+                                    {
+                                        <li class="relative pl-5 text-dino-creamd text-[0.88rem] leading-relaxed before:content-['-'] before:absolute before:left-0 before:text-dino-amber before:font-black">
+                                            @((MarkupString)item)
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        @if (v.Removed.Any())
+                        {
+                            <div class="mb-7">
+                                <h3 class="flex items-center gap-2.5 text-sm font-extrabold uppercase tracking-wide text-white mb-3">
+                                    <i class="ti ti-circle-minus text-dino-rose"></i> Removed
+                                </h3>
+                                <ul class="space-y-2.5 list-none p-0 m-0">
+                                    @foreach (var item in v.Removed)
+                                    {
+                                        <li class="relative pl-5 text-dino-creamd text-[0.88rem] leading-relaxed before:content-['-'] before:absolute before:left-0 before:text-dino-amber before:font-black">
+                                            @((MarkupString)item)
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        @if (v.Fixed.Any())
+                        {
+                            <div class="mb-7">
+                                <h3 class="flex items-center gap-2.5 text-sm font-extrabold uppercase tracking-wide text-white mb-3">
+                                    <i class="ti ti-tool text-blue-400"></i> Fixed
+                                </h3>
+                                <ul class="space-y-2.5 list-none p-0 m-0">
+                                    @foreach (var item in v.Fixed)
+                                    {
+                                        <li class="relative pl-5 text-dino-creamd text-[0.88rem] leading-relaxed before:content-['-'] before:absolute before:left-0 before:text-dino-amber before:font-black">
+                                            @((MarkupString)item)
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        @if (v.Security.Any())
+                        {
+                            <div class="mb-7">
+                                <h3 class="flex items-center gap-2.5 text-sm font-extrabold uppercase tracking-wide text-white mb-3">
+                                    <i class="ti ti-shield-check text-emerald-400"></i> Security
+                                </h3>
+                                <ul class="space-y-2.5 list-none p-0 m-0">
+                                    @foreach (var item in v.Security)
+                                    {
+                                        <li class="relative pl-5 text-dino-creamd text-[0.88rem] leading-relaxed before:content-['-'] before:absolute before:left-0 before:text-dino-amber before:font-black">
+                                            @((MarkupString)item)
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
 
-                    @if (v.Added.Any())
-                    {
-                        <div class="change-group">
-                            <h3><i class="ti ti-circle-plus"></i> Added</h3>
-                            <ul>@foreach (var item in v.Added) { <li>@((MarkupString)item)</li> }</ul>
-                        </div>
-                    }
-                    @if (v.Changed.Any())
-                    {
-                        <div class="change-group">
-                            <h3><i class="ti ti-refresh"></i> Changed</h3>
-                            <ul>@foreach (var item in v.Changed) { <li>@((MarkupString)item)</li> }</ul>
-                        </div>
-                    }
-                    @if (v.Deprecated.Any())
-                    {
-                        <div class="change-group">
-                            <h3><i class="ti ti-hourglass"></i> Deprecated</h3>
-                            <ul>@foreach (var item in v.Deprecated) { <li>@((MarkupString)item)</li> }</ul>
-                        </div>
-                    }
-                    @if (v.Removed.Any())
-                    {
-                        <div class="change-group">
-                            <h3><i class="ti ti-circle-minus"></i> Removed</h3>
-                            <ul>@foreach (var item in v.Removed) { <li>@((MarkupString)item)</li> }</ul>
-                        </div>
-                    }
-                    @if (v.Fixed.Any())
-                    {
-                        <div class="change-group">
-                            <h3><i class="ti ti-tool"></i> Fixed</h3>
-                            <ul>@foreach (var item in v.Fixed) { <li>@((MarkupString)item)</li> }</ul>
-                        </div>
-                    }
-                    @if (v.Security.Any())
-                    {
-                        <div class="change-group">
-                            <h3><i class="ti ti-shield-check"></i> Security</h3>
-                            <ul>@foreach (var item in v.Security) { <li>@((MarkupString)item)</li> }</ul>
-                        </div>
-                    }
-                </article>
-            }
-        </section>
+                    </article>
+                }
+            </div>
 
-    </main>
+        </main>
     </div>
 </div>
 
@@ -121,6 +189,31 @@
 
     private List<LogVersion> versions = new()
     {
+        // -- v1.4.0 ------------------------------------------------------------
+        new LogVersion
+        {
+            Id       = "1.4.0",
+            Date     = "2026-05-18",
+            Subtitle = "Tailwind Design System Migration",
+            Added    = new()
+            {
+                "Introduced a Tailwind CSS and DaisyUI build pipeline with committed configuration, source styles, and generated runtime CSS.",
+                "Added Iconify-powered navigation and release-note iconography for a more consistent visual system.",
+                "Created reusable Dino theme tokens for colors, typography, animation, cards, buttons, framework badges, and mobile controls."
+            },
+            Changed  = new()
+            {
+                "Migrated the main academy, navigation, feedback, and release-note screens from large handcrafted CSS blocks to utility-first Tailwind markup.",
+                "Consolidated shared UI styling into `Styles/tailwind.css` and reduced `wwwroot/app.css` to a legacy handoff note.",
+                "Reworked the subpage shell and mobile drawer to use responsive Tailwind layouts across desktop and mobile."
+            },
+            Removed  = new()
+            {
+                "Removed obsolete CSS isolation files for Feedback and Release Notes after those pages moved into the shared Tailwind styling system.",
+                "Excluded local build log text files from release commits."
+            }
+        },
+
         // ── v1.3.3 ────────────────────────────────────────────────────────────
         new LogVersion
         {
@@ -132,7 +225,7 @@
                 "Integrated premium Tabler Icons across the entire interface (Home, Nav, Feedback, Release Notes).",
                 "Created a dynamic `<DinoIcon>` component to standardize icon rendering throughout the app.",
                 "Added explicit `<span class=\"gn-lbl\">` text labels to 'Profile' and 'Settings' buttons in the desktop sidebar for visual parity.",
-                "Implemented custom, sleek scrollbars specifically tailored for Markdown `<pre>` and `<code>` blocks.",
+                "Implemented custom, sleek scrollbars specifically tailored for Markdown <pre> and <code> blocks.",
                 "Introduced dark-themed gradient backgrounds for code blocks to enhance contrast and readability."
             },
             Changed  = new()

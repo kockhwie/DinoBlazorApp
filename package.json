@@ -1,0 +1,33 @@
+{
+  "name": "dinoblazorapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./Styles/tailwind.css -o ./wwwroot/tailwind.css",
+    "watch:css": "npx tailwindcss -i ./Styles/tailwind.css -o ./wwwroot/tailwind.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kockhwie/DinoBlazorApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kockhwie/DinoBlazorApp/issues"
+  },
+  "homepage": "https://github.com/kockhwie/DinoBlazorApp#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.4",
+    "autoprefixer": "^10.5.0",
+    "daisyui": "^4.12.24",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^3.4.19"
+  }
+}
