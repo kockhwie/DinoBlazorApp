@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Microsoft.AspNetCore.Http;
 
 namespace DinoBlazorApp.Services;
 
@@ -9,6 +10,7 @@ public interface IAiUsageLimiter
 
 public sealed class AiUsageLimiter : IAiUsageLimiter
 {
+    private readonly IHttpContextAccessor _httpContextAccessor;
     private static readonly TimeSpan SessionWindow = TimeSpan.FromHours(1);
     private static readonly TimeSpan GlobalWindow = TimeSpan.FromMinutes(1);
     private const int MaxSessionRequestsPerWindow = 20;
@@ -20,9 +22,16 @@ public sealed class AiUsageLimiter : IAiUsageLimiter
     private readonly Queue<DateTimeOffset> _globalRequests = new();
     private readonly SemaphoreSlim _concurrency = new(MaxConcurrentRequests, MaxConcurrentRequests);
 
+    public AiUsageLimiter(IHttpContextAccessor httpContextAccessor)
+    {
+        _httpContextAccessor = httpContextAccessor;
+    }
+
     public async ValueTask<AiUsageLease?> TryAcquireAsync(string usageKey, CancellationToken cancellationToken)
     {
-        var normalizedKey = string.IsNullOrWhiteSpace(usageKey) ? "anonymous" : usageKey;
+        var clientIp = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+        var sessionKey = string.IsNullOrWhiteSpace(usageKey) ? "anonymous" : usageKey;
+        var normalizedKey = $"{sessionKey}:{clientIp}";
 
         lock (_gate)
         {

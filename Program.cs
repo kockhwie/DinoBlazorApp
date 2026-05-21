@@ -26,6 +26,7 @@ builder.Logging.AddDebug();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IFeedbackService, FeedbackService>();
 builder.Services.AddSingleton<IAiUsageLimiter, AiUsageLimiter>();
 
@@ -81,6 +82,15 @@ app.Use(async (context, next) =>
     context.Response.Headers.TryAdd("X-Content-Type-Options", "nosniff");
     context.Response.Headers.TryAdd("Referrer-Policy", "strict-origin-when-cross-origin");
     context.Response.Headers.TryAdd("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+    context.Response.Headers.TryAdd(
+        "Content-Security-Policy",
+        "default-src 'self'; " +
+        "script-src 'self' 'unsafe-inline' https://unpkg.com https://code.iconify.design; " +
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; " +
+        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:; " +
+        "img-src 'self' data: https: blob:; " +
+        "connect-src 'self' wss: ws: https:; " +
+        "frame-ancestors 'self'; base-uri 'self'");
     await next();
 });
 

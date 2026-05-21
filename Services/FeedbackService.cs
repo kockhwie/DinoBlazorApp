@@ -1,5 +1,7 @@
+using System.Collections.Concurrent;
 using System.Text.Json;
 using DinoBlazorApp.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace DinoBlazorApp.Services;
 
@@ -14,12 +16,18 @@ public interface IFeedbackService
 
 public class FeedbackService : IFeedbackService
 {
+    private static readonly TimeSpan FeedbackWriteWindow = TimeSpan.FromHours(1);
+    private const int MaxFeedbackWritesPerIpPerWindow = 20;
+
     private readonly object _gate = new();
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly ConcurrentDictionary<string, Queue<DateTimeOffset>> _writeTimestamps = new(StringComparer.Ordinal);
     private readonly string _storePath;
     private FeedbackDataStore _store = new();
 
-    public FeedbackService()
+    public FeedbackService(IHttpContextAccessor httpContextAccessor)
     {
+        _httpContextAccessor = httpContextAccessor;
         var appDataFolder = Path.Combine(Environment.CurrentDirectory, ".appdata");
         if (!Directory.Exists(appDataFolder))
         {
@@ -85,6 +93,11 @@ public class FeedbackService : IFeedbackService
 
     public void AddFeedback(FeedbackEntry entry)
     {
+        if (!TryAcquireWriteSlot())
+        {
+            return;
+        }
+
         lock (_gate)
         {
             entry.Nickname = CleanText(entry.Nickname, 40);
@@ -104,6 +117,11 @@ public class FeedbackService : IFeedbackService
 
     public void AddWishlistItem(WishlistItem item)
     {
+        if (!TryAcquireWriteSlot())
+        {
+            return;
+        }
+
         lock (_gate)
         {
             item.Title = CleanText(item.Title, 80);
@@ -133,6 +151,29 @@ public class FeedbackService : IFeedbackService
                 else { item.Votes++; item.Voted = true; }
                 SaveStore();
             }
+        }
+    }
+
+    private bool TryAcquireWriteSlot()
+    {
+        var ip = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+        var now = DateTimeOffset.UtcNow;
+        var queue = _writeTimestamps.GetOrAdd(ip, _ => new Queue<DateTimeOffset>());
+
+        lock (queue)
+        {
+            while (queue.TryPeek(out var seenAt) && seenAt < now - FeedbackWriteWindow)
+            {
+                queue.Dequeue();
+            }
+
+            if (queue.Count >= MaxFeedbackWritesPerIpPerWindow)
+            {
+                return false;
+            }
+
+            queue.Enqueue(now);
+            return true;
         }
     }
 

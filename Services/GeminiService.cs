@@ -60,12 +60,8 @@ public class GeminiService
         while (modelQueue.Count > 0)
         {
             var model = modelQueue.Dequeue();
-            // Passing the key in the URL is more reliable than the header in many environments
-            var relativeUrl = $"v1beta/models/{model}:streamGenerateContent?alt=sse&key={_apiKey}";
-            
-            // Mask the key for the UI display
-            var maskedKey = _apiKey.Length > 8 ? $"{_apiKey[..4]}...{_apiKey[^4..]}" : "****";
-            var displayUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent?alt=sse&key={maskedKey}";
+            var relativeUrl = $"v1beta/models/{model}:streamGenerateContent?alt=sse";
+            var displayUrl = $"https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent?alt=sse";
             
             yield return $"__DINO_STATUS__:Trying {model}...";
 
@@ -82,6 +78,7 @@ public class GeminiService
             {
                 Content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json")
             };
+            request.Headers.TryAddWithoutValidation("x-goog-api-key", _apiKey);
 
             HttpResponseMessage? response = null;
             try 

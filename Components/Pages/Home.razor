@@ -2,6 +2,7 @@
 @inject GeminiService Gemini
 @inject IJSRuntime JS
 @using DinoBlazorApp.Components.UI
+@using DinoBlazorApp.Services
 @using Markdig.Parsers
 @using System.Net
 @implements IDisposable
@@ -629,7 +630,7 @@
         var prepared = ExtractCodeBlocks(normalized, out var codeBlocks);
 
         var html = Markdown.ToHtml(prepared, _mdPipeline);
-        return InjectCodeBlocks(html, codeBlocks);
+        return ChatMarkdownSanitizer.SanitizeHtml(InjectCodeBlocks(html, codeBlocks));
     }
 
     private static string InjectCodeBlocks(string html, IReadOnlyList<CodeBlock> codeBlocks)
