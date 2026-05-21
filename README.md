@@ -1,1 +1,1 @@
-# DinoBlazorApp-v2
+# Dino App v2.0
