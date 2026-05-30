@@ -1,0 +1,169 @@
+.site-nav {
+    min-height: 4.75rem;
+    padding-inline: clamp(0.75rem, 1.6vw, 2rem);
+    background: rgba(0, 0, 0, 0.82);
+    border-bottom: 1px solid rgba(42, 201, 161, 0.08);
+    backdrop-filter: blur(20px);
+    position: relative;
+    z-index: 2;
+    font-size: 1.03rem;
+}
+
+.brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    padding: 0.2rem 0.35rem;
+}
+
+.brand-mark {
+    display: block;
+    height: 2.65rem;
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-wordmark {
+    display: block;
+    height: 2.7rem;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 767px) {
+    .brand-link {
+        gap: 0.35rem;
+        padding: 0.1rem 0.2rem;
+    }
+
+    .brand-mark {
+        height: 2.2rem;
+    }
+
+    .brand-wordmark {
+        height: 2.15rem;
+    }
+}
+
+.nav-menu-toggle {
+    border: 1px solid rgba(63, 214, 180, 0.32);
+    background: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.nav-menu-toggle:hover,
+.nav-menu-toggle:focus-visible {
+    background: rgba(63, 214, 180, 0.08);
+    border-color: rgba(63, 214, 180, 0.52);
+    color: #f8fffb;
+}
+
+.nav-links {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.nav-links li > a,
+.nav-links li > details > summary,
+.nav-menu li > a {
+    border-radius: 0.35rem;
+}
+
+.nav-links li > a:hover,
+.nav-links li > details > summary:hover,
+.nav-links li > a:focus-visible,
+.nav-links li > details > summary:focus-visible,
+.nav-menu li > a:hover,
+.nav-menu li > a:focus-visible {
+    background: color-mix(in srgb, #3fd6b4 18%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, #3fd6b4 30%, transparent);
+    color: #fff;
+}
+
+.nav-links li > details > summary {
+    list-style: none;
+    padding-inline: 0.65rem;
+    padding-block: 0.4rem;
+    font-size: 1.03rem;
+}
+
+.nav-links li > details[open] > summary {
+    background: color-mix(in srgb, #3fd6b4 14%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, #3fd6b4 22%, transparent);
+    color: #f8fffb;
+}
+
+.nav-links li > details > summary::-webkit-details-marker {
+    display: none;
+}
+
+.nav-menu {
+    background: rgba(4, 10, 8, 0.96);
+    border: 1px solid rgba(42, 201, 161, 0.18);
+    color: rgba(255, 255, 255, 0.92);
+    padding: 0.3rem;
+}
+
+.nav-login {
+    color: rgba(255, 255, 255, 0.92);
+    border-color: rgba(42, 201, 161, 0.34);
+    background: rgba(255, 255, 255, 0.02);
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+    font-size: 0.98rem;
+}
+
+.nav-join {
+    border: 0;
+    color: #09110f;
+    background: linear-gradient(90deg, #3fd6b4 0%, #f8bf24 100%);
+    box-shadow: 0 10px 24px rgba(248, 191, 36, 0.16);
+}
+
+.nav-login:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(63, 214, 180, 0.56);
+    color: #ffffff;
+}
+
+.nav-join:hover {
+    filter: brightness(1.03);
+}
+
+.nav-links li > a {
+    padding-inline: 0.65rem;
+    padding-block: 0.4rem;
+    font-size: 1.03rem;
+}
+
+.nav-menu li > a {
+    padding-inline: 0.65rem;
+    padding-block: 0.45rem;
+    margin: 0.08rem 0;
+    font-size: 0.96rem;
+}
+
+.nav-menu details > summary {
+    padding-inline: 0.65rem;
+    padding-block: 0.45rem;
+    border-radius: 0.35rem;
+    list-style: none;
+    font-size: 0.96rem;
+}
+
+.nav-menu details[open] > summary {
+    background: color-mix(in srgb, #3fd6b4 14%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, #3fd6b4 22%, transparent);
+    color: #f8fffb;
+}
+
+.nav-menu details > summary::-webkit-details-marker {
+    display: none;
+}
+
+.nav-menu details ul a {
+    padding-inline: 0.7rem;
+    padding-block: 0.35rem;
+    font-size: 0.92rem;
+}

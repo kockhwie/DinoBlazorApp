@@ -1,0 +1,74 @@
+<nav class="navbar site-nav">
+    <div class="navbar-start gap-2">
+        <div class="dropdown lg:hidden">
+            <div tabindex="0" role="button" class="btn btn-square btn-sm nav-menu-toggle" aria-label="Open navigation menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content z-50 mt-4 w-56 rounded-box nav-menu p-2 shadow-2xl">
+                <li>
+                    <details name="mobile-nav">
+                        <summary>Courses</summary>
+                        <ul class="p-1">
+                            <li><a href="#">Starter Path</a></li>
+                            <li><a href="#">Advanced Path</a></li>
+                            <li><a href="#">Projects</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li><a href="#">AI Tools</a></li>
+                <li>
+                    <details name="mobile-nav">
+                        <summary>Resources</summary>
+                        <ul class="p-1">
+                            <li><a href="#">Guides</a></li>
+                            <li><a href="#">Templates</a></li>
+                            <li><a href="#">Videos</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li><a href="#">Community</a></li>
+                 
+            </ul>
+        </div>
+
+        <a href="/" class="brand-link" aria-label="Dino AI Academy home">
+            <img alt="Dino mascot" class="brand-mark" src="@Assets["assets/company_logo.png"]" />
+            <img alt="Dino AI Academy" class="brand-wordmark" src="@Assets["assets/company_name.png"]" />
+        </a>
+    </div>
+
+    <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal menu-sm items-center gap-1 px-1 nav-links">
+            <li>
+                <details class="nav-dropdown" name="primary-nav">
+                    <summary>Courses</summary>
+                    <ul class="rounded-box nav-menu p-2 shadow-2xl">
+                        <li><a href="#">Starter Path</a></li>
+                        <li><a href="#">Advanced Path</a></li>
+                        <li><a href="#">Projects</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li><a href="#">AI Tools</a></li>
+            <li>
+                <details class="nav-dropdown" name="primary-nav">
+                    <summary>Resources</summary>
+                    <ul class="rounded-box nav-menu p-2 shadow-2xl">
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">Templates</a></li>
+                        <li><a href="#">Videos</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li><a href="#">Community</a></li>
+          
+        </ul>
+    </div>
+
+    <div class="navbar-end gap-3">
+        <a href="/membership" class="btn btn-sm sm:btn-md shadow-none nav-login">Log in</a>
+        <a href="/membership" class="btn btn-sm sm:btn-md nav-join">Join Academy</a>
+    </div>
+</nav>

@@ -1,9 +1,282 @@
-﻿@page "/"
+@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Dino AI Academy</PageTitle>
 
-<h1>Hello, world!</h1>
+<main class="home-page">
+    <section class="hero-shell">
+        <SiteNav />
 
-Welcome to our new app. We are redesign the web app.
-<br />We will add more content here later.
-<br />Stay tune on next Monday(2026/05/25).
+        <div class="hero-grid">
+            <div class="hero-copy">
+
+                <h1>Don't just use AI.<br />Evolve with it.</h1>
+                <p class="lead">
+                    Master AI through hands-on learning, real-world projects, and a thriving community of innovators.
+                </p>
+
+                <div class="benefits">
+                    @foreach (var item in BenefitItems)
+                    {
+                        <div class="benefit">
+                            <span class="benefit-icon">@((MarkupString)item.Icon)</span>
+                            <span>@item.Label</span>
+                        </div>
+                    }
+                </div>
+
+                <div class="hero-actions">
+                    <a href="/membership" class="btn btn-cta">Start Your Evolution <i class="ti ti-chevron-right"></i></a>
+                </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <img alt="" class="hero-mascot" src="@Assets["assets/dino_mascot.png"]" />
+            </div>
+        </div>
+    </section>
+
+    <section class="showcase-shell">
+        <div class="showcase-panel workbench">
+            <div class="panel-title">
+                <i class="ti ti-device-laptop"></i>
+                <span>AI Workbench</span>
+            </div>
+
+            <EditForm Model="@EmailDraft" class="composer-card">
+                <div class="composer-form">
+                    <div class="email-fields">
+                        <label class="email-field">
+                            <span class="email-label">To</span>
+                            <input @bind="EmailDraft.To" class="email-input" />
+                        </label>
+                        <label class="email-field">
+                            <span class="email-label">Subject</span>
+                            <input @bind="EmailDraft.Subject" class="email-input" />
+                        </label>
+                        <label class="email-field email-field-message">
+                            <span class="email-label">Message</span>
+                            <textarea @bind="EmailDraft.Message" rows="8" class="email-textarea"></textarea>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="composer-actions">
+                    <button type="button" class="mini-btn ghost" @onclick="ClearDraft">Clear</button>
+                    <button type="button" class="mini-btn ghost" @onclick="LoadImprovedDraft">Improve</button>
+                    <button type="button" class="mini-btn solid" @onclick="HandleSendEmail">Send Email</button>
+                </div>
+            </EditForm>
+        </div>
+
+        <div class="showcase-panel assistant">
+            <div class="panel-title">
+                <i class="ti ti-sparkle-highlight"></i>
+                <span>AI Assistant</span>
+            </div>
+
+            <div class="assistant-grid">
+                @foreach (var card in AssistantCards)
+                {
+                    <article class="assistant-card @card.AccentClass @(card.Key == SelectedAssistantKey ? "is-active" : string.Empty)">
+                        <div class="assistant-top">
+                            <span class="assistant-icon">@((MarkupString)card.Icon)</span>
+                            <h2>@card.Title</h2>
+                        </div>
+                        <p>@card.Description</p>
+                        <ul>
+                            @foreach (var item in card.Items)
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                        <button type="button" class="card-action" @onclick="() => SelectAssistant(card.Key)">
+                            @card.Action <i class="ti ti-chevron-right"></i>
+                        </button>
+                    </article>
+                }
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-shell">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <p class="footer-kicker">Dino AI Academy</p>
+                <p class="footer-title">Release Notes &amp; Feedback</p>
+                <p class="footer-copy">
+                    Track what changed, what’s coming next, and share ideas that would make the academy better.
+                </p>
+            </div>
+
+            <div class="footer-card" id="release-notes">
+                <p class="footer-card-title">Release Notes</p>
+                <ul class="footer-list">
+                    <li><strong>v2.0.0</strong> - Public website release, invitation-only membership flow, and AI Workbench polish.</li>
+                    <li><a href="/release-notes">Read the full release notes</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-card" id="feedback">
+                <p class="footer-card-title">Feedback / Wishlist</p>
+                <ul class="footer-links">
+                    <li><a href="mailto:admin@codingdinos.asia?subject=Dino%20AI%20Academy%20Feedback">Send feedback</a></li>
+                    <li><a href="mailto:admin@codingdinos.asia?subject=Dino%20AI%20Academy%20Wishlist">Add to wishlist</a></li>
+                    <li><a href="#">View roadmap</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© @DateTime.Now.Year Dino AI Academy</span>
+            <span>Built with Blazor and DaisyUI</span>
+        </div>
+    </footer>
+</main>
+
+@code {
+    private static readonly IReadOnlyList<BenefitItem> BenefitItems =
+    [
+        new BenefitItem(LeafIcon, "Learn AI the right way"),
+        new BenefitItem(MountainIcon, "Build real projects"),
+        new BenefitItem(CommunityIcon, "Join a global community"),
+        new BenefitItem(ShieldIcon, "Advance your career"),
+    ];
+
+    private static readonly IReadOnlyList<AssistantCard> AssistantCards =
+    [
+        new AssistantCard(
+            "content",
+            "Content Generator",
+            "Create engaging content in seconds.",
+            ["Blog posts", "Course outlines", "Social media", "Marketing copy"],
+            "Generate Content",
+            "green",
+            LeafRingIcon,
+            new EmailPreview(
+                "team@dinoacademy.com",
+                "Project Update & Next Steps",
+                ["Hi Team,", "I wanted to share a quick update on the progress of our AI Academy project."],
+                ["Content outline for the next module", "Landing page copy draft", "Social post ideas"],
+                "Looking forward to your feedback!",
+                "Best,\nAlex")),
+        new AssistantCard(
+            "code",
+            "Code Assistant",
+            "Write better code, faster.",
+            ["Debug and fix", "Explain code", "Generate snippets", "Best practices"],
+            "Write Code",
+            "teal",
+            CodeIcon,
+            new EmailPreview(
+                "engineering@dinoacademy.com",
+                "Code Review Follow-Up",
+                ["Hi team,", "Here’s a quick summary of the issues we should address before the next release."],
+                ["Refactor duplicated UI logic", "Add responsive breakpoints", "Review accessibility states"],
+                "Let’s sync on the fixes this afternoon.",
+                "Thanks,\nAlex")),
+        new AssistantCard(
+            "idea",
+            "Idea Brainstormer",
+            "Spark new ideas and solve problems.",
+            ["Creative ideas", "Problem solving", "Project concepts", "Strategy planning"],
+            "Brainstorm Ideas",
+            "gold",
+            IdeaIcon,
+            new EmailPreview(
+                "product@dinoacademy.com",
+                "Wishlist & Roadmap Notes",
+                ["Hi team,", "I collected a few ideas that could improve the next release and keep momentum going."],
+                ["Release notes page", "Feedback form", "Feature wishlist"],
+                "Happy to refine these further.",
+                "Cheers,\nAlex")),
+    ];
+
+    private static readonly string DefaultAssistantKey = AssistantCards[0].Key;
+
+    private string SelectedAssistantKey { get; set; } = DefaultAssistantKey;
+    private EmailDraftModel EmailDraft { get; set; } = CreateDraft(AssistantCards[0].Email);
+
+    private AssistantCard SelectedAssistant =>
+        AssistantCards.FirstOrDefault(card => card.Key == SelectedAssistantKey) ?? AssistantCards[0];
+
+    private void SelectAssistant(string assistantKey)
+    {
+        SelectedAssistantKey = assistantKey;
+        var assistant = SelectedAssistant;
+        EmailDraft = CreateDraft(assistant.Email);
+    }
+
+    private void ClearDraft()
+    {
+        EmailDraft = new EmailDraftModel();
+    }
+
+    private void LoadImprovedDraft()
+    {
+        var assistant = SelectedAssistant;
+        EmailDraft = new EmailDraftModel
+        {
+            To = assistant.Email.To,
+            Subject = $"{assistant.Email.Subject} (Improved)",
+            Message = $"{BuildMessage(assistant.Email)}\n\nI can tighten this further if you want a shorter version."
+        };
+    }
+
+    private void HandleSendEmail()
+    {
+        EmailDraft = EmailDraft with { StatusMessage = "Send preview only — no email was submitted." };
+    }
+
+    private static EmailDraftModel CreateDraft(EmailPreview preview) =>
+        new()
+        {
+            To = preview.To,
+            Subject = preview.Subject,
+            Message = BuildMessage(preview)
+        };
+
+    private static string BuildMessage(EmailPreview preview) =>
+        string.Join("\n\n", preview.Paragraphs)
+        + "\n\n"
+        + string.Join("\n", preview.Bullets.Select(item => $"- {item}"))
+        + "\n\n"
+        + preview.Closing
+        + "\n"
+        + preview.Signature.Replace("\n", Environment.NewLine);
+
+    private sealed record EmailDraftModel
+    {
+        public string To { get; set; } = string.Empty;
+        public string Subject { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+        public string StatusMessage { get; set; } = string.Empty;
+    }
+
+    private sealed record BenefitItem(string Icon, string Label);
+
+    private sealed record AssistantCard(
+        string Key,
+        string Title,
+        string Description,
+        IReadOnlyList<string> Items,
+        string Action,
+        string AccentClass,
+        string Icon,
+        EmailPreview Email);
+
+    private sealed record EmailPreview(
+        string To,
+        string Subject,
+        IReadOnlyList<string> Paragraphs,
+        IReadOnlyList<string> Bullets,
+        string Closing,
+        string Signature);
+
+    private const string LeafIcon = "<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M5 19c8 0 14-6 14-14C11 5 5 11 5 19Z'/><path d='M6 18c2.2-3.6 5.5-6.4 10-9'/></svg>";
+    private const string MountainIcon = "<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M3 19 10 7l4 7 2-3 5 8'/><path d='M3 19h18'/></svg>";
+    private const string CommunityIcon = "<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M8 11a3 3 0 1 0-6 0'/><path d='M22 11a3 3 0 1 0-6 0'/><path d='M16 11a4 4 0 0 0-8 0'/><path d='M2.5 20c1.7-3.2 4.3-5 7.5-5s5.8 1.8 7.5 5'/><path d='M12 20c1.1-2.2 3-3.5 6-3.5s4.7 1.3 6 3.5'/></svg>";
+    private const string ShieldIcon = "<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3 20 6v6c0 5.2-3.2 8.9-8 11-4.8-2.1-8-5.8-8-11V6l8-3Z'/><path d='m9.3 12 1.8 1.8 3.8-4.1'/></svg>";
+    private const string LeafRingIcon = "<svg width='26' height='26' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M5 19c8 0 14-6 14-14C11 5 5 11 5 19Z'/><path d='M6 18c2.2-3.6 5.5-6.4 10-9'/></svg>";
+    private const string CodeIcon = "<svg width='26' height='26' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='m8 9-4 3 4 3'/><path d='m16 9 4 3-4 3'/><path d='m14 6-4 12'/></svg>";
+    private const string IdeaIcon = "<svg width='26' height='26' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M9 18h6'/><path d='M10 21h4'/><path d='M12 3a7 7 0 0 0-4 12c1 1 1.5 2.1 1.7 3h4.6c.2-.9.7-2 1.7-3A7 7 0 0 0 12 3Z'/></svg>";
+}

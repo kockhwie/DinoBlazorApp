@@ -15,6 +15,15 @@
 .dotnetcli/
 .nuget/
 build_log*.txt
+*.binlog
+
+# Local publish, dependency, and environment files
+*.pubxml.user
+*.publishsettings
+Properties/serviceDependencies*.json.user
+appsettings.Local.json
+appsettings.*.local.json
+.env.*
 
 # Jason added specific secrets
 .env

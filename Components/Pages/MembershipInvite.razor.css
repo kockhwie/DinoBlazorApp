@@ -1,0 +1,101 @@
+.membership-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 4vw, 3rem);
+    background:
+        radial-gradient(circle at 50% 18%, rgba(60, 201, 128, 0.18), transparent 22%),
+        radial-gradient(circle at 82% 18%, rgba(42, 201, 161, 0.16), transparent 20%),
+        linear-gradient(180deg, #020405 0%, #03110d 52%, #020405 100%);
+    color: rgba(245, 250, 248, 0.94);
+}
+
+.membership-panel {
+    width: min(100%, 44rem);
+    display: grid;
+    gap: 1.35rem;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    border: 1px solid rgba(58, 209, 141, 0.22);
+    border-radius: 1rem;
+    background: rgba(2, 12, 9, 0.88);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+}
+
+.membership-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    width: fit-content;
+}
+
+.membership-logo {
+    height: 2.8rem;
+    width: auto;
+}
+
+.membership-wordmark {
+    height: 2.65rem;
+    width: auto;
+}
+
+.membership-copy {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.membership-kicker {
+    margin: 0;
+    color: #4ee1b6;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.membership-copy h1 {
+    margin: 0;
+    color: #f5f7f7;
+    font-family: "Sora", "DM Sans", sans-serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1;
+    font-weight: 800;
+}
+
+.membership-copy p {
+    margin: 0;
+    color: rgba(229, 240, 235, 0.82);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.membership-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.membership-primary,
+.membership-secondary {
+    min-height: 2.7rem;
+    border-radius: 0.7rem;
+    padding-inline: 1rem;
+    font-weight: 700;
+}
+
+.membership-primary {
+    border: 0;
+    background: linear-gradient(90deg, #2dc98e 0%, #80e36b 100%);
+    color: #07110d;
+}
+
+.membership-secondary {
+    border: 1px solid rgba(78, 225, 182, 0.32);
+    background: rgba(255, 255, 255, 0.02);
+    color: rgba(245, 250, 248, 0.9);
+}
+
+@media (max-width: 520px) {
+    .membership-actions {
+        display: grid;
+    }
+}
