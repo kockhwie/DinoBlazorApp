@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino AI Academy - Quick Practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes spin-slow {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.4s ease-out;
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 1s linear infinite;
+        }
+
+        /* Glassmorphism effect */
+        .glass-effect {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 191, 255, 0.1);
+        }
+
+        /* Smooth transitions */
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 191, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 191, 255, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">🦖</span>
+                    </div>
+                    <span class="text-lg font-bold">Dino AI <span class="text-cyan-400">Academy</span></span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#" class="text-sm text-slate-300 hover:text-cyan-400 transition-smooth">Features</a>
+                    <a href="#" class="text-sm text-slate-300 hover:text-cyan-400 transition-smooth">Use Cases</a>
+                    <a href="#" class="text-sm text-slate-300 hover:text-cyan-400 transition-smooth">Resources</a>
+                    <a href="#" class="text-sm text-slate-300 hover:text-cyan-400 transition-smooth">Pricing</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button class="text-sm text-slate-300 hover:text-cyan-400 transition-smooth hidden sm:block">Log in</button>
+                    <button class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-semibold rounded-lg transition-smooth">Get Started Free</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Section -->
+            <div class="text-center mb-12 animate-fade-in-up">
+                <h1 class="text-4xl sm:text-5xl font-bold mb-4">
+                    Quick <span class="text-cyan-400">Practice</span>
+                </h1>
+                <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+                    Sharpen your email skills with AI-powered feedback and suggestions.
+                </p>
+            </div>
+
+            <!-- AI Workbench Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12">
+                <!-- Left Panel: Email Composer -->
+                <div class="glass-effect rounded-xl p-6 sm:p-8 animate-fade-in-up">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center">
+                            <span class="text-amber-400 text-lg">✉️</span>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-semibold">Your Current Draft</h2>
+                            <p class="text-sm text-slate-400">Compose or paste your email below.</p>
+                        </div>
+                    </div>
+
+                    <form id="emailForm" class="space-y-4">
+                        <!-- To Field -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">To:</label>
+                            <input 
+                                type="email" 
+                                id="emailTo" 
+                                placeholder="Enter recipient email" 
+                                class="w-full px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-smooth"
+                            >
+                        </div>
+
+                        <!-- Subject Field -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Subject:</label>
+                            <input 
+                                type="text" 
+                                id="emailSubject" 
+                                placeholder="Enter email subject" 
+                                class="w-full px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-smooth"
+                            >
+                        </div>
+
+                        <!-- Body Field -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Body:</label>
+                            <textarea 
+                                id="emailBody" 
+                                placeholder="Write or paste your email content here..." 
+                                rows="8"
+                                class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-smooth resize-none"
+                            ></textarea>
+                        </div>
+
+                        <!-- Character Count -->
+                        <div class="flex justify-between items-center text-xs text-slate-500">
+                            <span>Characters: <span id="charCount">0</span></span>
+                            <button type="button" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 rounded text-slate-300 transition-smooth">
+                                📎 Attach
+                            </button>
+                        </div>
+
+                        <!-- Send Button -->
+                        <button 
+                            type="button" 
+                            class="w-full px-4 py-3 bg-cyan-500/20 border border-cyan-500/50 hover:bg-cyan-500/30 text-cyan-400 font-semibold rounded-lg transition-smooth flex items-center justify-center gap-2"
+                        >
+                            <span>✈️</span> Send
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Panel: AI Assistant -->
+                <div class="glass-effect rounded-xl p-6 sm:p-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-cyan-500/20 rounded-lg flex items-center justify-center">
+                            <span class="text-cyan-400 text-lg">✨</span>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-semibold">AI Assistant</h2>
+                            <p class="text-sm text-slate-400">Enhance your content with the power of AI.</p>
+                        </div>
+                    </div>
+
+                    <!-- AI Options Container -->
+                    <div id="aiOptionsContainer" class="space-y-4">
+                        <!-- Option 1: Refine My Draft -->
+                        <button 
+                            type="button"
+                            onclick="selectOption('refine')" 
+                            class="ai-option w-full p-4 glass-effect rounded-lg border border-slate-700 hover:border-cyan-500/50 transition-smooth text-left group cursor-pointer"
+                        >
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-cyan-500/40 transition-smooth">
+                                    <span class="text-cyan-400 text-lg">✏️</span>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-slate-100 group-hover:text-cyan-400 transition-smooth">Refine My Draft</h3>
+                                    <p class="text-sm text-slate-400 mt-1">Improve clarity, tone, grammar, and structure while keeping your original message.</p>
+                                </div>
+                                <span class="text-cyan-400 text-xl group-hover:translate-x-1 transition-smooth">→</span>
+                            </div>
+                        </button>
+
+                        <!-- Option 2: Generate from Prompt -->
+                        <button 
+                            type="button"
+                            onclick="selectOption('generate')" 
+                            class="ai-option w-full p-4 glass-effect rounded-lg border border-slate-700 hover:border-amber-500/50 transition-smooth text-left group cursor-pointer"
+                        >
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/40 transition-smooth">
+                                    <span class="text-amber-400 text-lg">💡</span>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-slate-100 group-hover:text-amber-400 transition-smooth">Generate from Prompt</h3>
+                                    <p class="text-sm text-slate-400 mt-1">Create a professional email from just a few words or instructions.</p>
+                                </div>
+                                <span class="text-amber-400 text-xl group-hover:translate-x-1 transition-smooth">→</span>
+                            </div>
+                        </button>
+
+                        <!-- Option 3: Professional Upgrade -->
+                        <button 
+                            type="button"
+                            onclick="selectOption('professional')" 
+                            class="ai-option w-full p-4 glass-effect rounded-lg border border-slate-700 hover:border-purple-500/50 transition-smooth text-left group cursor-pointer"
+                        >
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/40 transition-smooth">
+                                    <span class="text-purple-400 text-lg">👑</span>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-slate-100 group-hover:text-purple-400 transition-smooth">Professional Upgrade</h3>
+                                    <p class="text-sm text-slate-400 mt-1">Elevate your email to a more polished, executive-level tone.</p>
+                                </div>
+                                <span class="text-purple-400 text-xl group-hover:translate-x-1 transition-smooth">→</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Results Container (Hidden by default) -->
+                    <div id="resultsContainer" class="hidden space-y-4 animate-slide-in-right">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-slate-100" id="resultTitle">Processing...</h3>
+                            <button type="button" onclick="resetOptions()" class="text-sm text-slate-400 hover:text-cyan-400 transition-smooth">← Back</button>
+                        </div>
+                        <div id="resultsContent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Signals -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                <div class="glass-effect rounded-lg p-4 flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <p class="text-sm font-semibold">Enterprise-Grade Security</p>
+                        <p class="text-xs text-slate-500">Your data is encrypted</p>
+                    </div>
+                </div>
+                <div class="glass-effect rounded-lg p-4 flex items-center gap-3">
+                    <span class="text-2xl">🔒</span>
+                    <div>
+                        <p class="text-sm font-semibold">Your Data is Private</p>
+                        <p class="text-xs text-slate-500">Never shared or sold</p>
+                    </div>
+                </div>
+                <div class="glass-effect rounded-lg p-4 flex items-center gap-3">
+                    <span class="text-2xl">⚡</span>
+                    <div>
+                        <p class="text-sm font-semibold">Learn & Improve</p>
+                        <p class="text-xs text-slate-500">Practice more. Communicate better.</p>
+                    </div>
+                </div>
+                <div class="glass-effect rounded-lg p-4 flex items-center gap-3">
+                    <span class="text-2xl">📈</span>
+                    <div>
+                        <p class="text-sm font-semibold">Track Progress</p>
+                        <p class="text-xs text-slate-500">See your improvement over time</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center glass-effect rounded-xl p-8 sm:p-12 border-2 border-cyan-500/30">
+                <h2 class="text-3xl font-bold mb-4">Ready to Evolve?</h2>
+                <p class="text-slate-400 mb-6 max-w-2xl mx-auto">
+                    Join thousands of professionals who are mastering AI communication. Start your 7-Day AI Upgrade Journey today.
+                </p>
+                <button class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white font-semibold rounded-lg transition-smooth">
+                    Unlock Your Evolution Path →
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Character counter
+        const emailBody = document.getElementById('emailBody');
+        const charCount = document.getElementById('charCount');
+
+        emailBody.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+
+        // AI Option Selection
+        function selectOption(option) {
+            const optionsContainer = document.getElementById('aiOptionsContainer');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const resultsContent = document.getElementById('resultsContent');
+            const resultTitle = document.getElementById('resultTitle');
+
+            // Get email content
+            const to = document.getElementById('emailTo').value || '[Recipient]';
+            const subject = document.getElementById('emailSubject').value || '[Subject]';
+            const body = document.getElementById('emailBody').value || '[Email body]';
+
+            optionsContainer.classList.add('hidden');
+            resultsContainer.classList.remove('hidden');
+
+            if (option === 'refine') {
+                resultTitle.textContent = 'Refine My Draft';
+                resultsContent.innerHTML = `
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-400">✓ Refined version of your email:</p>
+                        <textarea 
+                            id="refinedOutput" 
+                            class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-100 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-smooth resize-none" 
+                            rows="8"
+                            placeholder="Loading refined version..."
+                        ></textarea>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="copyToClipboard('refinedOutput')" class="flex-1 px-4 py-2 bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 text-sm rounded hover:bg-cyan-500/30 transition-smooth">
+                                📋 Copy
+                            </button>
+                            <button type="button" onclick="applyToForm('refinedOutput')" class="flex-1 px-4 py-2 bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 text-sm rounded hover:bg-cyan-500/30 transition-smooth">
+                                ✓ Apply
+                            </button>
+                        </div>
+                        <div class="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+                            <p class="text-sm font-semibold text-green-400">⏱️ Time Saved: 8.5 minutes</p>
+                            <p class="text-xs text-slate-400 mt-1">That's 7.1 hours per year!</p>
+                        </div>
+                    </div>
+                `;
+                simulateRefinement(body);
+
+            } else if (option === 'generate') {
+                resultTitle.textContent = 'Generate from Prompt';
+                const defaultPrompt = "Write a professional email requesting a project deadline extension. Keep it concise and polite.";
+                resultsContent.innerHTML = `
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Your Prompt:</label>
+                            <textarea 
+                                id="userPrompt" 
+                                class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-smooth resize-none" 
+                                rows="3"
+                                placeholder="Describe what email you want to generate..."
+                            >${defaultPrompt}</textarea>
+                            <p class="text-xs text-slate-500 mt-2">💡 Tip: The prompt above is pre-filled. Modify it or write your own!</p>
+                        </div>
+                        <button type="button" onclick="generateFromPrompt()" class="w-full px-4 py-3 bg-amber-500/20 border border-amber-500/50 text-amber-400 font-semibold rounded-lg hover:bg-amber-500/30 transition-smooth">
+                            🚀 Generate Email
+                        </button>
+                        <div id="generatedOutput" class="hidden space-y-3">
+                            <textarea 
+                                id="generatedEmail" 
+                                class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-100 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-smooth resize-none" 
+                                rows="8"
+                                placeholder="Generated email will appear here..."
+                            ></textarea>
+                            <div class="flex gap-2">
+                                <button type="button" onclick="copyToClipboard('generatedEmail')" class="flex-1 px-4 py-2 bg-amber-500/20 border border-amber-500/50 text-amber-400 text-sm rounded hover:bg-amber-500/30 transition-smooth">
+                                    📋 Copy
+                                </button>
+                                <button type="button" onclick="applyToForm('generatedEmail')" class="flex-1 px-4 py-2 bg-amber-500/20 border border-amber-500/50 text-amber-400 text-sm rounded hover:bg-amber-500/30 transition-smooth">
+                                    ✓ Apply
+                                </button>
+                            </div>
+                            <div class="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+                                <p class="text-sm font-semibold text-green-400">⏱️ Time Saved: 12 minutes</p>
+                                <p class="text-xs text-slate-400 mt-1">That's 10 hours per year!</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+            } else if (option === 'professional') {
+                resultTitle.textContent = 'Professional Upgrade';
+                const professionalFramework = "Subject: [Clear, specific subject line]\n\nDear [Recipient Name],\n\n[Opening: State your purpose clearly and professionally]\n\n[Body: Provide context and key details in 2-3 sentences]\n\n[Call to Action: Specify what you need or expect]\n\nBest regards,\n[Your Name]";
+                resultsContent.innerHTML = `
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Professional Email Framework:</label>
+                            <textarea 
+                                id="professionalPrompt" 
+                                class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth resize-none font-mono text-xs" 
+                                rows="6"
+                            >${professionalFramework}</textarea>
+                            <p class="text-xs text-slate-500 mt-2">💡 Adjust the framework above or add your context, then click Generate</p>
+                        </div>
+                        <button type="button" onclick="generateProfessional()" class="w-full px-4 py-3 bg-purple-500/20 border border-purple-500/50 text-purple-400 font-semibold rounded-lg hover:bg-purple-500/30 transition-smooth">
+                            👑 Generate Professional Email
+                        </button>
+                        <div id="professionalOutput" class="hidden space-y-3">
+                            <textarea 
+                                id="professionalEmail" 
+                                class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-100 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-smooth resize-none" 
+                                rows="8"
+                                placeholder="Professional email will appear here..."
+                            ></textarea>
+                            <div class="flex gap-2">
+                                <button type="button" onclick="copyToClipboard('professionalEmail')" class="flex-1 px-4 py-2 bg-purple-500/20 border border-purple-500/50 text-purple-400 text-sm rounded hover:bg-purple-500/30 transition-smooth">
+                                    📋 Copy
+                                </button>
+                                <button type="button" onclick="applyToForm('professionalEmail')" class="flex-1 px-4 py-2 bg-purple-500/20 border border-purple-500/50 text-purple-400 text-sm rounded hover:bg-purple-500/30 transition-smooth">
+                                    ✓ Apply
+                                </button>
+                            </div>
+                            <div class="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+                                <p class="text-sm font-semibold text-green-400">⏱️ Time Saved: 15 minutes</p>
+                                <p class="text-xs text-slate-400 mt-1">That's 12.5 hours per year!</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function simulateRefinement(originalBody) {
+            setTimeout(function() {
+                const refinedText = "Dear [Recipient],\n\nI hope this message finds you well. I wanted to reach out regarding the matter we discussed.\n\n" + originalBody.substring(0, 150) + "...\n\nI would appreciate your thoughts on this matter at your earliest convenience.\n\nBest regards";
+                document.getElementById('refinedOutput').value = refinedText;
+            }, 800);
+        }
+
+        function generateFromPrompt() {
+            const prompt = document.getElementById('userPrompt').value;
+            const outputDiv = document.getElementById('generatedOutput');
+            const outputTextarea = document.getElementById('generatedEmail');
+
+            outputTextarea.value = 'Generating...';
+            outputDiv.classList.remove('hidden');
+
+            setTimeout(function() {
+                const generatedEmail = "Subject: Request for Project Deadline Extension\n\nDear [Manager Name],\n\nI hope this email finds you well. I am writing to request a brief extension on the current project deadline.\n\nDue to unforeseen circumstances and additional requirements that emerged during the development phase, I believe an extension of [X days] would allow me to deliver a higher quality result.\n\nI am committed to keeping you updated on progress and ensuring minimal impact on the overall timeline.\n\nThank you for considering this request. I look forward to your response.\n\nBest regards,\n[Your Name]";
+                outputTextarea.value = generatedEmail;
+            }, 1200);
+        }
+
+        function generateProfessional() {
+            const framework = document.getElementById('professionalPrompt').value;
+            const outputDiv = document.getElementById('professionalOutput');
+            const outputTextarea = document.getElementById('professionalEmail');
+
+            outputTextarea.value = 'Generating professional email...';
+            outputDiv.classList.remove('hidden');
+
+            setTimeout(function() {
+                const professionalEmail = "Subject: Strategic Proposal for Q3 Initiative\n\nDear [Executive Name],\n\nI am writing to present a strategic opportunity that aligns with our organizational objectives and market positioning.\n\nOur analysis indicates a significant potential for growth in the emerging market segment. By implementing the proposed framework, we can enhance operational efficiency by an estimated 30% while reducing overhead costs. This initiative would require a modest investment upfront but promises substantial returns within the first fiscal year.\n\nI would welcome the opportunity to discuss this proposal in detail and explore how we might collaborate to drive this initiative forward. I am available for a meeting at your earliest convenience.\n\nThank you for your consideration. I look forward to your insights.\n\nRespectfully,\n[Your Name]";
+                outputTextarea.value = professionalEmail;
+            }, 1200);
+        }
+
+        function copyToClipboard(elementId) {
+            const textarea = document.getElementById(elementId);
+            textarea.select();
+            document.execCommand('copy');
+            alert('Copied to clipboard!');
+        }
+
+        function applyToForm(elementId) {
+            const textarea = document.getElementById(elementId);
+            document.getElementById('emailBody').value = textarea.value;
+            resetOptions();
+        }
+
+        function resetOptions() {
+            document.getElementById('aiOptionsContainer').classList.remove('hidden');
+            document.getElementById('resultsContainer').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
