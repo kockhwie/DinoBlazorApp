@@ -442,33 +442,7 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
-.footer-brand {
-    display: grid;
-    gap: 0.35rem;
-}
 
-.footer-kicker {
-    margin: 0;
-    color: #39cf9e;
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-}
-
-.footer-title {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.95);
-}
-
-.footer-copy {
-    margin: 0;
-    max-width: 38rem;
-    color: rgba(229, 240, 235, 0.76);
-    line-height: 1.55;
-}
 
 .footer-card {
     padding: 0.95rem 1rem;
