@@ -28,3 +28,40 @@ Keep the detailed working rules in [docs/codex-rules.md](docs/codex-rules.md). U
 - Treat `.appdata/` and `.dotnetcli/` as local-only runtime folders.
 - Do not use destructive directory commands unless contents were checked first.
 - Keep `DinoBlazorApp.Tests` outside the app folder.
+
+# Coding Rules
+
+## Architecture
+
+- Use ASP.NET Core 10
+- Razor Pages
+- PostgreSQL
+
+## Data Access
+
+- Prefer EF Core
+
+- Use Dapper for:
+  - Complex joins
+  - Reporting
+  - Dashboard queries
+  - Performance critical queries
+
+## Avoid
+
+- Repository Pattern
+- Unit Of Work
+- Generic Repository
+- Generic Service
+- AutoMapper
+
+## Design
+
+- Feature Folder Structure
+
+## Principles
+
+- Keep code simple
+- Avoid unnecessary abstractions
+- Minimize file count
+- Prefer explicit code
