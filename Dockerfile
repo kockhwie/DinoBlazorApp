@@ -14,14 +14,14 @@ RUN dotnet publish "DinoBlazorApp-v2.csproj" -c Release -o /app --no-restore
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 
-# Create a non-root user and group and give ownership of /app to that user
-RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
-
-# Copy published output and set ownership
+# Copy published output
 COPY --from=build /app ./
-RUN chown -R appuser:appgroup /app
 
-# Run as non-root user for improved container security
-USER appuser
+# Create a non-root ownership and avoid adduser/addgroup which may not exist in minimal images.
+# Use numeric UID 1000 (common non-root user) so the container runs without root privileges.
+RUN mkdir -p /home/app && chown -R 1000:1000 /app /home/app
+
+# Run as non-root numeric user
+USER 1000
 
 ENTRYPOINT ["dotnet", "DinoBlazorApp-v2.dll"]
