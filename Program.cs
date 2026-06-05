@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,7 +90,10 @@ app.MapGet("/culture/set", (HttpContext httpContext, string culture, string? ret
         {
             Expires = DateTimeOffset.UtcNow.AddYears(1),
             IsEssential = true,
-            Path = "/"
+            Path = "/",
+            Secure = httpContext.Request.IsHttps,
+            HttpOnly = true,
+            SameSite = SameSiteMode.Lax
         });
 
     var target = string.IsNullOrWhiteSpace(returnUrl) || !returnUrl.StartsWith("/", StringComparison.Ordinal)

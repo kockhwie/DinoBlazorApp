@@ -168,7 +168,7 @@
             else
             {
                 <div class="assistant-view-header"> 
-                        <h3>@CurrentAssistantView.Title</h3> 
+                        <h3>@T[SelectedAssistant.Title]</h3>
                 </div>
 
                 <div class="flex-1 flex flex-col">
@@ -346,20 +346,20 @@
         {
             ["refine"] = new AssistantViewSpec(
                 "refine",
-                "Refine my email",
-                "Improve clarity, tone, grammar, and structure while keeping your original message.",
+                "Assistant.Option.Refine.Title",
+                "Assistant.Option.Refine.Description",
                 "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1.4em\" height=\"1.4em\" viewBox=\"0 0 32 32\"><path d=\"M0 0h32v32H0z\" fill=\"none\" /><g fill=\"none\"><path fill=\"#433B6B\" d=\"m5 29l-2-2l16-16l2 2z\" /><path fill=\"#F4F4F4\" d=\"m18 12l2 2l1.674-1.667c.435-.445.435-1.24 0-1.675l-.33-.331C20.9 9.89 20 10 19.5 10.5zM2.338 29.252l.41.41c.44.452 1.17.452 1.61-.01L6 28.007L4 26l-1.662 1.627a1.146 1.146 0 0 0 0 1.625\" /><path fill=\"#F9C23C\" d=\"M27.87 4.423c.131.284.352.508.644.635l1.215.527a.453.453 0 0 1 0 .83l-1.205.527a1.22 1.22 0 0 0-.643.635l-.954 2.167c-.17.341-.683.341-.854 0l-.954-2.167a1.26 1.26 0 0 0-.643-.635l-1.205-.527a.453.453 0 0 1 0-.83l1.205-.527a1.22 1.22 0 0 0 .643-.635l.954-2.167c.17-.341.683-.341.854 0zm-11.429 1.18a.88.88 0 0 1-.458-.438l-.676-1.49c-.125-.233-.49-.233-.614 0l-.676 1.49a.85.85 0 0 1-.458.438l-.864.36a.309.309 0 0 0 0 .574l.864.36a.9.9 0 0 1 .458.438l.676 1.49c.125.233.49.233.614 0l.676-1.49a.85.85 0 0 1 .458-.438l.864-.36a.309.309 0 0 0 0-.574zm9.51 10.695a.95.95 0 0 1-.46-.48l-.686-1.622c-.128-.261-.492-.261-.61 0l-.685 1.623a.95.95 0 0 1-.46.479l-.857.392c-.257.13-.257.5 0 .62l.856.392a.95.95 0 0 1 .46.48l.686 1.622c.128.261.492.261.61 0l.685-1.622a.95.95 0 0 1 .46-.48l.857-.392c.257-.13.257-.5 0-.62zM12 14a1 1 0 1 0 0-2a1 1 0 0 0 0 2m18-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0M19 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2m1 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0\" /></g></svg>",
                 "green"),
             ["generate"] = new AssistantViewSpec(
                 "generate",
-                "Generate from prompt",
-                "Create a professional email from just a few words or instructions in seconds.",
+                "Assistant.Option.Generate.Title",
+                "Assistant.Option.Generate.Description",
                 "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 36 36\"><path d=\"M0 0h36v36H0z\" fill=\"none\" /><path fill=\"#ffd983\" d=\"M29 11.06c0 6.439-5 7.439-5 13.44c0 3.098-3.123 3.359-5.5 3.359c-2.053 0-6.586-.779-6.586-3.361C11.914 18.5 7 17.5 7 11.06C7 5.029 12.285.14 18.083.14C23.883.14 29 5.029 29 11.06\" /><path fill=\"#ccd6dd\" d=\"M22.167 32.5c0 .828-2.234 2.5-4.167 2.5s-4.167-1.672-4.167-2.5S16.066 32 18 32s4.167-.328 4.167.5\" /><path fill=\"#ffcc4d\" d=\"M22.707 10.293a1 1 0 0 0-1.414 0L18 13.586l-3.293-3.293a.999.999 0 1 0-1.414 1.414L17 15.414V26a1 1 0 1 0 2 0V15.414l3.707-3.707a1 1 0 0 0 0-1.414\" /><path fill=\"#99aab5\" d=\"M24 31a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-6h12z\" /><path fill=\"#ccd6dd\" d=\"M11.999 32a1 1 0 0 1-.163-1.986l12-2a.994.994 0 0 1 1.15.822a1 1 0 0 1-.822 1.15l-12 2a1 1 0 0 1-.165.014m0-4a1 1 0 0 1-.163-1.986l12-2a.995.995 0 0 1 1.15.822a1 1 0 0 1-.822 1.15l-12 2a1 1 0 0 1-.165.014\" /></svg>",
                 "teal"),
             ["professional"] = new AssistantViewSpec(
                 "professional",
-                "Make it professional",
-                "Make it more formal, polished and executive-level tone.",
+                "Assistant.Option.Professional.Title",
+                "Assistant.Option.Professional.Description",
                 "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1.2em\" height=\"1.2em\" viewBox=\"0 0 36 36\"><path d=\"M0 0h36v36H0z\" fill=\"none\" /><path fill=\"#f4900c\" d=\"M14.174 17.075L6.75 7.594l-3.722 9.481z\" /><path fill=\"#f4900c\" d=\"m17.938 5.534l-6.563 12.389H24.5z\" /><path fill=\"#f4900c\" d=\"m21.826 17.075l7.424-9.481l3.722 9.481z\" /><path fill=\"#ffcc4d\" d=\"M28.669 15.19L23.887 3.523l-5.88 11.668l-.007.003l-.007-.004l-5.88-11.668L7.331 15.19C4.197 10.833 1.28 8.042 1.28 8.042S3 20.75 3 33h30c0-12.25 1.72-24.958 1.72-24.958s-2.917 2.791-6.051 7.148\" /><circle cx=\"17.957\" cy=\"22\" r=\"3.688\" fill=\"#5c913b\" /><circle cx=\"26.463\" cy=\"22\" r=\"2.412\" fill=\"#981ceb\" /><circle cx=\"32.852\" cy=\"22\" r=\"1.986\" fill=\"#dd2e44\" /><circle cx=\"9.45\" cy=\"22\" r=\"2.412\" fill=\"#981ceb\" /><circle cx=\"3.061\" cy=\"22\" r=\"1.986\" fill=\"#dd2e44\" /><path fill=\"#ffac33\" d=\"M33 34H3a1 1 0 1 1 0-2h30a1 1 0 1 1 0 2m0-3.486H3a1 1 0 1 1 0-2h30a1 1 0 1 1 0 2\" /><circle cx=\"1.447\" cy=\"8.042\" r=\"1.407\" fill=\"#ffcc4d\" /><circle cx=\"6.75\" cy=\"7.594\" r=\"1.192\" fill=\"#f4900c\" /><circle cx=\"12.113\" cy=\"3.523\" r=\"1.784\" fill=\"#ffcc4d\" /><circle cx=\"34.553\" cy=\"8.042\" r=\"1.407\" fill=\"#ffcc4d\" /><circle cx=\"29.25\" cy=\"7.594\" r=\"1.192\" fill=\"#f4900c\" /><circle cx=\"23.887\" cy=\"3.523\" r=\"1.784\" fill=\"#ffcc4d\" /><circle cx=\"17.938\" cy=\"5.534\" r=\"1.784\" fill=\"#f4900c\" /></svg>",
                 "gold"),
         };
@@ -376,8 +376,8 @@
     [
         new AssistantCard(
             "content",
-            "Refine My Draft",
-            "Create engaging content in seconds.",
+            "Assistant.Option.Refine.Title",
+            "Assistant.Option.Refine.Description",
             ["Blog posts", "Course outlines", "Social media", "Marketing copy"],
             "Generate Content",
             "green",
@@ -391,8 +391,8 @@
                 "Best,\nAlex")),
         new AssistantCard(
             "code",
-            "Generate from Prompt",
-            "Write better code, faster.",
+            "Assistant.Option.Generate.Title",
+            "Assistant.Option.Generate.Description",
             ["Debug and fix", "Explain code", "Generate snippets", "Best practices"],
             "Write Code",
             "teal",
@@ -406,8 +406,8 @@
                 "Thanks,\nAlex")),
         new AssistantCard(
             "idea",
-            "Professional Upgrade",
-            "Spark new ideas and solve problems.",
+            "Assistant.Option.Professional.Title",
+            "Assistant.Option.Professional.Description",
             ["Creative ideas", "Problem solving", "Project concepts", "Strategy planning"],
             "Brainstorm Ideas",
             "gold",
