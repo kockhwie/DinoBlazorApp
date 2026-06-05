@@ -1,4 +1,4 @@
-﻿@page "/Account/LoginWith2fa"
+@page "/Account/LoginWith2fa"
 
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Identity
@@ -9,12 +9,12 @@
 @inject IdentityRedirectManager RedirectManager
 @inject ILogger<LoginWith2fa> Logger
 
-<PageTitle>Two-factor authentication</PageTitle>
+<PageTitle>@T["Two-factor authentication"]</PageTitle>
 
-<h1>Two-factor authentication</h1>
+<h1>@T["Two-factor authentication"]</h1>
 <hr />
 <StatusMessage Message="@message" />
-<p>Your login is protected with an authenticator app. Enter your authenticator code below.</p>
+<p>@T["Your login is protected with an authenticator app. Enter your authenticator code below."]</p>
 <div class="row">
     <div class="col-md-4">
         <EditForm Model="Input" FormName="login-with-2fa" OnValidSubmit="OnValidSubmitAsync" method="post">
@@ -24,24 +24,24 @@
             <ValidationSummary class="text-danger" role="alert" />
             <div class="form-floating mb-3">
                 <InputText @bind-Value="Input.TwoFactorCode" id="Input.TwoFactorCode" class="form-control" autocomplete="off" />
-                <label for="Input.TwoFactorCode" class="form-label">Authenticator code</label>
+                <label for="Input.TwoFactorCode" class="form-label">@T["Authenticator code"]</label>
                 <ValidationMessage For="() => Input.TwoFactorCode" class="text-danger" />
             </div>
             <div class="checkbox mb-3">
                 <label for="remember-machine" class="form-label">
                     <InputCheckbox @bind-Value="Input.RememberMachine" />
-                    Remember this machine
+                    @T["Remember this machine"]
                 </label>
             </div>
             <div>
-                <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">@T["Log in"]</button>
             </div>
         </EditForm>
     </div>
 </div>
 <p>
-    Don't have access to your authenticator device? You can
-    <a href="Account/LoginWithRecoveryCode?ReturnUrl=@ReturnUrl">log in with a recovery code</a>.
+    @T["Don't have access to your authenticator device? You can"]
+    <a href="Account/LoginWithRecoveryCode?ReturnUrl=@ReturnUrl">@T["log in with a recovery code"]</a>.
 </p>
 
 @code {
@@ -61,9 +61,8 @@
     {
         Input ??= new();
 
-        // Ensure the user has gone through the username & password screen first
         user = await SignInManager.GetTwoFactorAuthenticationUserAsync() ??
-            throw new InvalidOperationException("Unable to load two-factor authentication user.");
+            throw new InvalidOperationException(T["Unable to load two-factor authentication user."]);
     }
 
     private async Task OnValidSubmitAsync()
@@ -85,14 +84,14 @@
         else
         {
             Logger.LogWarning("Invalid authenticator code entered for user with ID '{UserId}'.", userId);
-            message = "Error: Invalid authenticator code.";
+            message = T["Error: Invalid authenticator code."];
         }
     }
 
     private sealed class InputModel
     {
-        [Required]
-        [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = nameof(ValidationStrings.Required))]
+        [StringLength(7, ErrorMessageResourceType = typeof(ValidationStrings), ErrorMessageResourceName = nameof(ValidationStrings.StringLength), MinimumLength = 6)]
         [DataType(DataType.Text)]
         [Display(Name = "Authenticator code")]
         public string? TwoFactorCode { get; set; }

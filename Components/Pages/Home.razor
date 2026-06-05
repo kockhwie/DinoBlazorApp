@@ -1,17 +1,18 @@
 @page "/"
 
-<PageTitle>Dino AI Academy</PageTitle>
+<PageTitle>@T["Site.Title"]</PageTitle>
 
 <main class="home-page">
+    @* Debug info removed. Keep localization middleware and resources intact. *@
     <section class="hero-shell">
         <SiteNav />
 
         <div class="hero-grid">
             <div class="hero-copy">
 
-                <h1>Don't just use AI.<br />Evolve with it.</h1>
+                <h1>@T["Don't just use AI."]<br />@T["Evolve with it."]</h1>
                 <p class="lead">
-                    Master AI through hands-on learning, real-world projects, and a thriving community of innovators.
+                    @T["Home.Hero.Lead"]
                 </p>
 
                 <div class="benefits">
@@ -19,13 +20,13 @@
                     {
                         <div class="benefit">
                             <span class="benefit-icon">@((MarkupString)item.Icon)</span>
-                            <span>@item.Label</span>
+                            <span>@T[item.Label]</span>
                         </div>
                     }
                 </div>
 
                 <div class="hero-actions">
-                    <a href="/membership" class="btn btn-cta">Start Your Evolution <i class="ti ti-chevron-right"></i></a>
+                    <a href="/membership" class="btn btn-cta">@T["Home.Hero.StartCta"] <i class="ti ti-chevron-right"></i></a>
                 </div>
             </div>
 
@@ -36,33 +37,33 @@
     </section>
 
     <section class="showcase-shell">
-        <div class="showcase-panel workbench">
+            <div class="showcase-panel workbench">
             <div class="panel-title">
                 <i class="ti ti-mail-fast"></i>
-                <span>Email Composer</span>
+                <span>@T["Home.Composer.Title"]</span>
             </div>
 
             <EditForm Model="@EmailDraft" class="composer-card">
                 <div class="composer-form">
                     <div class="email-fields">
                         <label class="email-field">
-                            <span class="email-label">To</span>
+                            <span class="email-label">@T["Home.Composer.Label.To"]</span>
                             <input @bind="EmailDraft.To" class="email-input" />
                         </label>
                         <label class="email-field">
-                            <span class="email-label">Subject</span>
+                            <span class="email-label">@T["Home.Composer.Label.Subject"]</span>
                             <input @bind="EmailDraft.Subject" class="email-input" />
                         </label>
                         <label class="email-field email-field-message">
-                            <span class="email-label">Message</span>
-                            <textarea @bind="EmailDraft.Message" rows="10" class="email-textarea" placeholder="Write or paste your email content here..."></textarea>
+                            <span class="email-label">@T["Home.Composer.Label.Message"]</span>
+                            <textarea @bind="EmailDraft.Message" rows="10" class="email-textarea" placeholder="@T["Home.Composer.Placeholder.Message"]"></textarea>
                         </label>
                     </div>
                 </div> 
                 <div class="composer-actions">
-                    <button type="button" class="mini-btn ghost" @onclick="ClearDraft">Clear</button>
-                    <button type="button" class="mini-btn ghost" @onclick="LoadImprovedDraft">Improve</button>
-                    <button type="button" class="mini-btn solid" @onclick="HandleSendEmail">Send Email</button>
+                    <button type="button" class="mini-btn ghost" @onclick="ClearDraft">@T["Home.Composer.Action.Clear"]</button>
+                    <button type="button" class="mini-btn ghost" @onclick="LoadImprovedDraft">@T["Home.Composer.Action.Improve"]</button>
+                    <button type="button" class="mini-btn solid" @onclick="HandleSendEmail">@T["Home.Composer.Action.Send"]</button>
                 </div>
                 @if (!string.IsNullOrWhiteSpace(EmailDraft.StatusMessage))
                 {
@@ -77,19 +78,19 @@
             <div class="flex items-center justify-between mt-1 mb-0">
                 <div class="panel-title">
                     <i class="ti ti-robot text-[#33d7a6] text-lg"></i>
-                    <span>AI Assistant</span>
+                    <span>@T["Home.Assistant.Title"]</span>
                 </div>
                 @if (currentView != "options")
                 {
                     <button type="button" @onclick="GoBackToOptions" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-[#33d7a6] hover:bg-[#33d7a6]/10 gap-1 flex items-center transition-all duration-300 text-xs cursor-pointer">
-                        <i class="ti ti-chevron-left"></i> Back
+                        <i class="ti ti-chevron-left"></i> @T["Home.Assistant.Button.Back"]
                     </button>
                 }
             </div>
 
             @if (currentView == "options")
             {
-                <p class="text-xs text-slate-400 mb-4">Choose an action to get started.</p>
+                <p class="text-xs text-slate-400 mb-4">@T["Home.Assistant.ChooseAction"]</p>
                 <div class="assistant-options">
                     <!-- Option 1: Refine My Email -->
                     <button type="button" @onclick='() => SelectOption("refine")' class="assistant-option assistant-option-refine">
@@ -105,8 +106,8 @@
 
                         </div>
                         <div class="assistant-option-copy">
-                            <h3>Refine my email</h3>
-                            <p>Improve clarity, tone, grammar, and structure while keeping your original message.</p>
+                            <h3>@T["Assistant.Option.Refine.Title"]</h3>
+                            <p>@T["Assistant.Option.Refine.Description"]</p>
                         </div>
                         <span class="assistant-option-arrow">→</span>
                     </button>
@@ -125,8 +126,8 @@
 
                         </div>
                         <div class="assistant-option-copy">
-                            <h3>Generate from prompt</h3>
-                            <p>Create a professional email from just a few words or instructions in seconds.</p>
+                            <h3>@T["Assistant.Option.Generate.Title"]</h3>
+                            <p>@T["Assistant.Option.Generate.Description"]</p>
                         </div>
                         <span class="assistant-option-arrow">→</span>
                     </button>
@@ -157,8 +158,8 @@
 
                         </div>
                         <div class="assistant-option-copy">
-                            <h3>Make it professional</h3>
-                            <p>Make it more formal, polished and executive-level tone.</p>
+                            <h3>@T["Assistant.Option.Professional.Title"]</h3>
+                            <p>@T["Assistant.Option.Professional.Description"]</p>
                         </div>
                         <span class="assistant-option-arrow">→</span>
                     </button>
@@ -166,10 +167,8 @@
             }
             else
             {
-                <div class="assistant-view-header">                    
- 
-                        <h3>@CurrentAssistantView.Title</h3>                        
- 
+                <div class="assistant-view-header"> 
+                        <h3>@CurrentAssistantView.Title</h3> 
                 </div>
 
                 <div class="flex-1 flex flex-col">
@@ -184,30 +183,30 @@
                     else if (currentView == "refine")
                     {
                         <div class="space-y-4 flex-1 flex flex-col">
-                            @if (string.IsNullOrWhiteSpace(EmailDraft.Message))
+                                @if (string.IsNullOrWhiteSpace(EmailDraft.Message))
                             {
                                 <div class="p-4 rounded-xl bg-amber-500/5 border border-amber-500/20 text-amber-200 text-xs space-y-2">
-                                    <p class="font-semibold">Your draft is empty!</p>
-                                    <p>Please compose or paste your email in the AI Workbench on the left, or use our pre-filled sample draft to see refinement in action.</p>
+                                    <p class="font-semibold">@T["Home.Assistant.EmptyDraft.Title"]</p>
+                                    <p>@T["Home.Assistant.EmptyDraft.Body"]</p>
                                     <button type="button" @onclick="LoadSampleDraft" class="w-full py-2 bg-gradient-to-r from-[#f5b722] to-[#f5bb2c] text-[#08110f] font-bold rounded-lg text-xs mt-2 hover:brightness-110 transition-all duration-300 cursor-pointer">
-                                        Use Sample Draft
+                                        @T["Home.Assistant.Button.UseSampleDraft"]
                                     </button>
                                 </div>
                             }
                             else
                             {
                                 <div class="flex flex-col flex-1 gap-3">
-                                    <p class="text-xs text-slate-400">✓ Refined version of your email:</p>
+                                    <p class="text-xs text-slate-400">@T["Home.Assistant.RefinedHeading"]</p>
                                     <textarea @bind="refinedText" class="w-full p-3 bg-[#031810] border border-[rgba(86, 230, 145, 0.22)] rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#9be326] focus:ring-1 focus:ring-[#9be326] transition-all duration-300 flex-1 min-h-[180px] resize-none" rows="8"></textarea>
                                     <button type="button" @onclick="TriggerPromptGeneration" class="w-full py-2 rounded-lg bg-gradient-to-r from-[#2dc98e] to-[#80e36b] text-[#08110f] font-bold hover:brightness-110 transition-all duration-300 text-xs flex items-center justify-center gap-1.5 cursor-pointer">
-                                        🚀 Generate Email
+                                        🚀 @T["Home.Assistant.Button.GenerateEmail"]
                                     </button>
-                                    <label id="new-email-message1" class="block text-xs font-medium text-slate-300 mb-1.5">New Email Message:</label>
+                                    <label id="new-email-message1" class="block text-xs font-medium text-slate-300 mb-1.5">@T["Home.Assistant.Label.NewEmailMessage"]</label>
                                     <textarea @bind="refinedEmail" class="w-full p-3 bg-[#031810] border border-[rgba(86, 230, 145, 0.22)] rounded-xl text-xs text-slate-100 focus:outline-none focus:border-[#25d0be] focus:ring-1 focus:ring-[#25d0be] transition-all duration-300 flex-1 min-h-[150px] resize-none" rows="6"></textarea>
 
-                                    <div class="p-3 bg-green-500/5 border border-green-500/20 rounded-xl mt-auto">
-                                        <p class="text-xs font-semibold text-green-400 flex items-center gap-1">⏱️ Time Saved: 8.5 minutes</p>
-                                        <p class="text-[10px] text-slate-400 mt-0.5">That's 7.1 hours per year!</p>
+                                        <div class="p-3 bg-green-500/5 border border-green-500/20 rounded-xl mt-auto">
+                                        <p class="text-xs font-semibold text-green-400 flex items-center gap-1">@T["Home.Assistant.TimeSaved", "8.5 minutes"]</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">@T["Home.Assistant.TimeSavedYear", "7.1"]</p>
                                     </div>
                                 </div>
                             }
@@ -218,26 +217,26 @@
                         <div class="space-y-4 flex-1 flex flex-col">
                             <div class="space-y-3 flex-1 flex flex-col">
                                 <div>
-                                    <label class="block text-xs font-medium text-slate-300 mb-1.5">Your Prompt:</label>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1.5">@T["Home.Assistant.Prompt.Label"]</label>
                                     <textarea @bind="promptInput" class="w-full p-3 bg-[#031810] border border-[rgba(86, 230, 145, 0.22)] rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#25d0be] focus:ring-1 focus:ring-[#25d0be] transition-all duration-300 resize-none" rows="3" placeholder="Describe what email you want to generate..."></textarea>
                                 </div>
 
                                 <div class="flex flex-wrap gap-1.5">
                                     <button type="button" @onclick='() => SetPrompt("Write a professional email requesting a project deadline extension. Keep it concise and polite.")' class="px-2.5 py-1 rounded-full border border-slate-700 text-slate-400 hover:text-[#25d0be] hover:border-[#25d0be]/50 bg-[#02100c] text-[10px] transition-all duration-300 cursor-pointer">
-                                        📅 Extension
+                                        📅 @T["Home.Assistant.Button.Extension"]
                                     </button>
                                     <button type="button" @onclick='() => SetPrompt("Write a warm follow-up email after a project kick-off meeting. Summarize key action items.")' class="px-2.5 py-1 rounded-full border border-slate-700 text-slate-400 hover:text-[#25d0be] hover:border-[#25d0be]/50 bg-[#02100c] text-[10px] transition-all duration-300 cursor-pointer">
-                                        🤝 Follow-up
+                                        🤝 @T["Home.Assistant.Button.FollowUp"]
                                     </button>
                                     <button type="button" @onclick='() => SetPrompt("Write a brief out-of-office auto-reply. I am on vacation until next Monday.")' class="px-2.5 py-1 rounded-full border border-slate-700 text-slate-400 hover:text-[#25d0be] hover:border-[#25d0be]/50 bg-[#02100c] text-[10px] transition-all duration-300 cursor-pointer">
-                                        🏝️ Vacation
+                                        🏝️ @T["Home.Assistant.Button.Vacation"]
                                     </button>
                                 </div>
 
                                 <button type="button" @onclick="TriggerPromptGeneration" class="w-full py-2 rounded-lg bg-gradient-to-r from-[#2dc98e] to-[#80e36b] text-[#08110f] font-bold hover:brightness-110 transition-all duration-300 text-xs flex items-center justify-center gap-1.5 cursor-pointer">
-                                    🚀 Generate Email
+                                    🚀 @T["Home.Assistant.Button.GenerateEmail"]
                                 </button>
-                                <label id="new-email-message2" class="block text-xs font-medium text-slate-300 mb-1.5">New Email Message:</label>
+                                        <label id="new-email-message2" class="block text-xs font-medium text-slate-300 mb-1.5">@T["Home.Assistant.NewMessageLabel"]</label>
 
                                     <div class="space-y-3 flex-1 flex flex-col">
                                         <textarea @bind="generatedEmail" class="w-full p-3 bg-[#031810] border border-[rgba(86, 230, 145, 0.22)] rounded-xl text-xs text-slate-100 focus:outline-none focus:border-[#25d0be] focus:ring-1 focus:ring-[#25d0be] transition-all duration-300 flex-1 min-h-[150px] resize-none" rows="6"></textarea>
@@ -255,29 +254,29 @@
                         <div class="space-y-4 flex-1 flex flex-col">
                             <div class="space-y-3 flex-1 flex flex-col">
                                 <div>
-                                    <label class="block text-xs font-medium text-slate-300 mb-1.5">Your Prompt:</label>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1.5">@T["Home.Assistant.Prompt.Label"]</label>
                                     <textarea @bind="professionalFramework" class="w-full p-3 bg-[#031810] border border-[rgba(86, 230, 145, 0.22)] rounded-xl text-[11px] text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#f5b722] focus:ring-1 focus:ring-[#f5b722] transition-all duration-300 resize-none font-mono" rows="6"></textarea>
                                 </div>
 
                                 <div class="space-y-1.5">
-                                    <span class="block text-[11px] font-medium text-slate-400">Select Tone:</span>
+                                    <span class="block text-[11px] font-medium text-slate-400">@T["Home.Assistant.Tone.Select"]</span>
                                     <div class="flex gap-2">
                                         <button type="button" @onclick='() => SetTone("Executive")' class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-300 flex-1 cursor-pointer @(selectedTone == "Executive" ? "bg-[#f5b722] text-[#08110f]" : "border border-slate-700 text-slate-400 hover:text-[#f5b722] hover:border-[#f5b722]/50 bg-[#02100c]")">
-                                            💼 Executive
+                                            💼 @T["Home.Assistant.Tone.Executive"]
                                         </button>
                                         <button type="button" @onclick='() => SetTone("Diplomatic")' class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-300 flex-1 cursor-pointer @(selectedTone == "Diplomatic" ? "bg-[#f5b722] text-[#08110f]" : "border border-slate-700 text-slate-400 hover:text-[#f5b722] hover:border-[#f5b722]/50 bg-[#02100c]")">
-                                            🤝 Diplomatic
+                                            🤝 @T["Home.Assistant.Tone.Diplomatic"]
                                         </button>
                                         <button type="button" @onclick='() => SetTone("Persuasive")' class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-300 flex-1 cursor-pointer @(selectedTone == "Persuasive" ? "bg-[#f5b722] text-[#08110f]" : "border border-slate-700 text-slate-400 hover:text-[#f5b722] hover:border-[#f5b722]/50 bg-[#02100c]")">
-                                            📣 Persuasive
+                                            📣 @T["Home.Assistant.Tone.Persuasive"]
                                         </button>
                                     </div>
                                 </div>
 
                                 <button type="button" @onclick="TriggerProfessionalUpgrade" class="w-full py-2 rounded-lg bg-gradient-to-r from-[#2dc98e] to-[#80e36b] text-[#08110f] font-bold hover:brightness-110 transition-all duration-300 text-xs flex items-center justify-center gap-1.5 cursor-pointer">
-                                    👑 Generate Email
+                                    👑 @T["Home.Assistant.Button.GenerateEmail"]
                                 </button>
-                                <label class="block text-xs font-medium text-slate-300 mb-1.5">New Email Message:</label>
+                                <label class="block text-xs font-medium text-slate-300 mb-1.5">@T["Home.Assistant.NewMessageLabel"]</label>
 
                                     <div class="space-y-3 flex-1 flex flex-col">
                                         <textarea @bind="professionalOutputText" class="w-full p-3 bg-[#031810] border border-[rgba(86, 230, 145, 0.22)] rounded-xl text-xs text-slate-100 focus:outline-none focus:border-[#f5b722] focus:ring-1 focus:ring-[#f5b722] transition-all duration-300 flex-1 min-h-[150px] resize-none" rows="6"></textarea>
@@ -297,26 +296,26 @@
 
     <footer class="footer-shell">
         <div class="footer-grid">
-<div class="footer-card" id="release-notes">
-    <p class="footer-card-title">Release Notes</p>
-    <ul class="footer-list">
-        <li><strong>v2.0.0</strong> - Public website release, invitation-only membership flow, and AI Workbench polish.</li>
-        <li><a href="/release-notes">Read the full release notes</a></li>
-    </ul>
-</div>
+            <div class="footer-card" id="release-notes">
+                <p class="footer-card-title">@T["Footer.ReleaseNotesTitle"]</p>
+                <ul class="footer-list">
+                    <li><strong>v2.0.0</strong> - @T["Footer.ReleaseNotes.V2"]</li>
+                    <li><a href="/release-notes">@T["Footer.ReleaseNotes.ReadFull"]</a></li>
+                </ul>
+            </div>
             <div class="footer-card" id="feedback">
-                <p class="footer-card-title">Feedback / Wishlist</p>
+                <p class="footer-card-title">@T["Footer.Feedback.Title"]</p>
                 <ul class="footer-links">
-                    <li><a href="mailto:admin@codingdinos.asia?subject=Dino%20AI%20Academy%20Feedback">Send feedback</a></li>
-                    <li><a href="mailto:admin@codingdinos.asia?subject=Dino%20AI%20Academy%20Wishlist">Add to wishlist</a></li>
-                    <li><a href="#">View roadmap</a></li>
+                    <li><a href="mailto:admin@codingdinos.asia?subject=Dino%20AI%20Academy%20Feedback">@T["Footer.Feedback.Send"]</a></li>
+                    <li><a href="mailto:admin@codingdinos.asia?subject=Dino%20AI%20Academy%20Wishlist">@T["Footer.Feedback.Wishlist"]</a></li>
+                    <li><a href="#">@T["Footer.Feedback.Roadmap"]</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <span>© @DateTime.Now.Year Dino AI Academy</span>
-            <span>Built with Blazor and DaisyUI</span>
+            <span>@T["Footer.Copyright", DateTime.Now.Year]</span>
+            <span>@T["Footer.BuiltWith"]</span>
         </div>
     </footer>
 </main>
@@ -367,10 +366,10 @@
 
     private static readonly IReadOnlyList<BenefitItem> BenefitItems =
     [
-        new BenefitItem(LeafIcon, "Learn AI the right way"),
-        new BenefitItem(MountainIcon, "Build real projects"),
-        new BenefitItem(CommunityIcon, "Join a global community"),
-        new BenefitItem(ShieldIcon, "Advance your career"),
+        new BenefitItem(LeafIcon, "Home.Benefit.LearnAI"),
+        new BenefitItem(MountainIcon, "Home.Benefit.BuildProjects"),
+        new BenefitItem(CommunityIcon, "Home.Benefit.JoinCommunity"),
+        new BenefitItem(ShieldIcon, "Home.Benefit.AdvanceCareer"),
     ];
 
     private static readonly IReadOnlyList<AssistantCard> AssistantCards =

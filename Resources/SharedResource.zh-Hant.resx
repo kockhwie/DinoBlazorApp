@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Open navigation menu" xml:space="preserve"><value>開啟導覽選單</value></data>
+  <data name="Courses" xml:space="preserve"><value>課程</value></data>
+  <data name="Starter Path" xml:space="preserve"><value>入門路線</value></data>
+  <data name="Advanced Path" xml:space="preserve"><value>進階路線</value></data>
+  <data name="Projects" xml:space="preserve"><value>專案</value></data>
+  <data name="AI Tools" xml:space="preserve"><value>AI 工具</value></data>
+  <data name="Resources" xml:space="preserve"><value>資源</value></data>
+  <data name="Guides" xml:space="preserve"><value>指南</value></data>
+  <data name="Templates" xml:space="preserve"><value>範本</value></data>
+  <data name="Videos" xml:space="preserve"><value>影片</value></data>
+  <data name="Community" xml:space="preserve"><value>社群</value></data>
+  <data name="Dino AI Academy home" xml:space="preserve"><value>Dino AI 學院首頁</value></data>
+  <data name="Dino mascot" xml:space="preserve"><value>Dino 吉祥物</value></data>
+  <data name="Dino AI Academy" xml:space="preserve"><value>Dino AI 學院</value></data>
+  <data name="Log in" xml:space="preserve"><value>登入</value></data>
+  <data name="Join Academy" xml:space="preserve"><value>加入學院</value></data>
+  <data name="Membership By Invitation" xml:space="preserve"><value>邀請制會員</value></data>
+  <data name="Membership Access" xml:space="preserve"><value>會員存取</value></data>
+  <data name="Invitation-only registration is currently in place." xml:space="preserve"><value>目前採用邀請制註冊。</value></data>
+  <data name="Dino AI Academy membership is free. At this stage, access is available by invitation only while we prepare the full login and registration experience." xml:space="preserve"><value>Dino AI 學院會員免費。現階段僅提供邀請制存取，我們正在準備完整的登入與註冊體驗。</value></data>
+  <data name="To be considered for the waiting list, please email the admin team and we will keep your request for future intake." xml:space="preserve"><value>若您希望加入候補名單，請寄信給管理團隊，我們會保留您的申請供未來安排。</value></data>
+  <data name="Email Admin" xml:space="preserve"><value>寄信給管理員</value></data>
+  <data name="Back to Home" xml:space="preserve"><value>回到首頁</value></data>
+  <data name="Release Notes" xml:space="preserve"><value>版本說明</value></data>
+  <data name="Release Notes - Dino AI Academy" xml:space="preserve"><value>版本說明 - Dino AI 學院</value></data>
+  <data name="Version 2 is ready for release." xml:space="preserve"><value>第二版已可發布。</value></data>
+  <data name="This release prepares the public Dino AI Academy website for sharing on GitHub with a refreshed homepage, clearer membership flow, and a cleaner AI workbench preview." xml:space="preserve"><value>此版本為公開的 Dino AI 學院網站做好 GitHub 分享準備，包含更新首頁、更清楚的會員流程，以及更俐落的 AI 工作台預覽。</value></data>
+  <data name="Added" xml:space="preserve"><value>新增</value></data>
+  <data name="Changed" xml:space="preserve"><value>變更</value></data>
+  <data name="Fixed" xml:space="preserve"><value>修正</value></data>
+  <data name="Register" xml:space="preserve"><value>註冊</value></data>
+  <data name="Create a new account." xml:space="preserve"><value>建立新帳號。</value></data>
+  <data name="Email" xml:space="preserve"><value>電子郵件</value></data>
+  <data name="Password" xml:space="preserve"><value>密碼</value></data>
+  <data name="Confirm Password" xml:space="preserve"><value>確認密碼</value></data>
+  <data name="Use another service to register." xml:space="preserve"><value>使用其他服務註冊。</value></data>
+  <data name="Use another service to log in." xml:space="preserve"><value>使用其他服務登入。</value></data>
+  <data name="Use a local account to log in." xml:space="preserve"><value>使用本機帳號登入。</value></data>
+  <data name="Remember me" xml:space="preserve"><value>記住我</value></data>
+  <data name="OR" xml:space="preserve"><value>或</value></data>
+  <data name="Log in with a passkey" xml:space="preserve"><value>使用通行金鑰登入</value></data>
+  <data name="Forgot your password?" xml:space="preserve"><value>忘記密碼？</value></data>
+  <data name="Register as a new user" xml:space="preserve"><value>註冊新使用者</value></data>
+  <data name="Resend email confirmation" xml:space="preserve"><value>重新寄送電子郵件確認</value></data>
+  <data name="Two-factor authentication" xml:space="preserve"><value>雙重驗證</value></data>
+  <data name="Two-factor authentication (2FA)" xml:space="preserve"><value>雙重驗證（2FA）</value></data>
+  <data name="Authenticator code" xml:space="preserve"><value>驗證器代碼</value></data>
+  <data name="Remember this machine" xml:space="preserve"><value>記住這台裝置</value></data>
+  <data name="log in with a recovery code" xml:space="preserve"><value>使用恢復碼登入</value></data>
+  <data name="Recovery code verification" xml:space="preserve"><value>恢復碼驗證</value></data>
+  <data name="Recovery Code" xml:space="preserve"><value>恢復碼</value></data>
+  <data name="Access denied" xml:space="preserve"><value>拒絕存取</value></data>
+  <data name="You do not have access to this resource." xml:space="preserve"><value>您沒有權限存取此資源。</value></data>
+  <data name="Confirm email" xml:space="preserve"><value>確認電子郵件</value></data>
+  <data name="Confirm email change" xml:space="preserve"><value>確認電子郵件變更</value></data>
+  <data name="Forgot password confirmation" xml:space="preserve"><value>忘記密碼確認</value></data>
+  <data name="Reset password confirmation" xml:space="preserve"><value>重設密碼確認</value></data>
+  <data name="Reset password" xml:space="preserve"><value>重設密碼</value></data>
+  <data name="Reset your password." xml:space="preserve"><value>重設您的密碼。</value></data>
+  <data name="Reset" xml:space="preserve"><value>重設</value></data>
+  <data name="Locked out" xml:space="preserve"><value>已鎖定</value></data>
+  <data name="Not Found" xml:space="preserve"><value>找不到頁面</value></data>
+  <data name="Sorry, the content you are looking for does not exist." xml:space="preserve"><value>很抱歉，您要找的內容不存在。</value></data>
+  <data name="Error" xml:space="preserve"><value>錯誤</value></data>
+  <data name="Error." xml:space="preserve"><value>發生錯誤。</value></data>
+  <data name="An error occurred while processing your request." xml:space="preserve"><value>處理您的要求時發生錯誤。</value></data>
+  <data name="Development Mode" xml:space="preserve"><value>開發模式</value></data>
+  <data name="Manage your account" xml:space="preserve"><value>管理您的帳號</value></data>
+  <data name="Change your account settings" xml:space="preserve"><value>變更您的帳號設定</value></data>
+  <data name="Profile" xml:space="preserve"><value>個人資料</value></data>
+  <data name="Phone number" xml:space="preserve"><value>電話號碼</value></data>
+  <data name="Username" xml:space="preserve"><value>使用者名稱</value></data>
+  <data name="Save" xml:space="preserve"><value>儲存</value></data>
+  <data name="Manage email" xml:space="preserve"><value>管理電子郵件</value></data>
+  <data name="Change email" xml:space="preserve"><value>變更電子郵件</value></data>
+  <data name="New email" xml:space="preserve"><value>新電子郵件</value></data>
+  <data name="Send verification email" xml:space="preserve"><value>寄送驗證電子郵件</value></data>
+  <data name="Your email is unchanged." xml:space="preserve"><value>您的電子郵件未變更。</value></data>
+  <data name="Confirmation link to change email sent. Please check your email." xml:space="preserve"><value>變更電子郵件的確認連結已寄出。請檢查您的電子郵件。</value></data>
+  <data name="Verification email sent. Please check your email." xml:space="preserve"><value>驗證電子郵件已寄出。請檢查您的電子郵件。</value></data>
+  <data name="Manage your external logins" xml:space="preserve"><value>管理您的外部登入</value></data>
+  <data name="Registered Logins" xml:space="preserve"><value>已註冊登入</value></data>
+  <data name="Add another service to log in." xml:space="preserve"><value>新增另一個登入服務。</value></data>
+  <data name="Remove" xml:space="preserve"><value>移除</value></data>
+  <data name="Delete" xml:space="preserve"><value>刪除</value></data>
+  <data name="Continue" xml:space="preserve"><value>繼續</value></data>
+  <data name="Set password" xml:space="preserve"><value>設定密碼</value></data>
+  <data name="Set your password" xml:space="preserve"><value>設定您的密碼</value></data>
+  <data name="Your password has been set." xml:space="preserve"><value>您的密碼已設定完成。</value></data>
+  <data name="Your profile has been updated" xml:space="preserve"><value>您的個人資料已更新</value></data>
+  <data name="Your password has been changed" xml:space="preserve"><value>您的密碼已變更</value></data>
+  <data name="Manage your passkeys" xml:space="preserve"><value>管理您的通行金鑰</value></data>
+  <data name="Add a new passkey" xml:space="preserve"><value>新增通行金鑰</value></data>
+  <data name="Passkey name" xml:space="preserve"><value>通行金鑰名稱</value></data>
+  <data name="Passkey deleted successfully." xml:space="preserve"><value>通行金鑰已成功刪除。</value></data>
+  <data name="Passkey updated successfully." xml:space="preserve"><value>通行金鑰已成功更新。</value></data>
+  <data name="No passkeys are registered." xml:space="preserve"><value>尚未註冊任何通行金鑰。</value></data>
+  <data name="Personal Data" xml:space="preserve"><value>個人資料</value></data>
+  <data name="Download" xml:space="preserve"><value>下載</value></data>
+  <data name="Delete data and close my account" xml:space="preserve"><value>刪除資料並關閉我的帳號</value></data>
+  <data name="Delete Personal Data" xml:space="preserve"><value>刪除個人資料</value></data>
+  <data name="Change password" xml:space="preserve"><value>變更密碼</value></data>
+  <data name="Update password" xml:space="preserve"><value>更新密碼</value></data>
+  <data name="Old password" xml:space="preserve"><value>舊密碼</value></data>
+  <data name="New password" xml:space="preserve"><value>新密碼</value></data>
+  <data name="Disable two-factor authentication (2FA)" xml:space="preserve"><value>停用雙重驗證（2FA）</value></data>
+  <data name="Disable 2FA" xml:space="preserve"><value>停用 2FA</value></data>
+  <data name="Enable authenticator app" xml:space="preserve"><value>啟用驗證器應用程式</value></data>
+  <data name="Configure authenticator app" xml:space="preserve"><value>設定驗證器應用程式</value></data>
+  <data name="Reset authenticator key" xml:space="preserve"><value>重設驗證器金鑰</value></data>
+  <data name="Reset authenticator app" xml:space="preserve"><value>重設驗證器應用程式</value></data>
+  <data name="Reset recovery codes" xml:space="preserve"><value>重設恢復碼</value></data>
+  <data name="Generate Recovery Codes" xml:space="preserve"><value>產生恢復碼</value></data>
+  <data name="Generate two-factor authentication (2FA) recovery codes" xml:space="preserve"><value>產生雙重驗證（2FA）恢復碼</value></data>
+  <data name="Put these codes in a safe place." xml:space="preserve"><value>請將這些代碼妥善保管。</value></data>
+  <data name="If you lose your device and don't have the recovery codes you will lose access to your account." xml:space="preserve"><value>如果您遺失裝置且沒有恢復碼，將無法存取您的帳號。</value></data>
+  <data name="This action only disables 2FA." xml:space="preserve"><value>此動作只會停用 2FA。</value></data>
+  <data name="The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code." xml:space="preserve"><value>目前的瀏覽器已被忘記。當您再次從這個瀏覽器登入時，系統會要求您輸入 2FA 代碼。</value></data>
+  <data name="Your authenticator app has been verified." xml:space="preserve"><value>您的驗證器應用程式已通過驗證。</value></data>
+  <data name="Don't just use AI." xml:space="preserve"><value>不要只使用 AI。</value></data>
+  <data name="Evolve with it." xml:space="preserve"><value>與它共同進化。</value></data>
+  <data name="Site.Title" xml:space="preserve"><value>Dino AI 學院</value></data>
+  <data name="Home.Hero.Lead" xml:space="preserve"><value>透過實作學習、真實專案與充滿活力的創新社群，掌握 AI 技能。</value></data>
+  <data name="Home.Hero.StartCta" xml:space="preserve"><value>開始你的進化</value></data>
+
+  <data name="Home.Composer.Label.To" xml:space="preserve"><value>收件者</value></data>
+  <data name="Home.Composer.Label.Subject" xml:space="preserve"><value>主旨</value></data>
+  <data name="Home.Composer.Label.Message" xml:space="preserve"><value>內容</value></data>
+  <data name="Home.Composer.Placeholder.Message" xml:space="preserve"><value>在此撰寫或貼上您的電子郵件內容…</value></data>
+  <data name="Home.Composer.Action.Clear" xml:space="preserve"><value>清除</value></data>
+  <data name="Home.Composer.Action.Improve" xml:space="preserve"><value>改善</value></data>
+  <data name="Home.Composer.Action.Send" xml:space="preserve"><value>發送電子郵件</value></data>
+  <data name="Home.Composer.Status.SendPreview" xml:space="preserve"><value>僅發送預覽 — 未實際寄出電子郵件。</value></data>
+
+  <data name="Home.Assistant.Title" xml:space="preserve"><value>AI 助手</value></data>
+  <data name="Home.Assistant.Button.Back" xml:space="preserve"><value>返回</value></data>
+  <data name="Home.Assistant.ChooseAction" xml:space="preserve"><value>選擇一個操作開始。</value></data>
+  <data name="Home.Assistant.EmptyDraft.Title" xml:space="preserve"><value>您的草稿為空！</value></data>
+  <data name="Home.Assistant.EmptyDraft.Body" xml:space="preserve"><value>請在左側的 AI 工作台撰寫或貼上電子郵件，或使用範例草稿查看改寫效果。</value></data>
+  <data name="Home.Assistant.Button.UseSampleDraft" xml:space="preserve"><value>使用範例草稿</value></data>
+  <data name="Home.Assistant.RefinedHeading" xml:space="preserve"><value>✓ 已優化的郵件版本：</value></data>
+  <data name="Home.Assistant.Button.Generate" xml:space="preserve"><value>🚀 產生郵件</value></data>
+  <data name="Home.Assistant.Prompt.Label" xml:space="preserve"><value>您的提示：</value></data>
+  <data name="Home.Assistant.Prompt.Placeholder" xml:space="preserve"><value>描述您想要產生的電子郵件內容…</value></data>
+  <data name="Home.Assistant.NewMessageLabel" xml:space="preserve"><value>新郵件內容：</value></data>
+  <data name="Assistant.Option.Refine.Title" xml:space="preserve"><value>改寫我的郵件</value></data>
+  <data name="Assistant.Option.Refine.Description" xml:space="preserve"><value>在保留原意的同時，改善清晰度、語氣、文法與結構。</value></data>
+  <data name="Assistant.Option.Generate.Title" xml:space="preserve"><value>從提示產生</value></data>
+  <data name="Assistant.Option.Generate.Description" xml:space="preserve"><value>只需幾個字或指示，立即產生專業郵件。</value></data>
+  <data name="Assistant.Option.Professional.Title" xml:space="preserve"><value>讓它更專業</value></data>
+  <data name="Assistant.Option.Professional.Description" xml:space="preserve"><value>使語氣更正式、精煉且具高階管理風格。</value></data>
+  <data name="Home.Composer.Title" xml:space="preserve"><value>電子郵件撰寫器</value></data>
+  <data name="Added.Localization" xml:space="preserve"><value>新增：首頁與頁腳的初始本地化支援（英語 + 繁體中文）。</value></data>
+  <data name="Home.Benefit.LearnAI" xml:space="preserve"><value>正確學習 AI</value></data>
+  <data name="Home.Benefit.BuildProjects" xml:space="preserve"><value>建立真實專案</value></data>
+  <data name="Home.Benefit.JoinCommunity" xml:space="preserve"><value>加入全球社群</value></data>
+  <data name="Home.Benefit.AdvanceCareer" xml:space="preserve"><value>提升你的職涯</value></data>
+  <data name="Home.Assistant.Button.GenerateEmail" xml:space="preserve"><value>產生郵件</value></data>
+  <data name="Home.Assistant.Label.NewEmailMessage" xml:space="preserve"><value>新郵件內容：</value></data>
+  <data name="Home.Assistant.TimeSaved" xml:space="preserve"><value>⏱️ 節省時間：{0}</value></data>
+  <data name="Home.Assistant.TimeSavedYear" xml:space="preserve"><value>每年可節省 {0} 小時！</value></data>
+  <data name="Home.Assistant.Button.Extension" xml:space="preserve"><value>延期</value></data>
+  <data name="Home.Assistant.Button.FollowUp" xml:space="preserve"><value>跟進</value></data>
+  <data name="Home.Assistant.Button.Vacation" xml:space="preserve"><value>休假</value></data>
+  <data name="Home.Assistant.Tone.Select" xml:space="preserve"><value>選擇語氣：</value></data>
+  <data name="Home.Assistant.Tone.Executive" xml:space="preserve"><value>主管式</value></data>
+  <data name="Home.Assistant.Tone.Diplomatic" xml:space="preserve"><value>圓融式</value></data>
+  <data name="Home.Assistant.Tone.Persuasive" xml:space="preserve"><value>說服式</value></data>
+  <data name="Footer.ReleaseNotesTitle" xml:space="preserve"><value>版本說明</value></data>
+  <data name="Footer.ReleaseNotes.V2" xml:space="preserve"><value>公開網站發布、邀請制會員流程，以及 AI 工作台的優化。</value></data>
+  <data name="Footer.ReleaseNotes.ReadFull" xml:space="preserve"><value>閱讀完整版本說明</value></data>
+  <data name="Footer.Feedback.Title" xml:space="preserve"><value>回饋 / 願望清單</value></data>
+  <data name="Footer.Feedback.Send" xml:space="preserve"><value>提供回饋</value></data>
+  <data name="Footer.Feedback.Wishlist" xml:space="preserve"><value>加入願望清單</value></data>
+  <data name="Footer.Feedback.Roadmap" xml:space="preserve"><value>檢視路線圖</value></data>
+  <data name="Footer.Copyright" xml:space="preserve"><value>© {0} Dino AI 學院</value></data>
+  <data name="Footer.BuiltWith" xml:space="preserve"><value>使用 Blazor 與 DaisyUI 建置</value></data>
+</root>

@@ -1,13 +1,16 @@
 using DinoBlazorApp_v2.Components;
 using DinoBlazorApp_v2.Components.Account;
 using DinoBlazorApp_v2.Data;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
@@ -40,6 +43,23 @@ builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSe
 
 var app = builder.Build();
 
+var supportedCultures = new[]
+{
+    CultureInfo.GetCultureInfo("en-US"),
+    CultureInfo.GetCultureInfo("zh-Hant")
+};
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("en-US"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+    RequestCultureProviders = new[]
+    {
+        new CookieRequestCultureProvider()
+    }
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -48,7 +68,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
@@ -56,11 +75,34 @@ app.UseHttpsRedirection();
 
 app.UseAntiforgery();
 
+app.MapGet("/culture/set", (HttpContext httpContext, string culture, string? returnUrl) =>
+{
+    var selectedCulture = supportedCultures.Any(candidate =>
+        string.Equals(candidate.Name, culture, StringComparison.OrdinalIgnoreCase))
+        ? culture
+        : "en-US";
+
+    httpContext.Response.Cookies.Append(
+        CookieRequestCultureProvider.DefaultCookieName,
+        CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(selectedCulture)),
+        new CookieOptions
+        {
+            Expires = DateTimeOffset.UtcNow.AddYears(1),
+            IsEssential = true,
+            Path = "/"
+        });
+
+    var target = string.IsNullOrWhiteSpace(returnUrl) || !returnUrl.StartsWith("/", StringComparison.Ordinal)
+        ? "/"
+        : returnUrl;
+
+    return Results.LocalRedirect(target);
+});
+
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-// Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
 
 app.Run();

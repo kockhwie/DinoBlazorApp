@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentUICulture.Name">
 
 <head>
     <meta charset="utf-8" />
@@ -7,7 +7,7 @@
     <base href="/" />
     <ResourcePreloader />
     <link rel="stylesheet" href="@Assets["app.css"]" />
-    <link rel="stylesheet" href="@Assets["DinoBlazorApp-v2.styles.css"]" />
+    <link rel="stylesheet" href="@Assets["DinoBlazorApp_v2.styles.css"]" />
     <ImportMap />
     <HeadOutlet @rendermode="PageRenderMode" />
 
@@ -32,10 +32,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@@tailwindcss/browser@4"></script>
     
 
-
 </head>
 
 <body>
+    <CultureProvider />
     <Routes @rendermode="PageRenderMode" />
     <ReconnectModal />
     <script src="@Assets["_framework/blazor.web.js"]"></script>

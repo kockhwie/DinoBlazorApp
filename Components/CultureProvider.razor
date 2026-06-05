@@ -1,0 +1,59 @@
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Localization
+@using System.Globalization
+@implements IDisposable
+
+@*
+    Bridges the culture from HTTP request (UseRequestLocalization middleware)
+    into the Blazor Interactive Server circuit.
+
+    During SSR: reads the resolved culture from HttpContext and persists it.
+    During circuit startup: restores the persisted culture onto the thread.
+    This ensures IStringLocalizer uses the cookie-based culture in both phases.
+*@
+
+@code {
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    [Inject]
+    private PersistentComponentState PersistentState { get; set; } = default!;
+
+    private PersistingComponentStateSubscription _subscription;
+
+    protected override void OnInitialized()
+    {
+        if (HttpContext is not null)
+        {
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>()?.RequestCulture;
+            if (requestCulture is not null)
+            {
+                CultureInfo.CurrentCulture = requestCulture.Culture;
+                CultureInfo.CurrentUICulture = requestCulture.UICulture;
+            }
+
+            _subscription = PersistentState.RegisterOnPersisting(() =>
+            {
+                PersistentState.PersistAsJson("culture", CultureInfo.CurrentUICulture.Name);
+                PersistentState.PersistAsJson("uiCulture", CultureInfo.CurrentUICulture.Name);
+                return Task.CompletedTask;
+            });
+        }
+        else
+        {
+            if (PersistentState.TryTakeFromJson<string>("culture", out var cultureName) &&
+                PersistentState.TryTakeFromJson<string>("uiCulture", out var uiCultureName))
+            {
+                var culture = CultureInfo.GetCultureInfo(cultureName!);
+                var uiCulture = CultureInfo.GetCultureInfo(uiCultureName!);
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = uiCulture;
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        _subscription.Dispose();
+    }
+}
