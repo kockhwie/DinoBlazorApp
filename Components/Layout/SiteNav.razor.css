@@ -8,6 +8,9 @@
     z-index: 2;
     font-size: 1.03rem;
 }
+.navbar-start {
+    width: 40%;
+}
 
 .brand-link {
     display: inline-flex;

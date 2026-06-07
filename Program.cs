@@ -1,16 +1,38 @@
-using DinoBlazorApp_v2.Components;
-using DinoBlazorApp_v2.Components.Account;
-using DinoBlazorApp_v2.Data;
+using DinoAI.Components;
+using DinoAI.Components.Account;
+using DinoAI.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ── RAZOR COMPONENTS ─────────────────────────────────────────────────────────
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+// ── LOCALIZATION Part 1: ──────────────────────────────────────────────────────
+// ResourcesPath tells IStringLocalizer where to find .resx files.
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("zh-TW") };
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("en");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    // Cookie first (set by CultureController), then browser Accept-Language, then default
+    options.RequestCultureProviders =
+    [
+        new CookieRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    ];
+});
+ 
+// ── IDENTITY ──────────────────────────────────────────────────────────────────
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
@@ -54,9 +76,49 @@ else
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
 
+// LOCALIZATION Part 2: Add the localization middleware to the pipeline.
+// Must be before UseAntiforgery so culture is resolved before any component renders
+app.UseRequestLocalization();
+
+
 app.UseAntiforgery();
 
 app.MapStaticAssets();
+
+// ── CULTURE ENDPOINT — minimal API, no MVC ────────────────────────────────────
+// Reads the posted form, writes the ASP.NET Core culture cookie, redirects back.
+// .DisableAntiforgery() is required because LangToggle is a plain HTML form
+// with no Blazor antiforgery token — language switching carries no security risk.
+app.MapPost("/culture/set", async (HttpContext context) =>
+{
+    var form = await context.Request.ReadFormAsync();
+    var culture = form["culture"].ToString();
+    var redirectUri = form["redirectUri"].ToString();
+
+    string[] supported = ["en", "zh-TW"];
+    if (!supported.Contains(culture))
+        return Results.BadRequest();
+
+    context.Response.Cookies.Append(
+        CookieRequestCultureProvider.DefaultCookieName,
+        CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+        new CookieOptions
+        {
+            Path = "/",
+            MaxAge = TimeSpan.FromDays(365),
+            IsEssential = true,
+            SameSite = SameSiteMode.Lax
+        });
+
+    if (!Uri.IsWellFormedUriString(redirectUri, UriKind.Relative))
+        redirectUri = "/";
+
+    return Results.LocalRedirect(redirectUri);
+})
+.DisableAntiforgery();
+// ─────────────────────────────────────────────────────────────────────────────
+
+
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

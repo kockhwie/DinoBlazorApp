@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace DinoBlazorApp_v2.Data;
+namespace DinoAI.Data;
 // Add profile data for application users by adding properties to the ApplicationUser class
 public class ApplicationUser : IdentityUser
 {
