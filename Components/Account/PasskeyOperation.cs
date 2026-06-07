@@ -1,4 +1,4 @@
-namespace DinoBlazorApp_v2.Components.Account;
+namespace DinoAI.Components.Account;
 
 public enum PasskeyOperation
 {

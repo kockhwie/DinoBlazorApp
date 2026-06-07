@@ -1,8 +1,8 @@
-using DinoBlazorApp_v2.Data;
+using DinoAI.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 
-namespace DinoBlazorApp_v2.Components.Account;
+namespace DinoAI.Components.Account;
 
 internal sealed class IdentityRedirectManager(NavigationManager navigationManager)
 {

@@ -3,7 +3,7 @@ using System;
 
 #nullable disable
 
-namespace DinoBlazorApp_v2.Migrations;
+namespace DinoAI.Migrations;
 /// <inheritdoc />
 public partial class CreateIdentitySchema : Migration
 {

@@ -1,6 +1,6 @@
-using DinoBlazorApp_v2.Components.Account.Pages;
-using DinoBlazorApp_v2.Components.Account.Pages.Manage;
-using DinoBlazorApp_v2.Data;
+using DinoAI.Components.Account.Pages;
+using DinoAI.Components.Account.Pages.Manage;
+using DinoAI.Data;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;

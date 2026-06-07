@@ -1,3 +1,7 @@
+@using Microsoft.Extensions.Localization
+@inject NavigationManager Nav
+@inject IStringLocalizer<DinoAI.Resources.SharedResource> L
+
 <nav class="navbar site-nav">
     <div class="navbar-start gap-2">
         <div class="dropdown lg:hidden">
@@ -29,7 +33,9 @@
                     </details>
                 </li>
                 <li><a href="#">Community</a></li>
-                 
+                <li class="mt-1 px-1">
+                    <LangToggle CurrentPath="@CurrentPath" />
+                </li>
             </ul>
         </div>
 
@@ -63,12 +69,23 @@
                 </details>
             </li>
             <li><a href="#">Community</a></li>
-          
+
         </ul>
     </div>
 
     <div class="navbar-end gap-3">
-        <a href="/membership" class="btn btn-sm sm:btn-md shadow-none nav-login">Log in</a>
-        <a href="/membership" class="btn btn-sm sm:btn-md nav-join">Join Academy</a>
+        <div class="hidden lg:flex">
+            <LangToggle CurrentPath="@CurrentPath" />
+        </div>
+        <a href="/membership" class="btn btn-sm sm:btn-md shadow-none nav-login">@L["Nav_LogIn"]</a>
+        <a href="/membership" class="btn btn-sm sm:btn-md nav-join">@L["Nav_JoinAcademy"]</a>
+
     </div>
 </nav>
+
+@code {
+    // Compute once here; pass down to LangToggle as a parameter.
+    // Nav is only injected in SiteNav — LangToggle stays dependency-free.
+    private string CurrentPath =>
+        "/" + Nav.ToBaseRelativePath(Nav.Uri);
+}

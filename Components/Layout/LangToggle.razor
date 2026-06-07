@@ -1,0 +1,42 @@
+﻿@* Components/Layout/LangToggle.razor
+   Renders two plain HTML form POST buttons — EN and 中文.
+   Posting to /culture/set (minimal API in Program.cs) sets the
+   .AspNetCore.Culture cookie server-side and redirects back.
+   RequestLocalizationMiddleware reads the cookie on the next request.
+
+   No JSInterop. No MVC. No controller.
+   Works in both static SSR and InteractiveServer render modes.
+*@
+
+<div class="lang-toggle">
+    <form method="post" action="/culture/set" class="lang-form">
+        <input type="hidden" name="culture" value="en" />
+        <input type="hidden" name="redirectUri" value="@CurrentPath" />
+        <button type="submit" class="lt-btn @(CurrentCulture == "en" ? "on" : "")">
+            EN
+        </button>
+    </form>
+
+    <span class="lt-divider">|</span>
+
+    <form method="post" action="/culture/set" class="lang-form">
+        <input type="hidden" name="culture" value="zh-TW" />
+        <input type="hidden" name="redirectUri" value="@CurrentPath" />
+        <button type="submit" class="lt-btn @(CurrentCulture == "zh-TW" ? "on" : "")">
+            中文
+        </button>
+    </form>
+</div>
+
+@code {
+    // Passed in by the parent (SiteNav) which already knows the current URL.
+    // Avoids injecting NavigationManager here — keeps this component pure.
+    [Parameter] public string CurrentPath { get; set; } = "/";
+
+    private static string CurrentCulture =>
+        System.Globalization.CultureInfo.CurrentUICulture.Name switch
+        {
+            "zh-TW" => "zh-TW",
+            _ => "en"
+        };
+}
