@@ -1,8 +1,12 @@
-﻿namespace DinoAI.Resources;
- 
-/// <summary>
+﻿/// <summary>
 /// Marker class for IStringLocalizer&lt;SharedResource&gt;.
 /// Strings live in Resources/SharedResource.resx (English default)
-/// and Resources/SharedResource.zh-TW.resx (Traditional Chinese).
+/// and Resources/SharedResource.zh-Hant.resx (Traditional Chinese).
 /// </summary>
-public class SharedResource { }
+ 
+
+
+namespace DinoAI
+{
+    public class SharedResource { }
+}

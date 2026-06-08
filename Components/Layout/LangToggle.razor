@@ -20,9 +20,9 @@
     <span class="lt-divider">|</span>
 
     <form method="post" action="/culture/set" class="lang-form">
-        <input type="hidden" name="culture" value="zh-TW" />
+        <input type="hidden" name="culture" value="zh-Hant" />
         <input type="hidden" name="redirectUri" value="@CurrentPath" />
-        <button type="submit" class="lt-btn @(CurrentCulture == "zh-TW" ? "on" : "")">
+        <button type="submit" class="lt-btn @(CurrentCulture == " zh-Hant" ? "on" : "")">
             中文
         </button>
     </form>
@@ -36,7 +36,7 @@
     private string CurrentCulture =>
         System.Globalization.CultureInfo.CurrentUICulture.Name switch
         {
-            var name when name.StartsWith("zh") => "zh-TW",
+            var name when name.StartsWith("zh") => " zh-Hant",
             _ => "en"
         };
 }

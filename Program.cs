@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,7 @@ builder.Services.AddRazorComponents()
 // ResourcesPath tells IStringLocalizer where to find .resx files.
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("zh-TW") };
+var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("zh-Hant") };
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     options.DefaultRequestCulture = new RequestCulture("en");
@@ -95,7 +96,7 @@ app.MapPost("/culture/set", async (HttpContext context) =>
     var culture = form["culture"].ToString();
     var redirectUri = form["redirectUri"].ToString();
 
-    string[] supported = ["en", "zh-TW"];
+    string[] supported = ["en", "zh-Hant"];
     if (!supported.Contains(culture))
         return Results.BadRequest();
 
