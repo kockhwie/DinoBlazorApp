@@ -1,4 +1,4 @@
-﻿namespace DinoAI;
+﻿namespace DinoAI.Resources;
  
 /// <summary>
 /// Marker class for IStringLocalizer&lt;SharedResource&gt;.
