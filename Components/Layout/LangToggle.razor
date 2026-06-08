@@ -33,10 +33,48 @@
     // Avoids injecting NavigationManager here — keeps this component pure.
     [Parameter] public string CurrentPath { get; set; } = "/";
 
-    private static string CurrentCulture =>
+    private string CurrentCulture =>
         System.Globalization.CultureInfo.CurrentUICulture.Name switch
         {
-            "zh-TW" => "zh-TW",
+            var name when name.StartsWith("zh") => "zh-TW",
             _ => "en"
         };
 }
+
+<style>
+    .lang-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .lang-form {
+        display: inline-block;
+    }
+
+    .lt-btn {
+        background: none;
+        border: none;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        transition: color 0.2s ease;
+        border-radius: 0.25rem;
+    }
+
+    .lt-btn:hover {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .lt-btn.on {
+        color: #3fd6b4;
+        font-weight: 700;
+    }
+
+    .lt-divider {
+        color: rgba(255, 255, 255, 0.2);
+        font-size: 0.75rem;
+    }
+</style>
