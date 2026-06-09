@@ -701,6 +701,11 @@
     font-size: 0.85rem;
 }
 
+.footer-logo {
+    width: 30px;
+    height: auto;
+}
+
 @media (min-width: 768px) {
     .hero-grid {
         grid-template-columns: minmax(0, 1.28fr) minmax(0, 0.72fr);

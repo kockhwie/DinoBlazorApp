@@ -175,7 +175,7 @@
 	<data name="Footer.Feedback.Wishlist" xml:space="preserve"><value>加入願望清單</value></data>
 	<data name="Footer.Feedback.Roadmap" xml:space="preserve"><value>檢視路線圖</value></data>
 	<data name="Footer.Copyright" xml:space="preserve"><value>© {0} Dino AI Academy</value></data>
-	<data name="Footer.BuiltWith" xml:space="preserve"><value>使用 Blazor 與 DaisyUI 建置</value></data>
+	<data name="Footer.BuiltWith" xml:space="preserve"><value>使用 :</value></data>
 
 
 </root>

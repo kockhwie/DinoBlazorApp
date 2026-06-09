@@ -10,9 +10,9 @@ Keep the detailed working rules in [docs/codex-rules.md](docs/codex-rules.md). U
 
 ## UI And UX
 
-- Prefer DaisyUI components and Tailwind utilities for all UI work unless there is a strong reason to do otherwise.
-- Keep layouts minimal, responsive, and visually consistent with DaisyUI patterns.
-- Avoid custom CSS when a DaisyUI component or utility class can express the same result cleanly.
+- Prefer daisyUI components and Tailwind utilities for all UI work unless there is a strong reason to do otherwise.
+- Keep layouts minimal, responsive, and visually consistent with daisyUI patterns.
+- Avoid custom CSS when a daisyUI component or utility class can express the same result cleanly.
 
 ## Security And Config
 

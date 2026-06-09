@@ -108,6 +108,6 @@
     <data name="Footer.Feedback.Wishlist" xml:space="preserve"><value>Add to wishlist</value></data>
     <data name="Footer.Feedback.Roadmap" xml:space="preserve"><value>View roadmap</value></data>
     <data name="Footer.Copyright" xml:space="preserve"><value>© {0} Dino AI Academy</value></data>
-    <data name="Footer.BuiltWith" xml:space="preserve"><value>Built with Blazor and DaisyUI</value></data>
+    <data name="Footer.BuiltWith" xml:space="preserve"><value>Built with :</value></data>
 
 </root>
