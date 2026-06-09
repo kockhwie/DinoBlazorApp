@@ -1,5 +1,4 @@
 @using Microsoft.Extensions.Localization
-@using DinoAI.Resources
 @inject NavigationManager Nav
 @inject IStringLocalizer<SharedResource> L
 
@@ -14,26 +13,26 @@
             <ul tabindex="0" class="menu menu-sm dropdown-content z-50 mt-4 w-56 rounded-box nav-menu p-2 shadow-2xl">
                 <li>
                     <details name="mobile-nav">
-                        <summary>Courses</summary>
+                        <summary>@L["Nav_Courses"]</summary>
                         <ul class="p-1">
-                            <li><a href="#">Starter Path</a></li>
-                            <li><a href="#">Advanced Path</a></li>
-                            <li><a href="#">Projects</a></li>
+                            <li><a href="#">@L["Nav_StarterPath"]</a></li>
+                            <li><a href="#">@L["Nav_AdvancedPath"]</a></li>
+                            <li><a href="#">@L["Nav_Projects"]</a></li>
                         </ul>
                     </details>
                 </li>
-                <li><a href="#">AI Tools</a></li>
+                <li><a href="#">@L["Nav_AITools"]</a></li>
                 <li>
                     <details name="mobile-nav">
-                        <summary>Resources</summary>
+                        <summary>@L["Nav_Resources"]</summary>
                         <ul class="p-1">
-                            <li><a href="#">Guides</a></li>
-                            <li><a href="#">Templates</a></li>
-                            <li><a href="#">Videos</a></li>
+                            <li><a href="#">@L["Nav_Guides"]</a></li>
+                            <li><a href="#">@L["Nav_Templates"]</a></li>
+                            <li><a href="#">@L["Nav_Videos"]</a></li>
                         </ul>
                     </details>
                 </li>
-                <li><a href="#">Community</a></li>
+                <li><a href="#">@L["Nav_Community"]</a></li>
                 <li class="mt-1 px-1">
                     <LangToggle CurrentPath="@CurrentPath" />
                 </li>
@@ -50,26 +49,26 @@
         <ul class="menu menu-horizontal menu-sm items-center gap-1 px-1 nav-links">
             <li>
                 <details class="nav-dropdown" name="primary-nav">
-                    <summary>Courses</summary>
+                    <summary>@L["Nav_Courses"]</summary>
                     <ul class="rounded-box nav-menu p-2 shadow-2xl">
-                        <li><a href="#">Starter Path</a></li>
-                        <li><a href="#">Advanced Path</a></li>
-                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">@L["Nav_StarterPath"]</a></li>
+                        <li><a href="#">@L["Nav_AdvancedPath"]</a></li>
+                        <li><a href="#">@L["Nav_Projects"]</a></li>
                     </ul>
                 </details>
             </li>
-            <li><a href="#">AI Tools</a></li>
+            <li><a href="#">@L["Nav_AITools"]</a></li>
             <li>
                 <details class="nav-dropdown" name="primary-nav">
-                    <summary>Resources</summary>
+                    <summary>@L["Nav_Resources"]</summary>
                     <ul class="rounded-box nav-menu p-2 shadow-2xl">
-                        <li><a href="#">Guides</a></li>
-                        <li><a href="#">Templates</a></li>
-                        <li><a href="#">Videos</a></li>
+                        <li><a href="#">@L["Nav_Guides"]</a></li>
+                        <li><a href="#">@L["Nav_Templates"]</a></li>
+                        <li><a href="#">@L["Nav_Videos"]</a></li>
                     </ul>
                 </details>
             </li>
-            <li><a href="#">Community</a></li>
+            <li><a href="#">@L["Nav_Community"]</a></li>
 
         </ul>
     </div>

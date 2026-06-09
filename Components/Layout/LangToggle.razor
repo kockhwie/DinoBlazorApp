@@ -1,4 +1,4 @@
-﻿@* Components/Layout/LangToggle.razor
+@* Components/Layout/LangToggle.razor
    Renders two plain HTML form POST buttons — EN and 中文.
    Posting to /culture/set (minimal API in Program.cs) sets the
    .AspNetCore.Culture cookie server-side and redirects back.
@@ -22,7 +22,7 @@
     <form method="post" action="/culture/set" class="lang-form">
         <input type="hidden" name="culture" value="zh-Hant" />
         <input type="hidden" name="redirectUri" value="@CurrentPath" />
-        <button type="submit" class="lt-btn @(CurrentCulture == " zh-Hant" ? "on" : "")">
+        <button type="submit" class="lt-btn @(CurrentCulture == "zh-Hant" ? "on" : "")">
             中文
         </button>
     </form>
@@ -36,45 +36,7 @@
     private string CurrentCulture =>
         System.Globalization.CultureInfo.CurrentUICulture.Name switch
         {
-            var name when name.StartsWith("zh") => " zh-Hant",
+            var name when name.StartsWith("zh") => "zh-Hant",
             _ => "en"
         };
 }
-
-<style>
-    .lang-toggle {
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-    }
-
-    .lang-form {
-        display: inline-block;
-    }
-
-    .lt-btn {
-        background: none;
-        border: none;
-        padding: 0.2rem 0.4rem;
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.4);
-        cursor: pointer;
-        transition: color 0.2s ease;
-        border-radius: 0.25rem;
-    }
-
-    .lt-btn:hover {
-        color: rgba(255, 255, 255, 0.8);
-    }
-
-    .lt-btn.on {
-        color: #3fd6b4;
-        font-weight: 700;
-    }
-
-    .lt-divider {
-        color: rgba(255, 255, 255, 0.2);
-        font-size: 0.75rem;
-    }
-</style>

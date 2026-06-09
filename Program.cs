@@ -17,7 +17,7 @@ builder.Services.AddRazorComponents()
 
 // ── LOCALIZATION Part 1: ──────────────────────────────────────────────────────
 // ResourcesPath tells IStringLocalizer where to find .resx files.
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddLocalization();
 
 var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("zh-Hant") };
 builder.Services.Configure<RequestLocalizationOptions>(options =>

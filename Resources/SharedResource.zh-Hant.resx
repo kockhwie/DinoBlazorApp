@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -98,4 +98,19 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+
+  <!-- NAV -->
+  <data name="Nav_OpenMenu"><value>開啟導覽選單</value></data>
+  <data name="Nav_Courses"><value>課程</value></data>
+  <data name="Nav_StarterPath"><value>新手路徑</value></data>
+  <data name="Nav_AdvancedPath"><value>進階路徑</value></data>
+  <data name="Nav_Projects"><value>實作專案</value></data>
+  <data name="Nav_AITools"><value>AI 工具</value></data>
+  <data name="Nav_Resources"><value>學習資源</value></data>
+  <data name="Nav_Guides"><value>指南</value></data>
+  <data name="Nav_Templates"><value>範本</value></data>
+  <data name="Nav_Videos"><value>教學影片</value></data>
+  <data name="Nav_Community"><value>交流社群</value></data>
+  <data name="Nav_LogIn"><value>登入</value></data>
+  <data name="Nav_JoinAcademy"><value>加入學院</value></data>
 </root>
