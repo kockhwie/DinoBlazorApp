@@ -99,18 +99,83 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 
-  <!-- NAV -->
-  <data name="Nav_OpenMenu"><value>開啟導覽選單</value></data>
-  <data name="Nav_Courses"><value>課程</value></data>
-  <data name="Nav_StarterPath"><value>新手路徑</value></data>
-  <data name="Nav_AdvancedPath"><value>進階路徑</value></data>
-  <data name="Nav_Projects"><value>實作專案</value></data>
-  <data name="Nav_AITools"><value>AI 工具</value></data>
-  <data name="Nav_Resources"><value>學習資源</value></data>
-  <data name="Nav_Guides"><value>指南</value></data>
-  <data name="Nav_Templates"><value>範本</value></data>
-  <data name="Nav_Videos"><value>教學影片</value></data>
-  <data name="Nav_Community"><value>交流社群</value></data>
-  <data name="Nav_LogIn"><value>登入</value></data>
-  <data name="Nav_JoinAcademy"><value>加入學院</value></data>
+
+	<!-- General -->
+	<data name="Site.Title" xml:space="preserve"><value>Dino AI Academy 首頁</value></data>
+
+
+	<!-- NAV -->
+	<data name="Nav_OpenMenu"><value>開啟導覽選單</value></data>
+	<data name="Nav_Courses"><value>課程</value></data>
+	<data name="Nav_StarterPath"><value>新手路徑</value></data>
+	<data name="Nav_AdvancedPath"><value>進階路徑</value></data>
+	<data name="Nav_Projects"><value>實作專案</value></data>
+	<data name="Nav_AITools"><value>AI 工具</value></data>
+	<data name="Nav_Resources"><value>學習資源</value></data>
+	<data name="Nav_Guides"><value>指南</value></data>
+	<data name="Nav_Templates"><value>範本</value></data>
+	<data name="Nav_Videos"><value>教學影片</value></data>
+	<data name="Nav_Community"><value>交流社群</value></data>
+	<data name="Nav_LogIn"><value>登入</value></data>
+	<data name="Nav_JoinAcademy"><value>加入</value></data>
+
+	<!-- Hero section -->
+	<data name="Home.Hero.Title1" xml:space="preserve"><value>不要只使用 AI。</value></data>
+	<data name="Home.Hero.Title2" xml:space="preserve"><value>與它共同進化。</value></data>
+	<data name="Home.Hero.Lead" xml:space="preserve"><value>透過實作學習、真實專案與充滿活力的創新社群，掌握 AI 技能。</value></data>
+	<data name="Home.Hero.StartCta" xml:space="preserve"><value>開始你的進化</value></data>
+	<data name="Home.Benefit.LearnAI" xml:space="preserve"><value>正確學習 AI</value></data>
+	<data name="Home.Benefit.BuildProjects" xml:space="preserve"><value>建立真實專案</value></data>
+	<data name="Home.Benefit.JoinCommunity" xml:space="preserve"><value>加入全球社群</value></data>
+	<data name="Home.Benefit.AdvanceCareer" xml:space="preserve"><value>提升你的職涯</value></data>
+
+	<!-- Main AI Workbench -->
+	<data name="Home.Composer.Title" xml:space="preserve"><value>電子郵件撰寫器</value></data>
+	<data name="Home.Assistant.Title" xml:space="preserve"><value>AI 助手</value></data>
+	<!-- Email Composer -->
+	<data name="Home.Composer.Label.To" xml:space="preserve"><value>收件者</value></data>
+	<data name="Home.Composer.Label.Subject" xml:space="preserve"><value>主旨</value></data>
+	<data name="Home.Composer.Label.Message" xml:space="preserve"><value>內容</value></data>
+	<data name="Home.Composer.Placeholder.Message" xml:space="preserve"><value>在此撰寫您的電子郵件內容或使用任何一個AI助手選項…</value></data>
+	<data name="Home.Composer.Action.Clear" xml:space="preserve"><value>清除</value></data>
+	<data name="Home.Composer.Action.Improve" xml:space="preserve"><value>改善內容</value></data>
+	<data name="Home.Composer.Action.Send" xml:space="preserve"><value>發送電子郵件</value></data>
+	<data name="Home.Composer.Status.SendPreview" xml:space="preserve"><value>僅發送預覽 — 未實際寄出電子郵件。</value></data>
+	<!-- AI Assistant -->
+	<data name="Home.Assistant.Button.Back" xml:space="preserve"><value>返回</value></data>
+ 	<data name="Home.Assistant.ChooseAction" xml:space="preserve"><value>選擇一個操作開始。</value></data>
+	<data name="Home.Assistant.EmptyDraft.Title" xml:space="preserve"><value>您的草稿為空！</value></data>
+	<data name="Home.Assistant.EmptyDraft.Body" xml:space="preserve"><value>請在左側的 AI 工作台撰寫或貼上電子郵件，或使用範例草稿查看改寫效果。</value></data>
+	<data name="Home.Assistant.Button.UseSampleDraft" xml:space="preserve"><value>使用範例草稿</value></data>
+	<data name="Assistant.Button.Generate" xml:space="preserve"><value>🚀 產生郵件內容</value></data>
+	<data name="Assistant.Prompt.Label" xml:space="preserve"><value>AI 提示：</value></data>
+	<data name="Assistant.Prompt.Placeholder" xml:space="preserve"><value>描述您想要產生的電子郵件內容…</value></data>
+	<data name="Assistant.NewMessage.Label" xml:space="preserve"><value>新郵件內容：</value></data>
+	<data name="Assistant.Option.Generate.Title" xml:space="preserve"><value>等级 1: 替我寫郵件內容</value></data>
+	<data name="Assistant.Option.Generate.Description" xml:space="preserve"><value>只需幾個字或指示，立即產生專業郵件。</value></data>	
+	<data name="Assistant.Option.Refine.Title" xml:space="preserve"><value>等级 2: 改寫我的郵件內容</value></data>
+	<data name="Assistant.Option.Refine.Description" xml:space="preserve"><value>在保留原意的同時，改善清晰度、語氣、文法與結構。</value></data>
+	<data name="Assistant.Option.Professional.Title" xml:space="preserve"><value>等级 3: 讓郵件內容更專業</value></data>
+	<data name="Assistant.Option.Professional.Description" xml:space="preserve"><value>使語氣更正式、精煉且具高階管理風格。</value></data>
+	<data name="Assistant.Button.Extension" xml:space="preserve"><value>延期</value></data>
+	<data name="Assistant.Button.FollowUp" xml:space="preserve"><value>跟進</value></data>
+	<data name="Assistant.Button.Vacation" xml:space="preserve"><value>休假</value></data>
+	<data name="Assistant.Tone.Select" xml:space="preserve"><value>選擇語氣：</value></data>
+	<data name="Assistant.Tone.Executive" xml:space="preserve"><value>主管式</value></data>
+	<data name="Assistant.Tone.Diplomatic" xml:space="preserve"><value>圓融式</value></data>
+	<data name="Assistant.Tone.Persuasive" xml:space="preserve"><value>說服式</value></data>
+
+
+	<!-- Footer section-->
+	<data name="Footer.ReleaseNotesTitle" xml:space="preserve"><value>版本說明</value></data>
+	<data name="Footer.ReleaseNotes.V2" xml:space="preserve"><value>公開網站發布、邀請制會員流程，以及 AI 工作台的優化。</value></data>
+	<data name="Footer.ReleaseNotes.ReadFull" xml:space="preserve"><value>閱讀完整版本說明</value></data>
+	<data name="Footer.Feedback.Title" xml:space="preserve"><value>回饋 / 願望清單</value></data>
+	<data name="Footer.Feedback.Send" xml:space="preserve"><value>提供回饋</value></data>
+	<data name="Footer.Feedback.Wishlist" xml:space="preserve"><value>加入願望清單</value></data>
+	<data name="Footer.Feedback.Roadmap" xml:space="preserve"><value>檢視路線圖</value></data>
+	<data name="Footer.Copyright" xml:space="preserve"><value>© {0} Dino AI Academy</value></data>
+	<data name="Footer.BuiltWith" xml:space="preserve"><value>使用 Blazor 與 DaisyUI 建置</value></data>
+
+
 </root>

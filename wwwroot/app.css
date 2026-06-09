@@ -36,4 +36,15 @@ h1:focus {
     border-color: #929292;
 }
 
- 
+.stars {
+    color: gold;
+    font-size: 0.5em;
+
+}
+
+.stars-container {
+    display: inline-block;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 0.5rem; /* Prevents text line-height from creating fake padding */
+}

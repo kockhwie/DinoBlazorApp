@@ -9,7 +9,7 @@
     font-size: 1.03rem;
 }
 .navbar-start {
-    width: 40%;
+    width: 50%;
 }
 
 .brand-link {
@@ -41,11 +41,11 @@
     }
 
     .brand-mark {
-        height: 2.2rem;
+        height: 1.90rem;
     }
 
     .brand-wordmark {
-        height: 2.15rem;
+        height: 2.20rem;
     }
 }
 
@@ -114,7 +114,7 @@
     border-color: rgba(42, 201, 161, 0.34);
     background: rgba(255, 255, 255, 0.02);
     transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
-    font-size: 0.98rem;
+    /*font-size: 0.98rem;*/
 }
 
 .nav-join {
@@ -152,7 +152,7 @@
     padding-block: 0.45rem;
     border-radius: 0.35rem;
     list-style: none;
-    font-size: 0.96rem;
+    font-size: 0.90rem;
 }
 
 .nav-menu details[open] > summary {
@@ -168,5 +168,5 @@
 .nav-menu details ul a {
     padding-inline: 0.7rem;
     padding-block: 0.35rem;
-    font-size: 0.92rem;
+    font-size: 0.80rem;
 }

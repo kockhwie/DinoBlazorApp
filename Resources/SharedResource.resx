@@ -29,18 +29,85 @@
   <resheader name="reader"><value>System.Resources.ResXResourceReader</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter</value></resheader>
 
-  <!-- NAV -->
-  <data name="Nav_OpenMenu"><value>Open navigation menu</value></data>
-  <data name="Nav_Courses"><value>Courses</value></data>
-  <data name="Nav_StarterPath"><value>Starter Path</value></data>
-  <data name="Nav_AdvancedPath"><value>Advanced Path</value></data>
-  <data name="Nav_Projects"><value>Projects</value></data>
-  <data name="Nav_AITools"><value>AI Tools</value></data>
-  <data name="Nav_Resources"><value>Resources</value></data>
-  <data name="Nav_Guides"><value>Guides</value></data>
-  <data name="Nav_Templates"><value>Templates</value></data>
-  <data name="Nav_Videos"><value>Videos</value></data>
-  <data name="Nav_Community"><value>Community</value></data>
-  <data name="Nav_LogIn"><value>Log in</value></data>
-  <data name="Nav_JoinAcademy"><value>Join Academy</value></data>
+    <!-- General -->
+    <data name="Site.Title" xml:space="preserve"><value>Dino AI Academy</value></data>
+
+
+    <!-- NAV -->
+    <data name="Nav_OpenMenu"><value>Open navigation menu</value></data>
+    <data name="Nav_Courses"><value>Courses</value></data>
+    <data name="Nav_StarterPath"><value>Starter Path</value></data>
+    <data name="Nav_AdvancedPath"><value>Advanced Path</value></data>
+    <data name="Nav_Projects"><value>Projects</value></data>
+    <data name="Nav_AITools"><value>AI Tools</value></data>
+    <data name="Nav_Resources"><value>Resources</value></data>
+    <data name="Nav_Guides"><value>Guides</value></data>
+    <data name="Nav_Templates"><value>Templates</value></data>
+    <data name="Nav_Videos"><value>Videos</value></data>
+    <data name="Nav_Community"><value>Community</value></data>
+    <data name="Nav_LogIn"><value>Log in</value></data>
+    <data name="Nav_JoinAcademy"><value>Join</value></data>
+
+    <!-- Hero section -->
+    <data name="Home.Hero.Title1" xml:space="preserve"><value>Don't just use AI.</value></data>
+    <data name="Home.Hero.Title2" xml:space="preserve"><value>Evolve with it.</value></data>
+    <data name="Home.Hero.Lead" xml:space="preserve"><value>Master AI through hands-on learning, real-world projects, and a thriving community of innovators.</value></data>
+    <data name="Home.Hero.StartCta" xml:space="preserve"><value>Start Your Evolution</value></data>
+    <data name="Home.Benefit.LearnAI" xml:space="preserve"><value>Learn AI the right way</value></data>
+    <data name="Home.Benefit.BuildProjects" xml:space="preserve"><value>Build real projects</value></data>
+    <data name="Home.Benefit.JoinCommunity" xml:space="preserve"><value>Join a global community</value></data>
+    <data name="Home.Benefit.AdvanceCareer" xml:space="preserve"><value>Advance your career</value></data>
+
+    <!-- AI Workbench Section -->
+    <data name="Home.Composer.Title" xml:space="preserve"><value>Email Composer</value></data>
+    <data name="Home.Assistant.Title" xml:space="preserve"><value>AI Assistant</value></data>
+    <!-- Email Composer -->
+    <data name="Home.Composer.Label.To" xml:space="preserve"><value>To</value></data>
+    <data name="Home.Composer.Label.Subject" xml:space="preserve"><value>Subject</value></data>
+    <data name="Home.Composer.Label.Message" xml:space="preserve"><value>Message</value></data>
+    <data name="Home.Composer.Placeholder.Message" xml:space="preserve"><value>Write your email content here or use any AI assistant option...</value></data>
+    <data name="Home.Composer.Action.Clear" xml:space="preserve"><value>Clear</value></data>
+    <data name="Home.Composer.Action.Improve" xml:space="preserve"><value>Improve Content</value></data>
+    <data name="Home.Composer.Action.Send" xml:space="preserve"><value>Send Email</value></data>
+    <data name="Home.Composer.Status.SendPreview" xml:space="preserve"><value>Send preview only - no email was submitted.</value></data>
+    <!-- AI Assistant -->
+    <data name="Home.Assistant.ChooseAction" xml:space="preserve"><value>Choose an action to get started.</value></data>
+    <data name="Home.Assistant.Button.Back" xml:space="preserve"><value>Back</value></data>
+    <data name="Home.Assistant.EmptyDraft.Title" xml:space="preserve"><value>Your draft is empty!</value></data>
+    <data name="Home.Assistant.EmptyDraft.Body" xml:space="preserve"><value>Please compose or paste your email in the AI Workbench on the left, or use our pre-filled sample draft to see refinement in action.</value></data>
+    <data name="Home.Assistant.Button.UseSampleDraft" xml:space="preserve"><value>Use Sample Draft</value></data>
+    <data name="Assistant.Button.Generate" xml:space="preserve"><value>🚀 Generate Email Content</value></data>
+    <data name="Assistant.Prompt.Label" xml:space="preserve"><value>AI Prompt:</value></data>
+    <data name="Assistant.Prompt.Placeholder" xml:space="preserve"><value>Describe what email you want to generate...</value></data>
+    <data name="Assistant.NewMessage.Label" xml:space="preserve"><value>New Email Message:</value></data>
+    <data name="Assistant.Option.Generate.Title" xml:space="preserve"><value>Level 1: Generate email for me</value></data>
+    <data name="Assistant.Option.Generate.Description" xml:space="preserve"><value>Create a professional email from just a few words or instructions in seconds.</value></data>
+    <data name="Assistant.Option.Refine.Title" xml:space="preserve"><value>Level 2: Refine my email</value></data>
+    <data name="Assistant.Option.Refine.Description" xml:space="preserve"><value>Improve clarity, tone, grammar, and structure while keeping your original message.</value></data>
+    <data name="Assistant.Option.Professional.Title" xml:space="preserve"><value>Level 3: Make my email professional</value></data>
+    <data name="Assistant.Option.Professional.Description" xml:space="preserve"><value>Make it more formal, polished and executive-level tone.</value></data>
+    <data name="Assistant.Button.Extension" xml:space="preserve"><value>Extension</value></data>
+    <data name="Assistant.Button.FollowUp" xml:space="preserve"><value>Follow-up</value></data>
+    <data name="Assistant.Button.Vacation" xml:space="preserve"><value>Vacation</value></data>
+    <data name="Assistant.Tone.Select" xml:space="preserve"><value>Select Tone:</value></data>
+    <data name="Assistant.Tone.Executive" xml:space="preserve"><value>Executive</value></data>
+    <data name="Assistant.Tone.Diplomatic" xml:space="preserve"><value>Diplomatic</value></data>
+    <data name="Assistant.Tone.Persuasive" xml:space="preserve"><value>Persuasive</value></data>
+
+    
+    
+    
+    
+    
+    <!-- Footer section-->
+    <data name="Footer.ReleaseNotesTitle" xml:space="preserve"><value>Release Notes</value></data>
+    <data name="Footer.ReleaseNotes.V2" xml:space="preserve"><value>Public website release, invitation-only membership flow, and AI Workbench polish.</value></data>
+    <data name="Footer.ReleaseNotes.ReadFull" xml:space="preserve"><value>Read the full release notes</value></data>
+    <data name="Footer.Feedback.Title" xml:space="preserve"><value>Feedback / Wishlist</value></data>
+    <data name="Footer.Feedback.Send" xml:space="preserve"><value>Send feedback</value></data>
+    <data name="Footer.Feedback.Wishlist" xml:space="preserve"><value>Add to wishlist</value></data>
+    <data name="Footer.Feedback.Roadmap" xml:space="preserve"><value>View roadmap</value></data>
+    <data name="Footer.Copyright" xml:space="preserve"><value>© {0} Dino AI Academy</value></data>
+    <data name="Footer.BuiltWith" xml:space="preserve"><value>Built with Blazor and DaisyUI</value></data>
+
 </root>
