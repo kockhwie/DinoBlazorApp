@@ -75,6 +75,7 @@
     <data name="Home.Assistant.Button.Back" xml:space="preserve"><value>Back</value></data>
     <data name="Home.Assistant.EmptyDraft.Title" xml:space="preserve"><value>Your draft is empty!</value></data>
     <data name="Home.Assistant.EmptyDraft.Body" xml:space="preserve"><value>Please compose or paste your email in the AI Workbench on the left, or use our pre-filled sample draft to see refinement in action.</value></data>
+    <data name="Home.Assistant.Button.CreateDraftFirst" xml:space="preserve"><value>Create Draft First</value></data>
     <data name="Home.Assistant.Button.UseSampleDraft" xml:space="preserve"><value>Use Sample Draft</value></data>
     <data name="Assistant.Button.Generate" xml:space="preserve"><value>🚀 Generate Email Content</value></data>
     <data name="Assistant.Prompt.Label" xml:space="preserve"><value>AI Prompt:</value></data>
@@ -86,6 +87,8 @@
     <data name="Assistant.Option.Refine.Description" xml:space="preserve"><value>Improve clarity, tone, grammar, and structure while keeping your original message.</value></data>
     <data name="Assistant.Option.Professional.Title" xml:space="preserve"><value>Level 3: Make my email professional</value></data>
     <data name="Assistant.Option.Professional.Description" xml:space="preserve"><value>Make it more formal, polished and executive-level tone.</value></data>
+    <data name="Assistant.Button.UseImprovedVersion" xml:space="preserve"><value>Use Improved Version</value></data>
+    <data name="Assistant.Button.UseThisVersion" xml:space="preserve"><value>Use This Version</value></data>
     <data name="Assistant.Button.Extension" xml:space="preserve"><value>Extension</value></data>
     <data name="Assistant.Button.FollowUp" xml:space="preserve"><value>Follow-up</value></data>
     <data name="Assistant.Button.Vacation" xml:space="preserve"><value>Vacation</value></data>

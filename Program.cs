@@ -1,6 +1,7 @@
 using DinoAI.Components;
 using DinoAI.Components.Account;
 using DinoAI.Data;
+using DinoAI.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
@@ -18,6 +19,10 @@ builder.Services.AddRazorComponents()
 // ── LOCALIZATION Part 1: ──────────────────────────────────────────────────────
 // ResourcesPath tells IStringLocalizer where to find .resx files.
 builder.Services.AddLocalization();
+builder.Services.AddHttpClient<IEmailAssistantService, EmailAssistantService>(client =>
+{
+    client.BaseAddress = new Uri("https://generativelanguage.googleapis.com/");
+});
 
 var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("zh-Hant") };
 builder.Services.Configure<RequestLocalizationOptions>(options =>

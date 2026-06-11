@@ -146,6 +146,7 @@
  	<data name="Home.Assistant.ChooseAction" xml:space="preserve"><value>選擇一個操作開始。</value></data>
 	<data name="Home.Assistant.EmptyDraft.Title" xml:space="preserve"><value>您的草稿為空！</value></data>
 	<data name="Home.Assistant.EmptyDraft.Body" xml:space="preserve"><value>請在左側的 AI 工作台撰寫或貼上電子郵件，或使用範例草稿查看改寫效果。</value></data>
+	<data name="Home.Assistant.Button.CreateDraftFirst" xml:space="preserve"><value>先建立草稿</value></data>
 	<data name="Home.Assistant.Button.UseSampleDraft" xml:space="preserve"><value>使用範例草稿</value></data>
 	<data name="Assistant.Button.Generate" xml:space="preserve"><value>🚀 產生郵件內容</value></data>
 	<data name="Assistant.Prompt.Label" xml:space="preserve"><value>AI 提示：</value></data>
@@ -157,6 +158,8 @@
 	<data name="Assistant.Option.Refine.Description" xml:space="preserve"><value>在保留原意的同時，改善清晰度、語氣、文法與結構。</value></data>
 	<data name="Assistant.Option.Professional.Title" xml:space="preserve"><value>等级 3: 讓郵件內容更專業</value></data>
 	<data name="Assistant.Option.Professional.Description" xml:space="preserve"><value>使語氣更正式、精煉且具高階管理風格。</value></data>
+	<data name="Assistant.Button.UseImprovedVersion" xml:space="preserve"><value>使用改善版本</value></data>
+	<data name="Assistant.Button.UseThisVersion" xml:space="preserve"><value>使用此版本</value></data>
 	<data name="Assistant.Button.Extension" xml:space="preserve"><value>延期</value></data>
 	<data name="Assistant.Button.FollowUp" xml:space="preserve"><value>跟進</value></data>
 	<data name="Assistant.Button.Vacation" xml:space="preserve"><value>休假</value></data>
