@@ -1,5 +1,4 @@
-# Dino App v2.0
-# 🦖 Dino AI Academy
+# 🦖 Dino AI Academy v2.0
 
 > Don't just use AI. **Evolve with it.**
 
