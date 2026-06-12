@@ -12,9 +12,20 @@ using System.Globalization;
 var builder = WebApplication.CreateBuilder(args);
 
 // ── RAZOR COMPONENTS ─────────────────────────────────────────────────────────
-// Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+    .AddInteractiveServerComponents(options =>
+    {
+        // Keep disconnected circuits alive so brief drops can reattach to the
+        // same session (preserves component state). Pairs with client retry tuning
+        // in wwwroot/js/blazor-reconnect.js.
+        options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(5);
+        options.DisconnectedCircuitMaxRetained = 200;
+
+        // Headroom for flaky connections before the server tears down a circuit.
+        options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
+
+        options.DetailedErrors = builder.Environment.IsDevelopment();
+    });
 
 // ── LOCALIZATION Part 1: ──────────────────────────────────────────────────────
 // ResourcesPath tells IStringLocalizer where to find .resx files.
