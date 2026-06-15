@@ -581,3 +581,10 @@ FodyWeavers.xsd
 
 # Exclude Tests
 DinoBlazorApp.Tests/
+
+# Agent / skills files - local development tooling
+# These contain local skill definitions and lockfiles for developer agents
+# and should not be committed to the repo.
+skills/
+skills-lock.json
+.agents/

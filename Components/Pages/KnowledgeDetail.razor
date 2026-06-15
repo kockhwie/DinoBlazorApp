@@ -1,0 +1,188 @@
+@page "/knowledge/{Slug}"
+@using DinoAI.Data
+@using DinoAI.Services
+@inject KnowledgeService KnowledgeService
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<PageTitle>Dino AI Academy - @(_card?.Title ?? "Concept Details")</PageTitle>
+
+<main class="detail-page">
+    <section class="hero-shell">
+        <SiteNav />
+    </section>
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Back Navigation -->
+        <a href="/knowledge" class="back-link inline-flex items-center gap-1.5 text-xs text-[#33d7a6] hover:underline mb-8">
+            <i class="ti ti-arrow-left"></i> Back to Knowledge Hub
+        </a>
+
+        @if (_card == null)
+        {
+            <div class="text-center py-16 bg-[#02100c] border border-[rgba(58,209,141,0.16)] rounded-2xl">
+                <i class="ti ti-alert-triangle text-4xl text-amber-500 mb-3 block"></i>
+                <h2 class="text-lg font-bold text-white mb-2">Concept Not Found</h2>
+                <p class="text-xs text-slate-400 mb-6">The concept you are looking for might have been moved or renamed.</p>
+                <a href="/knowledge" class="btn btn-sm bg-[#33d7a6] text-[#04110f] hover:brightness-110 border-0 rounded-xl">
+                    Back to Hub
+                </a>
+            </div>
+        }
+        else
+        {
+            var age = _ages.FirstOrDefault(a => a.Key == _card.AgeKey);
+            
+            <article class="concept-article p-6 sm:p-10 bg-[#02100c]/90 border border-[rgba(58,209,141,0.16)] rounded-3xl shadow-2xl relative overflow-hidden" style="--age-color: @(age?.AccentColor ?? "#33d7a6")">
+                <!-- Decorative background glow -->
+                <div class="absolute -right-24 -top-24 w-48 h-48 rounded-full blur-[100px] opacity-20 pointer-events-none" style="background-color: @age?.AccentColor"></div>
+
+                <header class="mb-8 border-b border-slate-900 pb-6">
+                    <div class="flex flex-wrap items-center gap-2 mb-4">
+                        <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#031810] border border-slate-800" style="color: @age?.AccentColor">
+                            <i class="@age?.Icon me-1"></i> @age?.Name
+                        </span>
+                        <span class="text-[10px] font-medium text-slate-400 bg-[#031810] px-3 py-1 rounded-full border border-slate-800">
+                            @_card.Category
+                        </span>
+                    </div>
+
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white flex items-center gap-3">
+                        <span style="color: @age?.AccentColor"><i class="@_card.Icon"></i></span>
+                        @_card.Title
+                    </h1>
+                </header>
+
+                <!-- Summary Callout -->
+                <div class="summary-callout p-4 rounded-2xl bg-[#031810] border-l-4 mb-8 text-slate-200 text-xs sm:text-sm leading-relaxed" style="border-color: @age?.AccentColor">
+                    <strong>In short:</strong> @_card.Summary
+                </div>
+
+                <!-- Main Content Body -->
+                <div class="prose prose-invert max-w-none text-xs sm:text-sm text-slate-300 leading-relaxed space-y-4 mb-10 whitespace-pre-line">
+                    @_card.Body
+                </div>
+
+                <!-- Sharing and Action Footer -->
+                <footer class="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-400">Share knowledge:</span>
+                        
+                        <!-- Twitter/X -->
+                        <a href="@GetTwitterShareUrl()" target="_blank" class="share-btn flex items-center justify-center w-8 h-8 rounded-full bg-[#031810] border border-slate-800 hover:text-[#33d7a6] hover:border-[#33d7a6]/30 transition-all duration-300" title="Share on Twitter / X">
+                            <i class="ti ti-brand-twitter"></i>
+                        </a>
+
+                        <!-- Facebook -->
+                        <a href="@GetFacebookShareUrl()" target="_blank" class="share-btn flex items-center justify-center w-8 h-8 rounded-full bg-[#031810] border border-slate-800 hover:text-[#33d7a6] hover:border-[#33d7a6]/30 transition-all duration-300" title="Share on Facebook">
+                            <i class="ti ti-brand-facebook"></i>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a href="@GetLinkedinShareUrl()" target="_blank" class="share-btn flex items-center justify-center w-8 h-8 rounded-full bg-[#031810] border border-slate-800 hover:text-[#33d7a6] hover:border-[#33d7a6]/30 transition-all duration-300" title="Share on LinkedIn">
+                            <i class="ti ti-brand-linkedin"></i>
+                        </a>
+
+                        <!-- Copy Link -->
+                        <button type="button" @onclick="CopyLinkToClipboard" class="share-btn flex items-center justify-center w-8 h-8 rounded-full bg-[#031810] border border-slate-800 hover:text-[#33d7a6] hover:border-[#33d7a6]/30 transition-all duration-300 cursor-pointer" title="Copy Direct Link">
+                            @if (_copied)
+                            {
+                                <i class="ti ti-check text-emerald-400"></i>
+                            }
+                            else
+                            {
+                                <i class="ti ti-link"></i>
+                            }
+                        </button>
+                    </div>
+
+                    @if (_copied)
+                    {
+                        <span class="text-[10px] text-emerald-400 font-semibold animate-pulse">Link copied to clipboard!</span>
+                    }
+                </footer>
+            </article>
+
+            <!-- Related Concepts Section -->
+            @if (_relatedCards.Count > 0)
+            {
+                <div class="mt-12">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-6">Related Concepts</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        @foreach (var rCard in _relatedCards)
+                        {
+                            var rAge = _ages.FirstOrDefault(a => a.Key == rCard.AgeKey);
+                            <div class="p-5 bg-[#02100c]/60 border border-slate-900 hover:border-[rgba(58,209,141,0.2)] rounded-2xl cursor-pointer transition-all duration-300 flex items-start gap-4 group" @onclick="() => NavigateToDetail(rCard.Slug)">
+                                <div class="text-xl p-2 rounded-lg bg-[#031810] group-hover:scale-110 transition-transform duration-300" style="color: @(rAge?.AccentColor ?? "#33d7a6")">
+                                    <i class="@rCard.Icon"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="text-xs font-bold text-white group-hover:text-[#33d7a6] transition-colors duration-300">@rCard.Title</h4>
+                                    <p class="text-[10px] text-slate-500 line-clamp-2 mt-1 leading-normal">@rCard.Summary</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</main>
+
+@code {
+    [Parameter] public string Slug { get; set; } = string.Empty;
+
+    private KnowledgeCard? _card;
+    private IReadOnlyList<EvolutionAge> _ages = [];
+    private IReadOnlyList<KnowledgeCard> _relatedCards = [];
+    private bool _copied = false;
+
+    protected override void OnParametersSet()
+    {
+        _copied = false;
+        _ages = KnowledgeService.GetAges();
+        _card = KnowledgeService.GetCardBySlug(Slug);
+        if (_card != null)
+        {
+            _relatedCards = KnowledgeService.GetRelatedCards(Slug, 2);
+        }
+    }
+
+    private void NavigateToDetail(string slug)
+    {
+        Nav.NavigateTo($"/knowledge/{slug}");
+    }
+
+    private string GetTwitterShareUrl()
+    {
+        var text = $"Learning about '{_card?.Title}' on Dino AI Academy! Check out this concept card: ";
+        return $"https://twitter.com/intent/tweet?text={Uri.EscapeDataString(text)}&url={Uri.EscapeDataString(Nav.Uri)}";
+    }
+
+    private string GetFacebookShareUrl()
+    {
+        return $"https://www.facebook.com/sharer/sharer.php?u={Uri.EscapeDataString(Nav.Uri)}";
+    }
+
+    private string GetLinkedinShareUrl()
+    {
+        return $"https://www.linkedin.com/sharing/share-offsite/?url={Uri.EscapeDataString(Nav.Uri)}";
+    }
+
+    private async Task CopyLinkToClipboard()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("navigator.clipboard.writeText", Nav.Uri);
+            _copied = true;
+            StateHasChanged();
+            await Task.Delay(2000);
+            _copied = false;
+            StateHasChanged();
+        }
+        catch
+        {
+            // Fallback just in case browser context doesn't support clipboard API
+        }
+    }
+}

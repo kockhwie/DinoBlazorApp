@@ -34,6 +34,7 @@ builder.Services.AddHttpClient<IEmailAssistantService, EmailAssistantService>(cl
 {
     client.BaseAddress = new Uri("https://generativelanguage.googleapis.com/");
 });
+builder.Services.AddScoped<KnowledgeService>();
 
 var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("zh-Hant") };
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -62,8 +63,11 @@ builder.Services.AddAuthentication(options =>
     .AddIdentityCookies();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    //options.UseNpgsql(connectionString));
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options =>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino AI Academy - Design System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-500: #22c55e;
+            --primary-600: #16a34a;
+            --primary-700: #15803d;
+            --secondary-500: #3b82f6;
+            --secondary-600: #2563eb;
+            --accent-500: #f59e0b;
+            --success-500: #14b8a6;
+            --warning-500: #ef4444;
+            --dark-900: #0f172a;
+            --dark-800: #1e293b;
+            --surface-50: #f8fafc;
+            --surface-100: #f1f5f9;
+            --surface-200: #e2e8f0;
+            --surface-300: #cbd5e1;
+            --surface-400: #94a3b8;
+            --surface-500: #64748b;
+            --surface-600: #475569;
+            --surface-700: #334155;
+            --surface-800: #1e293b;
+            --surface-900: #0f172a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--dark-900) 0%, var(--dark-800) 100%);
+            color: var(--surface-50);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--dark-900) 0%, var(--dark-800) 100%);
+            border-bottom: 1px solid var(--surface-800);
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary-500), var(--secondary-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 20px;
+            color: var(--surface-400);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--surface-800);
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .color-card {
+            background: var(--surface-900);
+            border: 1px solid var(--surface-800);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .color-swatch {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            margin: 0 auto 16px;
+            border: 2px solid var(--surface-700);
+        }
+
+        .typography-grid {
+            display: grid;
+            gap: 32px;
+            margin: 40px 0;
+        }
+
+        .type-example {
+            background: var(--surface-900);
+            border: 1px solid var(--surface-800);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin: 40px 0;
+        }
+
+        .component-card {
+            background: var(--surface-900);
+            border: 1px solid var(--surface-800);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .component-preview {
+            background: var(--dark-900);
+            border: 1px solid var(--surface-700);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 4px;
+        }
+
+        .badge-primary { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); }
+        .badge-secondary { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+        .badge-accent { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .badge-success { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4); }
+
+        .button-demo {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+        .btn-secondary { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
+        .btn-outline { background: transparent; border: 1px solid #475569; color: #94a3b8; }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 36px; }
+            .section-title { font-size: 28px; }
+            .color-grid, .component-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Dino AI Academy Design System</h1>
+        <p>Comprehensive design guidelines and component specifications for the Dino AI Academy platform</p>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(135deg, #22c55e, #16a34a);"></div>
+                    <h3>Primary Green</h3>
+                    <p style="font-size: 12px; color: var(--surface-400); margin-top: 8px;">#22c55e - #16a34a</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(135deg, #3b82f6, #2563eb);"></div>
+                    <h3>Secondary Blue</h3>
+                    <p style="font-size: 12px; color: var(--surface-400); margin-top: 8px;">#3b82f6 - #2563eb</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></div>
+                    <h3>Accent Yellow</h3>
+                    <p style="font-size: 12px; color: var(--surface-400); margin-top: 8px;">#f59e0b - #d97706</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(135deg, #14b8a6, #0d9488);"></div>
+                    <h3>Success Teal</h3>
+                    <p style="font-size: 12px; color: var(--surface-400); margin-top: 8px;">#14b8a6 - #0d9488</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></div>
+                    <h3>Warning Red</h3>
+                    <p style="font-size: 12px; color: var(--surface-400); margin-top: 8px;">#ef4444 - #dc2626</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(135deg, #f8fafc, #f1f5f9);"></div>
+                    <h3>Light Surface</h3>
+                    <p style="font-size: 12px; color: var(--surface-400); margin-top: 8px;">#f8fafc - #f1f5f9</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Typography</h2>
+            <div class="typography-grid">
+                <div class="type-example">
+                    <h1>Heading 1 - 48px Inter Bold</h1>
+                    <p style="color: var(--surface-400); margin-top: 8px;">Font-weight: 700, Letter-spacing: -0.025em</p>
+                </div>
+                <div class="type-example">
+                    <h2>Heading 2 - 36px Inter SemiBold</h2>
+                    <p style="color: var(--surface-400); margin-top: 8px;">Font-weight: 600, Letter-spacing: -0.025em</p>
+                </div>
+                <div class="type-example">
+                    <h3>Heading 3 - 30px Inter SemiBold</h3>
+                    <p style="color: var(--surface-400); margin-top: 8px;">Font-weight: 600</p>
+                </div>
+                <div class="type-example">
+                    <p class="text-xl">Body Large - 20px Inter Regular</p>
+                    <p style="color: var(--surface-400); margin-top: 8px;">Font-weight: 400, Line-height: 1.6</p>
+                </div>
+                <div class="type-example">
+                    <p class="text-base">Body Regular - 16px Inter Regular</p>
+                    <p style="color: var(--surface-400); margin-top: 8px;">Font-weight: 400, Line-height: 1.6</p>
+                </div>
+                <div class="type-example">
+                    <p class="text-sm">Caption - 14px Inter Regular</p>
+                    <p style="color: var(--surface-400); margin-top: 8px;">Font-weight: 400, Line-height: 1.5</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Component Library</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3>Buttons</h3>
+                    <div class="component-preview">
+                        <div class="button-demo">
+                            <button class="btn btn-primary">Primary Button</button>
+                            <button class="btn btn-secondary">Secondary Button</button>
+                            <button class="btn btn-outline">Outline Button</button>
+                        </div>
+                    </div>
+                    <p style="color: var(--surface-400); font-size: 14px; margin-top: 16px;">
+                        Consistent button styles with hover states and transitions.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h3>Badges</h3>
+                    <div class="component-preview">
+                        <div>
+                            <span class="badge badge-primary">Primary</span>
+                            <span class="badge badge-secondary">Secondary</span>
+                            <span class="badge badge-accent">Accent</span>
+                            <span class="badge badge-success">Success</span>
+                        </div>
+                    </div>
+                    <p style="color: var(--surface-400); font-size: 14px; margin-top: 16px;">
+                        Status indicators and category labels with consistent styling.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h3>Cards</h3>
+                    <div class="component-preview">
+                        <div style="background: var(--dark-900); border: 1px solid var(--surface-700); border-radius: 8px; padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <h4 style="font-size: 16px; font-weight: 600;">Card Title</h4>
+                                <span class="badge badge-outline">Badge</span>
+                            </div>
+                            <p style="color: var(--surface-400); font-size: 14px;">
+                                Card content with flexible layout and consistent spacing.
+                            </p>
+                        </div>
+                    </div>
+                    <p style="color: var(--surface-400); font-size: 14px; margin-top: 16px;">
+                        Flexible content containers with hover effects and visual hierarchy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--dark-900); border-top: 1px solid var(--surface-800); padding: 48px 0; text-align: center;">
+        <p style="color: var(--surface-500); font-size: 14px;">
+            Dino AI Academy Design System v1.0
+        </p>
+    </footer>
+</body>\n</html>

@@ -1,0 +1,192 @@
+@page "/knowledge"
+@using DinoAI.Data
+@using DinoAI.Services
+@inject KnowledgeService KnowledgeService
+@inject NavigationManager Nav
+
+<PageTitle>Dino AI Academy - Knowledge Hub</PageTitle>
+
+<main class="knowledge-page">
+    <section class="hero-shell">
+        <SiteNav />
+
+        <div class="knowledge-hero text-center py-12 px-6">
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
+                AI Knowledge Hub
+            </h1>
+            <p class="max-w-2xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed">
+                Evolving Intelligence. Empowering Futures. Follow the progression from basic tools to the frontiers of Artificial Intelligence.
+            </p>
+        </div>
+    </section>
+
+    <!-- Evolution Progress Bar Section -->
+    <section class="progress-bar-shell py-6 px-4">
+        <div class="evolution-container max-w-6xl mx-auto">
+            <h2 class="text-xs uppercase font-semibold text-[#33d7a6] tracking-wider mb-6 text-center">
+                Select an Era of Human Intelligence
+            </h2>
+            
+            <div class="evolution-stepper flex flex-col md:flex-row items-stretch justify-between gap-1 md:gap-0">
+                @foreach (var age in _ages)
+                {
+                    var isSelected = _selectedAgeKey == age.Key;
+                    <button type="button" @onclick="() => SelectAge(age.Key)" class="evolution-step flex-1 text-left md:text-center transition-all duration-300 @(isSelected ? "active" : "")" style="--step-color: @age.AccentColor">
+                        <div class="step-arrow-container">
+                            <div class="step-icon-wrap">
+                                <i class="@age.Icon text-xl"></i>
+                            </div>
+                            <div class="step-details">
+                                <h3 class="step-title">@age.Name</h3>
+                                <p class="step-subtitle">@age.Subtitle</p>
+                            </div>
+                        </div>
+                    </button>
+                    @if (age.Order < _ages.Count)
+                    {
+                        <div class="evolution-divider hidden md:flex items-center justify-center" style="--divider-color: @(age.Order < 4 ? "#d97706" : age.Order == 4 ? "#64748b" : "#3b82f6")">
+                             <i class="ti ti-arrow-big-right-line"></i> 
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters and Card Grid Section -->
+    <section class="showcase-shell py-8">
+        <div class="max-w-6xl mx-auto px-4">
+            
+            <!-- Filter Bar -->
+            <div class="filter-bar flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 p-4 bg-[#020e0a]/80 border border-[rgba(58,209,141,0.16)] rounded-2xl">
+                <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                    <!-- Reset Button/All Era -->
+                    <button type="button" @onclick="ResetFilters" class="px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-300 cursor-pointer @(string.IsNullOrEmpty(_selectedAgeKey) && string.IsNullOrEmpty(_selectedCategory) && string.IsNullOrEmpty(_searchQuery) ? "bg-[#33d7a6] text-[#04110f]" : "bg-[#031810] text-slate-300 border border-slate-700 hover:text-[#33d7a6]")">
+                        All Eras
+                    </button>
+
+                    <!-- Category Dropdown -->
+                    <div class="dropdown relative z-[9999]">
+                        <div tabindex="0" role="button" class="btn btn-sm bg-[#031810] border-slate-700 hover:border-[#33d7a6] hover:bg-[#031810] text-xs font-semibold text-slate-300 normal-case rounded-xl h-9">
+                            @(string.IsNullOrEmpty(_selectedCategory) ? "Category: All" : $"Category: {_selectedCategory}")
+                            <i class="ti ti-chevron-down ms-1"></i>
+                        </div>
+                        <ul tabindex="0" class="dropdown-content absolute top-full left-0 mt-2 z-[9999] menu p-2 shadow-2xl bg-[#02100c] border border-[rgba(58,209,141,0.16)] rounded-box w-52">
+                            <li><button type="button" class="text-xs" @onclick="() => FilterByCategory(null)">All Categories</button></li>
+                            @foreach (var cat in _categories)
+                            {
+                                <li><button type="button" class="text-xs" @onclick="() => FilterByCategory(cat)">@cat</button></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-full sm:w-64">
+                    <input type="text" placeholder="Search knowledge..." @bind-value="_searchQuery" @bind-value:event="oninput" class="w-full pl-9 pr-4 py-2 bg-[#031810] border border-slate-700 focus:border-[#33d7a6] focus:ring-1 focus:ring-[#33d7a6] outline-none text-xs text-slate-200 placeholder-slate-500 rounded-xl transition-all duration-300" />
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
+                        <i class="ti ti-search text-sm"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Card Grid -->
+            @if (_filteredCards.Count == 0)
+            {
+                <div class="text-center py-16 bg-[#02100c] border border-[rgba(58,209,141,0.16)] rounded-2xl">
+                    <i class="ti ti-search-off text-4xl text-slate-600 mb-3 block"></i>
+                    <h3 class="text-sm font-semibold text-slate-300 mb-1">No concepts found</h3>
+                    <p class="text-xs text-slate-500 max-w-xs mx-auto">Try adjusting your filters or search terms to explore other technological eras.</p>
+                </div>
+            }
+            else
+            {
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach (var card in _filteredCards)
+                    {
+                        var age = _ages.FirstOrDefault(a => a.Key == card.AgeKey);
+                        <div class="card bg-[#02100c]/80 border border-[rgba(58,209,141,0.12)] hover:border-[rgba(58,209,141,0.3)] hover:-translate-y-1 transition-all duration-300 shadow-xl overflow-hidden rounded-2xl flex flex-col h-full cursor-pointer group" @onclick="() => NavigateToDetail(card.Slug)">
+                            <div class="p-6 flex-1 flex flex-col">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="icon-wrap p-2.5 rounded-xl bg-[#031810] border border-slate-800 text-2xl group-hover:scale-110 transition-transform duration-300" style="color: @(age?.AccentColor ?? "#33d7a6")">
+                                        <i class="@card.Icon"></i>
+                                    </div>
+                                    <span class="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full bg-[#031810] border border-slate-800" style="color: @(age?.AccentColor ?? "#33d7a6")">
+                                        @age?.Name
+                                    </span>
+                                </div>
+
+                                <h3 class="text-base font-bold text-white mb-2 group-hover:text-[#33d7a6] transition-colors duration-300">@card.Title</h3>
+                                <p class="text-slate-400 text-xs leading-relaxed flex-1">@card.Summary</p>
+
+                                <div class="mt-6 pt-4 border-t border-slate-900 flex items-center justify-between">
+                                    <span class="text-[10px] text-slate-500 font-medium bg-[#031810] px-2 py-0.5 rounded border border-slate-900">@card.Category</span>
+                                    <span class="text-xs font-semibold text-[#33d7a6] flex items-center gap-1 group-hover:translate-x-1 transition-transform duration-300">
+                                        Explore <i class="ti ti-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+        </div>
+    </section>
+
+    <footer class="footer-shell text-center py-6">
+        <p class="text-[10px] text-slate-600">Dino AI Academy © 22026. Empowering technology understanding worldwide.</p>
+    </footer>
+</main>
+
+@code {
+    private IReadOnlyList<EvolutionAge> _ages = [];
+    private IReadOnlyList<string> _categories = [];
+    private IReadOnlyList<KnowledgeCard> _filteredCards = [];
+
+    private string? _selectedAgeKey;
+    private string? _selectedCategory;
+    private string _searchQuery = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        _ages = KnowledgeService.GetAges();
+        _categories = KnowledgeService.GetCategories();
+        UpdateFilters();
+    }
+
+    private void SelectAge(string ageKey)
+    {
+        _selectedAgeKey = _selectedAgeKey == ageKey ? null : ageKey;
+        UpdateFilters();
+    }
+
+    private void FilterByCategory(string? category)
+    {
+        _selectedCategory = category;
+        UpdateFilters();
+    }
+
+    private void ResetFilters()
+    {
+        _selectedAgeKey = null;
+        _selectedCategory = null;
+        _searchQuery = string.Empty;
+        UpdateFilters();
+    }
+
+    private void UpdateFilters()
+    {
+        _filteredCards = KnowledgeService.GetCards(_selectedAgeKey, _selectedCategory, _searchQuery);
+    }
+
+    protected override void OnParametersSet()
+    {
+        UpdateFilters();
+    }
+
+    private void NavigateToDetail(string slug)
+    {
+        Nav.NavigateTo($"/knowledge/{slug}");
+    }
+}

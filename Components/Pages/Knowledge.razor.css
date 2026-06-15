@@ -1,0 +1,158 @@
+.knowledge-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% 18%, rgba(60, 201, 128, 0.12), transparent 22%),
+        radial-gradient(circle at 88% 16%, rgba(42, 201, 161, 0.14), transparent 16%),
+        radial-gradient(circle at 12% 42%, rgba(13, 148, 136, 0.08), transparent 24%),
+        linear-gradient(180deg, #020405 0%, #03110d 46%, #020405 100%);
+    color: rgba(255, 255, 255, 0.94);
+}
+
+.hero-shell {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 0.5rem;
+    background:
+        linear-gradient(180deg, rgba(2, 4, 5, 0.9) 0%, rgba(2, 4, 5, 0.46) 20%, rgba(2, 4, 5, 0.1) 55%, rgba(2, 4, 5, 0.88) 100%),
+        url("/assets/volcano_landscape_hero.png") center 84% / cover no-repeat;
+}
+
+.knowledge-hero h1 {
+    font-family: "Sora", "DM Sans", sans-serif;
+    line-height: 1.1;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.06);
+}
+
+.knowledge-hero h1::after {
+    content: "";
+    display: block;
+    width: 6rem;
+    height: 0.25rem;
+    margin: 1rem auto 0;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #33d7a6 0%, rgba(51, 215, 166, 0.15) 100%);
+    box-shadow: 0 0 12px rgba(51, 215, 166, 0.35);
+}
+
+/* Evolution Stepper */
+.evolution-stepper {
+    background: rgba(4, 16, 12, 0.7);
+    border: 1px solid rgba(58, 209, 141, 0.15);
+    border-radius: 1.5rem;
+    padding: 0.6rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+}
+
+.evolution-step {
+    border: none;
+    background: transparent;
+    padding: 0.8rem 1rem;
+    border-radius: 1.1rem;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+.evolution-step:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.evolution-step.active {
+    background: color-mix(in srgb, var(--step-color) 12%, rgba(255, 255, 255, 0.02));
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--step-color) 35%, transparent),
+        0 0 25px color-mix(in srgb, var(--step-color) 20%, transparent);
+}
+
+.step-arrow-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.step-icon-wrap {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: rgba(3, 24, 16, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--step-color);
+    transition: all 0.3s ease;
+}
+
+.evolution-step.active .step-icon-wrap {
+    background: var(--step-color);
+    color: #020405;
+    box-shadow: 0 0 15px var(--step-color);
+}
+
+.step-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: #fff;
+    letter-spacing: -0.01em;
+}
+
+.step-subtitle {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.evolution-step.active .step-title {
+    color: #fff;
+}
+
+.evolution-step.active .step-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.evolution-divider {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--divider-color);
+    padding: 0 0.2rem;
+}
+
+/* Desktop horizontal flow updates */
+@media (min-width: 768px) {
+    .step-arrow-container {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .step-icon-wrap {
+        margin: 0 auto 0.5rem;
+    }
+}
+
+/* Showcase grid / containers */
+.showcase-shell {
+    padding: 0 clamp(1rem, 3vw, 2.5rem) 1.5rem;
+}
+
+.filter-bar {
+    backdrop-filter: blur(8px);
+    position: relative; /* make filter bar a stacking context root */
+    z-index: 99999; /* ensure dropdown inside shows above cards */
+}
+
+.dropdown-content {
+    backdrop-filter: blur(12px);
+    position: absolute !important;
+    z-index: 100000 !important;
+}
+
+/* Ensure cards render below the filter bar/dropdown */
+.card {
+    position: relative;
+    z-index: 0;
+}
+
