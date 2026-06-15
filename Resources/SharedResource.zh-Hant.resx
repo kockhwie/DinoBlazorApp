@@ -174,14 +174,4 @@
 	<data name="Footer.Feedback.Roadmap" xml:space="preserve"><value>檢視路線圖</value></data>
 	<data name="Footer.Copyright" xml:space="preserve"><value>© {0} Dino AI Academy</value></data>
 	<data name="Footer.BuiltWith" xml:space="preserve"><value>使用 :</value></data>
-
-	<!-- Additional site-wide footer links -->
-	<data name="Footer.Learn" xml:space="preserve"><value>學習</value></data>
-	<data name="Footer.Company" xml:space="preserve"><value>公司</value></data>
-	<data name="Footer.Legal" xml:space="preserve"><value>法律條款</value></data>
-	<data name="Footer.ReleaseNotes" xml:space="preserve"><value>版本說明</value></data>
-	<data name="Footer.Contact" xml:space="preserve"><value>聯絡我們</value></data>
-	<data name="Footer.PrivacyPolicy" xml:space="preserve"><value>隱私權政策</value></data>
-	<data name="Footer.TermsOfService" xml:space="preserve"><value>服務條款</value></data>
-	<data name="Footer.AllRightsReserved" xml:space="preserve"><value>保留所有權利。</value></data>
 </root>

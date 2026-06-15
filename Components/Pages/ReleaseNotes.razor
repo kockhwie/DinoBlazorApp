@@ -1,13 +1,15 @@
 @page "/release-notes"
-@using DinoAI.Components.Layout
 
 <PageTitle>Release Notes - Dino AI Academy</PageTitle>
-<SiteNav />
-<main class="release-page">
-    
-    <section class="release-shell">
 
+<main class="release-page">
+    <section class="release-shell">
         <div class="release-header">
+            <a href="/" class="release-brand" aria-label="Dino AI Academy home">
+                <img alt="Dino mascot" class="release-logo" src="@Assets["assets/company_logo.png"]" />
+                <img alt="Dino AI Academy" class="release-wordmark" src="@Assets["assets/company_name.png"]" />
+            </a>
+
             <div class="release-heading">
                 <p class="release-kicker">Release Notes</p>
                 <h1>Version 2 is ready for release.</h1>
@@ -56,7 +58,6 @@
             <a class="btn release-secondary shadow-none " href="mailto:admin@codingdinos.asia?subject=Dino%20AI%20Academy%20Feedback">Send Feedback</a>
         </div>
     </section>
-    <SiteFooter />
 </main>
 
 <style>

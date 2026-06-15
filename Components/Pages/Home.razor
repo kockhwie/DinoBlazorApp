@@ -348,8 +348,53 @@
         </div>
     </section>
 
-    <SiteFooter />
+    <footer class="footer-shell">
+        <div class="footer-grid">
+            <div class="footer-card" id="release-notes">
+                <p class="footer-card-title">@L["Footer.ReleaseNotesTitle"]</p>
+                <ul class="footer-list">
+                    <li><strong>v2.0.0</strong> - @L["Footer.ReleaseNotes.V2"]</li>
+                    <li><a href="/release-notes">@L["Footer.ReleaseNotes.ReadFull"]</a></li>
+                </ul>
+            </div>
+            <div class="footer-card" id="feedback">
+                <p class="footer-card-title">@L["Footer.Feedback.Title"]</p>
+                <ul class="footer-links">
+                    <li><a href="mailto:admin@codingdinos.asia?subject=Dino%20AI%20Academy%20Feedback">@L["Footer.Feedback.Send"]</a></li>
+                    <li><a href="mailto:admin@codingdinos.asia?subject=Dino%20AI%20Academy%20Wishlist">@L["Footer.Feedback.Wishlist"]</a></li>
+                    <li><a href="#">@L["Footer.Feedback.Roadmap"]</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
+    <footer class="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
+        <nav>
+            <span>@L["Footer.Copyright", DateTime.Now.Year]</span>
+        </nav>
+
+        <nav class="grid-flow-col items-center gap-2 ms-auto">
+            <span>@L["Footer.BuiltWith"]</span>
+ 
+            <img class="footer-logo" title=".Net 10" src="@Assets["assets/logo/dotnet.png"]" />
+            <img class="footer-logo" title="Blazor" src="@Assets["assets/logo/blazor.png"]" />
+            <img class="footer-logo" title="Visual Studio 2026" src="@Assets["assets/logo/visualstudio2026.png"]" />
+            <img class="footer-logo" title="Codex" src="@Assets["assets/logo/codex.png"]" />
+            <img class="footer-logo" title="OpenAI" src="@Assets["assets/logo/openai.png"]" />            
+            <img class="footer-logo" title="Google Antigravity" src="@Assets["assets/logo/google-antigravity.png"]" />
+            <img class="footer-logo" title="Google Gemini" src="@Assets["assets/logo/google-gemini.png"]" />
+            <img class="footer-logo" title="daisyUI" src="@Assets["assets/logo/daisyui.png"]" />
+            <img class="footer-logo" title="Cloudflare" src="@Assets["assets/logo/cloudflare.png"]" />
+            <img class="footer-logo" title="GitHub" src="@Assets["assets/logo/github.png"]" />
+            <img class="footer-logo" title="Render" src="@Assets["assets/logo/render.png"]" />
+            <img class="footer-logo" title="Docker" src="@Assets["assets/logo/docker.png"]" />
+            <img class="footer-logo" title="bolt.new" src="@Assets["assets/logo/bolt.new.png"]" />
+            <img class="footer-logo" title="tabler" src="@Assets["assets/logo/tabler.png"]" />
+            <img class="footer-logo" title="Manus" src="@Assets["assets/logo/manus-ai.png"]" />
+        </nav>
+
+     
+    </footer>
 </main>
 
 @code {
