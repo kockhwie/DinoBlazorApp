@@ -109,4 +109,13 @@
     <data name="Footer.Copyright" xml:space="preserve"><value>© {0} Dino AI Academy</value></data>
     <data name="Footer.BuiltWith" xml:space="preserve"><value>Built with :</value></data>
 
+    <!-- Additional site-wide footer links -->
+    <data name="Footer.Learn" xml:space="preserve"><value>Learn</value></data>
+    <data name="Footer.Company" xml:space="preserve"><value>Company</value></data>
+    <data name="Footer.Legal" xml:space="preserve"><value>Legal</value></data>
+    <data name="Footer.ReleaseNotes" xml:space="preserve"><value>Release Notes</value></data>
+    <data name="Footer.Contact" xml:space="preserve"><value>Contact Us</value></data>
+    <data name="Footer.PrivacyPolicy" xml:space="preserve"><value>Privacy Policy</value></data>
+    <data name="Footer.TermsOfService" xml:space="preserve"><value>Terms of Service</value></data>
+    <data name="Footer.AllRightsReserved" xml:space="preserve"><value>All rights reserved.</value></data>
 </root>
