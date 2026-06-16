@@ -184,4 +184,7 @@
 	<data name="Footer.PrivacyPolicy" xml:space="preserve"><value>隱私權政策</value></data>
 	<data name="Footer.TermsOfService" xml:space="preserve"><value>服務條款</value></data>
 	<data name="Footer.AllRightsReserved" xml:space="preserve"><value>保留所有權利。</value></data>
+
+	<data name="Toast.Applied" xml:space="preserve"><value>已套用至撰寫器。</value></data>
+	<data name="Toast.Copied" xml:space="preserve"><value>已複製至撰寫器。</value></data>
 </root>

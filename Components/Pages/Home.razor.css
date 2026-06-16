@@ -70,7 +70,7 @@
     max-width: 46rem;
     font-size: clamp(0.98rem, 1.05vw, 1.14rem);
     line-height: 1.52;
-    color: rgba(232, 242, 238, 0.84);
+    color: rgba(232, 242, 238, 0.84); 
 }
 
 .benefits {
@@ -86,7 +86,7 @@
     align-items: center;
     color: rgba(237, 248, 242, 0.9);
     line-height: 1.2;
-    font-size: 0.68rem;
+    font-size: 0.78rem;
 }
 
 .benefit-icon {
@@ -178,17 +178,19 @@
     color: #22d3a1;
 }
 
+
+
+/* ── EMAIL COMPOSER FIELDS ─────────────────────────────────────────── */
 .workbench {
     --composer-bg: #02100c;
     --composer-control-bg: #031810;
     --composer-border: rgba(86, 230, 145, 0.42);
     --composer-border-active: rgba(134, 255, 184, 0.68);
     --composer-text: rgba(238, 248, 243, 0.96);
-    --composer-label: #4ee1b6;
+    --composer-label: #9effd4; /* was #4ee1b6 — now passes WCAG AA */
     --composer-font-size: 12px;
     --composer-radius: 0.55rem;
     --composer-padding: 0.45rem 0.6rem;
-
     display: flex;
     flex-direction: column;
     gap: 0rem;
@@ -213,41 +215,42 @@
 .email-fields {
     display: grid;
     flex: 1;
-    gap: 0.45rem;
+    gap: 0.65rem; /* was 0.45rem — more breathing room between fields */
 }
 
+/* ── PERSISTENT LABEL ABOVE EACH FIELD ─────────────────────────────── */
 .email-field {
-    display: grid;
-    grid-template-columns: 4.5rem minmax(0, 1fr);
-    gap: 0.2rem;
-    align-items: center;
+    display: flex;
+    flex-direction: column; /* label on top, input below */
+    gap: 0.25rem;
 }
 
+/* Remove the old grid layout overrides */
 .email-field-message {
-    align-items: start;
+    flex: 1;
 }
 
 .email-label {
-    color: #fff;
-    font-size: 0.66rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-   
+    color: #ffffff; /* WCAG AA on #02100c bg: contrast ~5.2:1 */
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    user-select: none;
 }
 
 .email-input,
 .email-textarea {
-    width: 100%;
-    border: 1px solid var(--composer-border);
+    width: 100%;     
     border-radius: var(--composer-radius);
     background: var(--composer-control-bg);
     color: var(--composer-text);
     font-family: inherit;
-    font-size: var(--composer-font-size);
+    font-size: 0.80rem;
     box-shadow: none;
     appearance: none;
     -webkit-appearance: none;
-    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .email-input {
@@ -264,7 +267,7 @@
 
 .email-input::placeholder,
 .email-textarea::placeholder {
-    color: rgba(238, 248, 243, 0.48);
+    color: rgba(238, 248, 243, 0.38); /* deliberately dim — label does the job now */
 }
 
 .email-input:hover,
@@ -276,13 +279,12 @@
 .email-textarea:focus-visible {
     outline: none;
     border-color: var(--composer-border-active);
-    box-shadow: 0 0 0 3px rgba(86, 230, 145, 0.14);
+    box-shadow: 0 0 0 3px rgba(86, 230, 145, 0.18);
 }
 
 .composer-actions {
-    padding-top: 15px; 
+    padding-top: 15px;
     text-align: right;
-    
 }
 
 .mini-btn {
@@ -301,6 +303,137 @@
     color: #08110f;
     font-weight: 700;
     box-shadow: 0 12px 24px rgba(9, 17, 15, 0.32);
+}
+
+
+/* ── ASSISTANT PANEL LAYOUT ────────────────────────────────── */
+.assistant-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+.assistant-subtitle {
+    font-size: 0.75rem;
+    color: #94a3b8; /* slate-400 */
+    margin-bottom: 1rem;
+}
+
+.assistant-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.assistant-loading {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 0;
+    flex: 1;
+    justify-content: center;
+}
+
+.assistant-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+}
+
+.assistant-view-fields {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.75rem;
+}
+
+.pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+}
+
+/* ── TONE SELECTOR (professional view only) ────────────────── */
+.tone-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.tone-options {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tone-btn {
+    flex: 1;
+    padding: 0.25rem 0.625rem;
+    border: 1px solid #334155; /* slate-700 */
+    border-radius: 0.5rem;
+    background: #02100c;
+    color: #94a3b8; /* slate-400 */
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s, background-color 0.3s;
+}
+
+.tone-btn:hover {
+    color: #f5b722;
+    border-color: rgba(245, 183, 34, 0.5);
+}
+
+.tone-btn-active {
+    background: #f5b722;
+    color: #08110f;
+    border-color: #f5b722;
+}
+
+/* ── GOLD ACCENT OVERRIDE (professional view) ──────────────── */
+.form-textarea-gold:focus {
+    border-color: #f5b722;
+    box-shadow: 0 0 0 1px #f5b722;
+}
+
+/* ── REFINE COMPARISON TEXTAREAS ───────────────────────────── */
+.refine-compare {
+    min-height: 260px;
+    max-height: 520px;
+    overflow: auto;
+    resize: vertical;
+}
+
+/* ── PROFESSIONAL OUTPUT TEXTAREA ──────────────────────────── */
+.pro-output {
+    min-height: 320px;
+    max-height: 520px;
+    overflow: auto;
+    resize: vertical;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ── GOLD BUTTON VARIANT ───────────────────────────────────── */
+.btn-gold {
+    background: #f5b722;
+}
+
+/* ── EMPTY STATE TYPOGRAPHY ────────────────────────────────── */
+.empty-state-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #f1f5f9; /* slate-100 */
+}
+
+.empty-state-desc {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    color: #94a3b8; /* slate-400 */
 }
 
 .assistant {
@@ -370,7 +503,7 @@
     width: 100%;
     min-height: 4rem;
     padding: 0.1rem 0.65rem 0.3rem 0.65rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12); /* slightly more visible at rest */
     border-radius: 1.1rem;
     color: #f8faf9;
     text-align: left;
@@ -378,7 +511,7 @@
     transform: translateY(0);
     isolation: isolate;
     cursor: pointer;
-    transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    transition: transform 200ms ease, filter 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
 }
 
 .assistant-option::before {
@@ -394,14 +527,13 @@
 
 .assistant-option:hover,
 .assistant-option:focus-visible {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+    box-shadow: 0 0 0 2px currentColor, 0 20px 42px rgba(0, 0, 0, 0.32);
+    /*box-shadow: 0 20px 42px rgba(0, 0, 0, 0.32), inset 0 0 0 1px rgba(255, 255, 255, 0.18);*/
     outline: none;
 }
-
-.assistant-option:focus-visible {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
-}
-
+ 
 .assistant-option-icon {
     position: relative;
     z-index: 1;
@@ -441,13 +573,13 @@
     z-index: 1;
     font-size: 1.35rem;
     font-weight: 700;
-    opacity: 0.92;
-    transition: transform 160ms ease, opacity 160ms ease;
+    opacity: 0.55; /* dim at rest — clearly changes on hover */
+    transition: transform 200ms ease, opacity 200ms ease;
 }
 
 .assistant-option:hover .assistant-option-arrow,
 .assistant-option:focus-visible .assistant-option-arrow {
-    transform: translateX(0.22rem);
+    transform: translateX(0.35rem); /* was 0.22rem — more noticeable */
     opacity: 1;
 }
 
@@ -510,6 +642,19 @@
     box-shadow:
         0 20px 42px rgba(0, 0, 0, 0.28),
         inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+/* per-variant hover border tints */
+.assistant-option-generate:focus-visible {
+    color: rgba(45, 212, 191, 0.85);
+}
+
+.assistant-option-refine:focus-visible {
+    color: rgba(163, 230, 53, 0.85);
+}
+
+.assistant-option-professional:focus-visible {
+    color: rgba(251, 191, 36, 0.85);
 }
 
 .assistant-grid {
@@ -783,5 +928,57 @@
         margin: 0 auto;
         transform: none;
         right: auto;
+    }
+}
+
+
+/* ── TOAST NOTIFICATION ─────────────────────────────────────────────── */
+.composer-toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    animation: toastIn 0.25s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+
+/* toast variants */
+.toast-success {
+    background: rgba(4, 24, 16, 0.96);
+    border: 1px solid rgba(45, 201, 142, 0.45);
+    color: #9effd4;
+}
+
+.toast-error {
+    background: rgba(24, 4, 4, 0.96);
+    border: 1px solid rgba(201, 45, 45, 0.45);
+    color: #ffb4ab;
+}
+
+.toast-icon {
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
     }
 }

@@ -6,9 +6,19 @@ body {
     color: #f5f7f7;
 }
 
+/* ── GLOBAL FOCUS RINGS ─────────────────────────────────────────────── */
+/* Remove browser default, replace with consistent visible ring */
 h1:focus {
     outline: none;
 }
+
+*:focus-visible {
+    outline: 2px solid rgba(63, 214, 180, 0.85);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+}
+
+
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
@@ -47,4 +57,161 @@ h1:focus {
     padding-top: 0px;
     padding-bottom: 0px;
     line-height: 0.5rem; /* Prevents text line-height from creating fake padding */
+}
+
+/* ── REUSABLE FORM CONTROLS ──────────────────────────────── */
+/* ponytail: single source for all dark-themed form fields across pages */
+
+.form-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #cbd5e1; /* slate-300 */
+    margin-bottom: 0.375rem;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background: #031810;
+    border: 1px solid rgba(86, 230, 145, 0.22);
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
+    color: #f1f5f9; /* slate-100 */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #64748b; /* slate-500 */
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #25d0be;
+    box-shadow: 0 0 0 1px #25d0be;
+}
+
+.form-textarea {
+    resize: none;
+}
+
+.form-textarea-ro {
+    width: 100%;
+    padding: 0.75rem;
+    background: #031810;
+    border: 1px solid #334155; /* slate-700 */
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
+    color: #cbd5e1; /* slate-300 */
+    transition: border-color 0.3s;
+}
+
+/* ── REUSABLE BUTTONS ────────────────────────────────────── */
+
+.btn-primary-gradient {
+    width: 100%;
+    padding: 0.5rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    background: linear-gradient(to right, #2dc98e, #80e36b);
+    color: #08110f;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    cursor: pointer;
+    transition: filter 0.3s;
+}
+
+.btn-primary-gradient:hover {
+    filter: brightness(1.1);
+}
+
+.btn-outline-accent {
+    width: 100%;
+    padding: 0.5rem 0;
+    border: 1px solid rgba(37, 208, 190, 0.5);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: #25d0be;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-outline-accent:hover {
+    background: rgba(37, 208, 190, 0.1);
+}
+
+.btn-pill {
+    padding: 0.25rem 0.625rem;
+    border: 1px solid #334155; /* slate-700 */
+    border-radius: 9999px;
+    background: #02100c;
+    color: #94a3b8; /* slate-400 */
+    font-size: 10px;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.btn-pill:hover {
+    color: #25d0be;
+    border-color: rgba(37, 208, 190, 0.5);
+}
+
+.btn-pill-active {
+    color: #25d0be;
+    border-color: rgba(37, 208, 190, 0.7);
+}
+
+.btn-nav-back {
+    padding: 0.25rem 0.625rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: #94a3b8; /* slate-400 */
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.btn-nav-back:hover {
+    color: #33d7a6;
+    background: rgba(51, 215, 166, 0.1);
+}
+
+/* ── UTILITY BOXES ───────────────────────────────────────── */
+
+.info-box {
+    border: 1px solid rgba(37, 208, 190, 0.3);
+    border-radius: 0.75rem;
+    background: #031810;
+    padding: 0.75rem;
+    font-size: 0.75rem;
+    color: #cbd5e1; /* slate-300 */
+}
+
+.empty-state-box {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid rgba(86, 230, 145, 0.22);
+    border-radius: 0.75rem;
+    background: #031810;
+    padding: 1.25rem;
+}
+
+.skeleton-row {
+    background: #031810;
 }

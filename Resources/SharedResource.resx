@@ -92,12 +92,7 @@
     <data name="Assistant.Tone.Executive" xml:space="preserve"><value>Executive</value></data>
     <data name="Assistant.Tone.Diplomatic" xml:space="preserve"><value>Diplomatic</value></data>
     <data name="Assistant.Tone.Persuasive" xml:space="preserve"><value>Persuasive</value></data>
-
-    
-    
-    
-    
-    
+   
     <!-- Footer section-->
     <data name="Footer.ReleaseNotesTitle" xml:space="preserve"><value>Release Notes</value></data>
     <data name="Footer.ReleaseNotes.V2" xml:space="preserve"><value>Public website release, invitation-only membership flow, and AI Workbench polish.</value></data>
@@ -118,4 +113,8 @@
     <data name="Footer.PrivacyPolicy" xml:space="preserve"><value>Privacy Policy</value></data>
     <data name="Footer.TermsOfService" xml:space="preserve"><value>Terms of Service</value></data>
     <data name="Footer.AllRightsReserved" xml:space="preserve"><value>All rights reserved.</value></data>
+
+    <data name="Toast.Applied" xml:space="preserve"><value>Applied to composer.</value></data>
+    <data name="Toast.Copied" xml:space="preserve"><value>Copied to composer.</value></data>
+        
 </root>

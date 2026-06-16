@@ -14,17 +14,17 @@
 
     <div class="max-w-4xl mx-auto px-4 py-8">
         <!-- Back Navigation -->
-        <a href="/knowledge" class="back-link inline-flex items-center gap-1.5 text-xs text-[#33d7a6] hover:underline mb-8">
+        <a href="/knowledge" class="btn-nav-back mb-8">
             <i class="ti ti-arrow-left"></i> Back to Knowledge Hub
         </a>
 
         @if (_card == null)
         {
-            <div class="text-center py-16 bg-[#02100c] border border-[rgba(58,209,141,0.16)] rounded-2xl">
-                <i class="ti ti-alert-triangle text-4xl text-amber-500 mb-3 block"></i>
-                <h2 class="text-lg font-bold text-white mb-2">Concept Not Found</h2>
-                <p class="text-xs text-slate-400 mb-6">The concept you are looking for might have been moved or renamed.</p>
-                <a href="/knowledge" class="btn btn-sm bg-[#33d7a6] text-[#04110f] hover:brightness-110 border-0 rounded-xl">
+            <div class="concept-not-found">
+                <i class="ti ti-alert-triangle concept-not-found-icon"></i>
+                <h2 class="concept-not-found-title">Concept Not Found</h2>
+                <p class="concept-not-found-text">The concept you are looking for might have been moved or renamed.</p>
+                <a href="/knowledge" class="btn-primary-gradient max-w-xs mx-auto">
                     Back to Hub
                 </a>
             </div>

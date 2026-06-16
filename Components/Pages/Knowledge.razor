@@ -83,8 +83,8 @@
 
                 <!-- Search Input -->
                 <div class="relative w-full sm:w-64">
-                    <input type="text" placeholder="Search knowledge..." @bind-value="_searchQuery" @bind-value:event="oninput" class="w-full pl-9 pr-4 py-2 bg-[#031810] border border-slate-700 focus:border-[#33d7a6] focus:ring-1 focus:ring-[#33d7a6] outline-none text-xs text-slate-200 placeholder-slate-500 rounded-xl transition-all duration-300" />
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
+                    <input type="text" placeholder="Search knowledge..." @bind-value="_searchQuery" @bind-value:event="oninput" class="form-input knowledge-search-input" />
+                    <span class="search-icon">
                         <i class="ti ti-search text-sm"></i>
                     </span>
                 </div>
@@ -93,10 +93,10 @@
             <!-- Card Grid -->
             @if (_filteredCards.Count == 0)
             {
-                <div class="text-center py-16 bg-[#02100c] border border-[rgba(58,209,141,0.16)] rounded-2xl">
+                <div class="knowledge-empty">
                     <i class="ti ti-search-off text-4xl text-slate-600 mb-3 block"></i>
-                    <h3 class="text-sm font-semibold text-slate-300 mb-1">No concepts found</h3>
-                    <p class="text-xs text-slate-500 max-w-xs mx-auto">Try adjusting your filters or search terms to explore other technological eras.</p>
+                    <h3 class="empty-state-title">No concepts found</h3>
+                    <p class="empty-state-desc" style="max-width:20rem;margin-inline:auto">Try adjusting your filters or search terms to explore other technological eras.</p>
                 </div>
             }
             else

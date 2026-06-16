@@ -42,3 +42,32 @@
     background: rgba(255, 255, 255, 0.04);
     transform: scale(1.08);
 }
+
+/* ── CONCEPT NOT FOUND ───────────────────────────────────────── */
+.concept-not-found {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: #02100c;
+    border: 1px solid rgba(58, 209, 141, 0.16);
+    border-radius: 1rem;
+}
+
+.concept-not-found-icon {
+    font-size: 2.25rem;
+    color: #f59e0b; /* amber-500 */
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.concept-not-found-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.concept-not-found-text {
+    font-size: 0.75rem;
+    color: #94a3b8; /* slate-400 */
+    margin-bottom: 1.5rem;
+}

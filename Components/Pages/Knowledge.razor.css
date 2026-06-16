@@ -156,3 +156,30 @@
     z-index: 0;
 }
 
+/* ── KNOWLEDGE SEARCH & EMPTY STATE ────────────────────────── */
+.knowledge-search-input {
+    padding-left: 2.25rem;
+    padding-right: 1rem;
+    border-color: #334155; /* slate-700 */
+}
+
+.knowledge-search-input:focus {
+    border-color: #33d7a6;
+    box-shadow: 0 0 0 1px #33d7a6;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b; /* slate-500 */
+}
+
+.knowledge-empty {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: #02100c;
+    border: 1px solid rgba(58, 209, 141, 0.16);
+    border-radius: 1rem;
+}

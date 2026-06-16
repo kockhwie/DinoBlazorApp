@@ -131,7 +131,7 @@ public static class KnowledgeStore
             "In computing, automation means writing scripts or using tools to handle jobs like backing up files, sending weekly reports, or testing code. By automating mundane, repetitive tasks, humans can focus on creative problem-solving. Modern AI takes automation a step further, enabling machines to make complex decisions rather than just following rigid pre-programmed rules.",
             "Software",
             "industrial-age",
-            "ti ti-robot-off",
+            "ti ti-robot",
             "automation,efficiency,scripts",
             1
         ),
