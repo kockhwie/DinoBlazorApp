@@ -8,6 +8,9 @@
     z-index: 2;
     font-size: 1.03rem;
 }
+
+ 
+
 .navbar-start {
     width: 50%;
 }
@@ -47,6 +50,13 @@
     .brand-wordmark {
         height: 2.20rem;
     }
+}
+
+.nav-menu {
+    background: rgba(4, 10, 8, 0.96);
+    border: 1px solid rgba(42, 201, 161, 0.18);
+    color: rgba(255, 255, 255, 0.92);
+    padding: 0.3rem;
 }
 
 .nav-menu-toggle {
@@ -102,12 +112,6 @@
     display: none;
 }
 
-.nav-menu {
-    background: rgba(4, 10, 8, 0.96);
-    border: 1px solid rgba(42, 201, 161, 0.18);
-    color: rgba(255, 255, 255, 0.92);
-    padding: 0.3rem;
-}
 
 .nav-login {
     color: rgba(255, 255, 255, 0.92);
