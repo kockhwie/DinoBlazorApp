@@ -35,13 +35,12 @@
             <img alt="Dino AI Academy" class="brand-wordmark" src="@Assets["assets/company_name.png"]" />
         </a>
     </div>
-
     <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal menu-sm items-center gap-1 px-1 nav-links">
+        <ul class="menu menu-horizontal px-1 nav-links">
             <li>
                 <details class="nav-dropdown" name="primary-nav">
                     <summary>@L["Nav_Courses"]</summary>
-                    <ul class="rounded-box nav-menu p-2 shadow-2xl">
+                    <ul class="rounded-box nav-menu p-2 bg-base-100 w-40 z-1 shadow-2xl">
                         <li><a href="#">@L["Nav_StarterPath"]</a></li>
                         <li><a href="#">@L["Nav_AdvancedPath"]</a></li>
                         <li><a href="#">@L["Nav_Projects"]</a></li>
@@ -50,8 +49,6 @@
             </li>
             <li><a href="#">@L["Nav_AITools"]</a></li>
             <li><a href="/knowledge">@L["Nav_Knowledge"]</a></li>
-            @* Resources and Community removed per request *@
-
         </ul>
     </div>
 
@@ -64,7 +61,7 @@
 
     </div>
 </nav>
-
+ 
 @code {
     // Compute once here; pass down to LangToggle as a parameter.
     // Nav is only injected in SiteNav — LangToggle stays dependency-free.
