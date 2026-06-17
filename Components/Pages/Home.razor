@@ -19,21 +19,33 @@
 
                 <div class="benefits">
                     <div class="benefit">
-                        <span class="benefit-icon"><i class="ti ti-leaf"></i></span>
-                        <span>@L["Home.Benefit.LearnAI"]</span>
+                        <span class="benefit-icon"><i class="ti ti-leaf"></i></span>                       
+                        <div class="benefit-content">
+                            <div class="benefit-title">@L["Home.Benefit.LearnAI"]</div>
+                            <div class="benefit-brief">@L["Home.Benefit.LearnAI.Brief"]</div>
+                        </div>
                     </div>
                     <div class="benefit">
-                        <span class="benefit-icon"><i class="ti ti-mountain"></i></span>
-                        <span>@L["Home.Benefit.BuildProjects"]</span>
+                        <span class="benefit-icon"><i class="ti ti-mountain"></i></span>                        
+                        <div class="benefit-content">
+                            <div class="benefit-title">@L["Home.Benefit.BuildProjects"]</div>
+                            <div class="benefit-brief">@L["Home.Benefit.BuildProjects.Brief"]</div>
+                        </div>
                     </div>
                     <div class="benefit">
                         <span class="benefit-icon"><i class="ti ti-cloud-network"></i></span>
-                        <span>@L["Home.Benefit.JoinCommunity"]</span>
+                        <div class="benefit-content">
+                            <div class="benefit-title">@L["Home.Benefit.JoinCommunity"]</div>
+                            <div class="benefit-brief">@L["Home.Benefit.JoinCommunity.Brief"]</div>
+                        </div>
                     </div>
                     <div class="benefit">
                         <span class="benefit-icon"><i class="ti ti-briefcase"></i></span>
-                        <span>@L["Home.Benefit.AdvanceCareer"]</span>
-                    </div>                           
+                        <div class="benefit-content">
+                            <div class="benefit-title">@L["Home.Benefit.AdvanceCareer"]</div>
+                            <div class="benefit-brief">@L["Home.Benefit.AdvanceCareer.Brief"]</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="hero-actions">
@@ -49,32 +61,32 @@
 
     <section class="showcase-shell">
         <div class="showcase-panel workbench">
-            <div class="panel-title">
+            <div class="panel-title-composer">
                 <i class="ti ti-mail-fast"></i>
                 <span>@L["Home.Composer.Title"]</span>
             </div>
 
-            <EditForm Model="@EmailDraft" class="composer-card">
-                <div class="composer-form">
-                    <div class="email-fields">
-                        <label class="email-field">
-                            <span class="email-label">@L["Home.Composer.Label.To"]</span>
-                            <input class="form-input" @bind="EmailDraft.To"
-                                   aria-label="@L["Home.Composer.Label.To"]" />
-                        </label>
-                        <label class="email-field">
-                            <span class="email-label">@L["Home.Composer.Label.Subject"]</span>
-                            <input class="form-input" @bind="EmailDraft.Subject"
-                                   aria-label="@L["Home.Composer.Label.Subject"]" />
-                        </label>
-                        <label class="email-field email-field-message">
-                            <span class="email-label">@L["Home.Composer.Label.Message"]</span>
-                            <textarea id="txtDraftEmailMessage" @bind="EmailDraft.Message"
-                                      rows="10" class="form-textarea"
-                                      placeholder="@L["Home.Composer.Placeholder.Message"]"
-                                      aria-label="@L["Home.Composer.Label.Message"]"></textarea>
-                        </label>
-                    </div>
+            <EditForm Model="@EmailDraft" class="flex flex-col gap-4 w-full">
+                <div class="space-y-3">
+                    <fieldset class="fieldset p-0">
+                        <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Home.Composer.Label.To"]</legend>
+                        <input class="input input-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" @bind="EmailDraft.To"
+                               aria-label="@L["Home.Composer.Label.To"]" />
+                    </fieldset>
+
+                    <fieldset class="fieldset p-0">
+                        <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Home.Composer.Label.Subject"]</legend>
+                        <input class="input input-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" @bind="EmailDraft.Subject"
+                               aria-label="@L["Home.Composer.Label.Subject"]" />
+                    </fieldset>
+
+                    <fieldset class="fieldset p-0">
+                        <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Home.Composer.Label.Message"]</legend>
+                        <textarea id="txtDraftEmailMessage" @bind="EmailDraft.Message"
+                                  rows="10" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[280px]"
+                                  placeholder="@L["Home.Composer.Placeholder.Message"]"
+                                  aria-label="@L["Home.Composer.Label.Message"]"></textarea>
+                    </fieldset>
                 </div> 
                 <div class="composer-actions">
                     <!--button type="button" class="mini-btn ghost" @onclick="ClearDraft">@L["Home.Composer.Action.Clear"]</button-->
@@ -94,19 +106,11 @@
         </div>
 
         <div class="showcase-panel assistant">
-            <div class="assistant-header">
-                <div class="panel-title">
-                    <i class="ti ti-robot text-[#33d7a6] text-lg"></i>
-                    <span>@L["Home.Assistant.Title"]</span>
-                </div>
-                @if (currentView != "options")
-                {
-                    <button type="button" @onclick="GoBackToOptions" class="btn-nav-back">
-                        <i class="ti ti-chevron-left"></i> @L["Home.Assistant.Button.Back"]
-                    </button>
-                }
+            <div class="panel-title">
+                <i class="ti ti-robot text-[#33d7a6] text-lg"></i>
+                <span>@L["Home.Assistant.Title"]</span>
             </div>
-
+ 
             @if (currentView == "options")
             {
                 <p class="assistant-subtitle">@L["Home.Assistant.ChooseAction"]</p>
@@ -124,7 +128,7 @@
                                 <path fill="#ccd6dd" d="M11.999 32a1 1 0 0 1-.163-1.986l12-2a.994.994 0 0 1 1.15.822a1 1 0 0 1-.822 1.15l-12 2a1 1 0 0 1-.165.014m0-4a1 1 0 0 1-.163-1.986l12-2a.995.995 0 0 1 1.15.822a1 1 0 0 1-.822 1.15l-12 2a1 1 0 0 1-.165.014" />
                             </svg>
                         </div>
-                        <div class="assistant-option-copy">
+                        <div class="assistant-option-bubble">
                             <div class="stars-container">
                                 <span class="stars">★</span>
                             </div>
@@ -143,11 +147,11 @@
                                 <g fill="none">
                                     <path fill="#433B6B" d="m5 29l-2-2l16-16l2 2z" />
                                     <path fill="#F4F4F4" d="m18 12l2 2l1.674-1.667c.435-.445.435-1.24 0-1.675l-.33-.331C20.9 9.89 20 10 19.5 10.5zM2.338 29.252l.41.41c.44.452 1.17.452 1.61-.01L6 28.007L4 26l-1.662 1.627a1.146 1.146 0 0 0 0 1.625" />
-                                    <path fill="#F9C23C" d="M27.87 4.423c.131.284.352.508.644.635l1.215.527a.453.453 0 0 1 0 .83l-1.205.527a1.22 1.22 0 0 0-.643.635l-.954 2.167c-.17.341-.683.341-.854 0l-.954-2.167a1.26 1.26 0 0 0-.643-.635l-1.205-.527a.453.453 0 0 1 0-.83l1.205-.527a1.22 1.22 0 0 0 .643-.635l.954-2.167c.17-.341.683-.341.854 0zm-11.429 1.18a.88.88 0 0 1-.458-.438l-.676-1.49c-.125-.233-.49-.233-.614 0l-.676 1.49a.85.85 0 0 1-.458.438l-.864.36a.309.309 0 0 0 0 .574l.864.36a.9.9 0 0 1 .458.438l.676 1.49c.125.233.49.233.614 0l.676-1.49a.85.85 0 0 1 .458-.438l.864-.36a.309.309 0 0 0 0-.574zm9.51 10.695a.95.95 0 0 1-.46-.48l-.686-1.622c-.128-.261-.492-.261-.61 0l-.685 1.623a.95.95 0 0 1-.46.479l-.857.392c-.257.13-.257.5 0 .62l.856.392a.95.95 0 0 1 .46.48l.686 1.622c.128.261.492.261.61 0l.685-1.622a.95.95 0 0 1 .46-.48l.857-.392c.257-.13.257-.5 0-.62zM12 14a1 1 0 1 0 0-2a1 1 0 0 0 0 2m18-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0M19 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2m1 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0" />
+                                    <path fill="#F9C23C" d="M27.87 4.423c.131.284.352.508.644.635l1.215.527a.453.453 0 0 1 0 .83l-1.205.527a1.22 1.22 0 0 0-.643.635l-.954 2.167c-.17.341-.683.341-.854 0l-.954-2.167a1.26 1.26 0 0 0-.643-.635l-1.205-.527a.453.453 0 0 1 0-.83l1.205-.527a1.22 1.22 0 0 0 .643-.635l.954-2.167c.17-.341.683-.341.854 0zm-11.429 1.18a.88.88 0 0 1-.458-.438l-.676-1.49c-.125-.233-.49-.233-.614 0l-.676 1.49a.85.85 0 0 1-.458.438l-.864.36a.309.309 0 0 0 0 .574l.864.36a.9.9 0 0 1 .458.438l.676 1.49c.125.233.49.233.614 0l.676-1.49a.85.85 0 0 1-.458.438l.864-.36a.309.309 0 0 0 0-.574zm9.51 10.695a.95.95 0 0 1-.46-.48l-.686-1.622c-.128-.261-.492-.261-.61 0l-.685 1.623a.95.95 0 0 1-.46.479l-.857.392c-.257.13-.257.5 0 .62l.856.392a.95.95 0 0 1 .46.48l.686 1.622c.128.261.492.261.61 0l.685-1.622a.95.95 0 0 1 .46-.48l.857-.392c.257-.13.257-.5 0-.62zM12 14a1 1 0 1 0 0-2a1 1 0 0 0 0 2m18-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0M19 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2m1 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0" />
                                 </g>
                             </svg>
                         </div>
-                        <div class="assistant-option-copy">
+                        <div class="assistant-option-bubble">
                             <div class="stars-container">
                                 <span class="stars">★</span>
                                 <span class="stars">★</span>
@@ -183,7 +187,7 @@
                                 <circle cx="17.938" cy="5.534" r="1.784" fill="#f4900c" />
                             </svg>
                         </div>
-                        <div class="assistant-option-copy">
+                        <div class="assistant-option-bubble">
                             <div class="stars-container">
                                 <span class="stars">★</span>
                                 <span class="stars">★</span>
@@ -199,7 +203,7 @@
             else
             {
                 <!-- AI Assistant Section -->
-                <div class="assistant-body">
+                 <div class="assistant-body">
                     @if (isLoading)
                     {
                         <div class="assistant-loading animate-pulse">
@@ -207,34 +211,38 @@
                             <div class="skeleton h-36 w-full skeleton-row"></div>
                             <div class="skeleton h-10 w-full skeleton-row"></div>
                         </div>
-                    }                    
+                    }                            
                     else if (currentView == "generate")
                     {
                         <!-- Option 1: Generate Email -->
-                        <div class="assistant-view">
-                            <div class="assistant-option-copy">
-                                <h3>@L["Assistant.Option.Generate.Title"]</h3>
+                        <div class="assistant-view flex flex-col gap-4">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-sm font-bold text-white">@L["Assistant.Option.Generate.Title"]</h3>
+                                <button type="button" @onclick="GoBackToOptions" class="btn-nav-back">
+                                    <i class="ti ti-chevron-left"></i> @L["Home.Assistant.Button.Back"]
+                                </button>
                             </div>
-                            <div class="assistant-view-fields">
-                                <div>
-                                    <label class="form-label">@L["Assistant.Prompt.Label"]</label>
-                                    <textarea id="txtGenerateEmailPrompt" @bind="promptInput" class="form-textarea" rows="3" placeholder="@L["Assistant.Prompt.Placeholder"]"></textarea>
-                                </div>
-                                <div class="pill-group">
+                            <div class="flex flex-col gap-3">
+                                <fieldset class="fieldset p-0">
+                                    <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Prompt.Label"]</legend>
+                                    <textarea id="txtGenerateEmailPrompt" @bind="promptInput" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[90px]" placeholder="@L["Assistant.Prompt.Placeholder"]"></textarea>
+                                </fieldset>
+                                
+                                <div class="flex flex-wrap gap-1.5 my-1">
                                     @foreach (var preset in EmailPresets)
                                     {
-                                        <button type="button" @onclick="() => SelectPreset(preset)" class="btn-pill @(selectedPresetKey == preset.Key ? "btn-pill-active" : "")">
+                                        <button type="button" @onclick="() => SelectPreset(preset)" class="btn btn-xs rounded-full border border-slate-700 bg-[#02100c] text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-colors cursor-pointer @(selectedPresetKey == preset.Key ? "border-emerald-500/70 text-emerald-400" : "")">
                                             @preset.Label
                                         </button>
                                     }
                                 </div>
-                                <button type="button" @onclick="TriggerPromptGeneration" class="btn-primary-gradient">
+                                <button type="button" @onclick="TriggerPromptGeneration" class="btn btn-sm btn-success text-slate-900 font-bold border-0 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
                                     @L["Assistant.Button.Generate"]
                                 </button>
                                 @if (!string.IsNullOrWhiteSpace(generatedEmail))
                                 {
-                                    <div class="info-box">
-                                        Draft added to the composer. You can edit it on the left before sending.
+                                    <div class="p-3 text-xs bg-[#031810] border border-emerald-500/30 rounded-xl text-slate-300">
+                                        @L["Home.Composer.Status.DraftIsDone"]
                                     </div>
                                 }
  
@@ -244,9 +252,12 @@
                     else if (currentView == "refine")
                     {   
                         <!-- Option 2: Refine My Email -->
-                        <div class="assistant-view"> 
-                                <div class="assistant-option-copy">
-                                    <h3>@L["Assistant.Option.Refine.Title"]</h3>
+                        <div class="assistant-view flex flex-col gap-4"> 
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-sm font-bold text-white">@L["Assistant.Option.Refine.Title"]</h3>
+                                    <button type="button" @onclick="GoBackToOptions" class="btn-nav-back">
+                                        <i class="ti ti-chevron-left"></i> @L["Home.Assistant.Button.Back"]
+                                    </button>
                                 </div>
                                 @if (string.IsNullOrWhiteSpace(EmailDraft.Message))
                                 {
@@ -256,10 +267,10 @@
                                             <p class="empty-state-desc">@L["Home.Assistant.EmptyDraft.Body"]</p>
                                         </div>
                                         <div class="grid gap-2 sm:grid-cols-2">
-                                            <button type="button" @onclick='() => SelectOption("generate")' class="btn-primary-gradient">
+                                            <button type="button" @onclick='() => SelectOption("generate")' class="btn btn-sm btn-success border-0 text-slate-900 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
                                                 @L["Home.Assistant.Button.CreateDraftFirst"]
                                             </button>
-                                            <button type="button" @onclick="UseSampleDraftForRefinement" class="btn-outline-accent">
+                                            <button type="button" @onclick="UseSampleDraftForRefinement" class="btn btn-sm btn-outline border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 cursor-pointer">
                                                 @L["Home.Assistant.Button.UseSampleDraft"]
                                             </button>
                                         </div>
@@ -267,32 +278,34 @@
                                 }
                                 else
                                 {
-                                    <div class="assistant-view-fields">
-                                        <div>
-                                            <label class="form-label">@L["Assistant.Prompt.Label"]</label>
-                                            <textarea id="txtRefineEmailPrompt" @bind="refineInstruction" class="form-textarea" rows="3" placeholder="@L["Assistant.Prompt.Placeholder"]"></textarea>
+                                    <div class="flex flex-col gap-3">
+                                        <fieldset class="fieldset p-0">
+                                            <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Prompt.Label"]</legend>
+                                            <textarea id="txtRefineEmailPrompt" @bind="refineInstruction" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[90px]" placeholder="@L["Assistant.Prompt.Placeholder"]"></textarea>
+                                        </fieldset>
+                                        
+                                        <div class="flex flex-wrap gap-1.5 my-1">
+                                            <button type="button" @onclick='() => SetRefineInstruction("Make it clearer, polite, and professional.")' class="btn btn-xs rounded-full border border-slate-700 bg-[#02100c] text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 cursor-pointer">Professional</button>
+                                            <button type="button" @onclick='() => SetRefineInstruction("Make it shorter and easier to read.")' class="btn btn-xs rounded-full border border-slate-700 bg-[#02100c] text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 cursor-pointer">Shorter</button>
+                                            <button type="button" @onclick='() => SetRefineInstruction("Make it friendlier and fix grammar mistakes.")' class="btn btn-xs rounded-full border border-slate-700 bg-[#02100c] text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 cursor-pointer">Friendly</button>
                                         </div>
-                                        <div class="pill-group">
-                                            <button type="button" @onclick='() => SetRefineInstruction("Make it clearer, polite, and professional.")' class="btn-pill">Professional</button>
-                                            <button type="button" @onclick='() => SetRefineInstruction("Make it shorter and easier to read.")' class="btn-pill">Shorter</button>
-                                            <button type="button" @onclick='() => SetRefineInstruction("Make it friendlier and fix grammar mistakes.")' class="btn-pill">Friendly</button>
-                                        </div>
-                                        <button type="button" @onclick="TriggerDraftRefinement" class="btn-primary-gradient">
-                                            Refine Email
+                                        
+                                        <button type="button" @onclick="TriggerDraftRefinement" class="btn btn-sm btn-success text-slate-900 font-bold border-0 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
+                                            @L["Assistant.Option.Refine.Button"]
                                         </button>
                                         @if (!string.IsNullOrWhiteSpace(refinedEmail))
                                         {
                                             <div class="grid gap-2 lg:grid-cols-2">
-                                                <div>
-                                                    <label class="form-label">Original</label>
-                                                    <textarea readonly class="form-textarea-ro refine-compare" rows="12">@refineOriginal</textarea>
-                                                </div>
-                                                <div>
-                                                    <label class="form-label">Improved</label>
-                                                    <textarea @bind="refinedEmail" class="form-textarea refine-compare" rows="12"></textarea>
-                                                </div>
+                                                <fieldset class="fieldset p-0">
+                                                    <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-400">@L["Assistant.Option.Refine.Original"]</legend>
+                                                    <textarea readonly class="textarea textarea-sm w-full bg-[#031810] border-slate-800 text-slate-400 resize-none h-[220px]" rows="12">@refineOriginal</textarea>
+                                                </fieldset>
+                                                <fieldset class="fieldset p-0">
+                                                    <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Refine.Improved"]</legend>
+                                                    <textarea @bind="refinedEmail" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[220px]" rows="12"></textarea>
+                                                </fieldset>
                                             </div>
-                                            <button type="button" @onclick="ApplyRefinedEmail" class="btn-outline-accent">
+                                            <button type="button" @onclick="ApplyRefinedEmail" class="btn btn-sm btn-outline border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 cursor-pointer">
                                                 @L["Assistant.Button.UseImprovedVersion"]
                                             </button>
                                         }
@@ -303,52 +316,58 @@
                     else if (currentView == "professional") 
                     {   
                         <!-- Option 3: Professional Upgrade -->
-                        <div class="assistant-view">
-                            <div class="assistant-option-copy">
-                                <h3>@L["Assistant.Option.Professional.Title"]</h3>
+                        <div class="assistant-view flex flex-col gap-4">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-sm font-bold text-white">@L["Assistant.Option.Professional.Title"]</h3>
+                                <button type="button" @onclick="GoBackToOptions" class="btn-nav-back">
+                                    <i class="ti ti-chevron-left"></i> @L["Home.Assistant.Button.Back"]
+                                </button>
                             </div> 
-                            <div class="assistant-view-fields">
-                                <div>
-                                    <label class="form-label">Purpose</label>
-                                    <textarea id="txtGenerateProfessionalEmailPrompt" @bind="professionalPurpose" class="form-textarea" rows="2" placeholder="What do you want the email to do?"></textarea>
-                                </div>
-
-                                <div>
-                                    <label class="form-label">Audience</label>
-                                    <input @bind="professionalAudience" class="form-input" placeholder="Teacher, manager, client, colleague..." />
-                                </div>
-
-                                <div class="tone-group">
-                                    <span class="form-label">@L["Assistant.Tone.Select"]</span>
-                                    <div class="tone-options">
-                                        <button type="button" @onclick='() => SetTone("Formal")' class="tone-btn @(selectedTone == "Formal" ? "tone-btn-active" : "")">
+                            <div class="flex flex-col gap-3">
+                                <fieldset class="fieldset p-0">
+                                    <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Professional.Purpose"]</legend>
+                                    <textarea id="txtGenerateProfessionalEmailPrompt" @bind="professionalPurpose" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[65px]" rows="2" placeholder="What do you want the email to do?"></textarea>
+                                </fieldset>
+ 
+                                <fieldset class="fieldset p-0">
+                                    <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Professional.Audience"]</legend>
+                                    <input @bind="professionalAudience" class="input input-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" placeholder="Teacher, manager, client, colleague..." />
+                                </fieldset>
+ 
+                                <fieldset class="fieldset p-0">
+                                    <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Tone.Select"]</legend>
+                                    <div class="flex gap-2">
+                                        <button type="button" @onclick='() => SetTone("Formal")' class="btn btn-xs rounded-lg border border-slate-700 bg-[#02100c] text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 cursor-pointer @(selectedTone == "Formal" ? "border-emerald-500/70 text-emerald-400 bg-emerald-500/5" : "")">
                                             💼 Formal
                                         </button>
-                                        <button type="button" @onclick='() => SetTone("Polite")' class="tone-btn @(selectedTone == "Polite" ? "tone-btn-active" : "")">
+                                        <button type="button" @onclick='() => SetTone("Polite")' class="btn btn-xs rounded-lg border border-slate-700 bg-[#02100c] text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 cursor-pointer @(selectedTone == "Polite" ? "border-emerald-500/70 text-emerald-400 bg-emerald-500/5" : "")">
                                             🤝 Polite
                                         </button>
-                                        <button type="button" @onclick='() => SetTone("Persuasive")' class="tone-btn @(selectedTone == "Persuasive" ? "tone-btn-active" : "")">
+                                        <button type="button" @onclick='() => SetTone("Persuasive")' class="btn btn-xs rounded-lg border border-slate-700 bg-[#02100c] text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 cursor-pointer @(selectedTone == "Persuasive" ? "border-emerald-500/70 text-emerald-400 bg-emerald-500/5" : "")">
                                             📣 Persuasive
                                         </button>
                                     </div>
-                                </div>
-
-                                <div>
-                                    <label class="form-label">Context</label>
-                                    <textarea @bind="professionalContext" class="form-textarea" rows="3" placeholder="Add any details, deadline, or reason..."></textarea>
-                                </div>
-
-                                <button type="button" @onclick="TriggerProfessionalUpgrade" class="btn-primary-gradient">
+                                </fieldset>
+ 
+                                <fieldset class="fieldset p-0">
+                                    <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Professional.Context"]</legend>
+                                    <textarea @bind="professionalContext" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[75px]" rows="3" placeholder="Add any details, deadline, or reason..."></textarea>
+                                </fieldset>
+ 
+                                <button type="button" @onclick="TriggerProfessionalUpgrade" class="btn btn-sm btn-success text-slate-900 font-bold border-0 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
                                         @L["Assistant.Button.Generate"]
                                 </button>
-                                <label class="form-label">Generated Email</label>
-                                <textarea readonly class="form-textarea pro-output" rows="14">@professionalOutputText</textarea>
-                                <button type="button" @onclick="ApplyProfessionalOutput" class="btn-primary-gradient btn-gold">
-                                    @L["Assistant.Button.UseThisVersion"]
-                                </button>
-                                
+                                @if (!string.IsNullOrWhiteSpace(professionalOutputText))
+                                {
+                                    <fieldset class="fieldset p-0">
+                                        <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Professional.GeneratedEmail"]</legend>
+                                        <textarea readonly class="textarea textarea-sm w-full bg-[#031810] border-slate-800 text-slate-400 resize-none h-[220px]" rows="14">@professionalOutputText</textarea>
+                                    </fieldset>
+                                    <button type="button" @onclick="ApplyProfessionalOutput" class="btn btn-sm btn-success border-0 text-slate-900 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
+                                        @L["Assistant.Button.UseThisVersion"]
+                                    </button>
+                                }
                             </div>
- 
                         </div>
                     }
                 </div>

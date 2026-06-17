@@ -1,190 +1,373 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
-		Microsoft ResX Schema
- 
-		Version 1.3
- 
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
- 
-		Example:
- 
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
- 
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
- 
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
- 
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
- 
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
- 
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
- 
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
- 
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
-	
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
- 
- 
-	<!-- General -->
-	<data name="Site.Title" xml:space="preserve"><value>Dino AI Academy 首頁</value></data>
- 
- 
-	<!-- NAV -->
-	<data name="Nav_OpenMenu"><value>開啟導覽選單</value></data>
-	<data name="Nav_Courses"><value>課程</value></data>
-	<data name="Nav_StarterPath"><value>新手路徑</value></data>
-	<data name="Nav_AdvancedPath"><value>進階路徑</value></data>
-	<data name="Nav_Projects"><value>實作專案</value></data>
-		<data name="Nav_AITools"><value>AI 工具</value></data>
-	<data name="Nav_Knowledge"><value>知識庫</value></data>
-	<data name="Nav_LogIn"><value>登入</value></data>
-	<data name="Nav_JoinAcademy"><value>加入</value></data>
- 
-	<!-- Hero section -->
-	<data name="Home.Hero.Title1" xml:space="preserve"><value>不要只使用 AI。</value></data>
-	<data name="Home.Hero.Title2" xml:space="preserve"><value>與它共同進化。</value></data>
-	<data name="Home.Hero.Lead" xml:space="preserve"><value>透過實作學習、真實專案與充滿活力的創新社群，掌握 AI 技能。</value></data>
-	<data name="Home.Hero.StartCta" xml:space="preserve"><value>開始你的進化</value></data>
-	<data name="Home.Benefit.LearnAI" xml:space="preserve"><value>正確學習 AI</value></data>
-	<data name="Home.Benefit.BuildProjects" xml:space="preserve"><value>建立真實專案</value></data>
-	<data name="Home.Benefit.JoinCommunity" xml:space="preserve"><value>加入全球社群</value></data>
-	<data name="Home.Benefit.AdvanceCareer" xml:space="preserve"><value>提升你的職涯</value></data>
- 
-	<!-- Main AI Workbench -->
-	<data name="Home.Composer.Title" xml:space="preserve"><value>電子郵件撰寫器</value></data>
-	<data name="Home.Assistant.Title" xml:space="preserve"><value>AI 助手</value></data>
-	<!-- Email Composer -->
-	<data name="Home.Composer.Label.To" xml:space="preserve"><value>收件者</value></data>
-	<data name="Home.Composer.Label.Subject" xml:space="preserve"><value>主旨</value></data>
-	<data name="Home.Composer.Label.Message" xml:space="preserve"><value>內容</value></data>
-	<data name="Home.Composer.Placeholder.Message" xml:space="preserve"><value>在此撰寫您的電子郵件內容或使用任何一個AI助手選項…</value></data>
-	<data name="Home.Composer.Action.Clear" xml:space="preserve"><value>清除</value></data>
-	<data name="Home.Composer.Action.Improve" xml:space="preserve"><value>改善內容</value></data>
-	<data name="Home.Composer.Action.Send" xml:space="preserve"><value>發送電子郵件</value></data>
-	<data name="Home.Composer.Status.SendPreview" xml:space="preserve"><value>僅發送預覽 — 未實際寄出電子郵件。</value></data>
-	<!-- AI Assistant -->
-	<data name="Home.Assistant.Button.Back" xml:space="preserve"><value>返回</value></data>
- 	<data name="Home.Assistant.ChooseAction" xml:space="preserve"><value>選擇一個操作開始。</value></data>
-	<data name="Home.Assistant.EmptyDraft.Title" xml:space="preserve"><value>您的草稿為空！</value></data>
-	<data name="Home.Assistant.EmptyDraft.Body" xml:space="preserve"><value>請在左側的 AI 工作台撰寫或貼上電子郵件，或使用範例草稿查看改寫效果。</value></data>
-	<data name="Home.Assistant.Button.CreateDraftFirst" xml:space="preserve"><value>先建立草稿</value></data>
-	<data name="Home.Assistant.Button.UseSampleDraft" xml:space="preserve"><value>使用範例草稿</value></data>
-	<data name="Assistant.Button.Generate" xml:space="preserve"><value>🚀 產生郵件內容</value></data>
-	<data name="Assistant.Prompt.Label" xml:space="preserve"><value>AI 提示：</value></data>
-	<data name="Assistant.Prompt.Placeholder" xml:space="preserve"><value>描述您想要產生的電子郵件內容…</value></data>
-	<data name="Assistant.NewMessage.Label" xml:space="preserve"><value>新郵件內容：</value></data>
-	<data name="Assistant.Option.Generate.Title" xml:space="preserve"><value>等级 1: 替我寫郵件內容</value></data>
-	<data name="Assistant.Option.Generate.Description" xml:space="preserve"><value>只需幾個字或指示，立即產生專業郵件。</value></data>	
-	<data name="Assistant.Option.Refine.Title" xml:space="preserve"><value>等级 2: 改寫我的郵件內容</value></data>
-	<data name="Assistant.Option.Refine.Description" xml:space="preserve"><value>在保留原意的同時，改善清晰度、語氣、文法與結構。</value></data>
-	<data name="Assistant.Option.Professional.Title" xml:space="preserve"><value>等级 3: 讓郵件內容更專業</value></data>
-	<data name="Assistant.Option.Professional.Description" xml:space="preserve"><value>使語氣更正式、精煉且具高階管理風格。</value></data>
-	<data name="Assistant.Button.UseImprovedVersion" xml:space="preserve"><value>使用改善版本</value></data>
-	<data name="Assistant.Button.UseThisVersion" xml:space="preserve"><value>使用此版本</value></data>
-	<data name="Assistant.Button.Extension" xml:space="preserve"><value>延期</value></data>
-	<data name="Assistant.Button.FollowUp" xml:space="preserve"><value>跟進</value></data>
-	<data name="Assistant.Button.Vacation" xml:space="preserve"><value>休假</value></data>
-	<data name="Assistant.Tone.Select" xml:space="preserve"><value>選擇語氣：</value></data>
-	<data name="Assistant.Tone.Executive" xml:space="preserve"><value>主管式</value></data>
-	<data name="Assistant.Tone.Diplomatic" xml:space="preserve"><value>圓融式</value></data>
-	<data name="Assistant.Tone.Persuasive" xml:space="preserve"><value>說服式</value></data>
- 
-	<!-- Footer section-->
-	<data name="Footer.ReleaseNotesTitle" xml:space="preserve"><value>版本說明</value></data>
-	<data name="Footer.ReleaseNotes.V2" xml:space="preserve"><value>公開網站發布、邀請制會員流程，以及 AI 工作台的優化。</value></data>
-	<data name="Footer.ReleaseNotes.ReadFull" xml:space="preserve"><value>閱讀完整版本說明</value></data>
-	<data name="Footer.Feedback.Title" xml:space="preserve"><value>回饋 / 願望清單</value></data>
-	<data name="Footer.Feedback.Send" xml:space="preserve"><value>提供回饋</value></data>
-	<data name="Footer.Feedback.Wishlist" xml:space="preserve"><value>加入願望清單</value></data>
-	<data name="Footer.Feedback.Roadmap" xml:space="preserve"><value>檢視路線圖</value></data>
-	<data name="Footer.Copyright" xml:space="preserve"><value>© {0} Dino AI Academy</value></data>
-	<data name="Footer.BuiltWith" xml:space="preserve"><value>使用 :</value></data>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-	<!-- Additional site-wide footer links -->
-	<data name="Footer.Learn" xml:space="preserve"><value>學習</value></data>
-	<data name="Footer.Company" xml:space="preserve"><value>公司</value></data>
-	<data name="Footer.Legal" xml:space="preserve"><value>法律條款</value></data>
-	<data name="Footer.ReleaseNotes" xml:space="preserve"><value>版本說明</value></data>
-	<data name="Footer.Contact" xml:space="preserve"><value>聯絡我們</value></data>
-	<data name="Footer.PrivacyPolicy" xml:space="preserve"><value>隱私權政策</value></data>
-	<data name="Footer.TermsOfService" xml:space="preserve"><value>服務條款</value></data>
-	<data name="Footer.AllRightsReserved" xml:space="preserve"><value>保留所有權利。</value></data>
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Site.Title" xml:space="preserve">
+    <value>Dino AI Academy 首頁</value>
+  </data>
+  <data name="Nav_OpenMenu" xml:space="preserve">
+    <value>開啟導覽選單</value>
+  </data>
+  <data name="Nav_Courses" xml:space="preserve">
+    <value>課程</value>
+  </data>
+  <data name="Nav_StarterPath" xml:space="preserve">
+    <value>新手路徑</value>
+  </data>
+  <data name="Nav_AdvancedPath" xml:space="preserve">
+    <value>進階路徑</value>
+  </data>
+  <data name="Nav_Projects" xml:space="preserve">
+    <value>實作專案</value>
+  </data>
+  <data name="Nav_AITools" xml:space="preserve">
+    <value>AI 工具</value>
+  </data>
+  <data name="Nav_Knowledge" xml:space="preserve">
+    <value>知識庫</value>
+  </data>
+  <data name="Nav_LogIn" xml:space="preserve">
+    <value>登入</value>
+  </data>
+  <data name="Nav_JoinAcademy" xml:space="preserve">
+    <value>加入</value>
+  </data>
+  <data name="Home.Hero.Title1" xml:space="preserve">
+    <value>不要只使用 AI 聊天，</value>
+  </data>
+  <data name="Home.Hero.Title2" xml:space="preserve">
+    <value>與它共同進化。</value>
+  </data>
+  <data name="Home.Hero.Lead" xml:space="preserve">
+    <value>透過實作學習、真實專案與充滿活力的創新社群，掌握 AI 技能。</value>
+  </data>
+  <data name="Home.Hero.StartCta" xml:space="preserve">
+    <value>開始你的進化</value>
+  </data>
+  <data name="Home.Benefit.LearnAI" xml:space="preserve">
+    <value>正確學習 AI：</value>
+  </data>
+  <data name="Home.Benefit.BuildProjects" xml:space="preserve">
+    <value>建立真實專案：</value>
+  </data>
+  <data name="Home.Benefit.JoinCommunity" xml:space="preserve">
+    <value>加入全球社群：</value>
+  </data>
+  <data name="Home.Benefit.AdvanceCareer" xml:space="preserve">
+    <value>提升你的職涯：</value>
+  </data>
+  <data name="Home.Benefit.LearnAI.Brief" xml:space="preserve">
+    <value>循著精心設計的學習路徑，真正掌握 AI。</value>
+  </data>
+  <data name="Home.Benefit.BuildProjects.Brief" xml:space="preserve">
+    <value>透過實作，把理論轉化為實際成果。</value>
+  </data>
+  <data name="Home.Benefit.JoinCommunity.Brief" xml:space="preserve">
+    <value>與全球創新者合作，共同成長。</value>
+  </data>
+  <data name="Home.Benefit.AdvanceCareer.Brief" xml:space="preserve">
+    <value>開啟新機會，加速職涯發展。</value>
+  </data>
 
-	<data name="Toast.Applied" xml:space="preserve"><value>已套用至撰寫器。</value></data>
-	<data name="Toast.Copied" xml:space="preserve"><value>已複製至撰寫器。</value></data>
+  <data name="Home.Composer.Title" xml:space="preserve">
+    <value>電子郵件編輯器</value>
+  </data>
+  <data name="Home.Assistant.Title" xml:space="preserve">
+    <value>AI 助手</value>
+  </data>
+  <data name="Home.Composer.Label.To" xml:space="preserve">
+    <value>收件者</value>
+  </data>
+  <data name="Home.Composer.Label.Subject" xml:space="preserve">
+    <value>標題</value>
+  </data>
+  <data name="Home.Composer.Label.Message" xml:space="preserve">
+    <value>內容</value>
+  </data>
+  <data name="Home.Composer.Placeholder.Message" xml:space="preserve">
+    <value>在此撰寫您的電子郵件內容或使用任何一個AI助手選項…</value>
+  </data>
+  <data name="Home.Composer.Action.Clear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="Home.Composer.Action.Improve" xml:space="preserve">
+    <value>改善內容</value>
+  </data>
+  <data name="Home.Composer.Action.Send" xml:space="preserve">
+    <value>發送電子郵件</value>
+  </data>
+  <data name="Home.Composer.Status.SendPreview" xml:space="preserve">
+    <value>僅發送預覽 - 未實際寄出電子郵件。</value>
+  </data>
+  <data name="Home.Composer.Status.DraftIsDone" xml:space="preserve">
+    <value>草稿已加入電子郵件撰寫器。寄出前，您可以在左側進行修改。</value>
+  </data>
+  <data name="Home.Assistant.ChooseAction" xml:space="preserve">
+    <value>選擇一個操作開始。</value>
+  </data>
+  <data name="Home.Assistant.Button.Back" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="Home.Assistant.EmptyDraft.Title" xml:space="preserve">
+    <value>您的草稿為空！</value>
+  </data>
+  <data name="Home.Assistant.EmptyDraft.Body" xml:space="preserve">
+    <value>請在左側的 AI 工作台撰寫或貼上電子郵件，或使用範例草稿查看改寫效果。</value>
+  </data>
+  <data name="Home.Assistant.Button.CreateDraftFirst" xml:space="preserve">
+    <value>先建立草稿</value>
+  </data>
+  <data name="Home.Assistant.Button.UseSampleDraft" xml:space="preserve">
+    <value>使用範例草稿</value>
+  </data>
+  <data name="Assistant.Button.Generate" xml:space="preserve">
+    <value>🚀 產生電子郵件內容</value>
+  </data>
+  <data name="Assistant.Prompt.Label" xml:space="preserve">
+    <value>AI 提示詞：</value>
+  </data>
+  <data name="Assistant.Prompt.Placeholder" xml:space="preserve">
+    <value>描述您想要產生的電子郵件內容…</value>
+  </data>
+  <data name="Assistant.NewMessage.Label" xml:space="preserve">
+    <value>新電子郵件內容：</value>
+  </data>
+  <data name="Assistant.Option.Generate.Title" xml:space="preserve">
+    <value>等级 1: 替我寫電子郵件內容</value>
+  </data>
+  <data name="Assistant.Option.Generate.Description" xml:space="preserve">
+    <value>只需幾個字或指示，立即產生專業電子郵件。</value>
+  </data>
+  <data name="Assistant.Option.Refine.Title" xml:space="preserve">
+    <value>等级 2: 改寫我的電子郵件內容</value>
+  </data>
+  <data name="Assistant.Option.Refine.Description" xml:space="preserve">
+    <value>在保留原意的同時，改善清晰度、語氣、文法與結構。</value>
+  </data>
+  <data name="Assistant.Option.Refine.Button" xml:space="preserve">
+    <value>改寫電子郵件內容</value>
+  </data>
+    <data name="Assistant.Option.Refine.Original" xml:space="preserve">
+    <value>原本內容</value>
+  </data>
+    <data name="Assistant.Option.Refine.Improved" xml:space="preserve">
+    <value>改寫後內容</value>
+  </data>
+  <data name="Assistant.Option.Professional.Title" xml:space="preserve">
+    <value>等级 3: 讓電子郵件內容更專業</value>
+  </data>
+  <data name="Assistant.Option.Professional.Description" xml:space="preserve">
+    <value>使語氣更正式、精煉且具高階管理風格。</value>
+  </data>
+  <data name="Assistant.Option.Professional.Purpose" xml:space="preserve">
+    <value>目的</value>
+  </data>
+  <data name="Assistant.Option.Professional.Audience" xml:space="preserve">
+    <value>對象</value>
+  </data>
+  <data name="Assistant.Option.Professional.Context" xml:space="preserve">
+    <value>情境上下文</value>
+  </data>
+  <data name="Assistant.Option.Professional.GeneratedEmail" xml:space="preserve">
+    <value>自動生成的電子郵件內容</value>
+  </data>
+  <data name="Assistant.Button.UseImprovedVersion" xml:space="preserve">
+    <value>使用改善版本</value>
+  </data>
+  <data name="Assistant.Button.UseThisVersion" xml:space="preserve">
+    <value>使用此版本</value>
+  </data>
+  <data name="Assistant.Button.Extension" xml:space="preserve">
+    <value>延期</value>
+  </data>
+  <data name="Assistant.Button.FollowUp" xml:space="preserve">
+    <value>跟進</value>
+  </data>
+  <data name="Assistant.Button.Vacation" xml:space="preserve">
+    <value>休假</value>
+  </data>
+  <data name="Assistant.Tone.Select" xml:space="preserve">
+    <value>選擇語氣：</value>
+  </data>
+  <data name="Assistant.Tone.Executive" xml:space="preserve">
+    <value>主管式</value>
+  </data>
+  <data name="Assistant.Tone.Diplomatic" xml:space="preserve">
+    <value>圓融式</value>
+  </data>
+  <data name="Assistant.Tone.Persuasive" xml:space="preserve">
+    <value>說服式</value>
+  </data>
+  <data name="Footer.ReleaseNotesTitle" xml:space="preserve">
+    <value>版本說明</value>
+  </data>
+  <data name="Footer.ReleaseNotes.V2" xml:space="preserve">
+    <value>公開網站發布、邀請制會員流程，以及 AI 工作台的優化。</value>
+  </data>
+  <data name="Footer.ReleaseNotes.ReadFull" xml:space="preserve">
+    <value>閱讀完整版本說明</value>
+  </data>
+  <data name="Footer.Feedback.Title" xml:space="preserve">
+    <value>回饋 / 願望清單</value>
+  </data>
+  <data name="Footer.Feedback.Send" xml:space="preserve">
+    <value>提供回饋</value>
+  </data>
+  <data name="Footer.Feedback.Wishlist" xml:space="preserve">
+    <value>加入願望清單</value>
+  </data>
+  <data name="Footer.Feedback.Roadmap" xml:space="preserve">
+    <value>檢視路線圖</value>
+  </data>
+  <data name="Footer.Copyright" xml:space="preserve">
+    <value>© {0} Dino AI Academy</value>
+  </data>
+  <data name="Footer.BuiltWith" xml:space="preserve">
+    <value>使用 :</value>
+  </data>
+  <data name="Footer.Learn" xml:space="preserve">
+    <value>學習</value>
+  </data>
+  <data name="Footer.Company" xml:space="preserve">
+    <value>公司</value>
+  </data>
+  <data name="Footer.Legal" xml:space="preserve">
+    <value>法律條款</value>
+  </data>
+  <data name="Footer.ReleaseNotes" xml:space="preserve">
+    <value>版本說明</value>
+  </data>
+  <data name="Footer.Contact" xml:space="preserve">
+    <value>聯絡我們</value>
+  </data>
+  <data name="Footer.PrivacyPolicy" xml:space="preserve">
+    <value>隱私權政策</value>
+  </data>
+  <data name="Footer.TermsOfService" xml:space="preserve">
+    <value>服務條款</value>
+  </data>
+  <data name="Footer.AllRightsReserved" xml:space="preserve">
+    <value>保留所有權利。</value>
+  </data>
+  <data name="Toast.Applied" xml:space="preserve">
+    <value>已套用至撰寫器。</value>
+  </data>
+  <data name="Toast.Copied" xml:space="preserve">
+    <value>已複製至撰寫器。</value>
+  </data>
 </root>

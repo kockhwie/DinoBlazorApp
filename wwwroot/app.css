@@ -18,6 +18,24 @@ h1:focus {
     border-radius: 0.5rem;
 }
 
+/* daisyUI form controls handle their own focus ring — suppress the global one */
+.input:focus-visible,
+.textarea:focus-visible,
+.select:focus-visible {
+    outline: none;
+}
+
+/* ── GLOBAL BUTTON RESET ─────────────────────────────────────────────── */
+/* daisyUI btn adds box-shadow by default; we opt-out site-wide */
+.btn {
+    box-shadow: none;
+}
+
+/* browsers give <fieldset> a default margin; strip it so flex gap is the only spacing */
+fieldset {
+    margin: 0;
+}
+
 
 
 .valid.modified:not([type=checkbox]) {
@@ -65,26 +83,24 @@ h1:focus {
 .form-label {
     display: block;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 700;
     color: #cbd5e1; /* slate-300 */
-    margin-bottom: 0.375rem;
+    margin-bottom: 0.45rem;
+    letter-spacing: 0.05em;
 }
 
 .form-input,
 .form-textarea {
     width: 100%;
-    padding: 0.75rem;
     background: #031810;
     border: 1px solid rgba(86, 230, 145, 0.22);
-    border-radius: 0.75rem;
-    font-size: 0.75rem;
     color: #f1f5f9; /* slate-100 */
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-input::placeholder,
 .form-textarea::placeholder {
-    color: #64748b; /* slate-500 */
+    color: #475569; /* slate-600 */
 }
 
 .form-input:focus,
@@ -94,20 +110,14 @@ h1:focus {
     box-shadow: 0 0 0 1px #25d0be;
 }
 
-.form-textarea {
-    resize: none;
-}
-
 .form-textarea-ro {
     width: 100%;
-    padding: 0.75rem;
     background: #031810;
     border: 1px solid #334155; /* slate-700 */
-    border-radius: 0.75rem;
-    font-size: 0.75rem;
     color: #cbd5e1; /* slate-300 */
     transition: border-color 0.3s;
 }
+
 
 /* ── REUSABLE BUTTONS ────────────────────────────────────── */
 
@@ -171,17 +181,13 @@ h1:focus {
 }
 
 .btn-nav-back {
-    padding: 0.25rem 0.625rem;
-    border: none;
+    padding: 0.25rem 0.52rem 0.25rem 0.22rem;
+    border: 1px solid #334155;
     border-radius: 0.5rem;
-    background: transparent;
+    background: #47556940;
     color: #94a3b8; /* slate-400 */
     font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
     cursor: pointer;
-    transition: color 0.3s, background-color 0.3s;
 }
 
 .btn-nav-back:hover {
