@@ -70,28 +70,28 @@
                 <div class="space-y-3">
                     <fieldset class="fieldset p-0">
                         <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Home.Composer.Label.To"]</legend>
-                        <input class="input input-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" @bind="EmailDraft.To"
+                        <input class="input form-input" @bind="EmailDraft.To"
                                aria-label="@L["Home.Composer.Label.To"]" />
                     </fieldset>
 
                     <fieldset class="fieldset p-0">
                         <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Home.Composer.Label.Subject"]</legend>
-                        <input class="input input-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" @bind="EmailDraft.Subject"
+                        <input class="input form-input" @bind="EmailDraft.Subject"
                                aria-label="@L["Home.Composer.Label.Subject"]" />
                     </fieldset>
 
                     <fieldset class="fieldset p-0">
                         <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Home.Composer.Label.Message"]</legend>
                         <textarea id="txtDraftEmailMessage" @bind="EmailDraft.Message"
-                                  rows="10" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[280px]"
+                                  rows="10" class="textarea form-textarea"
                                   placeholder="@L["Home.Composer.Placeholder.Message"]"
                                   aria-label="@L["Home.Composer.Label.Message"]"></textarea>
                     </fieldset>
                 </div> 
                 <div class="composer-actions">
                     <!--button type="button" class="mini-btn ghost" @onclick="ClearDraft">@L["Home.Composer.Action.Clear"]</button-->
-                    <button type="button" class="mini-btn solid" @onclick="LoadImprovedDraft">@L["Home.Composer.Action.Improve"] </button>
-                    <button type="button" class="mini-btn solid" @onclick="HandleSendEmail">@L["Home.Composer.Action.Send"]</button>
+                    <button type="button" class="btn btn-outline btn-success" @onclick="LoadImprovedDraft">@L["Home.Composer.Action.Improve"] </button>
+                    <button type="button" class="btn btn-success" @onclick="HandleSendEmail">@L["Home.Composer.Action.Send"]</button>
                 </div>
                 <!--  status moved to toast — remove this block entirely -->
                 @*    
@@ -218,14 +218,14 @@
                         <div class="assistant-view flex flex-col gap-4">
                             <div class="flex justify-between items-center">
                                 <h3 class="text-sm font-bold text-white">@L["Assistant.Option.Generate.Title"]</h3>
-                                <button type="button" @onclick="GoBackToOptions" class="btn-nav-back">
+                                <button type="button" @onclick="GoBackToOptions" class="btn btn-xs btn-nav-back">
                                     <i class="ti ti-chevron-left"></i> @L["Home.Assistant.Button.Back"]
                                 </button>
                             </div>
                             <div class="flex flex-col gap-3">
                                 <fieldset class="fieldset p-0">
                                     <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Prompt.Label"]</legend>
-                                    <textarea id="txtGenerateEmailPrompt" @bind="promptInput" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[90px]" placeholder="@L["Assistant.Prompt.Placeholder"]"></textarea>
+                                    <textarea id="txtGenerateEmailPrompt" @bind="promptInput" class="textarea form-textarea" placeholder="@L["Assistant.Prompt.Placeholder"]"></textarea>
                                 </fieldset>
                                 
                                 <div class="flex flex-wrap gap-1.5 my-1">
@@ -236,7 +236,7 @@
                                         </button>
                                     }
                                 </div>
-                                <button type="button" @onclick="TriggerPromptGeneration" class="btn btn-sm btn-success text-slate-900 font-bold border-0 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
+                                <button type="button" @onclick="TriggerPromptGeneration" class="btn btn-success">
                                     @L["Assistant.Button.Generate"]
                                 </button>
                                 @if (!string.IsNullOrWhiteSpace(generatedEmail))
@@ -255,7 +255,7 @@
                         <div class="assistant-view flex flex-col gap-4"> 
                                 <div class="flex justify-between items-center">
                                     <h3 class="text-sm font-bold text-white">@L["Assistant.Option.Refine.Title"]</h3>
-                                    <button type="button" @onclick="GoBackToOptions" class="btn-nav-back">
+                                <button type="button" @onclick="GoBackToOptions" class="btn btn-xs btn-nav-back">
                                         <i class="ti ti-chevron-left"></i> @L["Home.Assistant.Button.Back"]
                                     </button>
                                 </div>
@@ -267,10 +267,10 @@
                                             <p class="empty-state-desc">@L["Home.Assistant.EmptyDraft.Body"]</p>
                                         </div>
                                         <div class="grid gap-2 sm:grid-cols-2">
-                                            <button type="button" @onclick='() => SelectOption("generate")' class="btn btn-sm btn-success border-0 text-slate-900 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
+                                            <button type="button" @onclick='() => SelectOption("generate")' class="btn btn-success">
                                                 @L["Home.Assistant.Button.CreateDraftFirst"]
                                             </button>
-                                            <button type="button" @onclick="UseSampleDraftForRefinement" class="btn btn-sm btn-outline border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 cursor-pointer">
+                                        <button type="button" @onclick="UseSampleDraftForRefinement" class="btn btn-accent">
                                                 @L["Home.Assistant.Button.UseSampleDraft"]
                                             </button>
                                         </div>
@@ -281,7 +281,7 @@
                                     <div class="flex flex-col gap-3">
                                         <fieldset class="fieldset p-0">
                                             <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Prompt.Label"]</legend>
-                                            <textarea id="txtRefineEmailPrompt" @bind="refineInstruction" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[90px]" placeholder="@L["Assistant.Prompt.Placeholder"]"></textarea>
+                                            <textarea id="txtRefineEmailPrompt" @bind="refineInstruction" class="textarea form-textarea" placeholder="@L["Assistant.Prompt.Placeholder"]"></textarea>
                                         </fieldset>
                                         
                                         <div class="flex flex-wrap gap-1.5 my-1">
@@ -290,7 +290,7 @@
                                             <button type="button" @onclick='() => SetRefineInstruction("Make it friendlier and fix grammar mistakes.")' class="btn btn-xs rounded-full border border-slate-700 bg-[#02100c] text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 cursor-pointer">Friendly</button>
                                         </div>
                                         
-                                        <button type="button" @onclick="TriggerDraftRefinement" class="btn btn-sm btn-success text-slate-900 font-bold border-0 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
+                                        <button type="button" @onclick="TriggerDraftRefinement" class="btn btn-success">
                                             @L["Assistant.Option.Refine.Button"]
                                         </button>
                                         @if (!string.IsNullOrWhiteSpace(refinedEmail))
@@ -298,14 +298,14 @@
                                             <div class="grid gap-2 lg:grid-cols-2">
                                                 <fieldset class="fieldset p-0">
                                                     <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-400">@L["Assistant.Option.Refine.Original"]</legend>
-                                                    <textarea readonly class="textarea textarea-sm w-full bg-[#031810] border-slate-800 text-slate-400 resize-none h-[220px]" rows="12">@refineOriginal</textarea>
+                                                <textarea readonly class="textarea form-textarea" rows="12">@refineOriginal</textarea>
                                                 </fieldset>
                                                 <fieldset class="fieldset p-0">
                                                     <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Refine.Improved"]</legend>
-                                                    <textarea @bind="refinedEmail" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[220px]" rows="12"></textarea>
+                                                    <textarea @bind="refinedEmail" class="textarea form-textarea" rows="12"></textarea>
                                                 </fieldset>
                                             </div>
-                                            <button type="button" @onclick="ApplyRefinedEmail" class="btn btn-sm btn-outline border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 cursor-pointer">
+                                        <button type="button" @onclick="ApplyRefinedEmail" class="btn btn-warning">
                                                 @L["Assistant.Button.UseImprovedVersion"]
                                             </button>
                                         }
@@ -319,19 +319,19 @@
                         <div class="assistant-view flex flex-col gap-4">
                             <div class="flex justify-between items-center">
                                 <h3 class="text-sm font-bold text-white">@L["Assistant.Option.Professional.Title"]</h3>
-                                <button type="button" @onclick="GoBackToOptions" class="btn-nav-back">
+                                <button type="button" @onclick="GoBackToOptions" class="btn btn-xs btn-nav-back">
                                     <i class="ti ti-chevron-left"></i> @L["Home.Assistant.Button.Back"]
                                 </button>
                             </div> 
                             <div class="flex flex-col gap-3">
                                 <fieldset class="fieldset p-0">
                                     <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Professional.Purpose"]</legend>
-                                    <textarea id="txtGenerateProfessionalEmailPrompt" @bind="professionalPurpose" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[65px]" rows="2" placeholder="What do you want the email to do?"></textarea>
+                                    <textarea id="txtGenerateProfessionalEmailPrompt" @bind="professionalPurpose" class="textarea form-textarea" rows="2" placeholder="What do you want the email to do?"></textarea>
                                 </fieldset>
  
                                 <fieldset class="fieldset p-0">
                                     <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Professional.Audience"]</legend>
-                                    <input @bind="professionalAudience" class="input input-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" placeholder="Teacher, manager, client, colleague..." />
+                                    <input @bind="professionalAudience" class="input form-input" placeholder="Teacher, manager, client, colleague..." />
                                 </fieldset>
  
                                 <fieldset class="fieldset p-0">
@@ -351,19 +351,19 @@
  
                                 <fieldset class="fieldset p-0">
                                     <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Professional.Context"]</legend>
-                                    <textarea @bind="professionalContext" class="textarea textarea-sm w-full bg-[#031810] border-slate-700/60 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none h-[75px]" rows="3" placeholder="Add any details, deadline, or reason..."></textarea>
+                                    <textarea @bind="professionalContext" class="textarea form-textarea" rows="3" placeholder="Add any details, deadline, or reason..."></textarea>
                                 </fieldset>
  
-                                <button type="button" @onclick="TriggerProfessionalUpgrade" class="btn btn-sm btn-success text-slate-900 font-bold border-0 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
+                                <button type="button" @onclick="TriggerProfessionalUpgrade" class="btn btn-success">
                                         @L["Assistant.Button.Generate"]
                                 </button>
                                 @if (!string.IsNullOrWhiteSpace(professionalOutputText))
                                 {
                                     <fieldset class="fieldset p-0">
                                         <legend class="fieldset-legend text-xs font-bold uppercase tracking-wider text-slate-300">@L["Assistant.Option.Professional.GeneratedEmail"]</legend>
-                                        <textarea readonly class="textarea textarea-sm w-full bg-[#031810] border-slate-800 text-slate-400 resize-none h-[220px]" rows="14">@professionalOutputText</textarea>
+                                        <textarea readonly class="textarea form-textarea" rows="14">@professionalOutputText</textarea>
                                     </fieldset>
-                                    <button type="button" @onclick="ApplyProfessionalOutput" class="btn btn-sm btn-success border-0 text-slate-900 bg-gradient-to-r from-emerald-400 to-lime-400 hover:brightness-110 shadow-lg cursor-pointer">
+                                    <button type="button" @onclick="ApplyProfessionalOutput" class="btn  btn-warning">
                                         @L["Assistant.Button.UseThisVersion"]
                                     </button>
                                 }

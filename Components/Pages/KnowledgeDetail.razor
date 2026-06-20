@@ -16,10 +16,9 @@
 
     <div class="max-w-4xl mx-auto px-4 py-8">
         <!-- Back Navigation -->
-        <a href="/knowledge" class="btn-nav-back mb-8">
+        <a href="/knowledge" class="btn btn-xs btn-nav-back mb-5">
             <i class="ti ti-arrow-left"></i> @L["Knowledge.Detail.BackToHub"]
         </a>
-        <p>&nbsp;</p>
 
         @if (_card == null)
         {
@@ -35,7 +34,7 @@
         else
         {
             var age = _ages.FirstOrDefault(a => a.Key == _card.AgeKey);
-            
+ 
             <article class="concept-article p-6 sm:p-10 bg-[#02100c]/90 border border-[rgba(58,209,141,0.16)] rounded-3xl shadow-2xl relative overflow-hidden" style="--age-color: @(age?.AccentColor ?? "#33d7a6")">
                 <!-- Decorative background glow -->
                 <div class="absolute -right-24 -top-24 w-48 h-48 rounded-full blur-[100px] opacity-20 pointer-events-none" style="background-color: @age?.AccentColor"></div>
@@ -43,7 +42,7 @@
                 <header class="mb-8 border-b border-slate-900 pb-6">
                     <div class="flex flex-wrap items-center gap-2 mb-4">
                         <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#031810] border border-slate-800" style="color: @age?.AccentColor">
-                            <i class="@age?.Icon me-1"></i> @age?.Name
+                            <i class="@age?.Icon me-1"></i> @AgeName(age)
                         </span>
                         <span class="text-[10px] font-medium text-slate-400 bg-[#031810] px-3 py-1 rounded-full border border-slate-800">
                             @_card.Category
@@ -69,7 +68,7 @@
                 <!-- Sharing and Action Footer -->
                 <footer class="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-semibold text-slate-400">@L["Knowledge.Detail.Share"]</span>
+                        <span class="text-xs font-semibold text-slate-400">@L["Knowledge.Detail.ShareKnowledge"]</span>
                         
                         <!-- Twitter/X -->
                         <a href="@GetTwitterShareUrl()" target="_blank" class="share-btn flex items-center justify-center w-8 h-8 rounded-full bg-[#031810] border border-slate-800 hover:text-[#33d7a6] hover:border-[#33d7a6]/30 transition-all duration-300" title="Share on Twitter / X">
@@ -188,5 +187,15 @@
         {
             // Fallback just in case browser context doesn't support clipboard API
         }
+    }
+
+    private string AgeName(EvolutionAge? age) =>
+    age is null ? string.Empty : L[$"Age.{ToPascalKey(age.Key)}.Name"];
+
+    private static string ToPascalKey(string slug)
+    {
+        var abbreviations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "ai", "ip" };
+        return string.Concat(slug.Split('-').Select(w =>
+            abbreviations.Contains(w) ? w.ToUpper() : char.ToUpper(w[0]) + w[1..]));
     }
 }

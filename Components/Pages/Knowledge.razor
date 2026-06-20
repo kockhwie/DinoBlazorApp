@@ -106,8 +106,13 @@
                 </div>
 
                 <!-- Search Input -->
+ 
                 <div class="relative w-full sm:w-64">
-                    <input type="text" placeholder="@L["Knowledge.Filter.SearchPlaceholder"]" @bind-value="SearchQuery" @bind-value:event="oninput" class="form-input knowledge-search-input" />
+                    <input type="text"
+                           placeholder="@L["Knowledge.Filter.SearchPlaceholder"]"
+                           @bind-value="SearchQuery"
+                           @bind-value:event="oninput"
+                           class="input form-input knowledge-search-input" />
                     <span class="search-icon">
                         <i class="ti ti-search text-sm"></i>
                     </span>
@@ -183,7 +188,7 @@
                                         }
                                     </div>
                                 </div>
-                                <button type="button" class="continue-button" @onclick="() => NavigateToDetail(card.Slug)">
+                                <button type="button" class="btn btn-xs btn-success" @onclick="() => NavigateToDetail(card.Slug)">
                                     @L["Knowledge.Card.ContinueEvolution"] <i class="ti ti-arrow-right"></i>
                                 </button>
                             </div>
@@ -192,13 +197,13 @@
                 </div>
             }
 
-            <aside class="continue-evolution mt-10">
+            <aside class="continue-evolution mt-6">
                 <div>
                     <p class="journey-kicker">@L["Knowledge.Journey.Kicker"]</p>
                     <h2>@L["Knowledge.Continue.Title"]</h2>
                     <p>@L["Knowledge.Continue.Body"]</p>
                 </div>
-                <button type="button" class="continue-button" @onclick='() => NavigateToDetail("what-is-ai")'>
+                <button type="button" class="btn btn-primary-colorful" @onclick='() => NavigateToDetail("what-is-ai")'>
                     @L["Knowledge.Continue.Button"] <i class="ti ti-arrow-right"></i>
                 </button>
             </aside>

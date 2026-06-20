@@ -121,6 +121,14 @@ fieldset {
 
 /* ── REUSABLE BUTTONS ────────────────────────────────────── */
 
+
+.btn-primary-colorful {
+    border: 0;
+    color: #09110f;
+    background: linear-gradient(90deg, #3fd6b4 0%, #f8bf24 100%);
+    box-shadow: 0 10px 24px rgba(248, 191, 36, 0.16);
+}
+
 .btn-primary-gradient {
     width: 100%;
     padding: 0.5rem 0;
@@ -181,13 +189,9 @@ fieldset {
 }
 
 .btn-nav-back {
-    padding: 0.25rem 0.52rem 0.25rem 0.22rem;
-    border: 1px solid #334155;
-    border-radius: 0.5rem;
+    border: 1px solid #334155; 
     background: #47556940;
-    color: #94a3b8; /* slate-400 */
-    font-size: 0.75rem;
-    cursor: pointer;
+    color: #94a3b8; /* slate-400 */ 
 }
 
 .btn-nav-back:hover {

@@ -292,24 +292,7 @@
     padding-top: 15px;
     text-align: right;
 }
-
-.mini-btn {
-    min-height: 1.9rem;
-    padding: 0.2rem 0.5rem;
-    border-radius: var(--composer-radius);
-    border: 1px solid var(--composer-border);
-    background: var(--composer-control-bg);
-    color: rgba(230, 244, 239, 0.9);
-    font-size: 0.75rem;
-}
-
-.mini-btn.solid {
-    border: 0;
-    background: linear-gradient(90deg, #2dc98e 0%, #80e36b 100%);
-    color: #08110f;
-    font-weight: 700;
-    box-shadow: 0 12px 24px rgba(9, 17, 15, 0.32);
-}
+ 
 
 
 /*

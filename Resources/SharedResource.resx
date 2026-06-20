@@ -418,7 +418,7 @@
     <value>Other related:</value>
   </data>
   <data name="Knowledge.Card.ContinueEvolution" xml:space="preserve">
-    <value>Continue Evolution</value>
+    <value>Continue</value>
   </data>
   <data name="Knowledge.Empty.Title" xml:space="preserve">
     <value>No concepts found</value>
