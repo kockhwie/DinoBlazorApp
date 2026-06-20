@@ -7,9 +7,9 @@ public static class KnowledgeStore
 {
     public static IReadOnlyList<EvolutionAge> Ages { get; } = new List<EvolutionAge>
     {
-        new("stone-age", "Stone Age", "Survival & Instinct", "ti ti-egg-cracked", "#d97706", 1), // amber-600
-        new("bronze-age", "Bronze Age", "Tools & Discovery", "ti ti-shovel-pitchforks", "#b45309", 2), // amber-700
-        new("iron-age", "Iron Age", "Strength & Advancement", "ti ti-swords", "#78350f", 3), // amber-900
+        new("dinosaur-era", "Dinosaur Era", "Curiosity & Discovery", "ti ti-egg-cracked", "#33d7a6", 1),
+        new("stone-age", "Stone Age", "Survival & Instinct", "ti ti-bow", "#d97706", 2), // amber-600
+        new("bronze-age", "Bronze Age", "Tools & Discovery", "ti ti-shovel-pitchforks", "#b45309", 3), // amber-700
         new("industrial-age", "Industrial Age", "Machines & Efficiency", "ti ti-settings-spark", "#64748b", 4), // slate-500
         new("information-age", "Information Age", "Data & Connectivity", "ti ti-network", "#0284c7", 5), // sky-600
         new("digital-age", "Digital Age", "Computing & Automation", "ti ti-cpu", "#2563eb", 6), // blue-600
@@ -25,7 +25,7 @@ public static class KnowledgeStore
             "At its core, data is simply raw information. Before computers, humans recorded data as tallies, words, and drawings.",
             "Data is any set of values, characters, or symbols that represents facts, observations, or instructions. On a computer, all data—whether a photo, a text message, or a high-definition video—is converted into basic numbers. Understanding data is the absolute starting point of all technology, because software and AI exist solely to process, analyze, and transform data into useful knowledge.",
             "Data & Logic",
-            "stone-age",
+            "dinosaur-era",
             "ti ti-database-heart",
             "data,fundamentals,basics",
             1
@@ -36,7 +36,7 @@ public static class KnowledgeStore
             "Binary is the language of 1s and 0s that powers every digital screen and chip in the world.",
             "Binary is a base-2 numeral system. While humans count using ten digits (0-9), digital circuits use only two states: ON (represented by 1) or OFF (represented by 0). These are called bits. By combining multiple bits together, computers can represent letters, numbers, colors, and instructions. For example, the letter 'A' is represented in binary as `01000001`. Understanding binary helps you realize that at the lowest level, all complex software and AI models are executing billions of simple on-off switches.",
             "Data & Logic",
-            "stone-age",
+            "dinosaur-era",
             "ti ti-binary",
             "binary,computer-science,bits",
             2
@@ -47,7 +47,7 @@ public static class KnowledgeStore
             "An algorithm is a step-by-step recipe or set of rules to solve a specific problem.",
             "In computer science, an algorithm is a clear sequence of instructions designed to perform a task or solve a problem. Think of it like a recipe: you start with ingredients (input data), follow a series of precise steps (processing), and produce a meal (output). Every app, game, search engine, and AI model is built from algorithms. Some are simple (like sorting a list alphabetically), while others are incredibly complex (like deciding what to show on your social media feed).",
             "Data & Logic",
-            "stone-age",
+            "dinosaur-era",
             "ti ti-route",
             "algorithm,logic,basics",
             3
@@ -60,7 +60,7 @@ public static class KnowledgeStore
             "The internet is the physical global network connecting billions of computers together.",
             "The internet is a massive, global network of physical cables, wireless connections, routers, and switches. It allows computers all over the world to talk to each other. When you send a message, it is broken down into tiny 'packets' of data, routed through various paths across the globe in milliseconds, and reassembled on the receiving device. It is the foundation that enables the Web, cloud hosting, and cloud-based AI systems to exist.",
             "Networking",
-            "bronze-age",
+            "stone-age",
             "ti ti-world",
             "internet,networks,infrastructure",
             1
@@ -71,20 +71,20 @@ public static class KnowledgeStore
             "Code is how humans write instructions that computers can understand and execute.",
             "Computers only understand binary, which is too tedious for humans to write directly. Instead, we use programming languages (like C#, Python, JavaScript, and HTML) to write 'code'. A special program called a compiler or interpreter then translates this code into machine language (binary) that the computer's CPU can run. Writing code is like writing a very precise rulebook, telling the computer exactly how to react to clicks, input, and data.",
             "Software",
-            "bronze-age",
+            "stone-age",
             "ti ti-code",
             "code,programming,development",
             2
         ),
         new(
             "the-world-wide-web",
-            "The World Wide Web (WWW)",
-            "The Web is an information system of websites and pages built on top of the internet.",
+            "What is a Website?",
+            "A website is a collection of connected pages people can visit through a browser.",
             "While often confused with the internet, the World Wide Web is actually a service built *on top* of the internet. The internet is the physical connection, whereas the Web is the collection of documents, images, and pages linked by hyperlinks (URLs). We access the Web using a web browser (like Chrome, Safari, or Edge) which downloads files using protocols like HTTP and renders them on our screens as interactive websites.",
             "Networking",
-            "bronze-age",
+            "stone-age",
             "ti ti-browser",
-            "web,http,browser",
+            "website,web,http,browser",
             3
         ),
 
@@ -95,7 +95,7 @@ public static class KnowledgeStore
             "A database is an organized, secure digital filing cabinet for storing structured data.",
             "Unlike simple text files, databases are designed to store, retrieve, and update huge amounts of data securely and instantly. Relational databases (like SQL Server, PostgreSQL, and MySQL) organize data into structured tables with rows and columns, allowing you to run powerful queries to find relationships. Without databases, websites couldn't store user accounts, inventories, or app settings.",
             "Data & Logic",
-            "iron-age",
+            "bronze-age",
             "ti ti-database",
             "database,sql,storage",
             1
@@ -106,7 +106,7 @@ public static class KnowledgeStore
             "The core architecture of the web: clients ask for resources, and servers provide them.",
             "In software development, this model defines how devices communicate. A **Client** is the device or app you use (like your web browser or phone app) to request information. A **Server** is a powerful computer located somewhere in the world that listens for those requests and sends back the requested resources (like a web page, file, or search result). When you query an AI, your browser is the client, and the AI host is the server.",
             "Networking",
-            "iron-age",
+            "bronze-age",
             "ti ti-server",
             "server,client,architecture",
             2
@@ -117,7 +117,7 @@ public static class KnowledgeStore
             "An API (Application Programming Interface) is a messenger that lets two different software applications talk to each other.",
             "Think of an API like a waiter in a restaurant. You (the client app) look at the menu and place an order. The waiter (the API) takes your request to the kitchen (the server or database) and brings the food back to you. APIs allow developers to use existing services (like Google Maps, payment gateways, or OpenAI's language models) inside their own apps without rebuilding them from scratch.",
             "Software",
-            "iron-age",
+            "bronze-age",
             "ti ti-api",
             "api,integration,development",
             3
@@ -250,6 +250,17 @@ public static class KnowledgeStore
             "ti ti-steering-wheel",
             "agents,autonomy,tools",
             4
+        ),
+        new(
+            "what-is-mcp",
+            "What is MCP?",
+            "MCP is a common way for AI systems to connect with tools, apps, and data sources.",
+            "Model Context Protocol (MCP) gives AI applications a standard pattern for reaching external systems such as files, databases, business tools, and developer workflows. Instead of building a different custom integration for every tool, teams can expose capabilities in a consistent way and let AI agents use them more reliably.",
+            "AI Architecture",
+            "ai-era",
+            "ti ti-plug-connected",
+            "mcp,agents,tools,integration",
+            5
         )
     };
 }

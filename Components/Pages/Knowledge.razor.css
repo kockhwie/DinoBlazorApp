@@ -37,9 +37,9 @@
 /* Evolution Stepper */
 .evolution-stepper {
     background: rgba(4, 16, 12, 0.7);
-    border: 1px solid rgba(58, 209, 141, 0.15);
+    border: 1px solid rgba(58, 209, 141, 0.35);
     border-radius: 1.5rem;
-    padding: 0.6rem;
+    padding: 0.4rem;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(12px);
 }
@@ -47,7 +47,7 @@
 .evolution-step {
     border: none;
     background: transparent;
-    padding: 0.8rem 1rem;
+    padding: 0.5rem 0.6rem;
     border-radius: 1.1rem;
     position: relative;
     cursor: pointer;
@@ -68,7 +68,7 @@
 .step-arrow-container {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.05rem;
     width: 100%;
 }
 
@@ -151,9 +151,247 @@
 }
 
 /* Ensure cards render below the filter bar/dropdown */
-.card {
+.card,
+.knowledge-card {
     position: relative;
     z-index: 0;
+}
+
+.journey-brief,
+.continue-evolution {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.25rem;
+    border: 1px solid rgba(58, 209, 141, 0.16);
+    border-radius: 1.25rem;
+    background:
+        linear-gradient(135deg, rgba(51, 215, 166, 0.1), rgba(3, 24, 16, 0.72)),
+        rgba(2, 16, 12, 0.82);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.35);
+}
+
+.journey-kicker {
+    margin: 0 0 0.3rem;
+    color: #33d7a6;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.journey-title,
+.continue-evolution h2 {
+    margin: 0;
+    color: #fff;
+    font-family: "Sora", "DM Sans", sans-serif;
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.journey-copy,
+.continue-evolution p:not(.journey-kicker) {
+    max-width: 42rem;
+    margin: 0.45rem 0 0;
+    color: rgba(226, 232, 240, 0.78);
+    font-size: 0.86rem;
+    line-height: 1.6;
+}
+
+.journey-path,
+.next-track-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.path-chip,
+.next-track {
+    border: 1px solid rgba(58, 209, 141, 0.18);
+    border-radius: 999px;
+    background: rgba(3, 24, 16, 0.9);
+    color: rgba(226, 232, 240, 0.86);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.55rem 0.7rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.path-chip:hover,
+.next-track:hover,
+.path-chip:focus-visible,
+.next-track:focus-visible {
+    border-color: #33d7a6;
+    color: #33d7a6;
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.knowledge-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(58, 209, 141, 0.12);
+    border-radius: 1.25rem;
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--era-color) 10%, transparent), transparent 9rem),
+        rgba(2, 16, 12, 0.86);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.knowledge-card:hover {
+    border-color: color-mix(in srgb, var(--era-color) 42%, rgba(58, 209, 141, 0.12));
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.44), 0 0 0 1px color-mix(in srgb, var(--era-color) 18%, transparent);
+    transform: translateY(-3px);
+}
+
+.knowledge-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.1rem 0.85rem;
+}
+
+.icon-wrap {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.85rem;
+    background: rgba(3, 24, 16, 0.86);
+    color: var(--era-color);
+    font-size: 1.55rem;
+}
+
+.knowledge-era,
+.knowledge-category,
+.next-label {
+    margin: 0;
+    color: var(--era-color);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.knowledge-card-title {
+    margin: 0.1rem 0 0;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: 0;
+}
+
+.knowledge-category {
+    flex: 0 0 auto;
+    max-width: 9rem;
+    padding: 0.4rem 0.55rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    background: rgba(3, 24, 16, 0.76);
+    color: rgba(226, 232, 240, 0.68);
+    text-align: center;
+}
+
+.knowledge-card-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0 1.1rem 1rem;
+}
+
+.learning-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.learning-section {
+    padding: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 0.9rem;
+    background: rgba(3, 24, 16, 0.58);
+}
+
+.learning-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0 0 0.35rem;
+    color: rgba(255, 255, 255, 0.94);
+    font-size: 0.73rem;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.learning-section h4 i {
+    color: var(--era-color);
+}
+
+.learning-section p {
+    margin: 0;
+    color: rgba(203, 213, 225, 0.82);
+    font-size: 0.8rem;
+    line-height: 1.55;
+}
+
+.learning-definition {
+    border-color: color-mix(in srgb, var(--era-color) 28%, rgba(255, 255, 255, 0.07));
+}
+
+.learning-without {
+    background: rgba(15, 23, 42, 0.32);
+}
+
+.knowledge-card-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding: 1rem 1.1rem 1.1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(1, 8, 6, 0.32);
+}
+
+.next-label {
+    margin-bottom: 0.45rem;
+    color: rgba(203, 213, 225, 0.6);
+}
+
+.continue-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    flex: 0 0 auto;
+    min-height: 2.35rem;
+    border: 1px solid rgba(51, 215, 166, 0.38);
+    border-radius: 0.8rem;
+    background: #33d7a6;
+    color: #04110f;
+    font-size: 0.76rem;
+    font-weight: 850;
+    padding: 0.65rem 0.85rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.continue-button:hover,
+.continue-button:focus-visible {
+    box-shadow: 0 0 22px rgba(51, 215, 166, 0.22);
+    transform: translateY(-1px);
+    outline: none;
 }
 
 /* ── KNOWLEDGE SEARCH & EMPTY STATE ────────────────────────── */
@@ -182,4 +420,36 @@
     background: #02100c;
     border: 1px solid rgba(58, 209, 141, 0.16);
     border-radius: 1rem;
+}
+
+@media (min-width: 1024px) {
+    .learning-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+    .journey-brief,
+    .continue-evolution,
+    .knowledge-card-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .journey-path,
+    .continue-button {
+        width: 100%;
+    }
+
+    .continue-button {
+        justify-content: center;
+    }
+
+    .knowledge-card-header {
+        flex-direction: column;
+    }
+
+    .knowledge-category {
+        max-width: none;
+    }
 }

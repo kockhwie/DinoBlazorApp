@@ -124,7 +124,7 @@
     <value>開啟導覽選單</value>
   </data>
   <data name="Nav_Courses" xml:space="preserve">
-    <value>課程</value>
+    <value>學習</value>
   </data>
   <data name="Nav_StarterPath" xml:space="preserve">
     <value>新手路徑</value>
@@ -148,10 +148,10 @@
     <value>加入</value>
   </data>
   <data name="Home.Hero.Title1" xml:space="preserve">
-    <value>不要只使用 AI 聊天，</value>
+    <value>不要只使用 AI 聊天。</value>
   </data>
   <data name="Home.Hero.Title2" xml:space="preserve">
-    <value>與它共同進化。</value>
+    <value>要與它共同進化。</value>
   </data>
   <data name="Home.Hero.Lead" xml:space="preserve">
     <value>透過實作學習、真實專案與充滿活力的創新社群，掌握 AI 技能。</value>
@@ -183,7 +183,6 @@
   <data name="Home.Benefit.AdvanceCareer.Brief" xml:space="preserve">
     <value>開啟新機會，加速職涯發展。</value>
   </data>
-
   <data name="Home.Composer.Title" xml:space="preserve">
     <value>電子郵件編輯器</value>
   </data>
@@ -262,10 +261,10 @@
   <data name="Assistant.Option.Refine.Button" xml:space="preserve">
     <value>改寫電子郵件內容</value>
   </data>
-    <data name="Assistant.Option.Refine.Original" xml:space="preserve">
+  <data name="Assistant.Option.Refine.Original" xml:space="preserve">
     <value>原本內容</value>
   </data>
-    <data name="Assistant.Option.Refine.Improved" xml:space="preserve">
+  <data name="Assistant.Option.Refine.Improved" xml:space="preserve">
     <value>改寫後內容</value>
   </data>
   <data name="Assistant.Option.Professional.Title" xml:space="preserve">
