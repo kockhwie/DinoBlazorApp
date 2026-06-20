@@ -151,7 +151,7 @@
     <value>不要只使用 AI 聊天。</value>
   </data>
   <data name="Home.Hero.Title2" xml:space="preserve">
-    <value>Back to Knowledge Hub</value>
+    <value>要與它共同進化。</value>
   </data>
   <data name="Home.Hero.Lead" xml:space="preserve">
     <value>透過實作學習、真實專案與充滿活力的創新社群，掌握 AI 技能。</value>
@@ -373,7 +373,7 @@
     <value>Dino AI Academy - 知識庫</value>
   </data>
   <data name="Knowledge.Hero.Title" xml:space="preserve">
-    <value>AI 知識庫</value>
+    <value>知識庫</value>
   </data>
   <data name="Knowledge.Hero.Subtitle" xml:space="preserve">
     <value>從恐龍到人工智慧。跟著足跡，從好奇心與原始資料，一路走向智慧代理人、工具與現代 AI 系統。</value>

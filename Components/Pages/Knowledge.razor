@@ -25,7 +25,7 @@
     <!-- Evolution Progress Bar Section -->
     <section class="progress-bar-shell py-6 px-4">
         <div class="evolution-container max-w-6xl mx-auto">
-            <div class="journey-brief mb-8">
+            <div class="journey-brief mb-0">
                 <div>
                     <p class="journey-kicker">@L["Knowledge.Journey.Kicker"]</p>
                     <h2 class="journey-title">@SelectedJourneyTitle</h2>
@@ -41,38 +41,43 @@
                 </div>
             </div>
             
-            <div class="evolution-stepper flex flex-col md:flex-row items-stretch justify-between gap-1 md:gap-0">
+            <div class="evolution-stepper flex flex-col md:flex-row items-stretch justify-between gap-1 md:gap-3">
+
                 @foreach (var age in _ages)
                 {
                     var isSelected = _selectedAgeKey == age.Key;
-                    <button type="button" @onclick="() => SelectAge(age.Key)" class="evolution-step flex-1 text-left md:text-center transition-all duration-300 @(isSelected ? "active" : "")" style="--step-color: @age.AccentColor">
+                    <button type="button" @onclick="() => SelectAge(age.Key)"
+                            class="evolution-step flex-1 text-left md:text-center transition-all duration-300 @(isSelected ? "active" : "")"
+                            style="--step-color: @age.AccentColor">
                         <div class="step-arrow-container">
                             <div class="step-icon-wrap">
                                 <i class="@age.Icon text-xl"></i>
                             </div>
                             <div class="step-details">
-                                <h3 class="step-title">@age.Name</h3>
-                                <p class="step-subtitle">@age.Subtitle</p>
+                                <h3 class="step-title">@AgeName(age)</h3> <!-- age.Name -->
+                                <p class="step-subtitle">@AgeSubtitle(age)</p><!-- age.Subtitle -->
                             </div>
                         </div>
                     </button>
                     @if (age.Order < _ages.Count)
                     {
-                        <div class="evolution-divider hidden md:flex items-center justify-center" style="--divider-color: @(age.Order < 4 ? "#d97706" : age.Order == 4 ? "#64748b" : "#3b82f6")">
-                             <i class="ti ti-arrow-big-right-line"></i> 
+                        <div class="evolution-divider hidden md:flex items-center justify-center"
+                                style="--divider-color: @(age.Order < 4 ? "#d97706" : age.Order == 4 ? "#64748b" : "#3b82f6")">
+                            <i class="ti ti-arrow-big-right-line"></i>
                         </div>
                     }
                 }
+
             </div>
         </div>
     </section>
 
     <!-- Filters and Card Grid Section -->
     <section class="showcase-shell py-8">
-        <div class="max-w-6xl mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
             
             <!-- Filter Bar -->
-            <div class="filter-bar flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 p-4 bg-[#020e0a]/80 border border-[rgba(58,209,141,0.16)] rounded-2xl">
+            <div class="filter-bar flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 p-4 bg-[#020e0a]/80 border border-[rgba(58,209,141,0.16)] rounded-2xl">
                 <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                     <!-- Reset Button/All Era -->
                     <button type="button" @onclick="ResetFilters" class="px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-300 cursor-pointer @(string.IsNullOrEmpty(_selectedAgeKey) && string.IsNullOrEmpty(_selectedCategory) && string.IsNullOrEmpty(_searchQuery) ? "bg-[#33d7a6] text-[#04110f]" : "bg-[#031810] text-slate-300 border border-slate-700 hover:text-[#33d7a6]")">
@@ -87,9 +92,14 @@
                         </div>
                         <ul tabindex="0" class="dropdown-content absolute top-full left-0 mt-2 z-[9999] menu p-2 shadow-2xl bg-[#02100c] border border-[rgba(58,209,141,0.16)] rounded-box w-52">
                             <li><button type="button" class="text-xs" @onclick="() => FilterByCategory(null)">@L["Knowledge.Filter.CategoryAll"]</button></li>
+
                             @foreach (var cat in _categories)
                             {
-                                <li><button type="button" class="text-xs" @onclick="() => FilterByCategory(cat)">@cat</button></li>
+                                <li>
+                                    <button type="button" class="text-xs" @onclick="() => FilterByCategory(cat)">
+                                        @LocalizeCategory(cat)
+                                    </button>
+                                </li>
                             }
                         </ul>
                     </div>
@@ -123,18 +133,20 @@
                         var age = _ages.FirstOrDefault(a => a.Key == card.AgeKey);
                         var nextTracks = GetNextTracks(card);
                         <article class="knowledge-card" style="--era-color: @(age?.AccentColor ?? "#33d7a6")">
+ 
                             <div class="knowledge-card-header">
-                                <div class="flex items-center gap-3 min-w-0">
-                                    <div class="icon-wrap">
-                                        <i class="@card.Icon"></i>
-                                    </div>
-                                    <div class="min-w-0">
-                                        <p class="knowledge-era">@age?.Name</p>
-                                        <h3 class="knowledge-card-title">@card.Title</h3>
-                                    </div>
+                                <div class="icon-wrap">
+                                    <i class="@card.Icon"></i>
                                 </div>
-                                <span class="knowledge-category">@card.Category</span>
+                                <div style="min-width:0">
+                                    <div class="knowledge-card-header-meta">
+                                        <p class="knowledge-era">@AgeName(age)</p>
+                                        <span class="knowledge-category">@LocalizeCategory(card.Category)</span>
+                                    </div>
+                                    <h3 class="knowledge-card-title">@card.Title</h3>
+                                </div>
                             </div>
+ 
 
                             <div class="knowledge-card-body">
                                 <section class="learning-section learning-definition">
@@ -380,4 +392,34 @@
 
     private static string TrimSentence(string value)
         => value.Length <= 130 ? value : $"{value[..127].TrimEnd()}...";
+
+
+    private string LocalizeCategory(string category) =>
+    category.Replace(" & ", "").Replace(" ", "") switch
+    {
+        "DataLogic"         => L["Category.DataLogic"],
+        "Networking"        => L["Category.Networking"],
+        "Software"          => L["Category.Software"],
+        "Infrastructure"    => L["Category.Infrastructure"],
+        "ArtificialIntelligence" => L["Category.ArtificialIntelligence"],
+        "PromptEngineering" => L["Category.PromptEngineering"],
+        "AIArchitecture"    => L["Category.AIArchitecture"],
+        _ => category   // safe fallback
+    };
+
+    private string AgeName(EvolutionAge age) => L[$"Age.{ToPascalKey(age.Key)}.Name"];
+
+    private string AgeSubtitle(EvolutionAge age) => L[$"Age.{ToPascalKey(age.Key)}.Subtitle"];
+
+ 
+    private static string ToPascalKey(string slug)
+    {
+        var abbreviations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "ai", "ip" };
+        return string.Concat(slug.Split('-').Select(w =>
+            abbreviations.Contains(w) ? w.ToUpper() : char.ToUpper(w[0]) + w[1..]));
+    }
+    // "ai-era"        → "AIEra"
+    // "dinosaur-era"  → "DinosaurEra"
+    // "stone-age"     → "StoneAge"
+
 }
