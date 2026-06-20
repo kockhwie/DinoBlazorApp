@@ -151,7 +151,7 @@
     <value>不要只使用 AI 聊天。</value>
   </data>
   <data name="Home.Hero.Title2" xml:space="preserve">
-    <value>要與它共同進化。</value>
+    <value>Back to Knowledge Hub</value>
   </data>
   <data name="Home.Hero.Lead" xml:space="preserve">
     <value>透過實作學習、真實專案與充滿活力的創新社群，掌握 AI 技能。</value>
@@ -368,5 +368,476 @@
   </data>
   <data name="Toast.Copied" xml:space="preserve">
     <value>已複製至撰寫器。</value>
+  </data>
+  <data name="Knowledge.PageTitle" xml:space="preserve">
+    <value>Dino AI Academy - 知識庫</value>
+  </data>
+  <data name="Knowledge.Hero.Title" xml:space="preserve">
+    <value>AI 知識庫</value>
+  </data>
+  <data name="Knowledge.Hero.Subtitle" xml:space="preserve">
+    <value>從恐龍到人工智慧。跟著足跡，從好奇心與原始資料，一路走向智慧代理人、工具與現代 AI 系統。</value>
+  </data>
+  <data name="Knowledge.EraSelector.Label" xml:space="preserve">
+    <value>選擇人類智慧的時代</value>
+  </data>
+  <data name="Knowledge.Filter.AllEras" xml:space="preserve">
+    <value>所有時代</value>
+  </data>
+  <data name="Knowledge.Filter.CategoryAll" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="Knowledge.Filter.CategoryPrefix" xml:space="preserve">
+    <value>類別：</value>
+  </data>
+  <data name="Knowledge.Filter.SearchPlaceholder" xml:space="preserve">
+    <value>搜尋知識…</value>
+  </data>
+  <data name="Knowledge.Journey.Kicker" xml:space="preserve">
+    <value>學習旅程</value>
+  </data>
+  <data name="Knowledge.Journey.DefaultTitle" xml:space="preserve">
+    <value>選擇一個時代，然後繼續沿著足跡前進。</value>
+  </data>
+  <data name="Knowledge.Journey.EraSubtitleSuffix" xml:space="preserve">
+    <value>每張卡片都說明概念、為何重要、真實世界的樣貌，以及下一步該學什麼。</value>
+  </data>
+  <data name="Knowledge.Card.Definition" xml:space="preserve">
+    <value>定義</value>
+  </data>
+  <data name="Knowledge.Card.WhyCare" xml:space="preserve">
+    <value>為何重要？</value>
+  </data>
+  <data name="Knowledge.Card.Example" xml:space="preserve">
+    <value>真實案例</value>
+  </data>
+  <data name="Knowledge.Card.WithoutIt" xml:space="preserve">
+    <value>沒有它…</value>
+  </data>
+  <data name="Knowledge.Card.NextTracks" xml:space="preserve">
+    <value>其它相關：</value>
+  </data>
+  <data name="Knowledge.Card.ContinueEvolution" xml:space="preserve">
+    <value>繼續進化</value>
+  </data>
+  <data name="Knowledge.Empty.Title" xml:space="preserve">
+    <value>找不到概念</value>
+  </data>
+  <data name="Knowledge.Empty.Body" xml:space="preserve">
+    <value>請調整篩選條件或搜尋詞，探索其他科技時代。</value>
+  </data>
+  <data name="Knowledge.Continue.Kicker" xml:space="preserve">
+    <value>下一個發現</value>
+  </data>
+  <data name="Knowledge.Continue.Title" xml:space="preserve">
+    <value>繼續你的進化</value>
+  </data>
+  <data name="Knowledge.Continue.Body" xml:space="preserve">
+    <value>每個概念現在都指向下一條有用的軌道，讓知識庫像導覽式博物館路徑，而非靜態詞彙表。</value>
+  </data>
+  <data name="Knowledge.Continue.Button" xml:space="preserve">
+    <value>或跳至 AI 時代</value>
+  </data>
+  <data name="Age.DinosaurEra.Name" xml:space="preserve">
+    <value>恐龍時代</value>
+  </data>
+  <data name="Age.DinosaurEra.Subtitle" xml:space="preserve">
+    <value>好奇心與探索</value>
+  </data>
+  <data name="Age.StoneAge.Name" xml:space="preserve">
+    <value>石器時代</value>
+  </data>
+  <data name="Age.StoneAge.Subtitle" xml:space="preserve">
+    <value>生存與本能</value>
+  </data>
+  <data name="Age.BronzeAge.Name" xml:space="preserve">
+    <value>青銅時代</value>
+  </data>
+  <data name="Age.BronzeAge.Subtitle" xml:space="preserve">
+    <value>工具與發現</value>
+  </data>
+  <data name="Age.IndustrialAge.Name" xml:space="preserve">
+    <value>工業時代</value>
+  </data>
+  <data name="Age.IndustrialAge.Subtitle" xml:space="preserve">
+    <value>機器與效率</value>
+  </data>
+  <data name="Age.InformationAge.Name" xml:space="preserve">
+    <value>資訊時代</value>
+  </data>
+  <data name="Age.InformationAge.Subtitle" xml:space="preserve">
+    <value>資料與連結</value>
+  </data>
+  <data name="Age.DigitalAge.Name" xml:space="preserve">
+    <value>數位時代</value>
+  </data>
+  <data name="Age.DigitalAge.Subtitle" xml:space="preserve">
+    <value>運算與自動化</value>
+  </data>
+  <data name="Age.AIEra.Name" xml:space="preserve">
+    <value>AI 時代</value>
+  </data>
+  <data name="Age.AIEra.Subtitle" xml:space="preserve">
+    <value>智慧與進化</value>
+  </data>
+  <data name="Category.DataLogic" xml:space="preserve">
+    <value>資料與邏輯</value>
+  </data>
+  <data name="Category.Networking" xml:space="preserve">
+    <value>網路</value>
+  </data>
+  <data name="Category.Software" xml:space="preserve">
+    <value>軟體</value>
+  </data>
+  <data name="Category.Infrastructure" xml:space="preserve">
+    <value>基礎設施</value>
+  </data>
+  <data name="Category.ArtificialIntelligence" xml:space="preserve">
+    <value>人工智慧</value>
+  </data>
+  <data name="Category.PromptEngineering" xml:space="preserve">
+    <value>提示工程</value>
+  </data>
+  <data name="Category.AIArchitecture" xml:space="preserve">
+    <value>AI 架構</value>
+  </data>
+  <data name="Card.WhatIsData.Title" xml:space="preserve">
+    <value>什麼是資料？</value>
+  </data>
+  <data name="Card.WhatIsData.Summary" xml:space="preserve">
+    <value>資料的核心就是原始資訊。在電腦出現之前，人類用刻痕、文字和圖畫來記錄資料。</value>
+  </data>
+  <data name="Card.WhatIsData.WhyCare" xml:space="preserve">
+    <value>每個應用程式、報告、儀表板和 AI 答案都從資料開始。</value>
+  </data>
+  <data name="Card.WhatIsData.Example" xml:space="preserve">
+    <value>資料是代表事實、觀察或指令的任何一組數值、字元或符號。</value>
+  </data>
+  <data name="Card.WhatIsData.WithoutIt" xml:space="preserve">
+    <value>軟體將沒有東西可以處理，AI 也將沒有東西可以學習。</value>
+  </data>
+  <data name="Card.WhatIsBinary.Title" xml:space="preserve">
+    <value>什麼是二進制？</value>
+  </data>
+  <data name="Card.WhatIsBinary.Summary" xml:space="preserve">
+    <value>二進制是 1 和 0 的語言，驅動著世界上每一個數位螢幕和晶片。</value>
+  </data>
+  <data name="Card.WhatIsBinary.WhyCare" xml:space="preserve">
+    <value>它解釋了數位機器如何將簡單的訊號轉化為有用的工作。</value>
+  </data>
+  <data name="Card.WhatIsBinary.Example" xml:space="preserve">
+    <value>二進制是一種以 2 為底的數字系統。</value>
+  </data>
+  <data name="Card.WhatIsBinary.WithoutIt" xml:space="preserve">
+    <value>數位硬體將失去表示資訊最簡單、最可靠的方式。</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.Title" xml:space="preserve">
+    <value>什麼是演算法？</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.Summary" xml:space="preserve">
+    <value>演算法是解決特定問題的逐步操作方法或一組規則。</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.WhyCare" xml:space="preserve">
+    <value>演算法是搜尋、推薦、自動化和 AI 背後可重複執行的步驟。</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.Example" xml:space="preserve">
+    <value>在電腦科學中，演算法是一組明確的指令序列，用於執行任務或解決問題。</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.WithoutIt" xml:space="preserve">
+    <value>電腦將沒有可重複的指令來解決問題。</value>
+  </data>
+  <data name="Card.TheInternet.Title" xml:space="preserve">
+    <value>什麼是網際網路？</value>
+  </data>
+  <data name="Card.TheInternet.Summary" xml:space="preserve">
+    <value>網際網路是連接全球數十億台電腦的實體全球網路。</value>
+  </data>
+  <data name="Card.TheInternet.WhyCare" xml:space="preserve">
+    <value>幾乎所有現代服務都依賴連接的裝置交換資料。</value>
+  </data>
+  <data name="Card.TheInternet.Example" xml:space="preserve">
+    <value>視訊通話、網路銀行、雲端應用程式和 AI 聊天都透過網際網路傳輸。</value>
+  </data>
+  <data name="Card.TheInternet.WithoutIt" xml:space="preserve">
+    <value>現代線上服務、雲端應用程式和遠端 AI 系統將不復存在。</value>
+  </data>
+  <data name="Card.WhatIsCode.Title" xml:space="preserve">
+    <value>什麼是程式碼？</value>
+  </data>
+  <data name="Card.WhatIsCode.Summary" xml:space="preserve">
+    <value>程式碼是人類撰寫電腦能夠理解並執行之指令的方式。</value>
+  </data>
+  <data name="Card.WhatIsCode.WhyCare" xml:space="preserve">
+    <value>程式碼是團隊將想法、業務規則和工作流程轉化為軟體的方式。</value>
+  </data>
+  <data name="Card.WhatIsCode.Example" xml:space="preserve">
+    <value>電腦只能理解二進制，這對人類直接撰寫來說太繁瑣了。</value>
+  </data>
+  <data name="Card.WhatIsCode.WithoutIt" xml:space="preserve">
+    <value>大多數數位產品將停留在想法階段，而非成為實際工具。</value>
+  </data>
+  <data name="Card.TheWeb.Title" xml:space="preserve">
+    <value>什麼是網站？</value>
+  </data>
+  <data name="Card.TheWeb.Summary" xml:space="preserve">
+    <value>網站是人們可以透過瀏覽器造訪的相互連結頁面集合。</value>
+  </data>
+  <data name="Card.TheWeb.WhyCare" xml:space="preserve">
+    <value>網站仍是大多數產品、公司和學習體驗的前門。</value>
+  </data>
+  <data name="Card.TheWeb.Example" xml:space="preserve">
+    <value>公司網站、產品儀表板或線上課程都是透過全球資訊網提供的。</value>
+  </data>
+  <data name="Card.TheWeb.WithoutIt" xml:space="preserve">
+    <value>人們需要為許多現在在瀏覽器中開啟的事物安裝獨立的軟體。</value>
+  </data>
+  <data name="Card.Databases.Title" xml:space="preserve">
+    <value>什麼是資料庫？</value>
+  </data>
+  <data name="Card.Databases.Summary" xml:space="preserve">
+    <value>資料庫是一個有組織、安全的數位檔案櫃，用於儲存結構化資料。</value>
+  </data>
+  <data name="Card.Databases.WhyCare" xml:space="preserve">
+    <value>沒有可靠的儲存，應用程式就無法記住使用者、訂單、內容或決策。</value>
+  </data>
+  <data name="Card.Databases.Example" xml:space="preserve">
+    <value>購物車能記住商品，是因為資料庫儲存了它們。</value>
+  </data>
+  <data name="Card.Databases.WithoutIt" xml:space="preserve">
+    <value>應用程式將忘記帳戶、訂單、庫存、訊息和設定。</value>
+  </data>
+  <data name="Card.ServersAndClients.Title" xml:space="preserve">
+    <value>伺服器與客戶端</value>
+  </data>
+  <data name="Card.ServersAndClients.Summary" xml:space="preserve">
+    <value>網路的核心架構：客戶端請求資源，伺服器提供資源。</value>
+  </data>
+  <data name="Card.ServersAndClients.WhyCare" xml:space="preserve">
+    <value>這個模式說明了每當瀏覽器、應用程式或 AI 工具請求某些東西時發生了什麼。</value>
+  </data>
+  <data name="Card.ServersAndClients.Example" xml:space="preserve">
+    <value>在軟體開發中，這個模型定義了裝置如何通訊。</value>
+  </data>
+  <data name="Card.ServersAndClients.WithoutIt" xml:space="preserve">
+    <value>瀏覽器和應用程式將沒有明確的方式來請求和接收服務。</value>
+  </data>
+  <data name="Card.WhatIsAPI.Title" xml:space="preserve">
+    <value>什麼是 API？</value>
+  </data>
+  <data name="Card.WhatIsAPI.Summary" xml:space="preserve">
+    <value>API（應用程式介面）是讓兩個不同軟體應用程式相互通訊的橋梁。</value>
+  </data>
+  <data name="Card.WhatIsAPI.WhyCare" xml:space="preserve">
+    <value>API 讓產品能重複使用地圖、支付、AI 模型和業務系統，而無需重新建置一切。</value>
+  </data>
+  <data name="Card.WhatIsAPI.Example" xml:space="preserve">
+    <value>外送應用程式使用 API 提供地圖、支付、訊息和餐廳菜單。</value>
+  </data>
+  <data name="Card.WhatIsAPI.WithoutIt" xml:space="preserve">
+    <value>軟體系統將難以共享資料或重複使用外部功能。</value>
+  </data>
+  <data name="Card.Automation.Title" xml:space="preserve">
+    <value>什麼是自動化？</value>
+  </data>
+  <data name="Card.Automation.Summary" xml:space="preserve">
+    <value>自動化是設定軟體自動執行重複性任務，無需人工介入。</value>
+  </data>
+  <data name="Card.Automation.WhyCare" xml:space="preserve">
+    <value>自動化消除重複性工作，讓人們專注於判斷和創意。</value>
+  </data>
+  <data name="Card.Automation.Example" xml:space="preserve">
+    <value>在運算領域，自動化意指撰寫腳本或使用工具來處理備份檔案、發送每週報告或測試程式碼等工作。</value>
+  </data>
+  <data name="Card.Automation.WithoutIt" xml:space="preserve">
+    <value>人類將重複機器可以一致執行的手動步驟。</value>
+  </data>
+  <data name="Card.GitOpenSource.Title" xml:space="preserve">
+    <value>Git 與開源</value>
+  </data>
+  <data name="Card.GitOpenSource.Summary" xml:space="preserve">
+    <value>Git 追蹤程式碼歷史，而開源讓開發者能在全球協作開發免費軟體。</value>
+  </data>
+  <data name="Card.GitOpenSource.WhyCare" xml:space="preserve">
+    <value>大多數專業軟體工作依賴共享的程式碼、歷史記錄和協作。</value>
+  </data>
+  <data name="Card.GitOpenSource.Example" xml:space="preserve">
+    <value>Git 是一個版本控制系統，讓開發者追蹤程式碼檔案的變更、與他人協作，並在出現問題時回溯至較舊的版本。</value>
+  </data>
+  <data name="Card.GitOpenSource.WithoutIt" xml:space="preserve">
+    <value>團隊將失去更安全的協作方式和大部分的共享軟體生態系統。</value>
+  </data>
+  <data name="Card.TheCloud.Title" xml:space="preserve">
+    <value>什麼是雲端？</value>
+  </data>
+  <data name="Card.TheCloud.Summary" xml:space="preserve">
+    <value>雲端是指在別人的網際網路連接伺服器上運行軟體和儲存資料。</value>
+  </data>
+  <data name="Card.TheCloud.WhyCare" xml:space="preserve">
+    <value>雲端平台讓團隊無需先購買所有硬體就能推出並擴展軟體。</value>
+  </data>
+  <data name="Card.TheCloud.Example" xml:space="preserve">
+    <value>Microsoft 365 和 Google Drive 將檔案儲存在您可以從任何地方存取的遠端伺服器上。</value>
+  </data>
+  <data name="Card.TheCloud.WithoutIt" xml:space="preserve">
+    <value>公司在推出或擴展產品之前需要更多的實體硬體。</value>
+  </data>
+  <data name="Card.NetworksAndIPs.Title" xml:space="preserve">
+    <value>網路與 IP 位址</value>
+  </data>
+  <data name="Card.NetworksAndIPs.Summary" xml:space="preserve">
+    <value>IP 位址是分配給網路上每個裝置的唯一數位郵寄地址。</value>
+  </data>
+  <data name="Card.NetworksAndIPs.WhyCare" xml:space="preserve">
+    <value>網路知識幫助您了解裝置、服務和雲端系統如何找到彼此。</value>
+  </data>
+  <data name="Card.NetworksAndIPs.Example" xml:space="preserve">
+    <value>電腦要相互傳送資料封包，需要一種識別目的地的方式。</value>
+  </data>
+  <data name="Card.NetworksAndIPs.WithoutIt" xml:space="preserve">
+    <value>裝置和服務將不知道要將資訊傳送到哪裡。</value>
+  </data>
+  <data name="Card.WhatIsAI.Title" xml:space="preserve">
+    <value>什麼是人工智慧？</value>
+  </data>
+  <data name="Card.WhatIsAI.Summary" xml:space="preserve">
+    <value>AI 是讓電腦模仿人類認知功能（如學習和推理）的科學。</value>
+  </data>
+  <data name="Card.WhatIsAI.WhyCare" xml:space="preserve">
+    <value>AI 正在改變人們寫作、分析、建置、客戶支援和決策的方式。</value>
+  </data>
+  <data name="Card.WhatIsAI.Example" xml:space="preserve">
+    <value>ChatGPT、Copilot、客服聊天機器人和圖像識別工具是日常 AI 的範例。</value>
+  </data>
+  <data name="Card.WhatIsAI.WithoutIt" xml:space="preserve">
+    <value>許多現代助手、推薦和自動化工具將消失。</value>
+  </data>
+  <data name="Card.WhatIsML.Title" xml:space="preserve">
+    <value>什麼是機器學習？</value>
+  </data>
+  <data name="Card.WhatIsML.Summary" xml:space="preserve">
+    <value>機器學習是 AI 的一個子領域，電腦在不被明確編程的情況下從資料中學習模式。</value>
+  </data>
+  <data name="Card.WhatIsML.WhyCare" xml:space="preserve">
+    <value>機器學習驅動預測、推薦、排名和許多 AI 系統。</value>
+  </data>
+  <data name="Card.WhatIsML.Example" xml:space="preserve">
+    <value>在傳統程式設計中，人類撰寫規則來處理輸入並獲得輸出。</value>
+  </data>
+  <data name="Card.WhatIsML.WithoutIt" xml:space="preserve">
+    <value>軟體將更多依賴手寫規則，而較少依賴從資料中學習的模式。</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.Title" xml:space="preserve">
+    <value>什麼是深度學習？</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.Summary" xml:space="preserve">
+    <value>深度學習使用多層人工神經網路來解決高度複雜的任務。</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.WhyCare" xml:space="preserve">
+    <value>深度學習是語言、視覺、語音和現代生成式 AI 許多突破的背後功臣。</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.Example" xml:space="preserve">
+    <value>深度學習是機器學習的一個特殊分支。</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.WithoutIt" xml:space="preserve">
+    <value>AI 將難以應對複雜的語言、視覺和語音任務。</value>
+  </data>
+  <data name="Card.WhatIsLLM.Title" xml:space="preserve">
+    <value>什麼是大型語言模型（LLM）？</value>
+  </data>
+  <data name="Card.WhatIsLLM.Summary" xml:space="preserve">
+    <value>大型語言模型（LLM）是在大量文字資料上訓練的 AI 引擎，用於預測和生成類人語言。</value>
+  </data>
+  <data name="Card.WhatIsLLM.WhyCare" xml:space="preserve">
+    <value>LLM 驅動人們現在對 AI 期望的聊天、寫作、程式碼和推理體驗。</value>
+  </data>
+  <data name="Card.WhatIsLLM.Example" xml:space="preserve">
+    <value>LLM 是一種設計用於理解、處理和生成自然文字的深度學習模型。</value>
+  </data>
+  <data name="Card.WhatIsLLM.WithoutIt" xml:space="preserve">
+    <value>AI 在自然語言對話、寫作和程式碼協助方面將弱得多。</value>
+  </data>
+  <data name="Card.WhatIsPrompt.Title" xml:space="preserve">
+    <value>什麼是提示詞？</value>
+  </data>
+  <data name="Card.WhatIsPrompt.Summary" xml:space="preserve">
+    <value>提示詞是您給 AI 模型的自然語言指令或查詢，用於引導其回應。</value>
+  </data>
+  <data name="Card.WhatIsPrompt.WhyCare" xml:space="preserve">
+    <value>提示詞是人類意圖與 AI 輸出之間的實際介面。</value>
+  </data>
+  <data name="Card.WhatIsPrompt.Example" xml:space="preserve">
+    <value>與需要嚴格指令或點擊的傳統軟體不同，生成式 AI 由「提示詞」引導。</value>
+  </data>
+  <data name="Card.WhatIsPrompt.WithoutIt" xml:space="preserve">
+    <value>人們將更難引導 AI 朝向有用的結果。</value>
+  </data>
+  <data name="Card.WhatIsRAG.Title" xml:space="preserve">
+    <value>什麼是 RAG？</value>
+  </data>
+  <data name="Card.WhatIsRAG.Summary" xml:space="preserve">
+    <value>檢索增強生成（RAG）是一種將自訂文件提供給 LLM 以給予最新、準確事實的技術。</value>
+  </data>
+  <data name="Card.WhatIsRAG.WhyCare" xml:space="preserve">
+    <value>RAG 幫助 AI 從可信的公司或產品知識中回答，而非猜測。</value>
+  </data>
+  <data name="Card.WhatIsRAG.Example" xml:space="preserve">
+    <value>HR 聊天機器人可以使用 RAG 從公司政策 PDF 中回答問題。</value>
+  </data>
+  <data name="Card.WhatIsRAG.WithoutIt" xml:space="preserve">
+    <value>AI 將更多依賴訓練資料，而較少立基於當前的私有知識。</value>
+  </data>
+  <data name="Card.AIAgents.Title" xml:space="preserve">
+    <value>什麼是 AI 代理人？</value>
+  </data>
+  <data name="Card.AIAgents.Summary" xml:space="preserve">
+    <value>AI 代理人是自主系統，能夠使用工具、規劃步驟並執行複雜工作流程，無需持續人工監督。</value>
+  </data>
+  <data name="Card.AIAgents.WhyCare" xml:space="preserve">
+    <value>代理人將 AI 從回答問題推進到完成多步驟工作。</value>
+  </data>
+  <data name="Card.AIAgents.Example" xml:space="preserve">
+    <value>代理人可以起草電子郵件、查看 CRM、匯總結果並準備報告。</value>
+  </data>
+  <data name="Card.AIAgents.WithoutIt" xml:space="preserve">
+    <value>人們需要在工具和工作流程中手動執行每個步驟。</value>
+  </data>
+  <data name="Card.WhatIsMCP.Title" xml:space="preserve">
+    <value>什麼是 MCP？</value>
+  </data>
+  <data name="Card.WhatIsMCP.Summary" xml:space="preserve">
+    <value>MCP 是 AI 系統連接工具、應用程式和資料來源的通用方式。</value>
+  </data>
+  <data name="Card.WhatIsMCP.WhyCare" xml:space="preserve">
+    <value>MCP 讓代理人更容易取得所需的工具和資料。</value>
+  </data>
+  <data name="Card.WhatIsMCP.Example" xml:space="preserve">
+    <value>AI 助手可以透過 MCP 伺服器連接到資料庫或 CRM。</value>
+  </data>
+  <data name="Card.WhatIsMCP.WithoutIt" xml:space="preserve">
+    <value>每個 AI 工具連接都需要更多自訂整合工作。</value>
+  </data>
+  <data name="Knowledge.Detail.InShort" xml:space="preserve">
+    <value>簡而言之：</value>
+  </data>
+  <data name="Knowledge.Detail.ShareKnowledge" xml:space="preserve">
+    <value>分享知識：</value>
+  </data>
+  <data name="Knowledge.Detail.RelatedConcepts" xml:space="preserve">
+    <value>相關概念</value>
+  </data>
+  <data name="Knowledge.Detail.BackToHub" xml:space="preserve">
+    <value>返回知識庫</value>
+  </data>
+  <data name="Knowledge.Detail.NotFound.Title" xml:space="preserve">
+    <value>找不到概念</value>
+  </data>
+  <data name="Knowledge.Detail.NotFound.Body" xml:space="preserve">
+    <value>您尋找的概念可能已移動或重新命名。</value>
+  </data>
+  <data name="Knowledge.Filter.AllCategories" xml:space="preserve">
+    <value>所有類別</value>
+  </data>
+  <data name="Knowledge.Journey.DefaultCopy" xml:space="preserve">
+    <value>從恐龍時代的好奇心出發，依序走過工具、網路、資料、雲端與 AI。時代時間軸是唯一的進展系統。</value>
   </data>
 </root>

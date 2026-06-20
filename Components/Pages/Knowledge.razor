@@ -1,8 +1,10 @@
 @page "/knowledge"
 @using DinoAI.Data
 @using DinoAI.Services
+@using Microsoft.Extensions.Localization
 @inject KnowledgeService KnowledgeService
 @inject NavigationManager Nav
+@inject IStringLocalizer<SharedResource> L
 
 <PageTitle>Dino AI Academy - Knowledge Hub</PageTitle>
 
@@ -12,10 +14,10 @@
 
         <div class="knowledge-hero text-center py-12 px-6">
             <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
-                AI Knowledge Hub
+                @L["Knowledge.Hero.Title"]
             </h1>
             <p class="max-w-2xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed">
-                From dinosaurs to artificial intelligence. Follow the tracks from curiosity and raw data to agents, tools, and modern AI systems.
+                @L["Knowledge.Hero.Subtitle"]
             </p>
         </div>
     </section>
@@ -23,9 +25,21 @@
     <!-- Evolution Progress Bar Section -->
     <section class="progress-bar-shell py-6 px-4">
         <div class="evolution-container max-w-6xl mx-auto">
-            <h2 class="text-xs uppercase font-semibold text-[#33d7a6] tracking-wider mb-6 text-center">
-                Select an Era of Human Intelligence
-            </h2>
+            <div class="journey-brief mb-8">
+                <div>
+                    <p class="journey-kicker">@L["Knowledge.Journey.Kicker"]</p>
+                    <h2 class="journey-title">@SelectedJourneyTitle</h2>
+      
+                </div>
+                <div class="journey-path" aria-label="Suggested learning path">
+                    @foreach (var track in _featuredPath)
+                    {
+                        <button type="button" class="path-chip" @onclick="() => NavigateToDetail(track.Slug)">
+                            @track.Label
+                        </button>
+                    }
+                </div>
+            </div>
             
             <div class="evolution-stepper flex flex-col md:flex-row items-stretch justify-between gap-1 md:gap-0">
                 @foreach (var age in _ages)
@@ -62,17 +76,17 @@
                 <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                     <!-- Reset Button/All Era -->
                     <button type="button" @onclick="ResetFilters" class="px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-300 cursor-pointer @(string.IsNullOrEmpty(_selectedAgeKey) && string.IsNullOrEmpty(_selectedCategory) && string.IsNullOrEmpty(_searchQuery) ? "bg-[#33d7a6] text-[#04110f]" : "bg-[#031810] text-slate-300 border border-slate-700 hover:text-[#33d7a6]")">
-                        All Eras
+                        @L["Knowledge.Filter.AllEras"]
                     </button>
 
                     <!-- Category Dropdown -->
                     <div class="dropdown relative z-[9999]">
                         <div tabindex="0" role="button" class="btn btn-sm bg-[#031810] border-slate-700 hover:border-[#33d7a6] hover:bg-[#031810] text-xs font-semibold text-slate-300 normal-case rounded-xl h-9">
-                            @(string.IsNullOrEmpty(_selectedCategory) ? "Category: All" : $"Category: {_selectedCategory}")
+                            @(string.IsNullOrEmpty(_selectedCategory) ? @L["Knowledge.Filter.CategoryPrefix"] + " " + @L["Knowledge.Filter.AllCategories"] : $"Category: {_selectedCategory}")
                             <i class="ti ti-chevron-down ms-1"></i>
                         </div>
                         <ul tabindex="0" class="dropdown-content absolute top-full left-0 mt-2 z-[9999] menu p-2 shadow-2xl bg-[#02100c] border border-[rgba(58,209,141,0.16)] rounded-box w-52">
-                            <li><button type="button" class="text-xs" @onclick="() => FilterByCategory(null)">All Categories</button></li>
+                            <li><button type="button" class="text-xs" @onclick="() => FilterByCategory(null)">@L["Knowledge.Filter.CategoryAll"]</button></li>
                             @foreach (var cat in _categories)
                             {
                                 <li><button type="button" class="text-xs" @onclick="() => FilterByCategory(cat)">@cat</button></li>
@@ -83,36 +97,22 @@
 
                 <!-- Search Input -->
                 <div class="relative w-full sm:w-64">
-                    <input type="text" placeholder="Search knowledge..." @bind-value="SearchQuery" @bind-value:event="oninput" class="form-input knowledge-search-input" />
+                    <input type="text" placeholder="@L["Knowledge.Filter.SearchPlaceholder"]" @bind-value="SearchQuery" @bind-value:event="oninput" class="form-input knowledge-search-input" />
                     <span class="search-icon">
                         <i class="ti ti-search text-sm"></i>
                     </span>
                 </div>
             </div>
 
-            <div class="journey-brief mb-8">
-                <div>
-                    <p class="journey-kicker">Learning Journey</p>
-                    <h2 class="journey-title">@SelectedJourneyTitle</h2>
-                    <p class="journey-copy">@SelectedJourneyCopy</p>
-                </div>
-                <div class="journey-path" aria-label="Suggested learning path">
-                    @foreach (var track in _featuredPath)
-                    {
-                        <button type="button" class="path-chip" @onclick="() => NavigateToDetail(track.Slug)">
-                            @track.Label
-                        </button>
-                    }
-                </div>
-            </div>
+
 
             <!-- Card Grid -->
             @if (_filteredCards.Count == 0)
             {
                 <div class="knowledge-empty">
                     <i class="ti ti-search-off text-4xl text-slate-600 mb-3 block"></i>
-                    <h3 class="empty-state-title">No concepts found</h3>
-                    <p class="empty-state-desc" style="max-width:20rem;margin-inline:auto">Try adjusting your filters or search terms to explore other technological eras.</p>
+                    <h3 class="empty-state-title">@L["Knowledge.Empty.Title"]</h3>
+                    <p class="empty-state-desc" style="max-width:20rem;margin-inline:auto">@L["Knowledge.Empty.Description"]</p>
                 </div>
             }
             else
@@ -138,30 +138,30 @@
 
                             <div class="knowledge-card-body">
                                 <section class="learning-section learning-definition">
-                                    <h4><i class="ti ti-compass"></i> Definition</h4>
+                                    <h4><i class="ti ti-compass"></i> @L["Knowledge.Card.Definition"]</h4>
                                     <p>@GetDefinition(card)</p>
                                 </section>
 
                                 <div class="learning-grid">
                                     <section class="learning-section">
-                                        <h4><i class="ti ti-bulb"></i> Why Should I Care?</h4>
+                                        <h4><i class="ti ti-bulb"></i> @L["Knowledge.Card.WhyCare"]</h4>
                                         <p>@GetWhyCare(card)</p>
                                     </section>
                                     <section class="learning-section">
-                                        <h4><i class="ti ti-map-pin"></i> Real-World Example</h4>
+                                        <h4><i class="ti ti-map-pin"></i> @L["Knowledge.Card.Example"]</h4>
                                         <p>@GetExample(card)</p>
                                     </section>
                                 </div>
 
                                 <section class="learning-section learning-without">
-                                    <h4><i class="ti ti-alert-triangle"></i> Without It...</h4>
+                                    <h4><i class="ti ti-alert-triangle"></i> @L["Knowledge.Card.WithoutIt"]</h4>
                                     <p>@GetWithoutIt(card)</p>
                                 </section>
                             </div>
 
                             <div class="knowledge-card-footer">
                                 <div>
-                                    <p class="next-label">Next Dino Tracks</p>
+                                    <p class="next-label">@L["Knowledge.Card.NextTracks"]</p>
                                     <div class="next-track-list">
                                         @foreach (var next in nextTracks)
                                         {
@@ -172,7 +172,7 @@
                                     </div>
                                 </div>
                                 <button type="button" class="continue-button" @onclick="() => NavigateToDetail(card.Slug)">
-                                    Continue Evolution <i class="ti ti-arrow-right"></i>
+                                    @L["Knowledge.Card.ContinueEvolution"] <i class="ti ti-arrow-right"></i>
                                 </button>
                             </div>
                         </article>
@@ -182,12 +182,12 @@
 
             <aside class="continue-evolution mt-10">
                 <div>
-                    <p class="journey-kicker">Next Discovery</p>
-                    <h2>Continue Your Evolution</h2>
-                    <p>Each concept now points to the next useful tracks, so the hub behaves like a guided museum path instead of a static glossary.</p>
+                    <p class="journey-kicker">@L["Knowledge.Journey.Kicker"]</p>
+                    <h2>@L["Knowledge.Continue.Title"]</h2>
+                    <p>@L["Knowledge.Continue.Body"]</p>
                 </div>
                 <button type="button" class="continue-button" @onclick='() => NavigateToDetail("what-is-ai")'>
-                    Jump to AI Era <i class="ti ti-arrow-right"></i>
+                    @L["Knowledge.Continue.Button"] <i class="ti ti-arrow-right"></i>
                 </button>
             </aside>
 
@@ -234,13 +234,13 @@
 
     private string SelectedJourneyTitle
         => string.IsNullOrEmpty(_selectedAgeKey)
-            ? "Choose an era, then keep following the tracks."
+            ? @L["Knowledge.Journey.DefaultTitle"]
             : $"{_ages.First(a => a.Key == _selectedAgeKey).Name}: {_ages.First(a => a.Key == _selectedAgeKey).Subtitle}";
 
     private string SelectedJourneyCopy
         => string.IsNullOrEmpty(_selectedAgeKey)
-            ? "Start with curiosity in the Dinosaur Era, then move through tools, networks, data, cloud, and AI. The era timeline stays as the single progression system."
-            : "Each card explains the concept, why it matters, what it looks like in real life, and what to learn next.";
+            ? @L["Knowledge.Journey.DefaultCopy"]
+            : @L["Knowledge.Journey.EraSubtitleSuffix"];
 
     protected override void OnInitialized()
     {

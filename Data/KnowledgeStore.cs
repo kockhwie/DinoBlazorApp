@@ -1,13 +1,19 @@
+using DinoAI.Resources;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
+using DinoAI.Utilities;
+
 
 namespace DinoAI.Data;
 
 public static class KnowledgeStore
 {
+
+ 
     public static IReadOnlyList<EvolutionAge> Ages { get; } = new List<EvolutionAge>
     {
-        new("dinosaur-era", "Dinosaur Era", "Curiosity & Discovery", "ti ti-egg-cracked", "#33d7a6", 1),
+        new("dinosaur-era",  "Dinosaur Era", "Curiosity & Discovery", "ti ti-egg-cracked", "#33d7a6", 1),
         new("stone-age", "Stone Age", "Survival & Instinct", "ti ti-bow", "#d97706", 2), // amber-600
         new("bronze-age", "Bronze Age", "Tools & Discovery", "ti ti-shovel-pitchforks", "#b45309", 3), // amber-700
         new("industrial-age", "Industrial Age", "Machines & Efficiency", "ti ti-settings-spark", "#64748b", 4), // slate-500

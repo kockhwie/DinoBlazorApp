@@ -369,4 +369,475 @@
   <data name="Toast.Copied" xml:space="preserve">
     <value>Copied to composer.</value>
   </data>
+  <data name="Knowledge.PageTitle" xml:space="preserve">
+    <value>Dino AI Academy - Knowledge Hub</value>
+  </data>
+  <data name="Knowledge.Hero.Title" xml:space="preserve">
+    <value>AI Knowledge Hub</value>
+  </data>
+  <data name="Knowledge.Hero.Subtitle" xml:space="preserve">
+    <value>From dinosaurs to artificial intelligence. Follow the tracks from curiosity and raw data to agents, tools, and modern AI systems.</value>
+  </data>
+  <data name="Knowledge.EraSelector.Label" xml:space="preserve">
+    <value>Select an Era of Human Intelligence</value>
+  </data>
+  <data name="Knowledge.Filter.AllEras" xml:space="preserve">
+    <value>All Eras</value>
+  </data>
+  <data name="Knowledge.Filter.CategoryAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Knowledge.Filter.CategoryPrefix" xml:space="preserve">
+    <value>Category: </value>
+  </data>
+  <data name="Knowledge.Filter.SearchPlaceholder" xml:space="preserve">
+    <value>Search knowledge...</value>
+  </data>
+  <data name="Knowledge.Journey.Kicker" xml:space="preserve">
+    <value>Learning Journey</value>
+  </data>
+  <data name="Knowledge.Journey.DefaultTitle" xml:space="preserve">
+    <value>Choose an era, then keep following the tracks.</value>
+  </data>
+  <data name="Knowledge.Journey.EraSubtitleSuffix" xml:space="preserve">
+    <value>Each card explains the concept, why it matters, what it looks like in real life, and what to learn next.</value>
+  </data>
+  <data name="Knowledge.Card.Definition" xml:space="preserve">
+    <value>Definition</value>
+  </data>
+  <data name="Knowledge.Card.WhyCare" xml:space="preserve">
+    <value>Why Should I Care?</value>
+  </data>
+  <data name="Knowledge.Card.Example" xml:space="preserve">
+    <value>Real-World Example</value>
+  </data>
+  <data name="Knowledge.Card.WithoutIt" xml:space="preserve">
+    <value>Without It...</value>
+  </data>
+  <data name="Knowledge.Card.NextTracks" xml:space="preserve">
+    <value>Other related:</value>
+  </data>
+  <data name="Knowledge.Card.ContinueEvolution" xml:space="preserve">
+    <value>Continue Evolution</value>
+  </data>
+  <data name="Knowledge.Empty.Title" xml:space="preserve">
+    <value>No concepts found</value>
+  </data>
+  <data name="Knowledge.Empty.Body" xml:space="preserve">
+    <value>Try adjusting your filters or search terms to explore other technological eras.</value>
+  </data>
+  <data name="Knowledge.Continue.Kicker" xml:space="preserve">
+    <value>Next Discovery</value>
+  </data>
+  <data name="Knowledge.Continue.Title" xml:space="preserve">
+    <value>Continue Your Evolution</value>
+  </data>
+  <data name="Knowledge.Continue.Body" xml:space="preserve">
+    <value>Each concept now points to the next useful tracks, so the hub behaves like a guided museum path instead of a static glossary.</value>
+  </data>
+  <data name="Knowledge.Continue.Button" xml:space="preserve">
+    <value>Or Jump to AI Era</value>
+  </data>
+  <data name="Age.DinosaurEra.Name" xml:space="preserve">
+    <value>Dinosaur Era</value>
+  </data>
+  <data name="Age.DinosaurEra.Subtitle" xml:space="preserve">
+    <value>Curiosity &amp; Discovery</value>
+  </data>
+  <data name="Age.StoneAge.Name" xml:space="preserve">
+    <value>Stone Age</value>
+  </data>
+  <data name="Age.StoneAge.Subtitle" xml:space="preserve">
+    <value>Survival &amp; Instinct</value>
+  </data>
+  <data name="Age.BronzeAge.Name" xml:space="preserve">
+    <value>Bronze Age</value>
+  </data>
+  <data name="Age.BronzeAge.Subtitle" xml:space="preserve">
+    <value>Tools &amp; Discovery</value>
+  </data>
+  <data name="Age.IndustrialAge.Name" xml:space="preserve">
+    <value>Industrial Age</value>
+  </data>
+  <data name="Age.IndustrialAge.Subtitle" xml:space="preserve">
+    <value>Machines &amp; Efficiency</value>
+  </data>
+  <data name="Age.InformationAge.Name" xml:space="preserve">
+    <value>Information Age</value>
+  </data>
+  <data name="Age.InformationAge.Subtitle" xml:space="preserve">
+    <value>Data &amp; Connectivity</value>
+  </data>
+  <data name="Age.DigitalAge.Name" xml:space="preserve">
+    <value>Digital Age</value>
+  </data>
+  <data name="Age.DigitalAge.Subtitle" xml:space="preserve">
+    <value>Computing &amp; Automation</value>
+  </data>
+  <data name="Age.AIEra.Name" xml:space="preserve">
+    <value>AI Era</value>
+  </data>
+  <data name="Age.AIEra.Subtitle" xml:space="preserve">
+    <value>Intelligence &amp; Evolution</value>
+  </data>
+  <data name="Category.DataLogic" xml:space="preserve">
+    <value>Data &amp; Logic</value>
+  </data>
+  <data name="Category.Networking" xml:space="preserve">
+    <value>Networking</value>
+  </data>
+  <data name="Category.Software" xml:space="preserve">
+    <value>Software</value>
+  </data>
+  <data name="Category.Infrastructure" xml:space="preserve">
+    <value>Infrastructure</value>
+  </data>
+  <data name="Category.ArtificialIntelligence" xml:space="preserve">
+    <value>Artificial Intelligence</value>
+  </data>
+  <data name="Category.PromptEngineering" xml:space="preserve">
+    <value>Prompt Engineering</value>
+  </data>
+  <data name="Category.AIArchitecture" xml:space="preserve">
+    <value>AI Architecture</value>
+  </data>
+  <data name="Card.WhatIsData.Title" xml:space="preserve">
+    <value>What is Data?</value>
+  </data>
+  <data name="Card.WhatIsData.Summary" xml:space="preserve">
+    <value>At its core, data is simply raw information. Before computers, humans recorded data as tallies, words, and drawings.</value>
+  </data>
+  <data name="Card.WhatIsData.WhyCare" xml:space="preserve">
+    <value>Every app, report, dashboard, and AI answer starts with data.</value>
+  </data>
+  <data name="Card.WhatIsData.Example" xml:space="preserve">
+    <value>Data is any set of values, characters, or symbols that represents facts, observations, or instructions.</value>
+  </data>
+  <data name="Card.WhatIsData.WithoutIt" xml:space="preserve">
+    <value>Software would have nothing to process and AI would have nothing to learn from.</value>
+  </data>
+  <data name="Card.WhatIsBinary.Title" xml:space="preserve">
+    <value>What is Binary?</value>
+  </data>
+  <data name="Card.WhatIsBinary.Summary" xml:space="preserve">
+    <value>Binary is the language of 1s and 0s that powers every digital screen and chip in the world.</value>
+  </data>
+  <data name="Card.WhatIsBinary.WhyCare" xml:space="preserve">
+    <value>It explains how digital machines turn simple signals into useful work.</value>
+  </data>
+  <data name="Card.WhatIsBinary.Example" xml:space="preserve">
+    <value>Binary is a base-2 numeral system.</value>
+  </data>
+  <data name="Card.WhatIsBinary.WithoutIt" xml:space="preserve">
+    <value>Digital hardware would lose its simplest, most reliable way to represent information.</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.Title" xml:space="preserve">
+    <value>What is an Algorithm?</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.Summary" xml:space="preserve">
+    <value>An algorithm is a step-by-step recipe or set of rules to solve a specific problem.</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.WhyCare" xml:space="preserve">
+    <value>Algorithms are the repeatable steps behind search, recommendations, automation, and AI.</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.Example" xml:space="preserve">
+    <value>In computer science, an algorithm is a clear sequence of instructions designed to perform a task or solve a problem.</value>
+  </data>
+  <data name="Card.WhatIsAlgorithm.WithoutIt" xml:space="preserve">
+    <value>Computers would not have repeatable instructions for solving problems.</value>
+  </data>
+  <data name="Card.TheInternet.Title" xml:space="preserve">
+    <value>What is the Internet?</value>
+  </data>
+  <data name="Card.TheInternet.Summary" xml:space="preserve">
+    <value>The internet is the physical global network connecting billions of computers together.</value>
+  </data>
+  <data name="Card.TheInternet.WhyCare" xml:space="preserve">
+    <value>Almost every modern service depends on connected devices exchanging data.</value>
+  </data>
+  <data name="Card.TheInternet.Example" xml:space="preserve">
+    <value>Video calls, online banking, cloud apps, and AI chat all travel through the internet.</value>
+  </data>
+  <data name="Card.TheInternet.WithoutIt" xml:space="preserve">
+    <value>Modern online services, cloud apps, and remote AI systems would not exist.</value>
+  </data>
+  <data name="Card.WhatIsCode.Title" xml:space="preserve">
+    <value>What is Programming Code?</value>
+  </data>
+  <data name="Card.WhatIsCode.Summary" xml:space="preserve">
+    <value>Code is how humans write instructions that computers can understand and execute.</value>
+  </data>
+  <data name="Card.WhatIsCode.WhyCare" xml:space="preserve">
+    <value>Code is how teams turn ideas, business rules, and workflows into software.</value>
+  </data>
+  <data name="Card.WhatIsCode.Example" xml:space="preserve">
+    <value>Computers only understand binary, which is too tedious for humans to write directly.</value>
+  </data>
+  <data name="Card.WhatIsCode.WithoutIt" xml:space="preserve">
+    <value>Most digital products would stay as ideas instead of becoming working tools.</value>
+  </data>
+  <data name="Card.TheWeb.Title" xml:space="preserve">
+    <value>What is a Website?</value>
+  </data>
+  <data name="Card.TheWeb.Summary" xml:space="preserve">
+    <value>A website is a collection of connected pages people can visit through a browser.</value>
+  </data>
+  <data name="Card.TheWeb.WhyCare" xml:space="preserve">
+    <value>Websites are still the front door for most products, companies, and learning experiences.</value>
+  </data>
+  <data name="Card.TheWeb.Example" xml:space="preserve">
+    <value>A company website, a product dashboard, or an online course is delivered through the Web.</value>
+  </data>
+  <data name="Card.TheWeb.WithoutIt" xml:space="preserve">
+    <value>People would need separate installed software for many things they now open in a browser.</value>
+  </data>
+  <data name="Card.Databases.Title" xml:space="preserve">
+    <value>What is a Database?</value>
+  </data>
+  <data name="Card.Databases.Summary" xml:space="preserve">
+    <value>A database is an organized, secure digital filing cabinet for storing structured data.</value>
+  </data>
+  <data name="Card.Databases.WhyCare" xml:space="preserve">
+    <value>Without reliable storage, apps cannot remember users, orders, content, or decisions.</value>
+  </data>
+  <data name="Card.Databases.Example" xml:space="preserve">
+    <value>A shopping cart remembers items because a database stores them.</value>
+  </data>
+  <data name="Card.Databases.WithoutIt" xml:space="preserve">
+    <value>Apps would forget accounts, orders, inventory, messages, and settings.</value>
+  </data>
+  <data name="Card.ServersAndClients.Title" xml:space="preserve">
+    <value>Servers vs. Clients</value>
+  </data>
+  <data name="Card.ServersAndClients.Summary" xml:space="preserve">
+    <value>The core architecture of the web: clients ask for resources, and servers provide them.</value>
+  </data>
+  <data name="Card.ServersAndClients.WhyCare" xml:space="preserve">
+    <value>This pattern explains what happens whenever a browser, app, or AI tool asks for something.</value>
+  </data>
+  <data name="Card.ServersAndClients.Example" xml:space="preserve">
+    <value>In software development, this model defines how devices communicate.</value>
+  </data>
+  <data name="Card.ServersAndClients.WithoutIt" xml:space="preserve">
+    <value>Browsers and apps would not have a clear way to request and receive services.</value>
+  </data>
+  <data name="Card.WhatIsAPI.Title" xml:space="preserve">
+    <value>What is an API?</value>
+  </data>
+  <data name="Card.WhatIsAPI.Summary" xml:space="preserve">
+    <value>An API (Application Programming Interface) is a messenger that lets two different software applications talk to each other.</value>
+  </data>
+  <data name="Card.WhatIsAPI.WhyCare" xml:space="preserve">
+    <value>APIs let products reuse maps, payments, AI models, and business systems instead of rebuilding everything.</value>
+  </data>
+  <data name="Card.WhatIsAPI.Example" xml:space="preserve">
+    <value>A food delivery app uses APIs for maps, payments, messages, and restaurant menus.</value>
+  </data>
+  <data name="Card.WhatIsAPI.WithoutIt" xml:space="preserve">
+    <value>Software systems would struggle to share data or reuse external capabilities.</value>
+  </data>
+  <data name="Card.Automation.Title" xml:space="preserve">
+    <value>What is Automation?</value>
+  </data>
+  <data name="Card.Automation.Summary" xml:space="preserve">
+    <value>Automation is configuring software to perform repetitive tasks automatically without human intervention.</value>
+  </data>
+  <data name="Card.Automation.WhyCare" xml:space="preserve">
+    <value>Automation removes repetitive work so people can focus on judgment and creativity.</value>
+  </data>
+  <data name="Card.Automation.Example" xml:space="preserve">
+    <value>In computing, automation means writing scripts or using tools to handle jobs like backing up files, sending weekly reports, or testing code.</value>
+  </data>
+  <data name="Card.Automation.WithoutIt" xml:space="preserve">
+    <value>Humans would repeat manual steps that machines can perform consistently.</value>
+  </data>
+  <data name="Card.GitOpenSource.Title" xml:space="preserve">
+    <value>Git &amp; Open Source</value>
+  </data>
+  <data name="Card.GitOpenSource.Summary" xml:space="preserve">
+    <value>Git tracks code history, while Open Source allows developers to collaborate globally on free software.</value>
+  </data>
+  <data name="Card.GitOpenSource.WhyCare" xml:space="preserve">
+    <value>Most professional software work depends on shared code, history, and collaboration.</value>
+  </data>
+  <data name="Card.GitOpenSource.Example" xml:space="preserve">
+    <value>Git is a version control system that lets developers track changes in code files, collaborate with others, and revert to older versions if something breaks.</value>
+  </data>
+  <data name="Card.GitOpenSource.WithoutIt" xml:space="preserve">
+    <value>Teams would lose safer collaboration and much of the shared software ecosystem.</value>
+  </data>
+  <data name="Card.TheCloud.Title" xml:space="preserve">
+    <value>What is the Cloud?</value>
+  </data>
+  <data name="Card.TheCloud.Summary" xml:space="preserve">
+    <value>The Cloud means running software and storing data on someone else's internet-connected servers.</value>
+  </data>
+  <data name="Card.TheCloud.WhyCare" xml:space="preserve">
+    <value>Cloud platforms let teams launch and scale software without buying all the hardware first.</value>
+  </data>
+  <data name="Card.TheCloud.Example" xml:space="preserve">
+    <value>Microsoft 365 and Google Drive store files on remote servers you access anywhere.</value>
+  </data>
+  <data name="Card.TheCloud.WithoutIt" xml:space="preserve">
+    <value>Companies would need far more physical hardware before launching or scaling products.</value>
+  </data>
+  <data name="Card.NetworksAndIPs.Title" xml:space="preserve">
+    <value>Networks &amp; IP Addresses</value>
+  </data>
+  <data name="Card.NetworksAndIPs.Summary" xml:space="preserve">
+    <value>An IP address is a unique digital mailing address assigned to every device on a network.</value>
+  </data>
+  <data name="Card.NetworksAndIPs.WhyCare" xml:space="preserve">
+    <value>Networking knowledge helps you understand how devices, services, and cloud systems find each other.</value>
+  </data>
+  <data name="Card.NetworksAndIPs.Example" xml:space="preserve">
+    <value>For computers to send packets of data to each other, they need a way to identify destinations.</value>
+  </data>
+  <data name="Card.NetworksAndIPs.WithoutIt" xml:space="preserve">
+    <value>Devices and services would not know where to send information.</value>
+  </data>
+  <data name="Card.WhatIsAI.Title" xml:space="preserve">
+    <value>What is Artificial Intelligence?</value>
+  </data>
+  <data name="Card.WhatIsAI.Summary" xml:space="preserve">
+    <value>AI is the science of making computers mimic human cognitive functions like learning and reasoning.</value>
+  </data>
+  <data name="Card.WhatIsAI.WhyCare" xml:space="preserve">
+    <value>AI is changing how people write, analyze, build, support customers, and make decisions.</value>
+  </data>
+  <data name="Card.WhatIsAI.Example" xml:space="preserve">
+    <value>ChatGPT, Copilot, support chatbots, and image recognition tools are everyday AI examples.</value>
+  </data>
+  <data name="Card.WhatIsAI.WithoutIt" xml:space="preserve">
+    <value>Many modern assistants, recommendations, and automation tools would disappear.</value>
+  </data>
+  <data name="Card.WhatIsML.Title" xml:space="preserve">
+    <value>What is Machine Learning?</value>
+  </data>
+  <data name="Card.WhatIsML.Summary" xml:space="preserve">
+    <value>Machine Learning is a subset of AI where computers learn patterns from data without being explicitly programmed.</value>
+  </data>
+  <data name="Card.WhatIsML.WhyCare" xml:space="preserve">
+    <value>Machine learning powers predictions, recommendations, ranking, and many AI systems.</value>
+  </data>
+  <data name="Card.WhatIsML.Example" xml:space="preserve">
+    <value>In traditional programming, humans write rules to process inputs and get outputs.</value>
+  </data>
+  <data name="Card.WhatIsML.WithoutIt" xml:space="preserve">
+    <value>Software would rely more on hand-written rules and less on patterns learned from data.</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.Title" xml:space="preserve">
+    <value>What is Deep Learning?</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.Summary" xml:space="preserve">
+    <value>Deep Learning uses multilayered artificial neural networks to solve highly complex tasks.</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.WhyCare" xml:space="preserve">
+    <value>Deep learning is behind many breakthroughs in language, vision, voice, and modern generative AI.</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.Example" xml:space="preserve">
+    <value>Deep Learning is a specialized branch of Machine Learning.</value>
+  </data>
+  <data name="Card.WhatIsDeepLearning.WithoutIt" xml:space="preserve">
+    <value>AI would struggle with complex language, vision, and speech tasks.</value>
+  </data>
+  <data name="Card.WhatIsLLM.Title" xml:space="preserve">
+    <value>What is an LLM?</value>
+  </data>
+  <data name="Card.WhatIsLLM.Summary" xml:space="preserve">
+    <value>Large Language Models (LLMs) are AI engines trained on massive text data to predict and generate human-like language.</value>
+  </data>
+  <data name="Card.WhatIsLLM.WhyCare" xml:space="preserve">
+    <value>LLMs power the chat, writing, coding, and reasoning experiences people now expect from AI.</value>
+  </data>
+  <data name="Card.WhatIsLLM.Example" xml:space="preserve">
+    <value>An LLM is a type of Deep Learning model designed to understand, process, and generate natural text.</value>
+  </data>
+  <data name="Card.WhatIsLLM.WithoutIt" xml:space="preserve">
+    <value>AI would be much weaker at natural language conversations, writing, and code help.</value>
+  </data>
+  <data name="Card.WhatIsPrompt.Title" xml:space="preserve">
+    <value>What is a Prompt?</value>
+  </data>
+  <data name="Card.WhatIsPrompt.Summary" xml:space="preserve">
+    <value>A prompt is the natural language instruction or query you give to an AI model to guide its response.</value>
+  </data>
+  <data name="Card.WhatIsPrompt.WhyCare" xml:space="preserve">
+    <value>Prompts are the practical interface between human intent and AI output.</value>
+  </data>
+  <data name="Card.WhatIsPrompt.Example" xml:space="preserve">
+    <value>Unlike traditional software, which requires strict commands or clicks, generative AI is guided by 'prompts'.</value>
+  </data>
+  <data name="Card.WhatIsPrompt.WithoutIt" xml:space="preserve">
+    <value>People would have a harder time steering AI toward useful outcomes.</value>
+  </data>
+  <data name="Card.WhatIsRAG.Title" xml:space="preserve">
+    <value>What is RAG?</value>
+  </data>
+  <data name="Card.WhatIsRAG.Summary" xml:space="preserve">
+    <value>Retrieval-Augmented Generation (RAG) is a technique that feeds custom documents to an LLM to give it up-to-date, accurate facts.</value>
+  </data>
+  <data name="Card.WhatIsRAG.WhyCare" xml:space="preserve">
+    <value>RAG helps AI answer from trusted company or product knowledge instead of guessing.</value>
+  </data>
+  <data name="Card.WhatIsRAG.Example" xml:space="preserve">
+    <value>An HR chatbot can answer from company policy PDFs using RAG.</value>
+  </data>
+  <data name="Card.WhatIsRAG.WithoutIt" xml:space="preserve">
+    <value>AI would rely more on training data and be less grounded in current private knowledge.</value>
+  </data>
+  <data name="Card.AIAgents.Title" xml:space="preserve">
+    <value>What are AI Agents?</value>
+  </data>
+  <data name="Card.AIAgents.Summary" xml:space="preserve">
+    <value>AI agents are autonomous systems that can use tools, plan steps, and execute complex workflows without constant human supervision.</value>
+  </data>
+  <data name="Card.AIAgents.WhyCare" xml:space="preserve">
+    <value>Agents move AI from answering questions to completing multi-step work.</value>
+  </data>
+  <data name="Card.AIAgents.Example" xml:space="preserve">
+    <value>An agent can draft emails, check a CRM, summarize results, and prepare a report.</value>
+  </data>
+  <data name="Card.AIAgents.WithoutIt" xml:space="preserve">
+    <value>People would need to manually perform every step across tools and workflows.</value>
+  </data>
+  <data name="Card.WhatIsMCP.Title" xml:space="preserve">
+    <value>What is MCP?</value>
+  </data>
+  <data name="Card.WhatIsMCP.Summary" xml:space="preserve">
+    <value>MCP is a common way for AI systems to connect with tools, apps, and data sources.</value>
+  </data>
+  <data name="Card.WhatIsMCP.WhyCare" xml:space="preserve">
+    <value>MCP makes it easier for agents to reach the tools and data they need.</value>
+  </data>
+  <data name="Card.WhatIsMCP.Example" xml:space="preserve">
+    <value>An AI assistant can connect to a database or CRM through an MCP server.</value>
+  </data>
+  <data name="Card.WhatIsMCP.WithoutIt" xml:space="preserve">
+    <value>Every AI-tool connection would need more custom integration work.</value>
+  </data>
+  <data name="Knowledge.Detail.InShort" xml:space="preserve">
+    <value>In short:</value>
+  </data>
+  <data name="Knowledge.Detail.ShareKnowledge" xml:space="preserve">
+    <value>Share knowledge:</value>
+  </data>
+  <data name="Knowledge.Detail.RelatedConcepts" xml:space="preserve">
+    <value>Related Concepts</value>
+  </data>
+  <data name="Knowledge.Detail.BackToHub" xml:space="preserve">
+    <value>Back to Knowledge Hub</value>
+  </data>
+  <data name="Knowledge.Detail.NotFound.Title" xml:space="preserve">
+    <value>Concept Not Found</value>
+  </data>
+  <data name="Knowledge.Detail.NotFound.Body" xml:space="preserve">
+    <value>The concept you are looking for might have been moved or renamed.</value>
+  </data>
+  <data name="Knowledge.Filter.AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="Knowledge.Journey.DefaultCopy" xml:space="preserve">
+    <value>Start with curiosity in the Dinosaur Era, then move through tools, networks, data, cloud, and AI. The era timeline stays as the single progression system.</value>
+  </data>
 </root>
