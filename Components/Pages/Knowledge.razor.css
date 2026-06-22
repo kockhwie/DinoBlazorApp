@@ -352,14 +352,14 @@
     gap: 0.75rem;
 }
 
-.learning-section {
+.learn-section {
     padding: 0.85rem;
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    border: 1px solid color-mix(in srgb, var(--section-color) 28%, rgba(255, 255, 255, 0.07));
     border-radius: 0.9rem;
     background: rgba(3, 24, 16, 0.58);
 }
 
-.learning-section h4 {
+.learn-section h4 {
     display: flex;
     align-items: center;
     gap: 0.35rem;
@@ -370,23 +370,15 @@
     letter-spacing: 0;
 }
 
-.learning-section h4 i {
-    color: var(--era-color);
+.learn-section h4 i {
+    color: var(--section-color);
 }
 
-.learning-section p {
+.learn-section p {
     margin: 0;
     color: rgba(203, 213, 225, 0.82);
     font-size: 0.8rem;
     line-height: 1.55;
-}
-
-.learning-definition {
-    border-color: color-mix(in srgb, var(--era-color) 28%, rgba(255, 255, 255, 0.07));
-}
-
-.learning-without {
-    background: rgba(15, 23, 42, 0.32);
 }
 
 .knowledge-card-footer {

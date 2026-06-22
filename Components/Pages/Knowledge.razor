@@ -145,7 +145,7 @@
                                 </div>
                                 <div style="min-width:0">
                                     <div class="knowledge-card-header-meta">
-                                        <p class="knowledge-era">@AgeName(age)</p>
+                                        <p class="knowledge-era">@AgeName(age!)</p>
                                         <span class="knowledge-category">@LocalizeCategory(card.Category)</span>
                                     </div>
                                     <h3 class="knowledge-card-title">@card.Title</h3>
@@ -154,25 +154,13 @@
  
 
                             <div class="knowledge-card-body">
-                                <section class="learning-section learning-definition">
+                                <section class="learn-section" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
                                     <h4><i class="ti ti-compass"></i> @L["Knowledge.Card.Definition"]</h4>
                                     <p>@GetDefinition(card)</p>
                                 </section>
-
-                                <div class="learning-grid">
-                                    <section class="learning-section">
-                                        <h4><i class="ti ti-bulb"></i> @L["Knowledge.Card.WhyCare"]</h4>
-                                        <p>@GetWhyCare(card)</p>
-                                    </section>
-                                    <section class="learning-section">
-                                        <h4><i class="ti ti-map-pin"></i> @L["Knowledge.Card.Example"]</h4>
-                                        <p>@GetExample(card)</p>
-                                    </section>
-                                </div>
-
-                                <section class="learning-section learning-without">
-                                    <h4><i class="ti ti-alert-triangle"></i> @L["Knowledge.Card.WithoutIt"]</h4>
-                                    <p>@GetWithoutIt(card)</p>
+                                <section class="learn-section mt-2" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
+                                    <h4><i class="ti ti-bulb"></i> @L["Knowledge.Card.WhyCare"]</h4>
+                                    <p>@GetWhyCare(card)</p>
                                 </section>
                             </div>
 
@@ -329,48 +317,6 @@
             "ai-agents" => "Agents move AI from answering questions to completing multi-step work.",
             "what-is-mcp" => "MCP makes it easier for agents to reach the tools and data they need.",
             _ => "This concept is one of the stepping stones in the technology evolution path."
-        };
-
-    private static string GetExample(KnowledgeCard card)
-        => card.Slug switch
-        {
-            "the-internet" => "Video calls, online banking, cloud apps, and AI chat all travel through the internet.",
-            "the-world-wide-web" => "A company website, a product dashboard, or an online course is delivered through the Web.",
-            "databases" => "A shopping cart remembers items because a database stores them.",
-            "what-is-an-api" => "A food delivery app uses APIs for maps, payments, messages, and restaurant menus.",
-            "the-cloud" => "Microsoft 365 and Google Drive store files on remote servers you access anywhere.",
-            "what-is-ai" => "ChatGPT, Copilot, support chatbots, and image recognition tools are everyday AI examples.",
-            "what-is-rag" => "An HR chatbot can answer from company policy PDFs using RAG.",
-            "ai-agents" => "An agent can draft emails, check a CRM, summarize results, and prepare a report.",
-            "what-is-mcp" => "An AI assistant can connect to a database or CRM through an MCP server.",
-            _ => FirstSentence(card.Body)
-        };
-
-    private static string GetWithoutIt(KnowledgeCard card)
-        => card.Slug switch
-        {
-            "what-is-data" => "Software would have nothing to process and AI would have nothing to learn from.",
-            "what-is-binary" => "Digital hardware would lose its simplest, most reliable way to represent information.",
-            "what-is-an-algorithm" => "Computers would not have repeatable instructions for solving problems.",
-            "the-internet" => "Modern online services, cloud apps, and remote AI systems would not exist.",
-            "what-is-code" => "Most digital products would stay as ideas instead of becoming working tools.",
-            "the-world-wide-web" => "People would need separate installed software for many things they now open in a browser.",
-            "databases" => "Apps would forget accounts, orders, inventory, messages, and settings.",
-            "servers-and-clients" => "Browsers and apps would not have a clear way to request and receive services.",
-            "what-is-an-api" => "Software systems would struggle to share data or reuse external capabilities.",
-            "automation" => "Humans would repeat manual steps that machines can perform consistently.",
-            "git-and-open-source" => "Teams would lose safer collaboration and much of the shared software ecosystem.",
-            "the-cloud" => "Companies would need far more physical hardware before launching or scaling products.",
-            "networks-and-ips" => "Devices and services would not know where to send information.",
-            "what-is-ai" => "Many modern assistants, recommendations, and automation tools would disappear.",
-            "what-is-machine-learning" => "Software would rely more on hand-written rules and less on patterns learned from data.",
-            "what-is-deep-learning" => "AI would struggle with complex language, vision, and speech tasks.",
-            "what-is-an-llm" => "AI would be much weaker at natural language conversations, writing, and code help.",
-            "what-is-a-prompt" => "People would have a harder time steering AI toward useful outcomes.",
-            "what-is-rag" => "AI would rely more on training data and be less grounded in current private knowledge.",
-            "ai-agents" => "People would need to manually perform every step across tools and workflows.",
-            "what-is-mcp" => "Every AI-tool connection would need more custom integration work.",
-            _ => "The journey would have a gap that makes later concepts harder to understand."
         };
 
     private IReadOnlyList<(string Slug, string Label)> GetNextTracks(KnowledgeCard card)

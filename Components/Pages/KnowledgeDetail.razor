@@ -1,11 +1,11 @@
 @page "/knowledge/{Slug}"
 @using DinoAI.Data
 @using DinoAI.Services
+@using Microsoft.Extensions.Localization 
+@inject IStringLocalizer<SharedResource> L
 @inject KnowledgeService KnowledgeService
 @inject NavigationManager Nav
 @inject IJSRuntime JS
-@using Microsoft.Extensions.Localization 
-@inject IStringLocalizer<SharedResource> L
 
 <PageTitle>Dino AI Academy - @(_card?.Title ?? "Concept Details")</PageTitle>
 
@@ -14,11 +14,14 @@
         <SiteNav />
     </section>
 
-    <div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="detail-shell">
+
         <!-- Back Navigation -->
-        <a href="/knowledge" class="btn btn-xs btn-nav-back mb-5">
-            <i class="ti ti-arrow-left"></i> @L["Knowledge.Detail.BackToHub"]
-        </a>
+        <div class="mb-2">
+            <a href="/knowledge" class="btn btn-xs btn-nav-back">
+                <i class="ti ti-arrow-left"></i> @L["Knowledge.Detail.BackToHub"]
+            </a>
+        </div>
 
         @if (_card == null)
         {
@@ -26,7 +29,7 @@
                 <i class="ti ti-alert-triangle concept-not-found-icon"></i>
                 <h2 class="concept-not-found-title">@L["Knowledge.Detail.NotFound.Title"]</h2>
                 <p class="concept-not-found-text">@L["Knowledge.Detail.NotFound.Body"]</p>
-                <a href="/knowledge" class="btn-primary-gradient max-w-xs mx-auto">
+                <a href="/knowledge" class="btn-primary-gradient" style="max-width:14rem;margin-inline:auto">
                     @L["Knowledge.Detail.BackToHub"]
                 </a>
             </div>
@@ -34,101 +37,135 @@
         else
         {
             var age = _ages.FirstOrDefault(a => a.Key == _card.AgeKey);
- 
-            <article class="concept-article p-6 sm:p-10 bg-[#02100c]/90 border border-[rgba(58,209,141,0.16)] rounded-3xl shadow-2xl relative overflow-hidden" style="--age-color: @(age?.AccentColor ?? "#33d7a6")">
-                <!-- Decorative background glow -->
-                <div class="absolute -right-24 -top-24 w-48 h-48 rounded-full blur-[100px] opacity-20 pointer-events-none" style="background-color: @age?.AccentColor"></div>
 
-                <header class="mb-8 border-b border-slate-900 pb-6">
-                    <div class="flex flex-wrap items-center gap-2 mb-4">
-                        <span class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#031810] border border-slate-800" style="color: @age?.AccentColor">
-                            <i class="@age?.Icon me-1"></i> @AgeName(age)
+            <article class="concept-article mb-4" style="--age-color: @(age?.AccentColor ?? "#33d7a6")">
+
+                <!-- Decorative glow -->
+                <div class="concept-glow" style="background-color: @age?.AccentColor"></div>
+
+                <!-- -- HEADER --------------------------------------------- -->
+                <header class="concept-header">
+                    <div class="concept-badges">
+                        <span class="badge-era" style="color: @age?.AccentColor">
+                            <i class="@age?.Icon"></i> @age?.Name
                         </span>
-                        <span class="text-[10px] font-medium text-slate-400 bg-[#031810] px-3 py-1 rounded-full border border-slate-800">
-                            @_card.Category
-                        </span>
+                        <span class="badge-category">@_card.Category</span>
                     </div>
 
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white flex items-center gap-3">
-                        <span style="color: @age?.AccentColor"><i class="@_card.Icon"></i></span>
+                    <h1 class="concept-title">
+                        <span class="concept-title-icon" style="color: @age?.AccentColor">
+                            <i class="@_card.Icon"></i>
+                        </span>
                         @_card.Title
                     </h1>
+
+                    <!-- Summary callout -->
+                    <div class="summary-callout" style="border-color: @age?.AccentColor">
+                        <strong>@L["Knowledge.Detail.InShort"]</strong> @_card.Summary
+                    </div>
                 </header>
 
-                <!-- Summary Callout -->
-                <div class="summary-callout p-4 rounded-2xl bg-[#031810] border-l-4 mb-8 text-slate-200 text-xs sm:text-sm leading-relaxed" style="border-color: @age?.AccentColor">
-                    <strong>In short:</strong> @_card.Summary
+                <!-- -- LEARNING SECTIONS ---------------------------------- -->
+                <div class="learning-sections">
+
+                    <section class="learn-section" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
+                        <h2 class="learn-section-title">
+                            <i class="ti ti-compass"></i> @L["Knowledge.Card.Definition"]
+                        </h2>
+                        <p>@_card.Summary</p>
+                    </section>
+
+                    <div class="learn-grid-2">
+                        <section class="learn-section" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
+                            <h2 class="learn-section-title">
+                                <i class="ti ti-bulb"></i> @L["Knowledge.Card.WhyCare"]
+                            </h2>
+                            <p>@_card.WhyCare</p>
+                        </section>
+
+                        <section class="learn-section" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
+                            <h2 class="learn-section-title">
+                                <i class="ti ti-map-pin"></i> @L["Knowledge.Card.Example"]
+                            </h2>
+                            <p>@_card.Example</p>
+                        </section>
+                    </div>
+
+                    <section class="learn-section" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
+                        <h2 class="learn-section-title">
+                            <i class="ti ti-alert-triangle"></i> @L["Knowledge.Card.WithoutIt"]
+                        </h2>
+                        <p>@_card.WithoutIt</p>
+                    </section>
+
+                    <!-- Full explanation body -->
+                    <section class="learn-section" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
+                        <h2 class="learn-section-title">
+                            <i class="ti ti-book-2"></i> @L["Knowledge.Card.ContinueEvolution"]
+                        </h2>
+                        <div class="concept-body">@_card.Body</div>
+                    </section>
+
                 </div>
 
-                <!-- Main Content Body -->
-                <div class="prose prose-invert max-w-none text-xs sm:text-sm text-slate-300 leading-relaxed space-y-4 mb-10 whitespace-pre-line">
-                    @_card.Body
-                </div>
-
-                <!-- Sharing and Action Footer -->
-                <footer class="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs font-semibold text-slate-400">@L["Knowledge.Detail.ShareKnowledge"]</span>
-                        
-                        <!-- Twitter/X -->
-                        <a href="@GetTwitterShareUrl()" target="_blank" class="share-btn flex items-center justify-center w-8 h-8 rounded-full bg-[#031810] border border-slate-800 hover:text-[#33d7a6] hover:border-[#33d7a6]/30 transition-all duration-300" title="Share on Twitter / X">
+                <!-- -- SHARE FOOTER --------------------------------------- -->
+                <footer class="concept-footer">
+                    <div class="share-row">
+                        <span class="share-label">@L["Knowledge.Detail.ShareKnowledge"]</span>
+                        <a href="@GetTwitterShareUrl()" target="_blank" class="share-btn" title="Share on X / Twitter">
                             <i class="ti ti-brand-twitter"></i>
                         </a>
-
-                        <!-- Facebook -->
-                        <a href="@GetFacebookShareUrl()" target="_blank" class="share-btn flex items-center justify-center w-8 h-8 rounded-full bg-[#031810] border border-slate-800 hover:text-[#33d7a6] hover:border-[#33d7a6]/30 transition-all duration-300" title="Share on Facebook">
+                        <a href="@GetFacebookShareUrl()" target="_blank" class="share-btn" title="Share on Facebook">
                             <i class="ti ti-brand-facebook"></i>
                         </a>
-
-                        <!-- LinkedIn -->
-                        <a href="@GetLinkedinShareUrl()" target="_blank" class="share-btn flex items-center justify-center w-8 h-8 rounded-full bg-[#031810] border border-slate-800 hover:text-[#33d7a6] hover:border-[#33d7a6]/30 transition-all duration-300" title="Share on LinkedIn">
+                        <a href="@GetLinkedinShareUrl()" target="_blank" class="share-btn" title="Share on LinkedIn">
                             <i class="ti ti-brand-linkedin"></i>
                         </a>
-
-                        <!-- Copy Link -->
-                        <button type="button" @onclick="CopyLinkToClipboard" class="share-btn flex items-center justify-center w-8 h-8 rounded-full bg-[#031810] border border-slate-800 hover:text-[#33d7a6] hover:border-[#33d7a6]/30 transition-all duration-300 cursor-pointer" title="Copy Direct Link">
+                        <button type="button" @onclick="CopyLinkToClipboard" class="share-btn" title="Copy link">
                             @if (_copied)
                             {
-                                <i class="ti ti-check text-emerald-400"></i>
+                                <i class="ti ti-check" style="color:#33d7a6"></i>
                             }
                             else
                             {
                                 <i class="ti ti-link"></i>
                             }
                         </button>
+                        @if (_copied)
+                        {
+                            <span class="copy-confirm">@L["Knowledge.Detail.LinkCopied"]</span>
+                        }
                     </div>
-
-                    @if (_copied)
-                    {
-                        <span class="text-[10px] text-emerald-400 font-semibold animate-pulse">@L["Knowledge.Detail.LinkCopied"]</span>
-                    }
                 </footer>
             </article>
 
-            <!-- Related Concepts Section -->
+            <!-- -- RELATED CONCEPTS --------------------------------------- -->
             @if (_relatedCards.Count > 0)
             {
-                <div class="mt-12">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-6">@L["Knowledge.Detail.RelatedConcepts"]</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <section class="related-section">
+                    <h3 class="related-title">@L["Knowledge.Detail.RelatedConcepts"]</h3>
+                    <div class="related-grid">
                         @foreach (var rCard in _relatedCards)
                         {
                             var rAge = _ages.FirstOrDefault(a => a.Key == rCard.AgeKey);
-                            <div class="p-5 bg-[#02100c]/60 border border-slate-900 hover:border-[rgba(58,209,141,0.2)] rounded-2xl cursor-pointer transition-all duration-300 flex items-start gap-4 group" @onclick="() => NavigateToDetail(rCard.Slug)">
-                                <div class="text-xl p-2 rounded-lg bg-[#031810] group-hover:scale-110 transition-transform duration-300" style="color: @(rAge?.AccentColor ?? "#33d7a6")">
+                            <button type="button" class="related-card" @onclick="() => NavigateToDetail(rCard.Slug)">
+                                <span class="related-icon" style="color: @(rAge?.AccentColor ?? "#33d7a6")">
                                     <i class="@rCard.Icon"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="text-xs font-bold text-white group-hover:text-[#33d7a6] transition-colors duration-300">@rCard.Title</h4>
-                                    <p class="text-[10px] text-slate-500 line-clamp-2 mt-1 leading-normal">@rCard.Summary</p>
-                                </div>
-                            </div>
+                                </span>
+                                <span class="related-copy">
+                                    <span class="related-card-title">@rCard.Title</span>
+                                    <span class="related-card-summary">@rCard.Summary</span>
+                                </span>
+                                <i class="ti ti-arrow-right related-arrow"></i>
+                            </button>
                         }
                     </div>
-                </div>
+                </section>
             }
         }
-        </div>
+
+    </div>
+
     <SiteFooter />
 </main>
 
@@ -145,32 +182,19 @@
         _copied = false;
         _ages = KnowledgeService.GetAges();
         _card = KnowledgeService.GetCardBySlug(Slug);
-        if (_card != null)
-        {
-            _relatedCards = KnowledgeService.GetRelatedCards(Slug, 2);
-        }
+        _relatedCards = _card != null ? KnowledgeService.GetRelatedCards(Slug, 2) : [];
     }
 
-    private void NavigateToDetail(string slug)
-    {
-        Nav.NavigateTo($"/knowledge/{slug}");
-    }
+    private void NavigateToDetail(string slug) => Nav.NavigateTo($"/knowledge/{slug}");
 
-    private string GetTwitterShareUrl()
-    {
-        var text = $"Learning about '{_card?.Title}' on Dino AI Academy! Check out this concept card: ";
-        return $"https://twitter.com/intent/tweet?text={Uri.EscapeDataString(text)}&url={Uri.EscapeDataString(Nav.Uri)}";
-    }
+    private string GetTwitterShareUrl() =>
+        $"https://twitter.com/intent/tweet?text={Uri.EscapeDataString($"Learning about '{_card?.Title}' on Dino AI Academy! ")}&url={Uri.EscapeDataString(Nav.Uri)}";
 
-    private string GetFacebookShareUrl()
-    {
-        return $"https://www.facebook.com/sharer/sharer.php?u={Uri.EscapeDataString(Nav.Uri)}";
-    }
+    private string GetFacebookShareUrl() =>
+        $"https://www.facebook.com/sharer/sharer.php?u={Uri.EscapeDataString(Nav.Uri)}";
 
-    private string GetLinkedinShareUrl()
-    {
-        return $"https://www.linkedin.com/sharing/share-offsite/?url={Uri.EscapeDataString(Nav.Uri)}";
-    }
+    private string GetLinkedinShareUrl() =>
+        $"https://www.linkedin.com/sharing/share-offsite/?url={Uri.EscapeDataString(Nav.Uri)}";
 
     private async Task CopyLinkToClipboard()
     {
@@ -183,19 +207,6 @@
             _copied = false;
             StateHasChanged();
         }
-        catch
-        {
-            // Fallback just in case browser context doesn't support clipboard API
-        }
-    }
-
-    private string AgeName(EvolutionAge? age) =>
-    age is null ? string.Empty : L[$"Age.{ToPascalKey(age.Key)}.Name"];
-
-    private static string ToPascalKey(string slug)
-    {
-        var abbreviations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "ai", "ip" };
-        return string.Concat(slug.Split('-').Select(w =>
-            abbreviations.Contains(w) ? w.ToUpper() : char.ToUpper(w[0]) + w[1..]));
+        catch { }
     }
 }
