@@ -21,5 +21,6 @@ public record KnowledgeCard(
     string AgeKey,
     string Icon,
     string Tags,
-    int SortOrder
+    int SortOrder,
+    string? ShortTitle = null
 );

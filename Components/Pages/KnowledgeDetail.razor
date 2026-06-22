@@ -46,18 +46,18 @@
                 <!-- -- HEADER --------------------------------------------- -->
                 <header class="concept-header">
                     <div class="concept-badges">
-                        <span class="badge-era" style="color: @age?.AccentColor">
-                            <i class="@age?.Icon"></i> @age?.Name
+                        <span class="badge-knowledge-era" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
+                            <i class="@age?.Icon"></i> @AgeName(age!)
                         </span>
-                        <span class="badge-category">@_card.Category</span>
+                        <span class="badge-knowledge-category" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">@LocalizeCategory(_card.Category)</span>
                     </div>
 
-                    <h1 class="concept-title">
+                    <h2 class="concept-title">
                         <span class="concept-title-icon" style="color: @age?.AccentColor">
                             <i class="@_card.Icon"></i>
                         </span>
                         @_card.Title
-                    </h1>
+                    </h2>
 
                     <!-- Summary callout -->
                     <div class="summary-callout" style="border-color: @age?.AccentColor">
@@ -208,5 +208,27 @@
             StateHasChanged();
         }
         catch { }
+    }
+
+    private string LocalizeCategory(string category) =>
+        category.Replace(" & ", "").Replace(" ", "") switch
+        {
+            "DataLogic"         => L["Category.DataLogic"],
+            "Networking"        => L["Category.Networking"],
+            "Software"          => L["Category.Software"],
+            "Infrastructure"    => L["Category.Infrastructure"],
+            "ArtificialIntelligence" => L["Category.ArtificialIntelligence"],
+            "PromptEngineering" => L["Category.PromptEngineering"],
+            "AIArchitecture"    => L["Category.AIArchitecture"],
+            _ => category
+        };
+
+    private string AgeName(EvolutionAge age) => L[$"Age.{ToPascalKey(age.Key)}.Name"];
+
+    private static string ToPascalKey(string slug)
+    {
+        var abbreviations = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "ai", "ip" };
+        return string.Concat(slug.Split('-').Select(w =>
+            abbreviations.Contains(w) ? w.ToUpper() : char.ToUpper(w[0]) + w[1..]));
     }
 }

@@ -62,20 +62,35 @@
     gap: 0.5rem;
 }
 
-.badge-era,
-.badge-category {
-    font-size: 0.68rem;
-    font-weight: 800;
+.badge-knowledge-era {
+    flex: 0 0 auto;
+    padding: 0.1rem 0rem;
+    color: var(--section-color, var(--era-color, #33d7a6));
+    text-align: center;
+    margin: 0;
+    font-size: 0.70rem;
+    font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 0.3rem 0.65rem;
-    border-radius: 999px;
-    background: rgba(3, 24, 16, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
 }
 
-.badge-category {
-    color: rgba(203, 213, 225, 0.7);
+.badge-knowledge-category {
+    flex: 0 0 auto;
+    max-width: 9rem;
+    padding: 0.1rem 0.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.66);
+    color: rgba(255, 255, 255, 0.88);
+    text-align: center;
+    margin: 0;
+    font-size: 0.35rem;
+    font-weight: 550;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .concept-title {

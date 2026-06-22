@@ -296,12 +296,34 @@
     font-size: 1.55rem;
 }
 
-.knowledge-era {
+.badge-knowledge-era  {
+    flex: 0 0 auto;
+    padding: 0.1rem 0rem;
+    color: var(--section-color, var(--era-color, #33d7a6));
+    text-align: center;
     margin: 0;
-    color: var(--era-color);
-    font-size: 0.80rem;
-    font-weight: 650;
-    letter-spacing: 0.10em;
+    font-size: 0.70rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.badge-knowledge-category {
+    flex: 0 0 auto;
+    max-width: 9rem;
+    padding: 0.1rem 0.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.66);
+    color: rgba(255, 255, 255, 0.88);
+    text-align: center;
+    margin: 0;
+    font-size: 0.35rem;
+    font-weight: 550;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
@@ -309,7 +331,6 @@
     margin: 0;
     color: var(--era-color);
     font-size: 0.65rem;
-
 }
 
 .knowledge-card-title {
@@ -317,25 +338,8 @@
     color: #fff;
     font-size: 1rem;
     font-weight: 800;
-    line-height: 1.25;
+    line-height: 1.00;
     letter-spacing: 0;
-}
-
-.knowledge-category {
-    flex: 0 0 auto;
-    max-width: 9rem;
-    padding: 0.2rem 0.45rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    background: rgba(3, 24, 16, 0.76);
-    color: rgba(226, 232, 240, 0.68);
-    text-align: center;
-    margin: 0;
-    color: var(--era-color);
-    font-size: 0.35rem;
-    font-weight: 550;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
 }
 
 .knowledge-card-body {

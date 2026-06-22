@@ -145,8 +145,8 @@
                                 </div>
                                 <div style="min-width:0">
                                     <div class="knowledge-card-header-meta">
-                                        <p class="knowledge-era">@AgeName(age!)</p>
-                                        <span class="knowledge-category">@LocalizeCategory(card.Category)</span>
+                                        <p class="badge-knowledge-era" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">@AgeName(age!)</p>
+                                        <span class="badge-knowledge-category" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">@LocalizeCategory(card.Category)</span>
                                     </div>
                                     <h3 class="knowledge-card-title">@card.Title</h3>
                                 </div>
@@ -158,7 +158,7 @@
                                     <h4><i class="ti ti-compass"></i> @L["Knowledge.Card.Definition"]</h4>
                                     <p>@GetDefinition(card)</p>
                                 </section>
-                                <section class="learn-section mt-2" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
+                                <section class="learn-section mt-0" style="--section-color: @(age?.AccentColor ?? "#33d7a6")">
                                     <h4><i class="ti ti-bulb"></i> @L["Knowledge.Card.WhyCare"]</h4>
                                     <p>@GetWhyCare(card)</p>
                                 </section>
@@ -319,6 +319,40 @@
             _ => "This concept is one of the stepping stones in the technology evolution path."
         };
 
+    private static string GetShortTitle(KnowledgeCard card)
+    {
+        if (!string.IsNullOrWhiteSpace(card.ShortTitle))
+        {
+            return card.ShortTitle;
+        }
+
+        return card.Slug switch
+        {
+            "what-is-data" => "Data",
+            "what-is-binary" => "Binary",
+            "what-is-an-algorithm" => "Algorithm",
+            "the-internet" => "Internet",
+            "what-is-code" => "Code",
+            "the-world-wide-web" => "Website",
+            "databases" => "Database",
+            "servers-and-clients" => "Server/Client",
+            "what-is-an-api" => "API",
+            "automation" => "Automation",
+            "git-and-open-source" => "Git/OS",
+            "the-cloud" => "Cloud",
+            "networks-and-ips" => "Network/IP",
+            "what-is-ai" => "AI",
+            "what-is-machine-learning" => "Machine Learning",
+            "what-is-deep-learning" => "Deep Learning",
+            "what-is-an-llm" => "LLM",
+            "what-is-a-prompt" => "Prompt",
+            "what-is-rag" => "RAG",
+            "ai-agents" => "AI Agents",
+            "what-is-mcp" => "MCP",
+            _ => card.Title.Replace("What is ", "").Replace("What are ", "").Replace("?", "").Trim()
+        };
+    }
+
     private IReadOnlyList<(string Slug, string Label)> GetNextTracks(KnowledgeCard card)
     {
         var index = _featuredPath.ToList().FindIndex(track => track.Slug == card.Slug);
@@ -331,7 +365,7 @@
             .Where(candidate => candidate.AgeKey == card.AgeKey && candidate.Slug != card.Slug)
             .OrderBy(candidate => candidate.SortOrder)
             .Take(3)
-            .Select(candidate => (candidate.Slug, candidate.Title.Replace("What is ", "").Replace("?", "")))
+            .Select(candidate => (candidate.Slug, GetShortTitle(candidate)))
             .ToList();
     }
 

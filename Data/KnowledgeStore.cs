@@ -306,7 +306,8 @@ public static class KnowledgeStore
             AgeKey:     "ai-era",
             Icon:       "ti ti-steering-wheel",
             Tags:       "agents,autonomy,tools",
-            SortOrder:  4
+            SortOrder:  4,
+            ShortTitle: "AI Agents"
         ),
         new(
             Slug:       "what-is-mcp",
