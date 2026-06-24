@@ -10,7 +10,7 @@
 
 .lt-btn {
     background: none;
-    border: none;
+    border: 0px solid rgba(255, 255, 255, 0.10);
     padding: 0.2rem 0.4rem;
     font-size: 0.85rem;
     font-weight: 500;
@@ -21,7 +21,9 @@
 }
 
 .lt-btn:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1.0);
+    background: rgb(255, 255, 255, 0.10);
+        
 }
 
 .lt-btn.on {
