@@ -24,7 +24,7 @@
     display: grid;
     gap: 2rem;
     align-items: center;
-    padding: 1.2rem clamp(1rem, 3vw, 2.5rem) 2rem;
+    padding: 1.2rem clamp(1rem, 3vw, 2.5rem) 0rem;
     min-height: clamp(14rem, 68vw, 26rem);
 }
 
@@ -81,7 +81,7 @@
     flex-direction: column;
     gap: 1rem;
     margin-top: 1.05rem;
-    margin-bottom: 1.0rem;
+    margin-bottom: 0.05rem;
     max-width: 38rem;
 }
 
@@ -167,10 +167,9 @@
     height: auto;
     shape-outside: url('/assets/dino_mascot.png');
     shape-margin: 0.75rem;
-    margin: 1.5rem;
+    margin: 1.05rem 0.95rem;
     pointer-events: none;
-    filter: drop-shadow(0 0 8px rgba(68, 255, 194, 0.52))
-            drop-shadow(0 0 20px rgba(68, 255, 194, 0.18));
+    filter: drop-shadow(0 0 8px rgba(68, 255, 194, 0.52)) drop-shadow(0 0 20px rgba(68, 255, 194, 0.18));
 }
 
 /* Only apply circle crop as fallback when shape-outside URL is NOT supported */
@@ -192,9 +191,9 @@
 }
 
 .showcase-shell {
-    margin: 0.5rem auto;
+    margin: 0.05rem auto;
     width: min(100%, 92rem);
-    padding: 0 clamp(1rem, 3vw, 2.5rem) 1.5rem;
+    padding: 0 clamp(1rem, 3vw, 2.5rem) 0.40rem;
 }
 
 .trust-shell {
@@ -877,14 +876,14 @@
 
 @media (min-width: 768px) and (max-width: 1199px) {
     .hero-grid {
-        grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+        /*grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);*/
         gap: 0.85rem;
         padding-top: 1rem;
         min-height: auto;
     }
 
     .hero-copy {
-        max-width: 34rem;
+        /*max-width: 34rem;*/
         padding-top: 0;
     }
 
