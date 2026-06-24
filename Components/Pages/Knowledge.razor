@@ -133,7 +133,7 @@
             else
             {
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    @foreach (var card in _filteredCards)
+                    @foreach (var card in _filteredCards.Take(_visibleCount))
                     {
                         var age = _ages.FirstOrDefault(a => a.Key == card.AgeKey);
                         var nextTracks = GetNextTracks(card);
@@ -183,6 +183,15 @@
                         </article>
                     }
                 </div>
+
+                @if (_filteredCards.Count > _visibleCount)
+                {
+                    <div class="flex justify-center mt-8">
+                        <button type="button" class="btn bg-[#031810] border-slate-700 hover:border-[#33d7a6] hover:bg-[#031810] text-[#33d7a6] normal-case rounded-xl px-8" @onclick="LoadMore">
+                            @L["Knowledge.LoadMore"]
+                        </button>
+                    </div>
+                }
             }
 
             <aside class="continue-evolution mt-6">
@@ -206,6 +215,7 @@
     private IReadOnlyList<EvolutionAge> _ages = [];
     private IReadOnlyList<string> _categories = [];
     private IReadOnlyList<KnowledgeCard> _filteredCards = [];
+    private int _visibleCount = 12;
     private readonly IReadOnlyList<(string Slug, string Label)> _featuredPath =
     [
         ("the-internet", "Internet"),
@@ -276,12 +286,18 @@
 
     private void UpdateFilters()
     {
+        _visibleCount = 12;
         _filteredCards = KnowledgeService.GetCards(_selectedAgeKey, _selectedCategory, _searchQuery);
     }
 
     protected override void OnParametersSet()
     {
         UpdateFilters();
+    }
+
+    private void LoadMore()
+    {
+        _visibleCount += 12;
     }
 
     private void NavigateToDetail(string slug)

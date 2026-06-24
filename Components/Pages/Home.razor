@@ -12,58 +12,63 @@
 
         <div class="hero-grid">
             <div class="hero-copy">
+                <img alt="Dino mascot" class="hero-mascot2" src="@Assets["assets/dino_mascot.png"]" />
                 <h1>@L["Home.Hero.Title1"]<br />@L["Home.Hero.Title2"]</h1>
                 <p class="lead">
                     @L["Home.Hero.Lead"]
                 </p>
 
                 <div class="benefits">
-                    <div class="benefit">
-                        <span class="benefit-icon"><i class="ti ti-leaf"></i></span>                       
-                        <div class="benefit-content">
-                            <div class="benefit-title">@L["Home.Benefit.LearnAI"]</div>
-                            <div class="benefit-brief">@L["Home.Benefit.LearnAI.Brief"]</div>
-                        </div>
-                    </div>
-                    <div class="benefit">
-                        <span class="benefit-icon"><i class="ti ti-mountain"></i></span>                        
-                        <div class="benefit-content">
-                            <div class="benefit-title">@L["Home.Benefit.BuildProjects"]</div>
-                            <div class="benefit-brief">@L["Home.Benefit.BuildProjects.Brief"]</div>
-                        </div>
-                    </div>
-                    <div class="benefit">
-                        <span class="benefit-icon"><i class="ti ti-cloud-network"></i></span>
-                        <div class="benefit-content">
-                            <div class="benefit-title">@L["Home.Benefit.JoinCommunity"]</div>
-                            <div class="benefit-brief">@L["Home.Benefit.JoinCommunity.Brief"]</div>
-                        </div>
-                    </div>
-                    <div class="benefit">
-                        <span class="benefit-icon"><i class="ti ti-briefcase"></i></span>
-                        <div class="benefit-content">
-                            <div class="benefit-title">@L["Home.Benefit.AdvanceCareer"]</div>
-                            <div class="benefit-brief">@L["Home.Benefit.AdvanceCareer.Brief"]</div>
-                        </div>
-                    </div>
+ 
+                            <div class="benefit">
+                                <span class="benefit-icon"><i class="ti ti-leaf"></i></span>
+                                <div class="benefit-content flex flex-row flex-wrap   gap-x-2 gap-y-0">
+                                    <span class="benefit-title">@L["Home.Benefit.LearnAI"]</span>
+                                    <span class="benefit-brief">@L["Home.Benefit.LearnAI.Brief"]</span>
+                                </div>
+                            </div>
+                            <div class="benefit">
+                                <span class="benefit-icon"><i class="ti ti-mountain"></i></span>
+                                <div class="benefit-content flex flex-row flex-wrap  gap-x-2 gap-y-0">
+                                    <span class="benefit-title">@L["Home.Benefit.BuildProjects"]</span>
+                                    <span class="benefit-brief">@L["Home.Benefit.BuildProjects.Brief"]</span>
+                                </div>
+                            </div>
+                            <div class="benefit">
+                                <span class="benefit-icon"><i class="ti ti-cloud-network"></i></span>
+                                <div class="benefit-content flex flex-row flex-wrap gap-x-2 gap-y-0">
+                                    <span class="benefit-title">@L["Home.Benefit.JoinCommunity"]</span>
+                                    <span class="benefit-brief">@L["Home.Benefit.JoinCommunity.Brief"]</span>
+                                </div>
+                            </div>
+                            <div class="benefit">
+                                <span class="benefit-icon"><i class="ti ti-briefcase"></i></span>
+                                <div class="benefit-content flex flex-row flex-wrap gap-x-2 gap-y-0">
+                                    <span class="benefit-title">@L["Home.Benefit.AdvanceCareer"]</span>
+                                    <span class="benefit-brief">@L["Home.Benefit.AdvanceCareer.Brief"]</span>
+                                </div>
+                            </div>
+                 
                 </div>
 
-                <div class="hero-actions">
-                    <a href="/membership" class="btn btn-cta">@L["Home.Hero.StartCta"] <i class="ti ti-chevron-right"></i></a>
-                </div>
             </div>
-
-            <div class="hero-visual" aria-hidden="true">
-                <img alt="" class="hero-mascot" src="@Assets["assets/dino_mascot.png"]" />
-            </div>
+ 
         </div>
     </section>
 
+    <div class="hero-actions">
+        <a href="#email-composer" class="btn btn-cta">@L["Home.Hero.StartCta"]</a>
+    </div>
     <section class="showcase-shell">
-        <div class="showcase-panel workbench">
-            <div class="panel-title-composer">
+        
+        <div id="email-composer" class="showcase-panel workbench">
+            <div class="panel-title-composer flex items-center gap-2">
                 <i class="ti ti-mail-fast"></i>
                 <span>@L["Home.Composer.Title"]</span>
+                
+                <div class="tooltip tooltip-right text-xxs font-normal normal-case" data-tip="@L["Home.Composer.Tooltip"]">
+                    <span class="text-xxs text-slate-400 font-normal  normal-case">(@L["Home.Composer.SimplifiedVersion"])</span> <span class="text-xxs ti ti-info-circle cursor-pointer text-slate-400 hover:text-emerald-400 transition-colors"></span>
+                </div>
             </div>
 
             <EditForm Model="@EmailDraft" class="flex flex-col gap-4 w-full">

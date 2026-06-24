@@ -123,18 +123,6 @@
   <data name="Nav_OpenMenu" xml:space="preserve">
     <value>開啟導覽選單</value>
   </data>
-  <data name="Nav_Courses" xml:space="preserve">
-    <value>學習</value>
-  </data>
-  <data name="Nav_StarterPath" xml:space="preserve">
-    <value>新手路徑</value>
-  </data>
-  <data name="Nav_AdvancedPath" xml:space="preserve">
-    <value>進階路徑</value>
-  </data>
-  <data name="Nav_Projects" xml:space="preserve">
-    <value>實作專案</value>
-  </data>
   <data name="Nav_AITools" xml:space="preserve">
     <value>AI 工具</value>
   </data>
@@ -157,7 +145,7 @@
     <value>透過實作學習、真實專案與充滿活力的創新社群，掌握 AI 技能。</value>
   </data>
   <data name="Home.Hero.StartCta" xml:space="preserve">
-    <value>開始你的進化</value>
+    <value>立即試用 AI 郵件撰寫器</value>
   </data>
   <data name="Home.Benefit.LearnAI" xml:space="preserve">
     <value>正確學習 AI：</value>
@@ -839,5 +827,23 @@
   </data>
   <data name="Knowledge.Journey.DefaultCopy" xml:space="preserve">
     <value>從恐龍時代的好奇心出發，依序走過工具、網路、資料、雲端與 AI。時代時間軸是唯一的進展系統。</value>
+  </data>
+  <data name="Knowledge.LoadMore" xml:space="preserve">
+    <value>載入更多</value>
+  </data>
+  <data name="Home.Composer.SimplifiedVersion" xml:space="preserve">
+    <value>簡化版</value>
+  </data>
+  <data name="Home.Composer.Tooltip" xml:space="preserve">
+    <value>請試用導覽列「AI 工具」底下的完整版本。</value>
+  </data>
+  <data name="Nav_AIEvolution" xml:space="preserve">
+    <value>AI 進化論</value>
+  </data>
+  <data name="Nav_EmailComposer" xml:space="preserve">
+    <value>電子郵件撰寫器</value>
+  </data>
+  <data name="Nav_FinancialCalculator" xml:space="preserve">
+    <value>財務計算機</value>
   </data>
 </root>

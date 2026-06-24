@@ -1,9 +1,17 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     min-height: 100vh;
     margin: 0;
     font-family:  "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background: #020405;
     color: #f5f7f7;
+}
+
+.text-xxs {
+    font-size: 10px;
 }
 
 /* ── GLOBAL FOCUS RINGS ─────────────────────────────────────────────── */

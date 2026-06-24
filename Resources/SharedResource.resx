@@ -123,20 +123,8 @@
   <data name="Nav_OpenMenu" xml:space="preserve">
     <value>Open navigation menu</value>
   </data>
-  <data name="Nav_Courses" xml:space="preserve">
-    <value>Learn</value>
-  </data>
-  <data name="Nav_StarterPath" xml:space="preserve">
-    <value>Starter Path</value>
-  </data>
-  <data name="Nav_AdvancedPath" xml:space="preserve">
-    <value>Advanced Path</value>
-  </data>
-  <data name="Nav_Projects" xml:space="preserve">
-    <value>Projects</value>
-  </data>
   <data name="Nav_AITools" xml:space="preserve">
-    <value>AI Tools</value>
+    <value>Join</value>
   </data>
   <data name="Nav_Knowledge" xml:space="preserve">
     <value>Knowledge Hub</value>
@@ -157,7 +145,7 @@
     <value>Master AI through hands-on learning, real-world projects, and a thriving community of innovators.</value>
   </data>
   <data name="Home.Hero.StartCta" xml:space="preserve">
-    <value>Start Your Evolution</value>
+    <value>Try AI Email Composer Now</value>
   </data>
   <data name="Home.Benefit.LearnAI" xml:space="preserve">
     <value>Learn AI the right way:</value>
@@ -839,5 +827,23 @@
   </data>
   <data name="Knowledge.Journey.DefaultCopy" xml:space="preserve">
     <value>Start with curiosity in the Dinosaur Era, then move through tools, networks, data, cloud, and AI. The era timeline stays as the single progression system.</value>
+  </data>
+  <data name="Knowledge.LoadMore" xml:space="preserve">
+    <value>Load More</value>
+  </data>
+  <data name="Home.Composer.SimplifiedVersion" xml:space="preserve">
+    <value>Simplified version</value>
+  </data>
+  <data name="Home.Composer.Tooltip" xml:space="preserve">
+    <value>Try the full version under 'AI Tools' in the navigation bar.</value>
+  </data>
+  <data name="Nav_AIEvolution" xml:space="preserve">
+    <value>AI Evolution</value>
+  </data>
+  <data name="Nav_EmailComposer" xml:space="preserve">
+    <value>Email Composer</value>
+  </data>
+  <data name="Nav_FinancialCalculator" xml:space="preserve">
+    <value>Financial Calculator</value>
   </data>
 </root>

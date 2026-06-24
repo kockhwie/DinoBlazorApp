@@ -1,5 +1,6 @@
 .home-page {
     min-height: 100vh;
+    overflow-x: hidden; /* prevent horizontal scroll from float bleed */
     background:
         radial-gradient(circle at 50% 18%, rgba(60, 201, 128, 0.18), transparent 22%),
         radial-gradient(circle at 88% 16%, rgba(42, 201, 161, 0.2), transparent 16%),
@@ -28,8 +29,10 @@
 }
 
 .hero-copy {
-    max-width: 42rem;
+    max-width: 56rem;
     padding-top: 5px;
+    /* clearfix so the section grows to contain the float */
+    overflow: hidden;
 }
 
 .eyebrow {
@@ -45,7 +48,7 @@
     margin: 0;
     max-width: 20ch;
     font-family: "Sora", "DM Sans", sans-serif;
-    font-size: clamp(2.7rem, 6vw, 4.7rem);
+    font-size: clamp(2.6rem, 5vw, 4.7rem);
     line-height: 0.97;
     font-weight: 800;
     letter-spacing: -0.05em;
@@ -77,7 +80,8 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 1.25rem;
+    margin-top: 1.05rem;
+    margin-bottom: 1.0rem;
     max-width: 38rem;
 }
 
@@ -119,8 +123,11 @@
     flex-shrink: 0;
 }
 
+
 .hero-actions {
-    margin-top: 1.45rem;
+ 
+    margin: 1.0rem;
+    padding: 0 clamp(0.5rem, 3vw, 2.5rem) 0rem;
 }
 
 .btn-cta {
@@ -148,6 +155,31 @@
     justify-content: flex-end;
 }
 
+/*
+  Mascot: float right so text wraps around it.
+  shape-outside follows the transparent PNG silhouette.
+  The PNG already has a transparent background — no clip-path needed.
+  Fallback clip-path only applies when shape-outside URL is NOT supported.
+*/
+.hero-mascot2 {
+    float: right;
+    width: clamp(12rem, 28%, 20rem);
+    height: auto;
+    shape-outside: url('/assets/dino_mascot.png');
+    shape-margin: 0.75rem;
+    margin: 1.5rem;
+    pointer-events: none;
+    filter: drop-shadow(0 0 8px rgba(68, 255, 194, 0.52))
+            drop-shadow(0 0 20px rgba(68, 255, 194, 0.18));
+}
+
+/* Only apply circle crop as fallback when shape-outside URL is NOT supported */
+@supports not (shape-outside: url('a')) {
+    .hero-mascot2 {
+        clip-path: circle(48% at 50% 48%);
+    }
+}
+
 .hero-mascot {
     position: relative;
     right: clamp(-1rem, -0.5vw, 0rem);
@@ -159,7 +191,12 @@
     z-index: 3;
 }
 
-.showcase-shell,
+.showcase-shell {
+    margin: 0.5rem auto;
+    width: min(100%, 92rem);
+    padding: 0 clamp(1rem, 3vw, 2.5rem) 1.5rem;
+}
+
 .trust-shell {
     margin: 1.1rem auto;
     width: min(100%, 92rem);
@@ -289,8 +326,12 @@
 }
 
 .composer-actions {
-    padding-top: 15px;
-    text-align: right;
+    display: flex;
+    justify-content: center; /* center buttons horizontally */
+    align-items: center;
+    gap: 0.75rem; /* space between buttons */
+    flex-wrap: wrap; /* allow wrap on small screens */
+    padding-top: 0.5rem;
 }
  
 
@@ -343,14 +384,6 @@
 
 .email-field-message {
     align-items: start;
-}
-
-
-
-.composer-actions {
-    padding-top: 15px; 
-    text-align: right;
-    
 }
 
 .mini-btn {
@@ -750,14 +783,17 @@
 
 @media (min-width: 768px) {
     .hero-grid {
-        grid-template-columns: minmax(0, 1.28fr) minmax(0, 0.72fr);
+        /* single column — mascot floats inside hero-copy */
+        grid-template-columns: 1fr;
         gap: 1rem;
+        /* keep the original shorthand padding; only override top */
         padding-top: 1.5rem;
+        padding-left: clamp(1rem, 3vw, 2.5rem);
+        padding-right: clamp(1rem, 3vw, 2.5rem);
     }
 
     .hero-visual {
-        min-height: 28rem;
-        margin-top: -3rem;
+        display: none;
     }
 
     .assistant-grid {
@@ -779,16 +815,23 @@
     }
 
     .hero-grid {
-        grid-template-columns: minmax(0, 1.38fr) minmax(0, 0.62fr);
+        grid-template-columns: 1fr;
         gap: 0.15rem;
-        min-height: 450px;
+        min-height: unset;
         padding-top: 1.2rem;
         padding-bottom: 0.25rem;
-        align-items: center;
+        padding-left: clamp(1rem, 3vw, 2.5rem);
+        padding-right: clamp(1rem, 3vw, 2.5rem);
+        align-items: start;
     }
 
     .hero-copy {
-        max-width: 42rem;
+        max-width: 72rem;
+    }
+
+    .hero-mascot2 {
+        /* use % so it stays proportional and never overflows */
+        width: clamp(14rem, 32%, 24rem);
     }
 
     .lead {
