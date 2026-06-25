@@ -846,4 +846,109 @@
   <data name="Nav_FinancialCalculator" xml:space="preserve">
     <value>財務計算機</value>
   </data>
+  <data name="AiEvolution.PageTitle" xml:space="preserve">
+    <value>AI 進化論 – 恐龍 AI 學院</value>
+  </data>
+  <data name="AiEvolution.Headline1" xml:space="preserve">
+    <value>人工智慧的</value>
+  </data>
+  <data name="AiEvolution.Headline2" xml:space="preserve">
+    <value>進化歷程</value>
+  </data>
+  <data name="AiEvolution.Lead" xml:space="preserve">
+    <value>從最初的計算火花，到今日的生成式智能——探索 AI 如何穿越不同時代演進，每一個時代都是一次劃時代的量子躍遷。</value>
+  </data>
+  <data name="AiEvolution.KeyMilestones" xml:space="preserve">
+    <value>關鍵里程碑</value>
+  </data>
+  <data name="AiEvolution.Era1.Title" xml:space="preserve">
+    <value>原始火花</value>
+  </data>
+  <data name="AiEvolution.Era1.Desc" xml:space="preserve">
+    <value>機器能否模擬人腦的概念開始萌芽。先驅者播下計算智能的第一顆種子——理論、邏輯電路與規則系統，為機器「思考」奠定了基礎。</value>
+  </data>
+  <data name="AiEvolution.Era1.M1" xml:space="preserve">
+    <value>圖靈發表《計算機器與智能》(1950)</value>
+  </data>
+  <data name="AiEvolution.Era1.M2" xml:space="preserve">
+    <value>達特茅斯會議正式提出「AI」一詞 (1956)</value>
+  </data>
+  <data name="AiEvolution.Era1.M3" xml:space="preserve">
+    <value>首個 AI 程式解決數學定理 (1956)</value>
+  </data>
+  <data name="AiEvolution.Era1.M4" xml:space="preserve">
+    <value>感知器——首個神經網路模型 (1958)</value>
+  </data>
+  <data name="AiEvolution.Era2.Title" xml:space="preserve">
+    <value>專家系統覺醒</value>
+  </data>
+  <data name="AiEvolution.Era2.Desc" xml:space="preserve">
+    <value>AI 從玩具問題走向真實應用。專家系統將人類知識編碼為決策樹、產生式規則與推理引擎，讓機器首次能夠在醫學、化學與棋弈中進行推論。</value>
+  </data>
+  <data name="AiEvolution.Era2.M1" xml:space="preserve">
+    <value>MYCIN 以專家規則診斷血液感染 (1972)</value>
+  </data>
+  <data name="AiEvolution.Era2.M2" xml:space="preserve">
+    <value>XCON 自動配置電腦系統 (1980)</value>
+  </data>
+  <data name="AiEvolution.Era2.M3" xml:space="preserve">
+    <value>知識產業規模成長至數十億美元 (1985)</value>
+  </data>
+  <data name="AiEvolution.Era2.M4" xml:space="preserve">
+    <value>專家系統遇瓶頸——「AI 寒冬」開始</value>
+  </data>
+  <data name="AiEvolution.Era3.Title" xml:space="preserve">
+    <value>機器學習起步</value>
+  </data>
+  <data name="AiEvolution.Era3.Desc" xml:space="preserve">
+    <value>AI 開始自主學習，從資料而非明確規則中訓練。演算法驅動的方式開啟了垃圾郵件過濾、商品推薦與語言模型的新紀元——首批能夠隨經驗進步的模型誕生。</value>
+  </data>
+  <data name="AiEvolution.Era3.M1" xml:space="preserve">
+    <value>反向傳播算法實現多層網路訓練 (1986)</value>
+  </data>
+  <data name="AiEvolution.Era3.M2" xml:space="preserve">
+    <value>支持向量機達到最先進水準 (1995)</value>
+  </data>
+  <data name="AiEvolution.Era3.M3" xml:space="preserve">
+    <value>Google PageRank 將 ML 應用於搜尋 (1998)</value>
+  </data>
+  <data name="AiEvolution.Era3.M4" xml:space="preserve">
+    <value>Netflix Prize 加速協同過濾研究 (2006)</value>
+  </data>
+  <data name="AiEvolution.Era4.Title" xml:space="preserve">
+    <value>深度學習革命</value>
+  </data>
+  <data name="AiEvolution.Era4.Desc" xml:space="preserve">
+    <value>多層人工神經網路在視覺、語音、遊戲與翻譯上取得突破性進展。大數據時代來臨，AI 開始看見、聆聽、翻譯，並擊敗圍棋世界冠軍。</value>
+  </data>
+  <data name="AiEvolution.Era4.M1" xml:space="preserve">
+    <value>AlexNet 贏得 ImageNet，錯誤率驟降 41% (2012)</value>
+  </data>
+  <data name="AiEvolution.Era4.M2" xml:space="preserve">
+    <value>DeepMind AlphaGo 擊敗世界圍棋冠軍 (2016)</value>
+  </data>
+  <data name="AiEvolution.Era4.M3" xml:space="preserve">
+    <value>Transformer 架構誕生——《注意力即一切》(2017)</value>
+  </data>
+  <data name="AiEvolution.Era4.M4" xml:space="preserve">
+    <value>GPT-1 引入大規模語言預訓練 (2018)</value>
+  </data>
+  <data name="AiEvolution.Era5.Title" xml:space="preserve">
+    <value>生成式 AI 時代</value>
+  </data>
+  <data name="AiEvolution.Era5.Desc" xml:space="preserve">
+    <value>AI 不再只是分析，而是開始創造，生成難以與人類區分的文字、圖像、程式碼、音訊與影片。基礎模型與自主代理人以行星規模增強並加速人類創造力。</value>
+  </data>
+  <data name="AiEvolution.Era5.M1" xml:space="preserve">
+    <value>GPT-3 展現少樣本學習湧現能力 (2020)</value>
+  </data>
+  <data name="AiEvolution.Era5.M2" xml:space="preserve">
+    <value>DALL·E 與 Stable Diffusion 普及圖像生成 (2021–22)</value>
+  </data>
+  <data name="AiEvolution.Era5.M3" xml:space="preserve">
+    <value>ChatGPT 在 2 個月內突破 1 億用戶 (2023)</value>
+  </data>
+  <data name="AiEvolution.Era5.M4" xml:space="preserve">
+    <value>AI 代理框架實現自主多步驟任務 (2024+)</value>
+  </data>
 </root>

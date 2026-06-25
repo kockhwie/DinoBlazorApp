@@ -846,4 +846,109 @@
   <data name="Nav_FinancialCalculator" xml:space="preserve">
     <value>Financial Calculator</value>
   </data>
+  <data name="AiEvolution.PageTitle" xml:space="preserve">
+    <value>AI Evolution – Dino AI Academy</value>
+  </data>
+  <data name="AiEvolution.Headline1" xml:space="preserve">
+    <value>The Evolution of</value>
+  </data>
+  <data name="AiEvolution.Headline2" xml:space="preserve">
+    <value>Artificial Intelligence</value>
+  </data>
+  <data name="AiEvolution.Lead" xml:space="preserve">
+    <value>From the first sparks of computation through to the generative minds of today — explore how AI evolved through distinct eras, each a quantum transformation from the last.</value>
+  </data>
+  <data name="AiEvolution.KeyMilestones" xml:space="preserve">
+    <value>Key Milestones</value>
+  </data>
+  <data name="AiEvolution.Era1.Title" xml:space="preserve">
+    <value>The Primordial Spark</value>
+  </data>
+  <data name="AiEvolution.Era1.Desc" xml:space="preserve">
+    <value>Ideas that machines could mimic the human brain began to emerge. Pioneers created the first seeds of computational intelligence — theory, logical circuits, and rule-based systems that laid the foundation for machines that could appear to think for the first time.</value>
+  </data>
+  <data name="AiEvolution.Era1.M1" xml:space="preserve">
+    <value>Turing's "Computing Machinery and Intelligence" (1950)</value>
+  </data>
+  <data name="AiEvolution.Era1.M2" xml:space="preserve">
+    <value>Dartmouth Conference coins the term "AI" (1956)</value>
+  </data>
+  <data name="AiEvolution.Era1.M3" xml:space="preserve">
+    <value>First AI programs solve mathematical theorems (1956)</value>
+  </data>
+  <data name="AiEvolution.Era1.M4" xml:space="preserve">
+    <value>Perceptron — the first neural net (1958)</value>
+  </data>
+  <data name="AiEvolution.Era2.Title" xml:space="preserve">
+    <value>The Expert Awakening</value>
+  </data>
+  <data name="AiEvolution.Era2.Desc" xml:space="preserve">
+    <value>AI moved from toy problems to real-world applications. Expert systems encoded human knowledge into decision trees, production rules, and inference engines — teaching machines to reason about medicine, chemistry, and chess for the first time.</value>
+  </data>
+  <data name="AiEvolution.Era2.M1" xml:space="preserve">
+    <value>MYCIN diagnoses blood infections with expert rules (1972)</value>
+  </data>
+  <data name="AiEvolution.Era2.M2" xml:space="preserve">
+    <value>XCON configures computer systems automatically (1980)</value>
+  </data>
+  <data name="AiEvolution.Era2.M3" xml:space="preserve">
+    <value>Knowledge-based industry grows to billions (1985)</value>
+  </data>
+  <data name="AiEvolution.Era2.M4" xml:space="preserve">
+    <value>Expert systems hit limits — the "AI Winter" begins</value>
+  </data>
+  <data name="AiEvolution.Era3.Title" xml:space="preserve">
+    <value>The Machine Learning Walk</value>
+  </data>
+  <data name="AiEvolution.Era3.Desc" xml:space="preserve">
+    <value>AI learned to learn on its own, trained on data instead of explicit rules. The algorithm-driven approach opened pattern recognition for spam filters, product recommendations, and language models — the first models that improved with experience.</value>
+  </data>
+  <data name="AiEvolution.Era3.M1" xml:space="preserve">
+    <value>Backpropagation enables multi-layer networks (1986)</value>
+  </data>
+  <data name="AiEvolution.Era3.M2" xml:space="preserve">
+    <value>Support Vector Machines achieve state-of-the-art (1995)</value>
+  </data>
+  <data name="AiEvolution.Era3.M3" xml:space="preserve">
+    <value>Google PageRank applies ML to search (1998)</value>
+  </data>
+  <data name="AiEvolution.Era3.M4" xml:space="preserve">
+    <value>Netflix Prize accelerates collaborative filtering (2006)</value>
+  </data>
+  <data name="AiEvolution.Era4.Title" xml:space="preserve">
+    <value>The Deep Learning Revolution</value>
+  </data>
+  <data name="AiEvolution.Era4.Desc" xml:space="preserve">
+    <value>Artificial neural networks evolved with many layers — making breakthroughs in vision, speech, games, and translation. The data era arrived, and AI started seeing, hearing, translating, and beating grandmasters at Go.</value>
+  </data>
+  <data name="AiEvolution.Era4.M1" xml:space="preserve">
+    <value>AlexNet wins ImageNet, slashing error 41% (2012)</value>
+  </data>
+  <data name="AiEvolution.Era4.M2" xml:space="preserve">
+    <value>DeepMind AlphaGo defeats world champion (2016)</value>
+  </data>
+  <data name="AiEvolution.Era4.M3" xml:space="preserve">
+    <value>Transformer architecture proposed — "Attention is All You Need" (2017)</value>
+  </data>
+  <data name="AiEvolution.Era4.M4" xml:space="preserve">
+    <value>GPT-1 introduces large-scale language pre-training (2018)</value>
+  </data>
+  <data name="AiEvolution.Era5.Title" xml:space="preserve">
+    <value>The Generative Era</value>
+  </data>
+  <data name="AiEvolution.Era5.Desc" xml:space="preserve">
+    <value>AI stopped only analysing and started creating, producing text, images, code, audio, and video indistinguishable from human output. Foundation models and autonomous agents now augment and accelerate human creativity at planetary scale.</value>
+  </data>
+  <data name="AiEvolution.Era5.M1" xml:space="preserve">
+    <value>GPT-3 demonstrates emergent few-shot capabilities (2020)</value>
+  </data>
+  <data name="AiEvolution.Era5.M2" xml:space="preserve">
+    <value>DALL·E &amp; Stable Diffusion democratise image generation (2021–22)</value>
+  </data>
+  <data name="AiEvolution.Era5.M3" xml:space="preserve">
+    <value>ChatGPT reaches 100 M users in 2 months (2023)</value>
+  </data>
+  <data name="AiEvolution.Era5.M4" xml:space="preserve">
+    <value>Agentic AI frameworks enable autonomous multi-step tasks (2024+)</value>
+  </data>
 </root>

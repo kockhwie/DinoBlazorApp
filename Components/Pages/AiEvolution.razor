@@ -1,0 +1,112 @@
+@page "/ai-evolution"
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> L
+
+<PageTitle>@L["AiEvolution.PageTitle"]</PageTitle>
+
+<main class="evo-page">
+    <SiteNav />
+
+    <!-- Hero -->
+    <section class="evo-hero-shell">
+        <div class="evo-hero-content">
+            <h1>@L["AiEvolution.Headline1"]<br /><span class="evo-headline-accent">@L["AiEvolution.Headline2"]</span></h1>
+            <p class="evo-lead">@L["AiEvolution.Lead"]</p>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="evo-timeline-shell">
+        <ul class="timeline timeline-vertical timeline-snap-icon">
+            @for (int i = 0; i < _eras.Count; i++)
+            {
+                var era = _eras[i];
+                bool isLeft = i % 2 == 0;
+                int idx = i;
+
+                <li>
+                    @if (!isLeft)
+                    {
+                        <div class="timeline-start md:text-end">
+                            @CardMarkup(era)
+                        </div>
+                    }
+
+                    <div class="timeline-middle">
+                        <div class="evo-dot" style="--dot-color: @era.Color">
+                            <i class="ti @era.Icon"></i>
+                        </div>
+                    </div>
+
+                    @if (isLeft)
+                    {
+                        <div class="timeline-end">
+                            @CardMarkup(era)
+                        </div>
+                    }
+
+                    @if (idx < _eras.Count - 1)
+                    {
+                        <hr class="evo-connector" />
+                    }
+                </li>
+            }
+        </ul>
+    </section>
+
+    <SiteFooter />
+</main>
+
+@code {
+    private sealed record EraData(
+        string YearRange,
+        string TitleKey,
+        string DescKey,
+        string Icon,
+        string Color,
+        string[] MilestoneKeys);
+
+    private List<EraData> _eras = [];
+
+    protected override void OnInitialized()
+    {
+        _eras =
+        [
+            new("1940s – 1960s", "AiEvolution.Era1.Title", "AiEvolution.Era1.Desc",
+                "ti-math-symbols", "#4ade80",
+                ["AiEvolution.Era1.M1", "AiEvolution.Era1.M2", "AiEvolution.Era1.M3", "AiEvolution.Era1.M4"]),
+
+            new("1970s – 1988", "AiEvolution.Era2.Title", "AiEvolution.Era2.Desc",
+                "ti-cpu", "#34d399",
+                ["AiEvolution.Era2.M1", "AiEvolution.Era2.M2", "AiEvolution.Era2.M3", "AiEvolution.Era2.M4"]),
+
+            new("1986 – 2005", "AiEvolution.Era3.Title", "AiEvolution.Era3.Desc",
+                "ti-brain", "#22d3ee",
+                ["AiEvolution.Era3.M1", "AiEvolution.Era3.M2", "AiEvolution.Era3.M3", "AiEvolution.Era3.M4"]),
+
+            new("2006 – 2016", "AiEvolution.Era4.Title", "AiEvolution.Era4.Desc",
+                "ti-layers-difference", "#a78bfa",
+                ["AiEvolution.Era4.M1", "AiEvolution.Era4.M2", "AiEvolution.Era4.M3", "AiEvolution.Era4.M4"]),
+
+            new("2017 – Now", "AiEvolution.Era5.Title", "AiEvolution.Era5.Desc",
+                "ti-sparkles", "#f472b6",
+                ["AiEvolution.Era5.M1", "AiEvolution.Era5.M2", "AiEvolution.Era5.M3", "AiEvolution.Era5.M4"]),
+        ];
+    }
+
+    private RenderFragment CardMarkup(EraData era) => __builder =>
+    {
+        <div class="evo-card" style="--card-accent: @era.Color">
+            <span class="evo-year">@era.YearRange</span>
+            <h2 class="evo-era-title">@L[era.TitleKey]</h2>
+            <p class="evo-era-desc">@L[era.DescKey]</p>
+            <p class="evo-milestones-label">@L["AiEvolution.KeyMilestones"]</p>
+            <ul class="evo-milestones">
+                @foreach (var mk in era.MilestoneKeys)
+                {
+                    <li><i class="ti ti-circle-dot"></i> @L[mk]</li>
+                }
+            </ul>
+        </div>
+    };
+}
